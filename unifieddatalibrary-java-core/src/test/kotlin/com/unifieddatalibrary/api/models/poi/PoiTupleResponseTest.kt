@@ -28,6 +28,9 @@ internal class PoiTupleResponseTest {
                 )
                 .alt(5.23)
                 .andims(3)
+                .area(
+                    "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
+                )
                 .asrid(3)
                 .asset("PLATFORM_NAME")
                 .atext(
@@ -93,6 +96,10 @@ internal class PoiTupleResponseTest {
             )
         assertThat(poiTupleResponse.alt()).contains(5.23)
         assertThat(poiTupleResponse.andims()).contains(3)
+        assertThat(poiTupleResponse.area())
+            .contains(
+                "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
+            )
         assertThat(poiTupleResponse.asrid()).contains(3)
         assertThat(poiTupleResponse.asset()).contains("PLATFORM_NAME")
         assertThat(poiTupleResponse.atext())
@@ -160,6 +167,9 @@ internal class PoiTupleResponseTest {
                 )
                 .alt(5.23)
                 .andims(3)
+                .area(
+                    "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
+                )
                 .asrid(3)
                 .asset("PLATFORM_NAME")
                 .atext(

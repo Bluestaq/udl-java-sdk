@@ -49,6 +49,9 @@ internal class EmitterGeolocationRetrieveResponseTest {
                 )
                 .algVersion("v1.0-3-gps_nb_3ball")
                 .andims(3)
+                .area(
+                    "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
+                )
                 .asrid(3)
                 .atext(
                     "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
@@ -1057,6 +1060,10 @@ internal class EmitterGeolocationRetrieveResponseTest {
             )
         assertThat(emitterGeolocationRetrieveResponse.algVersion()).contains("v1.0-3-gps_nb_3ball")
         assertThat(emitterGeolocationRetrieveResponse.andims()).contains(3)
+        assertThat(emitterGeolocationRetrieveResponse.area())
+            .contains(
+                "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
+            )
         assertThat(emitterGeolocationRetrieveResponse.asrid()).contains(3)
         assertThat(emitterGeolocationRetrieveResponse.atext())
             .contains(
@@ -2067,6 +2074,9 @@ internal class EmitterGeolocationRetrieveResponseTest {
                 )
                 .algVersion("v1.0-3-gps_nb_3ball")
                 .andims(3)
+                .area(
+                    "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
+                )
                 .asrid(3)
                 .atext(
                     "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"

@@ -34,6 +34,9 @@ internal class HistoryListResponseTest {
                 .origin("THIRD_PARTY_DATASOURCE")
                 .origNetwork("OPS1")
                 .origSensorId("ORIGSENSOR-ID")
+                .region(
+                    "POLYGON((26.156175339112 67.3291113966927,26.0910220642717 67.2580009640721,26.6637992964562 67.1795862381682,26.730115808233 67.2501237475598,26.156175339112 67.3291113966927))"
+                )
                 .regionGeoJson(
                     "{\"type\":\"Polygon\",\"coordinates\":[ [ [ 67.3291113966927, 26.156175339112 ], [ 67.2580009640721, 26.091022064271 ], [ 67.1795862381682, 26.6637992964562 ], [ 67.2501237475598, 26.730115808233 ], [ 67.3291113966927, 26.156175339112 ] ] ] }"
                 )
@@ -73,6 +76,10 @@ internal class HistoryListResponseTest {
         assertThat(historyListResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
         assertThat(historyListResponse.origNetwork()).contains("OPS1")
         assertThat(historyListResponse.origSensorId()).contains("ORIGSENSOR-ID")
+        assertThat(historyListResponse.region())
+            .contains(
+                "POLYGON((26.156175339112 67.3291113966927,26.0910220642717 67.2580009640721,26.6637992964562 67.1795862381682,26.730115808233 67.2501237475598,26.156175339112 67.3291113966927))"
+            )
         assertThat(historyListResponse.regionGeoJson())
             .contains(
                 "{\"type\":\"Polygon\",\"coordinates\":[ [ [ 67.3291113966927, 26.156175339112 ], [ 67.2580009640721, 26.091022064271 ], [ 67.1795862381682, 26.6637992964562 ], [ 67.2501237475598, 26.730115808233 ], [ 67.3291113966927, 26.156175339112 ] ] ] }"
@@ -119,6 +126,9 @@ internal class HistoryListResponseTest {
                 .origin("THIRD_PARTY_DATASOURCE")
                 .origNetwork("OPS1")
                 .origSensorId("ORIGSENSOR-ID")
+                .region(
+                    "POLYGON((26.156175339112 67.3291113966927,26.0910220642717 67.2580009640721,26.6637992964562 67.1795862381682,26.730115808233 67.2501237475598,26.156175339112 67.3291113966927))"
+                )
                 .regionGeoJson(
                     "{\"type\":\"Polygon\",\"coordinates\":[ [ [ 67.3291113966927, 26.156175339112 ], [ 67.2580009640721, 26.091022064271 ], [ 67.1795862381682, 26.6637992964562 ], [ 67.2501237475598, 26.730115808233 ], [ 67.3291113966927, 26.156175339112 ] ] ] }"
                 )
