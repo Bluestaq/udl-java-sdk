@@ -28,6 +28,9 @@ internal class HistoryListResponseTest {
                 )
                 .alt(5.23)
                 .andims(3)
+                .area(
+                    "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
+                )
                 .asrid(3)
                 .asset("PLATFORM_NAME")
                 .atext(
@@ -93,6 +96,10 @@ internal class HistoryListResponseTest {
             )
         assertThat(historyListResponse.alt()).contains(5.23)
         assertThat(historyListResponse.andims()).contains(3)
+        assertThat(historyListResponse.area())
+            .contains(
+                "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
+            )
         assertThat(historyListResponse.asrid()).contains(3)
         assertThat(historyListResponse.asset()).contains("PLATFORM_NAME")
         assertThat(historyListResponse.atext())
@@ -160,6 +167,9 @@ internal class HistoryListResponseTest {
                 )
                 .alt(5.23)
                 .andims(3)
+                .area(
+                    "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
+                )
                 .asrid(3)
                 .asset("PLATFORM_NAME")
                 .atext(

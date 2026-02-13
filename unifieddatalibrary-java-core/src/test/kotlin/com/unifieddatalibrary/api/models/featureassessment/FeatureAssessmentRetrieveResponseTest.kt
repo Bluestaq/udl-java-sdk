@@ -29,6 +29,7 @@ internal class FeatureAssessmentRetrieveResponseTest {
                 .annLims(listOf(listOf(1, 1), listOf(1, 2), listOf(1, 3), listOf(1, 4)))
                 .addAnnText("rec1")
                 .addAnnText("rec2")
+                .area("POINT(52.23486096929749 16.191937138595005)")
                 .asrid(4326)
                 .assessment(
                     "Vessel bigger than other small fishing boats commonly found along the coastline"
@@ -85,6 +86,8 @@ internal class FeatureAssessmentRetrieveResponseTest {
             .containsExactly(listOf(1, 1), listOf(1, 2), listOf(1, 3), listOf(1, 4))
         assertThat(featureAssessmentRetrieveResponse.annText().getOrNull())
             .containsExactly("rec1", "rec2")
+        assertThat(featureAssessmentRetrieveResponse.area())
+            .contains("POINT(52.23486096929749 16.191937138595005)")
         assertThat(featureAssessmentRetrieveResponse.asrid()).contains(4326)
         assertThat(featureAssessmentRetrieveResponse.assessment())
             .contains(
@@ -154,6 +157,7 @@ internal class FeatureAssessmentRetrieveResponseTest {
                 .annLims(listOf(listOf(1, 1), listOf(1, 2), listOf(1, 3), listOf(1, 4)))
                 .addAnnText("rec1")
                 .addAnnText("rec2")
+                .area("POINT(52.23486096929749 16.191937138595005)")
                 .asrid(4326)
                 .assessment(
                     "Vessel bigger than other small fishing boats commonly found along the coastline"

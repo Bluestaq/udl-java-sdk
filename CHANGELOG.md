@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.9.0 (2026-02-06)
+
+Full Changelog: [v0.8.0...v0.9.0](https://github.com/Bluestaq/udl-java-sdk/compare/v0.8.0...v0.9.0)
+
+### Features
+
+* **client:** send `X-Stainless-Kotlin-Version` header ([2e25ff1](https://github.com/Bluestaq/udl-java-sdk/commit/2e25ff17c6962aa84c6a2c110cd24c368b41adbb))
+
+
+### Bug Fixes
+
+* add missing fields ([b61bcfd](https://github.com/Bluestaq/udl-java-sdk/commit/b61bcfdddb13c6f2092a6f241febb9b8c1605ece))
+* **client:** preserve time zone in lenient date-time parsing ([b18eeb2](https://github.com/Bluestaq/udl-java-sdk/commit/b18eeb26f26a4c6d6305e16f5ebd9b4b51d56083))
+* **docs:** fix mcp installation instructions for remote servers ([cffa5bb](https://github.com/Bluestaq/udl-java-sdk/commit/cffa5bba230bcc2a34a63bc474ce77f7e3052565))
+
+
+### Chores
+
+* **ci:** upgrade `actions/github-script` ([591786f](https://github.com/Bluestaq/udl-java-sdk/commit/591786f7b9f250959ea3084a5274b59f9ed014a5))
+* **internal:** allow passing args to `./scripts/test` ([fdf2483](https://github.com/Bluestaq/udl-java-sdk/commit/fdf24836622e8f1d555ce18864b15abf57efc010))
+* **internal:** correct cache invalidation for `SKIP_MOCK_TESTS` ([5152565](https://github.com/Bluestaq/udl-java-sdk/commit/5152565878bd57819090fe76e8a24aa00f7333f0))
+* **internal:** update maven repo doc to include authentication ([c796df5](https://github.com/Bluestaq/udl-java-sdk/commit/c796df573cce44b5ea93d45ef2c9ec7c117715f9))
+* **internal:** upgrade AssertJ ([6e078ec](https://github.com/Bluestaq/udl-java-sdk/commit/6e078ec372af39d0455eac31b0544fc5e9b38d62))
+
 ## 0.8.0 (2026-01-16)
 
 Full Changelog: [v0.7.0...v0.8.0](https://github.com/Bluestaq/udl-java-sdk/compare/v0.7.0...v0.8.0)

@@ -32,6 +32,9 @@ internal class AnalyticImageryFullTest {
                 .annLims(listOf(listOf(1, 1), listOf(1, 2), listOf(1, 3), listOf(1, 4)))
                 .addAnnText("rec1")
                 .addAnnText("rec2")
+                .area(
+                    "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
+                )
                 .asrid(4326)
                 .atext(
                     "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
@@ -58,6 +61,7 @@ internal class AnalyticImageryFullTest {
                         .annLims(listOf(listOf(1, 1), listOf(1, 2), listOf(1, 3), listOf(1, 4)))
                         .addAnnText("rec1")
                         .addAnnText("rec2")
+                        .area("POINT(52.23486096929749 16.191937138595005)")
                         .asrid(4326)
                         .assessment(
                             "Vessel bigger than other small fishing boats commonly found along the coastline"
@@ -143,6 +147,10 @@ internal class AnalyticImageryFullTest {
         assertThat(analyticImageryFull.annLims().getOrNull())
             .containsExactly(listOf(1, 1), listOf(1, 2), listOf(1, 3), listOf(1, 4))
         assertThat(analyticImageryFull.annText().getOrNull()).containsExactly("rec1", "rec2")
+        assertThat(analyticImageryFull.area())
+            .contains(
+                "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
+            )
         assertThat(analyticImageryFull.asrid()).contains(4326)
         assertThat(analyticImageryFull.atext())
             .contains(
@@ -174,6 +182,7 @@ internal class AnalyticImageryFullTest {
                     .annLims(listOf(listOf(1, 1), listOf(1, 2), listOf(1, 3), listOf(1, 4)))
                     .addAnnText("rec1")
                     .addAnnText("rec2")
+                    .area("POINT(52.23486096929749 16.191937138595005)")
                     .asrid(4326)
                     .assessment(
                         "Vessel bigger than other small fishing boats commonly found along the coastline"
@@ -257,6 +266,9 @@ internal class AnalyticImageryFullTest {
                 .annLims(listOf(listOf(1, 1), listOf(1, 2), listOf(1, 3), listOf(1, 4)))
                 .addAnnText("rec1")
                 .addAnnText("rec2")
+                .area(
+                    "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
+                )
                 .asrid(4326)
                 .atext(
                     "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
@@ -283,6 +295,7 @@ internal class AnalyticImageryFullTest {
                         .annLims(listOf(listOf(1, 1), listOf(1, 2), listOf(1, 3), listOf(1, 4)))
                         .addAnnText("rec1")
                         .addAnnText("rec2")
+                        .area("POINT(52.23486096929749 16.191937138595005)")
                         .asrid(4326)
                         .assessment(
                             "Vessel bigger than other small fishing boats commonly found along the coastline"
