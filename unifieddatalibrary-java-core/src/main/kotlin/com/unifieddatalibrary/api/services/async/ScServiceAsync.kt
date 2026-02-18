@@ -131,6 +131,17 @@ interface ScServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<HttpResponse>
 
+    /** @see download */
+    fun download(
+        body: List<String>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<HttpResponse> =
+        download(ScDownloadParams.builder().body(body).build(), requestOptions)
+
+    /** @see download */
+    fun download(body: List<String>): CompletableFuture<HttpResponse> =
+        download(body, RequestOptions.none())
+
     /** Download a single file from SCS. */
     fun fileDownload(params: ScFileDownloadParams): CompletableFuture<HttpResponse> =
         fileDownload(params, RequestOptions.none())
@@ -335,6 +346,17 @@ interface ScServiceAsync {
             params: ScDownloadParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see download */
+        fun download(
+            body: List<String>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            download(ScDownloadParams.builder().body(body).build(), requestOptions)
+
+        /** @see download */
+        fun download(body: List<String>): CompletableFuture<HttpResponse> =
+            download(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /scs/download`, but is otherwise the same as

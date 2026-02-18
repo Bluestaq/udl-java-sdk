@@ -97,6 +97,17 @@ interface PersonnelrecoveryServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<PersonnelrecoveryCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(PersonnelrecoveryCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<PersonnelrecoveryCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to take a list of Personnel Recovery records as a POST body and ingest into
      * the database. Requires a specific role, please contact the UDL team to gain access. This
@@ -110,6 +121,17 @@ interface PersonnelrecoveryServiceAsync {
         params: PersonnelrecoveryFileCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see fileCreate */
+    fun fileCreate(
+        body: List<PersonnelrecoveryFileCreateParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        fileCreate(PersonnelrecoveryFileCreateParams.builder().body(body).build(), requestOptions)
+
+    /** @see fileCreate */
+    fun fileCreate(body: List<PersonnelrecoveryFileCreateParams.Body>): CompletableFuture<Void?> =
+        fileCreate(body, RequestOptions.none())
 
     /**
      * Service operation to get a single PersonnelRecovery by its unique ID passed as a path
@@ -262,6 +284,21 @@ interface PersonnelrecoveryServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
 
+        /** @see createBulk */
+        fun createBulk(
+            body: List<PersonnelrecoveryCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(
+                PersonnelrecoveryCreateBulkParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<PersonnelrecoveryCreateBulkParams.Body>
+        ): CompletableFuture<HttpResponse> = createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `post /filedrop/udl-personnelrecovery`, but is otherwise
          * the same as [PersonnelrecoveryServiceAsync.fileCreate].
@@ -274,6 +311,21 @@ interface PersonnelrecoveryServiceAsync {
             params: PersonnelrecoveryFileCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see fileCreate */
+        fun fileCreate(
+            body: List<PersonnelrecoveryFileCreateParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            fileCreate(
+                PersonnelrecoveryFileCreateParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see fileCreate */
+        fun fileCreate(
+            body: List<PersonnelrecoveryFileCreateParams.Body>
+        ): CompletableFuture<HttpResponse> = fileCreate(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/personnelrecovery/{id}`, but is otherwise the

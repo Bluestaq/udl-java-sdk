@@ -145,6 +145,20 @@ interface OnorbitthrusterstatusService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<OnorbitthrusterstatusCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        createBulk(
+            OnorbitthrusterstatusCreateBulkParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see createBulk */
+    fun createBulk(body: List<OnorbitthrusterstatusCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to get a single OnorbitThrusterStatus record by its unique ID passed as a
      * path parameter. OnorbitThrusterStatus records are information for OnorbitThruster objects.
@@ -354,6 +368,22 @@ interface OnorbitthrusterstatusService {
             params: OnorbitthrusterstatusCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<OnorbitthrusterstatusCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(
+                OnorbitthrusterstatusCreateBulkParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<OnorbitthrusterstatusCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/onorbitthrusterstatus/{id}`, but is otherwise

@@ -145,6 +145,20 @@ interface DatalinkServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<DatalinkIngest>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            DatalinkUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<DatalinkIngest>): CompletableFuture<Void?> =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [DatalinkServiceAsync] that provides access to raw HTTP responses for each method.
      */
@@ -267,5 +281,19 @@ interface DatalinkServiceAsync {
             params: DatalinkUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<DatalinkIngest>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                DatalinkUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(body: List<DatalinkIngest>): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(body, RequestOptions.none())
     }
 }

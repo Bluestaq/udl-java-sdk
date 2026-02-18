@@ -133,6 +133,20 @@ interface NavigationalObstructionService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<NavigationalObstructionCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        createBulk(
+            NavigationalObstructionCreateBulkParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see createBulk */
+    fun createBulk(body: List<NavigationalObstructionCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to get a single navigational obstruction record by its unique ID passed as
      * a path parameter.
@@ -333,6 +347,22 @@ interface NavigationalObstructionService {
             params: NavigationalObstructionCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<NavigationalObstructionCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(
+                NavigationalObstructionCreateBulkParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<NavigationalObstructionCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/navigationalobstruction/{id}`, but is otherwise

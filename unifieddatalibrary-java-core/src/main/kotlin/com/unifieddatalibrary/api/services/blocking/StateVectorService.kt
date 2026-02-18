@@ -113,6 +113,15 @@ interface StateVectorService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<StateVectorIngest>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(StateVectorCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<StateVectorIngest>) = createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to get a single state vector by its unique ID passed as a path parameter.
      */
@@ -196,6 +205,20 @@ interface StateVectorService {
         params: StateVectorUnvalidatedPublishParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<StateVectorIngest>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            StateVectorUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<StateVectorIngest>) =
+        unvalidatedPublish(body, RequestOptions.none())
 
     /**
      * A view of [StateVectorService] that provides access to raw HTTP responses for each method.
@@ -290,6 +313,19 @@ interface StateVectorService {
             params: StateVectorCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<StateVectorIngest>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(StateVectorCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<StateVectorIngest>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/statevector/{id}`, but is otherwise the same as
@@ -387,5 +423,21 @@ interface StateVectorService {
             params: StateVectorUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<StateVectorIngest>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                StateVectorUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(body: List<StateVectorIngest>): HttpResponse =
+            unvalidatedPublish(body, RequestOptions.none())
     }
 }

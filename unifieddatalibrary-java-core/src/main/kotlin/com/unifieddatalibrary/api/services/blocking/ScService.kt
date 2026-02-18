@@ -124,6 +124,17 @@ interface ScService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): HttpResponse
 
+    /** @see download */
+    @MustBeClosed
+    fun download(
+        body: List<String>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): HttpResponse = download(ScDownloadParams.builder().body(body).build(), requestOptions)
+
+    /** @see download */
+    @MustBeClosed
+    fun download(body: List<String>): HttpResponse = download(body, RequestOptions.none())
+
     /** Download a single file from SCS. */
     @MustBeClosed
     fun fileDownload(params: ScFileDownloadParams): HttpResponse =
@@ -327,6 +338,17 @@ interface ScService {
             params: ScDownloadParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see download */
+        @MustBeClosed
+        fun download(
+            body: List<String>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse = download(ScDownloadParams.builder().body(body).build(), requestOptions)
+
+        /** @see download */
+        @MustBeClosed
+        fun download(body: List<String>): HttpResponse = download(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /scs/download`, but is otherwise the same as
