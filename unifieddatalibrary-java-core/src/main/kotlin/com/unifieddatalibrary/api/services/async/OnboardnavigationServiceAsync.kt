@@ -82,6 +82,17 @@ interface OnboardnavigationServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<OnboardnavigationCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(OnboardnavigationCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<OnboardnavigationCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
      * particular data type.
@@ -142,6 +153,21 @@ interface OnboardnavigationServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<OnboardnavigationUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            OnboardnavigationUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<OnboardnavigationUnvalidatedPublishParams.Body>
+    ): CompletableFuture<Void?> = unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [OnboardnavigationServiceAsync] that provides access to raw HTTP responses for each
      * method.
@@ -201,6 +227,21 @@ interface OnboardnavigationServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
 
+        /** @see createBulk */
+        fun createBulk(
+            body: List<OnboardnavigationCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(
+                OnboardnavigationCreateBulkParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<OnboardnavigationCreateBulkParams.Body>
+        ): CompletableFuture<HttpResponse> = createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `get /udl/onboardnavigation/queryhelp`, but is otherwise
          * the same as [OnboardnavigationServiceAsync.queryhelp].
@@ -254,5 +295,20 @@ interface OnboardnavigationServiceAsync {
             params: OnboardnavigationUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<OnboardnavigationUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                OnboardnavigationUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<OnboardnavigationUnvalidatedPublishParams.Body>
+        ): CompletableFuture<HttpResponse> = unvalidatedPublish(body, RequestOptions.none())
     }
 }

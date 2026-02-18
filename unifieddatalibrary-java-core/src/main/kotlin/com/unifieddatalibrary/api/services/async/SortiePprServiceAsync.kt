@@ -157,6 +157,17 @@ interface SortiePprServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<SortiePprCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(SortiePprCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<SortiePprCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to get a single sortieppr record by its unique ID passed as a path
      * parameter.
@@ -243,6 +254,21 @@ interface SortiePprServiceAsync {
         params: SortiePprUnvalidatedPublishParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<SortiePprUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            SortiePprUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<SortiePprUnvalidatedPublishParams.Body>
+    ): CompletableFuture<Void?> = unvalidatedPublish(body, RequestOptions.none())
 
     /**
      * A view of [SortiePprServiceAsync] that provides access to raw HTTP responses for each method.
@@ -374,6 +400,18 @@ interface SortiePprServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
 
+        /** @see createBulk */
+        fun createBulk(
+            body: List<SortiePprCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(SortiePprCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<SortiePprCreateBulkParams.Body>
+        ): CompletableFuture<HttpResponse> = createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `get /udl/sortieppr/{id}`, but is otherwise the same as
          * [SortiePprServiceAsync.get].
@@ -466,5 +504,20 @@ interface SortiePprServiceAsync {
             params: SortiePprUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<SortiePprUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                SortiePprUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<SortiePprUnvalidatedPublishParams.Body>
+        ): CompletableFuture<HttpResponse> = unvalidatedPublish(body, RequestOptions.none())
     }
 }

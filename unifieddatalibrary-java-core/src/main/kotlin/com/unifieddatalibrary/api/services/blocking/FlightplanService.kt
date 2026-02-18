@@ -232,6 +232,20 @@ interface FlightplanService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<FlightplanUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            FlightplanUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<FlightplanUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /** A view of [FlightplanService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
@@ -473,5 +487,21 @@ interface FlightplanService {
             params: FlightplanUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<FlightplanUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                FlightplanUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(body: List<FlightplanUnvalidatedPublishParams.Body>): HttpResponse =
+            unvalidatedPublish(body, RequestOptions.none())
     }
 }

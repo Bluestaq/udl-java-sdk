@@ -110,6 +110,17 @@ interface OperatingunitremarkServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<OperatingunitremarkCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(OperatingunitremarkCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<OperatingunitremarkCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to get a single operatingunitremark record by its unique ID passed as a
      * path parameter.
@@ -280,6 +291,21 @@ interface OperatingunitremarkServiceAsync {
             params: OperatingunitremarkCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<OperatingunitremarkCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(
+                OperatingunitremarkCreateBulkParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<OperatingunitremarkCreateBulkParams.Body>
+        ): CompletableFuture<HttpResponse> = createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/operatingunitremark/{id}`, but is otherwise the

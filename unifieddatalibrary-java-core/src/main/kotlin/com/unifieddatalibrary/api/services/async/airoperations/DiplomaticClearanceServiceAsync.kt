@@ -39,6 +39,21 @@ interface DiplomaticClearanceServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<DiplomaticClearanceUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            DiplomaticClearanceUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<DiplomaticClearanceUnvalidatedPublishParams.Body>
+    ): CompletableFuture<Void?> = unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [DiplomaticClearanceServiceAsync] that provides access to raw HTTP responses for
      * each method.
@@ -67,5 +82,20 @@ interface DiplomaticClearanceServiceAsync {
             params: DiplomaticClearanceUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<DiplomaticClearanceUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                DiplomaticClearanceUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<DiplomaticClearanceUnvalidatedPublishParams.Body>
+        ): CompletableFuture<HttpResponse> = unvalidatedPublish(body, RequestOptions.none())
     }
 }

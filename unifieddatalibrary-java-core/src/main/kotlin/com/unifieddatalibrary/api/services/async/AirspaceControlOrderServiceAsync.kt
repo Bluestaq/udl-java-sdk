@@ -149,6 +149,21 @@ interface AirspaceControlOrderServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<AirspaceControlOrderCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(
+            AirspaceControlOrderCreateBulkParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<AirspaceControlOrderCreateBulkParams.Body>
+    ): CompletableFuture<Void?> = createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
      * particular data type.
@@ -322,6 +337,21 @@ interface AirspaceControlOrderServiceAsync {
             params: AirspaceControlOrderCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<AirspaceControlOrderCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(
+                AirspaceControlOrderCreateBulkParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<AirspaceControlOrderCreateBulkParams.Body>
+        ): CompletableFuture<HttpResponse> = createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/airspacecontrolorder/queryhelp`, but is

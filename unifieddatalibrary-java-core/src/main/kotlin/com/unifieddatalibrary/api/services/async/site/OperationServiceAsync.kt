@@ -193,6 +193,17 @@ interface OperationServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<OperationCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(OperationCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<OperationCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
      * particular data type.
@@ -246,6 +257,21 @@ interface OperationServiceAsync {
         params: OperationUnvalidatedPublishParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<OperationUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            OperationUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<OperationUnvalidatedPublishParams.Body>
+    ): CompletableFuture<Void?> = unvalidatedPublish(body, RequestOptions.none())
 
     /**
      * A view of [OperationServiceAsync] that provides access to raw HTTP responses for each method.
@@ -416,6 +442,18 @@ interface OperationServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
 
+        /** @see createBulk */
+        fun createBulk(
+            body: List<OperationCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(OperationCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<OperationCreateBulkParams.Body>
+        ): CompletableFuture<HttpResponse> = createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `get /udl/siteoperations/queryhelp`, but is otherwise the
          * same as [OperationServiceAsync.queryHelp].
@@ -469,5 +507,20 @@ interface OperationServiceAsync {
             params: OperationUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<OperationUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                OperationUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<OperationUnvalidatedPublishParams.Body>
+        ): CompletableFuture<HttpResponse> = unvalidatedPublish(body, RequestOptions.none())
     }
 }

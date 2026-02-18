@@ -184,6 +184,20 @@ interface SensorPlanService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<SensorPlanUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            SensorPlanUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<SensorPlanUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /** A view of [SensorPlanService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
@@ -372,5 +386,21 @@ interface SensorPlanService {
             params: SensorPlanUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<SensorPlanUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                SensorPlanUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(body: List<SensorPlanUnvalidatedPublishParams.Body>): HttpResponse =
+            unvalidatedPublish(body, RequestOptions.none())
     }
 }

@@ -98,6 +98,17 @@ interface EmireportServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<EmireportCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(EmireportCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<EmireportCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to get a single EMIReport record by its unique ID passed as a path
      * parameter.
@@ -187,6 +198,21 @@ interface EmireportServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<EmireportUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            EmireportUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<EmireportUnvalidatedPublishParams.Body>
+    ): CompletableFuture<Void?> = unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [EmireportServiceAsync] that provides access to raw HTTP responses for each method.
      */
@@ -256,6 +282,18 @@ interface EmireportServiceAsync {
             params: EmireportCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<EmireportCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(EmireportCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<EmireportCreateBulkParams.Body>
+        ): CompletableFuture<HttpResponse> = createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/emireport/{id}`, but is otherwise the same as
@@ -351,5 +389,20 @@ interface EmireportServiceAsync {
             params: EmireportUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<EmireportUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                EmireportUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<EmireportUnvalidatedPublishParams.Body>
+        ): CompletableFuture<HttpResponse> = unvalidatedPublish(body, RequestOptions.none())
     }
 }

@@ -131,6 +131,16 @@ interface CloselyspacedobjectService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<CloselyspacedobjectCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(CloselyspacedobjectCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<CloselyspacedobjectCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
      * particular data type.
@@ -185,6 +195,20 @@ interface CloselyspacedobjectService {
         params: CloselyspacedobjectUnvalidatedPublishParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<CloselyspacedobjectUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            CloselyspacedobjectUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<CloselyspacedobjectUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
 
     /**
      * A view of [CloselyspacedobjectService] that provides access to raw HTTP responses for each
@@ -311,6 +335,22 @@ interface CloselyspacedobjectService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
 
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<CloselyspacedobjectCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(
+                CloselyspacedobjectCreateBulkParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<CloselyspacedobjectCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `get /udl/closelyspacedobjects/queryhelp`, but is
          * otherwise the same as [CloselyspacedobjectService.queryHelp].
@@ -371,5 +411,22 @@ interface CloselyspacedobjectService {
             params: CloselyspacedobjectUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<CloselyspacedobjectUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                CloselyspacedobjectUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<CloselyspacedobjectUnvalidatedPublishParams.Body>
+        ): HttpResponse = unvalidatedPublish(body, RequestOptions.none())
     }
 }

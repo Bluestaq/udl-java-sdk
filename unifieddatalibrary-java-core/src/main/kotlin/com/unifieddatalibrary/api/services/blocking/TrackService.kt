@@ -78,6 +78,15 @@ interface TrackService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<TrackCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(TrackCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<TrackCreateBulkParams.Body>) = createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
      * particular data type.
@@ -129,6 +138,20 @@ interface TrackService {
         params: TrackUnvalidatedPublishParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<TrackUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            TrackUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<TrackUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
 
     /** A view of [TrackService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -187,6 +210,19 @@ interface TrackService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
 
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<TrackCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(TrackCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<TrackCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `get /udl/track/queryhelp`, but is otherwise the same as
          * [TrackService.queryhelp].
@@ -242,5 +278,21 @@ interface TrackService {
             params: TrackUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<TrackUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                TrackUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(body: List<TrackUnvalidatedPublishParams.Body>): HttpResponse =
+            unvalidatedPublish(body, RequestOptions.none())
     }
 }

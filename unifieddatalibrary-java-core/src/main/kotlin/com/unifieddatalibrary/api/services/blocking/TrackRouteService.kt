@@ -163,6 +163,15 @@ interface TrackRouteService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<TrackRouteIngest>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(TrackRouteCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<TrackRouteIngest>) = createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to get a single trackroute record by its unique ID passed as a path
      * parameter.
@@ -416,6 +425,19 @@ interface TrackRouteService {
             params: TrackRouteCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<TrackRouteIngest>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(TrackRouteCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<TrackRouteIngest>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/trackroute/{id}`, but is otherwise the same as

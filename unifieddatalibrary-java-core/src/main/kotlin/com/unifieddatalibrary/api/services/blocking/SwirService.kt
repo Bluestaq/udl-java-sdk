@@ -89,6 +89,15 @@ interface SwirService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<SwirCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(SwirCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<SwirCreateBulkParams.Body>) = createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to get a single SWIR record by its unique ID passed as a path parameter.
      */
@@ -222,6 +231,19 @@ interface SwirService {
             params: SwirCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<SwirCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(SwirCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<SwirCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/swir/{id}`, but is otherwise the same as

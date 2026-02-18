@@ -197,6 +197,16 @@ interface RouteStatService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<RouteStatCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(RouteStatCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<RouteStatCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
      * particular data type.
@@ -249,6 +259,20 @@ interface RouteStatService {
         params: RouteStatUnvalidatedPublishParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<RouteStatUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            RouteStatUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<RouteStatUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
 
     /** A view of [RouteStatService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -450,6 +474,19 @@ interface RouteStatService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
 
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<RouteStatCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(RouteStatCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<RouteStatCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `get /udl/routestats/queryhelp`, but is otherwise the
          * same as [RouteStatService.queryHelp].
@@ -505,5 +542,21 @@ interface RouteStatService {
             params: RouteStatUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<RouteStatUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                RouteStatUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(body: List<RouteStatUnvalidatedPublishParams.Body>): HttpResponse =
+            unvalidatedPublish(body, RequestOptions.none())
     }
 }

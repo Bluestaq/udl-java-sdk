@@ -131,6 +131,16 @@ interface FeatureAssessmentService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<FeatureAssessmentCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(FeatureAssessmentCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<FeatureAssessmentCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
      * particular data type.
@@ -185,6 +195,20 @@ interface FeatureAssessmentService {
         params: FeatureAssessmentUnvalidatedPublishParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<FeatureAssessmentUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            FeatureAssessmentUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<FeatureAssessmentUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
 
     /**
      * A view of [FeatureAssessmentService] that provides access to raw HTTP responses for each
@@ -310,6 +334,22 @@ interface FeatureAssessmentService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
 
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<FeatureAssessmentCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(
+                FeatureAssessmentCreateBulkParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<FeatureAssessmentCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `get /udl/featureassessment/queryhelp`, but is otherwise
          * the same as [FeatureAssessmentService.queryHelp].
@@ -370,5 +410,22 @@ interface FeatureAssessmentService {
             params: FeatureAssessmentUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<FeatureAssessmentUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                FeatureAssessmentUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<FeatureAssessmentUnvalidatedPublishParams.Body>
+        ): HttpResponse = unvalidatedPublish(body, RequestOptions.none())
     }
 }

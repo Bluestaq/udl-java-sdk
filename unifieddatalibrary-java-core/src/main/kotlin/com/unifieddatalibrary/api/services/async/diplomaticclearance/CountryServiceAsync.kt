@@ -208,6 +208,17 @@ interface CountryServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<CountryCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(CountryCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<CountryCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
      * particular data type.
@@ -262,6 +273,21 @@ interface CountryServiceAsync {
         params: CountryUnvalidatedPublishParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<CountryUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            CountryUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<CountryUnvalidatedPublishParams.Body>
+    ): CompletableFuture<Void?> = unvalidatedPublish(body, RequestOptions.none())
 
     /**
      * A view of [CountryServiceAsync] that provides access to raw HTTP responses for each method.
@@ -450,6 +476,17 @@ interface CountryServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
 
+        /** @see createBulk */
+        fun createBulk(
+            body: List<CountryCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(CountryCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(body: List<CountryCreateBulkParams.Body>): CompletableFuture<HttpResponse> =
+            createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `get /udl/diplomaticclearancecountry/queryhelp`, but is
          * otherwise the same as [CountryServiceAsync.queryHelp].
@@ -503,5 +540,20 @@ interface CountryServiceAsync {
             params: CountryUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<CountryUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                CountryUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<CountryUnvalidatedPublishParams.Body>
+        ): CompletableFuture<HttpResponse> = unvalidatedPublish(body, RequestOptions.none())
     }
 }

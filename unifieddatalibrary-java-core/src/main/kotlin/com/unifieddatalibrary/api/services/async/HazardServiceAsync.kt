@@ -97,6 +97,17 @@ interface HazardServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<HazardCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(HazardCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<HazardCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
+
     /** Service operation to get a single Hazard by its unique ID passed as a path parameter. */
     fun get(id: String): CompletableFuture<HazardGetResponse> = get(id, HazardGetParams.none())
 
@@ -236,6 +247,17 @@ interface HazardServiceAsync {
             params: HazardCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<HazardCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(HazardCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(body: List<HazardCreateBulkParams.Body>): CompletableFuture<HttpResponse> =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/hazard/{id}`, but is otherwise the same as

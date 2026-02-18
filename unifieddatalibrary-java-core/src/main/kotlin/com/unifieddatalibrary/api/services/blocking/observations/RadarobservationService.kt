@@ -97,6 +97,16 @@ interface RadarobservationService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<RadarobservationCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(RadarobservationCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<RadarobservationCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to get a single radar observations by its unique ID passed as a path
      * parameter.
@@ -184,6 +194,20 @@ interface RadarobservationService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<RadarobservationUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            RadarobservationUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<RadarobservationUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [RadarobservationService] that provides access to raw HTTP responses for each
      * method.
@@ -260,6 +284,22 @@ interface RadarobservationService {
             params: RadarobservationCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<RadarobservationCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(
+                RadarobservationCreateBulkParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<RadarobservationCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/radarobservation/{id}`, but is otherwise the
@@ -365,5 +405,22 @@ interface RadarobservationService {
             params: RadarobservationUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<RadarobservationUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                RadarobservationUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<RadarobservationUnvalidatedPublishParams.Body>
+        ): HttpResponse = unvalidatedPublish(body, RequestOptions.none())
     }
 }

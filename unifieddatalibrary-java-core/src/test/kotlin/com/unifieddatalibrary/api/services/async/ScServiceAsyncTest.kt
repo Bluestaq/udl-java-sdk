@@ -14,7 +14,6 @@ import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAs
 import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.models.scs.ScCopyParams
 import com.unifieddatalibrary.api.models.scs.ScDeleteParams
-import com.unifieddatalibrary.api.models.scs.ScDownloadParams
 import com.unifieddatalibrary.api.models.scs.ScFileDownloadParams
 import com.unifieddatalibrary.api.models.scs.ScFileUploadParams
 import com.unifieddatalibrary.api.models.scs.ScHasWriteAccessParams
@@ -103,10 +102,7 @@ internal class ScServiceAsyncTest {
         val scServiceAsync = client.scs()
         stubFor(post(anyUrl()).willReturn(ok().withBody("abc")))
 
-        val responseFuture =
-            scServiceAsync.download(
-                ScDownloadParams.builder().addBody("/MyFolderToDownload/").build()
-            )
+        val responseFuture = scServiceAsync.download(listOf("/MyFolderToDownload/"))
 
         val response = responseFuture.get()
         assertThat(response.body()).hasContent("abc")

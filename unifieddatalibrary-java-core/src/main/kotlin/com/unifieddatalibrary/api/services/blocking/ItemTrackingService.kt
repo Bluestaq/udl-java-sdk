@@ -197,6 +197,20 @@ interface ItemTrackingService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<ItemTrackingUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            ItemTrackingUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<ItemTrackingUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [ItemTrackingService] that provides access to raw HTTP responses for each method.
      */
@@ -399,5 +413,22 @@ interface ItemTrackingService {
             params: ItemTrackingUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<ItemTrackingUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                ItemTrackingUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<ItemTrackingUnvalidatedPublishParams.Body>
+        ): HttpResponse = unvalidatedPublish(body, RequestOptions.none())
     }
 }

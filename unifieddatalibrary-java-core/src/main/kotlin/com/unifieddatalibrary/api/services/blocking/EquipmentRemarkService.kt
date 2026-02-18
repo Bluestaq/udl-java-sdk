@@ -141,6 +141,16 @@ interface EquipmentRemarkService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<EquipmentRemarkCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(EquipmentRemarkCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<EquipmentRemarkCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
      * particular data type.
@@ -320,6 +330,19 @@ interface EquipmentRemarkService {
             params: EquipmentRemarkCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<EquipmentRemarkCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(EquipmentRemarkCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<EquipmentRemarkCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/equipmentremark/queryhelp`, but is otherwise

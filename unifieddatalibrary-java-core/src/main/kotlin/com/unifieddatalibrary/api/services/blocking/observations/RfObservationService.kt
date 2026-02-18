@@ -97,6 +97,16 @@ interface RfObservationService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<RfObservationCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(RfObservationCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<RfObservationCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to get a single RF observation by its unique ID passed as a path parameter.
      */
@@ -182,6 +192,20 @@ interface RfObservationService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<RfObservationUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            RfObservationUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<RfObservationUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [RfObservationService] that provides access to raw HTTP responses for each method.
      */
@@ -257,6 +281,19 @@ interface RfObservationService {
             params: RfObservationCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<RfObservationCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(RfObservationCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<RfObservationCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/rfobservation/{id}`, but is otherwise the same
@@ -361,5 +398,22 @@ interface RfObservationService {
             params: RfObservationUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<RfObservationUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                RfObservationUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<RfObservationUnvalidatedPublishParams.Body>
+        ): HttpResponse = unvalidatedPublish(body, RequestOptions.none())
     }
 }

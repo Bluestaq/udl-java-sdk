@@ -80,6 +80,16 @@ interface OnboardnavigationService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<OnboardnavigationCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(OnboardnavigationCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<OnboardnavigationCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
      * particular data type.
@@ -134,6 +144,20 @@ interface OnboardnavigationService {
         params: OnboardnavigationUnvalidatedPublishParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<OnboardnavigationUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            OnboardnavigationUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<OnboardnavigationUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
 
     /**
      * A view of [OnboardnavigationService] that provides access to raw HTTP responses for each
@@ -197,6 +221,22 @@ interface OnboardnavigationService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
 
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<OnboardnavigationCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(
+                OnboardnavigationCreateBulkParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<OnboardnavigationCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `get /udl/onboardnavigation/queryhelp`, but is otherwise
          * the same as [OnboardnavigationService.queryhelp].
@@ -256,5 +296,22 @@ interface OnboardnavigationService {
             params: OnboardnavigationUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<OnboardnavigationUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                OnboardnavigationUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<OnboardnavigationUnvalidatedPublishParams.Body>
+        ): HttpResponse = unvalidatedPublish(body, RequestOptions.none())
     }
 }

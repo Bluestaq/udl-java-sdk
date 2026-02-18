@@ -108,6 +108,16 @@ interface OperatingunitremarkService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<OperatingunitremarkCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(OperatingunitremarkCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<OperatingunitremarkCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to get a single operatingunitremark record by its unique ID passed as a
      * path parameter.
@@ -276,6 +286,22 @@ interface OperatingunitremarkService {
             params: OperatingunitremarkCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<OperatingunitremarkCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(
+                OperatingunitremarkCreateBulkParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<OperatingunitremarkCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/operatingunitremark/{id}`, but is otherwise the

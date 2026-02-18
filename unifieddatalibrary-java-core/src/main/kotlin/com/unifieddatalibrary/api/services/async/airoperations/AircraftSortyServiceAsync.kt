@@ -92,6 +92,17 @@ interface AircraftSortyServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<AircraftSortyCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(AircraftSortyCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<AircraftSortyCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to take one or many aircraft sortie records as a POST body and ingest into
      * the database. This operation is intended to be used for automated feeds into UDL. A specific
@@ -107,6 +118,21 @@ interface AircraftSortyServiceAsync {
         params: AircraftSortyUnvalidatedPublishParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<AircraftSortyUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            AircraftSortyUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<AircraftSortyUnvalidatedPublishParams.Body>
+    ): CompletableFuture<Void?> = unvalidatedPublish(body, RequestOptions.none())
 
     /**
      * A view of [AircraftSortyServiceAsync] that provides access to raw HTTP responses for each
@@ -179,6 +205,18 @@ interface AircraftSortyServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
 
+        /** @see createBulk */
+        fun createBulk(
+            body: List<AircraftSortyCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(AircraftSortyCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<AircraftSortyCreateBulkParams.Body>
+        ): CompletableFuture<HttpResponse> = createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `post /filedrop/udl-aircraftsortie`, but is otherwise the
          * same as [AircraftSortyServiceAsync.unvalidatedPublish].
@@ -192,5 +230,20 @@ interface AircraftSortyServiceAsync {
             params: AircraftSortyUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<AircraftSortyUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                AircraftSortyUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<AircraftSortyUnvalidatedPublishParams.Body>
+        ): CompletableFuture<HttpResponse> = unvalidatedPublish(body, RequestOptions.none())
     }
 }

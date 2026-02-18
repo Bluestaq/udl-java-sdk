@@ -94,6 +94,16 @@ interface PersonnelrecoveryService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<PersonnelrecoveryCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(PersonnelrecoveryCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<PersonnelrecoveryCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to take a list of Personnel Recovery records as a POST body and ingest into
      * the database. Requires a specific role, please contact the UDL team to gain access. This
@@ -107,6 +117,16 @@ interface PersonnelrecoveryService {
         params: PersonnelrecoveryFileCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see fileCreate */
+    fun fileCreate(
+        body: List<PersonnelrecoveryFileCreateParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = fileCreate(PersonnelrecoveryFileCreateParams.builder().body(body).build(), requestOptions)
+
+    /** @see fileCreate */
+    fun fileCreate(body: List<PersonnelrecoveryFileCreateParams.Body>) =
+        fileCreate(body, RequestOptions.none())
 
     /**
      * Service operation to get a single PersonnelRecovery by its unique ID passed as a path
@@ -258,6 +278,22 @@ interface PersonnelrecoveryService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
 
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<PersonnelrecoveryCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(
+                PersonnelrecoveryCreateBulkParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<PersonnelrecoveryCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `post /filedrop/udl-personnelrecovery`, but is otherwise
          * the same as [PersonnelrecoveryService.fileCreate].
@@ -272,6 +308,22 @@ interface PersonnelrecoveryService {
             params: PersonnelrecoveryFileCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see fileCreate */
+        @MustBeClosed
+        fun fileCreate(
+            body: List<PersonnelrecoveryFileCreateParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            fileCreate(
+                PersonnelrecoveryFileCreateParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see fileCreate */
+        @MustBeClosed
+        fun fileCreate(body: List<PersonnelrecoveryFileCreateParams.Body>): HttpResponse =
+            fileCreate(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/personnelrecovery/{id}`, but is otherwise the

@@ -90,6 +90,16 @@ interface HazardService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<HazardCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(HazardCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<HazardCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
+
     /** Service operation to get a single Hazard by its unique ID passed as a path parameter. */
     fun get(id: String): HazardGetResponse = get(id, HazardGetParams.none())
 
@@ -226,6 +236,19 @@ interface HazardService {
             params: HazardCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<HazardCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(HazardCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<HazardCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/hazard/{id}`, but is otherwise the same as

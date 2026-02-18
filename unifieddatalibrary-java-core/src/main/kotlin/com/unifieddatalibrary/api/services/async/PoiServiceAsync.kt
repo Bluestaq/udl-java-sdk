@@ -94,6 +94,17 @@ interface PoiServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<PoiCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(PoiCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<PoiCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
+
     /** Service operation to get a single POI by its unique ID passed as a path parameter. */
     fun get(id: String): CompletableFuture<PoiGetResponse> = get(id, PoiGetParams.none())
 
@@ -177,6 +188,17 @@ interface PoiServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<PoiUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(PoiUnvalidatedPublishParams.builder().body(body).build(), requestOptions)
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<PoiUnvalidatedPublishParams.Body>): CompletableFuture<Void?> =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /** A view of [PoiServiceAsync] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
@@ -238,6 +260,17 @@ interface PoiServiceAsync {
             params: PoiCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<PoiCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(PoiCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(body: List<PoiCreateBulkParams.Body>): CompletableFuture<HttpResponse> =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/poi/{id}`, but is otherwise the same as
@@ -331,5 +364,20 @@ interface PoiServiceAsync {
             params: PoiUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<PoiUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                PoiUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<PoiUnvalidatedPublishParams.Body>
+        ): CompletableFuture<HttpResponse> = unvalidatedPublish(body, RequestOptions.none())
     }
 }

@@ -146,6 +146,17 @@ interface ElsetServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<ElsetIngest>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(ElsetCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<ElsetIngest>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to take a multiple TLEs as a POST body and ingest into the database. This
      * operation is not intended to be used for automated feeds into UDL. Data providers should
@@ -239,6 +250,20 @@ interface ElsetServiceAsync {
         params: ElsetUnvalidatedPublishParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<ElsetIngest>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            ElsetUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<ElsetIngest>): CompletableFuture<Void?> =
+        unvalidatedPublish(body, RequestOptions.none())
 
     /** A view of [ElsetServiceAsync] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -357,6 +382,17 @@ interface ElsetServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
 
+        /** @see createBulk */
+        fun createBulk(
+            body: List<ElsetIngest>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(ElsetCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(body: List<ElsetIngest>): CompletableFuture<HttpResponse> =
+            createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `post /udl/elset/createBulkFromTLE`, but is otherwise the
          * same as [ElsetServiceAsync.createBulkFromTle].
@@ -448,5 +484,19 @@ interface ElsetServiceAsync {
             params: ElsetUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<ElsetIngest>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                ElsetUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(body: List<ElsetIngest>): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(body, RequestOptions.none())
     }
 }

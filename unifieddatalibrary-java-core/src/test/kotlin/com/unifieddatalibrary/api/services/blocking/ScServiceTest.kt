@@ -14,7 +14,6 @@ import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient
 import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.models.scs.ScCopyParams
 import com.unifieddatalibrary.api.models.scs.ScDeleteParams
-import com.unifieddatalibrary.api.models.scs.ScDownloadParams
 import com.unifieddatalibrary.api.models.scs.ScFileDownloadParams
 import com.unifieddatalibrary.api.models.scs.ScFileUploadParams
 import com.unifieddatalibrary.api.models.scs.ScHasWriteAccessParams
@@ -94,8 +93,7 @@ internal class ScServiceTest {
         val scService = client.scs()
         stubFor(post(anyUrl()).willReturn(ok().withBody("abc")))
 
-        val response =
-            scService.download(ScDownloadParams.builder().addBody("/MyFolderToDownload/").build())
+        val response = scService.download(listOf("/MyFolderToDownload/"))
 
         assertThat(response.body()).hasContent("abc")
     }

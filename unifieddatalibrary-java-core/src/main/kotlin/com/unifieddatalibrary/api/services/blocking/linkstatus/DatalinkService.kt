@@ -137,6 +137,20 @@ interface DatalinkService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<DatalinkIngest>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            DatalinkUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<DatalinkIngest>) =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /** A view of [DatalinkService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
@@ -263,5 +277,21 @@ interface DatalinkService {
             params: DatalinkUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<DatalinkIngest>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                DatalinkUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(body: List<DatalinkIngest>): HttpResponse =
+            unvalidatedPublish(body, RequestOptions.none())
     }
 }

@@ -116,6 +116,17 @@ interface StateVectorServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<StateVectorIngest>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(StateVectorCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<StateVectorIngest>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to get a single state vector by its unique ID passed as a path parameter.
      */
@@ -201,6 +212,20 @@ interface StateVectorServiceAsync {
         params: StateVectorUnvalidatedPublishParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<StateVectorIngest>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            StateVectorUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<StateVectorIngest>): CompletableFuture<Void?> =
+        unvalidatedPublish(body, RequestOptions.none())
 
     /**
      * A view of [StateVectorServiceAsync] that provides access to raw HTTP responses for each
@@ -288,6 +313,17 @@ interface StateVectorServiceAsync {
             params: StateVectorCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<StateVectorIngest>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(StateVectorCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(body: List<StateVectorIngest>): CompletableFuture<HttpResponse> =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/statevector/{id}`, but is otherwise the same as
@@ -381,5 +417,19 @@ interface StateVectorServiceAsync {
             params: StateVectorUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<StateVectorIngest>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                StateVectorUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(body: List<StateVectorIngest>): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(body, RequestOptions.none())
     }
 }

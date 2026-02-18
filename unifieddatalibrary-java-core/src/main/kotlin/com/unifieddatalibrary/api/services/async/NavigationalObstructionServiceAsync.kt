@@ -140,6 +140,21 @@ interface NavigationalObstructionServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<NavigationalObstructionCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(
+            NavigationalObstructionCreateBulkParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<NavigationalObstructionCreateBulkParams.Body>
+    ): CompletableFuture<Void?> = createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to get a single navigational obstruction record by its unique ID passed as
      * a path parameter.
@@ -342,6 +357,21 @@ interface NavigationalObstructionServiceAsync {
             params: NavigationalObstructionCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<NavigationalObstructionCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(
+                NavigationalObstructionCreateBulkParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<NavigationalObstructionCreateBulkParams.Body>
+        ): CompletableFuture<HttpResponse> = createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/navigationalobstruction/{id}`, but is otherwise

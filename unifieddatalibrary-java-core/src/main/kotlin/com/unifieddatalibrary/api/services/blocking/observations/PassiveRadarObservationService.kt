@@ -97,6 +97,20 @@ interface PassiveRadarObservationService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<PassiveRadarObservationCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        createBulk(
+            PassiveRadarObservationCreateBulkParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see createBulk */
+    fun createBulk(body: List<PassiveRadarObservationCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to take multiple PassiveRadarObservation records as a POST body and ingest
      * into the database. This operation is intended to be used for automated feeds into UDL. A
@@ -111,6 +125,20 @@ interface PassiveRadarObservationService {
         params: PassiveRadarObservationFileCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see fileCreate */
+    fun fileCreate(
+        body: List<PassiveRadarObservationFileCreateParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        fileCreate(
+            PassiveRadarObservationFileCreateParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see fileCreate */
+    fun fileCreate(body: List<PassiveRadarObservationFileCreateParams.Body>) =
+        fileCreate(body, RequestOptions.none())
 
     /**
      * Service operation to get a single PassiveRadarObservation record by its unique ID passed as a
@@ -267,6 +295,22 @@ interface PassiveRadarObservationService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
 
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<PassiveRadarObservationCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(
+                PassiveRadarObservationCreateBulkParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<PassiveRadarObservationCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `post /filedrop/udl-passiveradar`, but is otherwise the
          * same as [PassiveRadarObservationService.fileCreate].
@@ -281,6 +325,22 @@ interface PassiveRadarObservationService {
             params: PassiveRadarObservationFileCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see fileCreate */
+        @MustBeClosed
+        fun fileCreate(
+            body: List<PassiveRadarObservationFileCreateParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            fileCreate(
+                PassiveRadarObservationFileCreateParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see fileCreate */
+        @MustBeClosed
+        fun fileCreate(body: List<PassiveRadarObservationFileCreateParams.Body>): HttpResponse =
+            fileCreate(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/passiveradarobservation/{id}`, but is otherwise

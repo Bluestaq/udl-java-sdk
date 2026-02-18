@@ -90,6 +90,16 @@ interface DiffofarrivalService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<DiffofarrivalCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(DiffofarrivalCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<DiffofarrivalCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
+
     /**
      * A view of [DiffofarrivalService] that provides access to raw HTTP responses for each method.
      */
@@ -165,5 +175,18 @@ interface DiffofarrivalService {
             params: DiffofarrivalCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<DiffofarrivalCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(DiffofarrivalCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<DiffofarrivalCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
     }
 }
