@@ -197,6 +197,7 @@ internal constructor(private val clientOptions: ClientOptions) : GlobalAtmospher
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "globalatmosphericmodel", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
@@ -223,6 +224,7 @@ internal constructor(private val clientOptions: ClientOptions) : GlobalAtmospher
                         "getFile",
                         params._pathParam(0),
                     )
+                    .putHeader("Accept", "application/octet-stream")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
