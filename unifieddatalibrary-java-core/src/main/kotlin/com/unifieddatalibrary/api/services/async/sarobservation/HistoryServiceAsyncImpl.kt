@@ -133,6 +133,7 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "sarobservation", "history", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

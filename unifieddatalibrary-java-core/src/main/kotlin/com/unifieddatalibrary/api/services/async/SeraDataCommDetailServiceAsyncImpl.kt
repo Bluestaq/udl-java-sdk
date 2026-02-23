@@ -247,6 +247,7 @@ internal constructor(private val clientOptions: ClientOptions) : SeraDataCommDet
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "seradatacommdetails", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

@@ -61,6 +61,7 @@ class ViewServiceAsyncImpl internal constructor(private val clientOptions: Clien
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("scs", "view", params._pathParam(0))
+                    .putHeader("Accept", "application/octet-stream")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

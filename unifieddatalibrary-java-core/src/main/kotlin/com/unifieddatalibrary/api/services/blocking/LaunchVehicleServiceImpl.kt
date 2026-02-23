@@ -220,6 +220,7 @@ class LaunchVehicleServiceImpl internal constructor(private val clientOptions: C
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "launchvehicle", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

@@ -257,6 +257,7 @@ class SensorServiceAsyncImpl internal constructor(private val clientOptions: Cli
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "sensor", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

@@ -248,6 +248,7 @@ internal constructor(private val clientOptions: ClientOptions) : SeradataSigintP
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "seradatasigintpayload", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

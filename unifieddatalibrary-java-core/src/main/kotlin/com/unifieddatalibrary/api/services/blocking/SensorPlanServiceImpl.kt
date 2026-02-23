@@ -211,6 +211,7 @@ class SensorPlanServiceImpl internal constructor(private val clientOptions: Clie
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "sensorplan", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

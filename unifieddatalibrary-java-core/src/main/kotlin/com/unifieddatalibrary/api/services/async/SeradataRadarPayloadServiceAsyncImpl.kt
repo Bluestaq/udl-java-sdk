@@ -248,6 +248,7 @@ internal constructor(private val clientOptions: ClientOptions) : SeradataRadarPa
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "seradataradarpayload", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

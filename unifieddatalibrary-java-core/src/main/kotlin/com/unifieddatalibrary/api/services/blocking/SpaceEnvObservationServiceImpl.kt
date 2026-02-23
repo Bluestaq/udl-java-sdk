@@ -157,6 +157,7 @@ internal constructor(private val clientOptions: ClientOptions) : SpaceEnvObserva
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "spaceenvobservation", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

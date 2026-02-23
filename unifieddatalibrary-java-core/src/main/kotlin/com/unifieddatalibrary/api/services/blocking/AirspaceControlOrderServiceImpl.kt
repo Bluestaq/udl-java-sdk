@@ -203,6 +203,7 @@ internal constructor(private val clientOptions: ClientOptions) : AirspaceControl
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "airspacecontrolorder", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

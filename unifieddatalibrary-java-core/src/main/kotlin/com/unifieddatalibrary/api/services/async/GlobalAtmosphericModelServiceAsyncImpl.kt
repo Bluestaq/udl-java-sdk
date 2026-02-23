@@ -208,6 +208,7 @@ internal constructor(private val clientOptions: ClientOptions) :
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "globalatmosphericmodel", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
@@ -237,6 +238,7 @@ internal constructor(private val clientOptions: ClientOptions) :
                         "getFile",
                         params._pathParam(0),
                     )
+                    .putHeader("Accept", "application/octet-stream")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

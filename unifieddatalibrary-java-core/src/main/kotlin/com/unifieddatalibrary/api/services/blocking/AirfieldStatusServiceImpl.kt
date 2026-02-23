@@ -261,6 +261,7 @@ class AirfieldStatusServiceImpl internal constructor(private val clientOptions: 
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "airfieldstatus", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
