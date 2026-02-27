@@ -37,6 +37,7 @@ import com.unifieddatalibrary.api.services.blocking.conjunctions.HistoryServiceI
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/** These services provide operations for manipulation and querying of conjunctions. */
 class ConjunctionServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     ConjunctionService {
 
@@ -51,6 +52,7 @@ class ConjunctionServiceImpl internal constructor(private val clientOptions: Cli
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): ConjunctionService =
         ConjunctionServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /** These services provide operations for manipulation and querying of conjunctions. */
     override fun history(): HistoryService = history
 
     override fun retrieve(
@@ -135,6 +137,7 @@ class ConjunctionServiceImpl internal constructor(private val clientOptions: Cli
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /** These services provide operations for manipulation and querying of conjunctions. */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val retrieveHandler: Handler<ConjunctionFull> =

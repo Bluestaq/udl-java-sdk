@@ -20,6 +20,7 @@ import com.unifieddatalibrary.api.models.collectresponses.tuple.TupleListParams
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 class TupleServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     TupleServiceAsync {
 

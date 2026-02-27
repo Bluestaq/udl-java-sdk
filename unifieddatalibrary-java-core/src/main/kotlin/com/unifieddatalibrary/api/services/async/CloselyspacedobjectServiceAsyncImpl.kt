@@ -37,6 +37,11 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This collection of services provides operations for manipulating and querying of closely spaced
+ * objects (on orbit) operations including docking, rendezvous, proximity and reporting of payload
+ * zone engagements observed and characterized over a period of time.
+ */
 class CloselyspacedobjectServiceAsyncImpl
 internal constructor(private val clientOptions: ClientOptions) : CloselyspacedobjectServiceAsync {
 
@@ -56,6 +61,11 @@ internal constructor(private val clientOptions: ClientOptions) : Closelyspacedob
             clientOptions.toBuilder().apply(modifier::accept).build()
         )
 
+    /**
+     * This collection of services provides operations for manipulating and querying of closely
+     * spaced objects (on orbit) operations including docking, rendezvous, proximity and reporting
+     * of payload zone engagements observed and characterized over a period of time.
+     */
     override fun history(): HistoryServiceAsync = history
 
     override fun create(
@@ -131,6 +141,11 @@ internal constructor(private val clientOptions: ClientOptions) : Closelyspacedob
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * This collection of services provides operations for manipulating and querying of closely
+         * spaced objects (on orbit) operations including docking, rendezvous, proximity and
+         * reporting of payload zone engagements observed and characterized over a period of time.
+         */
         override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()

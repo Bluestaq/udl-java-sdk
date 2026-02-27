@@ -22,6 +22,11 @@ import com.unifieddatalibrary.api.models.laseremitter.LaseremitterUpdateParams
 import com.unifieddatalibrary.api.services.blocking.laseremitter.StagingService
 import java.util.function.Consumer
 
+/**
+ * This collection of services provides operations for querying and manipulation of laser related
+ * information to include the laser emitters, the laser deconflict requests, and laser deconflict
+ * responses.
+ */
 interface LaseremitterService {
 
     /**
@@ -36,6 +41,11 @@ interface LaseremitterService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): LaseremitterService
 
+    /**
+     * This collection of services provides operations for querying and manipulation of laser
+     * related information to include the laser emitters, the laser deconflict requests, and laser
+     * deconflict responses.
+     */
     fun staging(): StagingService
 
     /**
@@ -235,6 +245,11 @@ interface LaseremitterService {
             modifier: Consumer<ClientOptions.Builder>
         ): LaseremitterService.WithRawResponse
 
+        /**
+         * This collection of services provides operations for querying and manipulation of laser
+         * related information to include the laser emitters, the laser deconflict requests, and
+         * laser deconflict responses.
+         */
         fun staging(): StagingService.WithRawResponse
 
         /**

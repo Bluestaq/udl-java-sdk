@@ -37,6 +37,7 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 class CollectResponseServiceAsyncImpl
 internal constructor(private val clientOptions: ClientOptions) : CollectResponseServiceAsync {
 
@@ -55,8 +56,10 @@ internal constructor(private val clientOptions: ClientOptions) : CollectResponse
     ): CollectResponseServiceAsync =
         CollectResponseServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     override fun history(): HistoryServiceAsync = history
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     override fun tuple(): TupleServiceAsync = tuple
 
     override fun create(
@@ -129,8 +132,10 @@ internal constructor(private val clientOptions: ClientOptions) : CollectResponse
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         override fun history(): HistoryServiceAsync.WithRawResponse = history
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         override fun tuple(): TupleServiceAsync.WithRawResponse = tuple
 
         private val createHandler: Handler<Void?> = emptyHandler()

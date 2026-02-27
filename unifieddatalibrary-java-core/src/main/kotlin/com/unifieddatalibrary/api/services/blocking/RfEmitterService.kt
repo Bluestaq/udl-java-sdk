@@ -23,6 +23,12 @@ import com.unifieddatalibrary.api.services.blocking.rfemitter.DetailService
 import com.unifieddatalibrary.api.services.blocking.rfemitter.StagingService
 import java.util.function.Consumer
 
+/**
+ * This collection of services provides operations for querying and manipulation of RF related
+ * information to include RFEmitters which could potentially interfere with
+ * communications/operations of space related entities, and RFBands commonly used by various space
+ * related entities.
+ */
 interface RfEmitterService {
 
     /**
@@ -37,8 +43,20 @@ interface RfEmitterService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): RfEmitterService
 
+    /**
+     * This collection of services provides operations for querying and manipulation of RF related
+     * information to include RFEmitters which could potentially interfere with
+     * communications/operations of space related entities, and RFBands commonly used by various
+     * space related entities.
+     */
     fun staging(): StagingService
 
+    /**
+     * This collection of services provides operations for querying and manipulation of RF related
+     * information to include RFEmitters which could potentially interfere with
+     * communications/operations of space related entities, and RFBands commonly used by various
+     * space related entities.
+     */
     fun details(): DetailService
 
     /**
@@ -233,8 +251,20 @@ interface RfEmitterService {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): RfEmitterService.WithRawResponse
 
+        /**
+         * This collection of services provides operations for querying and manipulation of RF
+         * related information to include RFEmitters which could potentially interfere with
+         * communications/operations of space related entities, and RFBands commonly used by various
+         * space related entities.
+         */
         fun staging(): StagingService.WithRawResponse
 
+        /**
+         * This collection of services provides operations for querying and manipulation of RF
+         * related information to include RFEmitters which could potentially interfere with
+         * communications/operations of space related entities, and RFBands commonly used by various
+         * space related entities.
+         */
         fun details(): DetailService.WithRawResponse
 
         /**

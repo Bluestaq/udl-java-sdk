@@ -22,6 +22,7 @@ import com.unifieddatalibrary.api.models.sensorplan.SensorPlanUpdateParams
 import com.unifieddatalibrary.api.services.blocking.sensorplan.HistoryService
 import java.util.function.Consumer
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 interface SensorPlanService {
 
     /**
@@ -36,6 +37,7 @@ interface SensorPlanService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): SensorPlanService
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     fun history(): HistoryService
 
     /**
@@ -210,6 +212,7 @@ interface SensorPlanService {
             modifier: Consumer<ClientOptions.Builder>
         ): SensorPlanService.WithRawResponse
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         fun history(): HistoryService.WithRawResponse
 
         /**

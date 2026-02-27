@@ -11,6 +11,13 @@ import com.unifieddatalibrary.api.models.aircraftstatuses.history.HistoryListPar
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * This service provides operations for manipulation and querying of Aircraft and Aircraft Status
+ * data. Aircraft contains the static data of the specific aircraft: tail number, cruise speed, max
+ * speed, minimum required runway length, etc. The Aircraft Status contains the dynamic data
+ * associated with the specific aircraft: remaining fuel, mission readiness, and inventory for
+ * example.
+ */
 interface HistoryServiceAsync {
 
     /**

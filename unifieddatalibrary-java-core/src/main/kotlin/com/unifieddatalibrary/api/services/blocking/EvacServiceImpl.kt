@@ -36,6 +36,7 @@ import com.unifieddatalibrary.api.services.blocking.evac.TupleServiceImpl
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/** These services provide operations for manipulation and querying of Mission Ops information. */
 class EvacServiceImpl internal constructor(private val clientOptions: ClientOptions) : EvacService {
 
     private val withRawResponse: EvacService.WithRawResponse by lazy {
@@ -51,8 +52,14 @@ class EvacServiceImpl internal constructor(private val clientOptions: ClientOpti
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): EvacService =
         EvacServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     override fun history(): HistoryService = history
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     override fun tuple(): TupleService = tuple
 
     override fun create(params: EvacCreateParams, requestOptions: RequestOptions) {
@@ -113,8 +120,16 @@ class EvacServiceImpl internal constructor(private val clientOptions: ClientOpti
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         override fun tuple(): TupleService.WithRawResponse = tuple
 
         private val createHandler: Handler<Void?> = emptyHandler()

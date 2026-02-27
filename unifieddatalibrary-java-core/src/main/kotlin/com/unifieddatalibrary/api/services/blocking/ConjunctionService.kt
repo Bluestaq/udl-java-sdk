@@ -23,6 +23,7 @@ import com.unifieddatalibrary.api.models.conjunctions.ConjunctionUploadConjuncti
 import com.unifieddatalibrary.api.services.blocking.conjunctions.HistoryService
 import java.util.function.Consumer
 
+/** These services provide operations for manipulation and querying of conjunctions. */
 interface ConjunctionService {
 
     /**
@@ -37,6 +38,7 @@ interface ConjunctionService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): ConjunctionService
 
+    /** These services provide operations for manipulation and querying of conjunctions. */
     fun history(): HistoryService
 
     /**
@@ -273,6 +275,7 @@ interface ConjunctionService {
             modifier: Consumer<ClientOptions.Builder>
         ): ConjunctionService.WithRawResponse
 
+        /** These services provide operations for manipulation and querying of conjunctions. */
         fun history(): HistoryService.WithRawResponse
 
         /**

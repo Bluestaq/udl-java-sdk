@@ -36,6 +36,10 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This collection of services provide operations for manipulating and querying of various site
+ * related data, including site status, site operations, and site type-specific records.
+ */
 class SiteServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     SiteServiceAsync {
 
@@ -52,6 +56,10 @@ class SiteServiceAsyncImpl internal constructor(private val clientOptions: Clien
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): SiteServiceAsync =
         SiteServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * This collection of services provide operations for manipulating and querying of various site
+     * related data, including site status, site operations, and site type-specific records.
+     */
     override fun operations(): OperationServiceAsync = operations
 
     override fun create(
@@ -120,6 +128,11 @@ class SiteServiceAsyncImpl internal constructor(private val clientOptions: Clien
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * This collection of services provide operations for manipulating and querying of various
+         * site related data, including site status, site operations, and site type-specific
+         * records.
+         */
         override fun operations(): OperationServiceAsync.WithRawResponse = operations
 
         private val createHandler: Handler<Void?> = emptyHandler()

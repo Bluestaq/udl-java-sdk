@@ -19,6 +19,7 @@ import com.unifieddatalibrary.api.services.async.isrcollections.HistoryServiceAs
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 interface IsrCollectionServiceAsync {
 
     /**
@@ -33,6 +34,7 @@ interface IsrCollectionServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): IsrCollectionServiceAsync
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     fun history(): HistoryServiceAsync
 
     /**
@@ -180,6 +182,7 @@ interface IsrCollectionServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): IsrCollectionServiceAsync.WithRawResponse
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**

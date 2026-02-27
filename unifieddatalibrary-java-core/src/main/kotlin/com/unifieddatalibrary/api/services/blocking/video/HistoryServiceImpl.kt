@@ -21,6 +21,7 @@ import com.unifieddatalibrary.api.models.video.history.HistoryListParams
 import com.unifieddatalibrary.api.models.video.history.VideoStreamsFull
 import java.util.function.Consumer
 
+/** This collection of services provides operations for video streaming. */
 class HistoryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryService {
 

@@ -21,6 +21,7 @@ import com.unifieddatalibrary.api.models.seradataearlywarning.SeraDataEarlyWarni
 import com.unifieddatalibrary.api.models.seradataearlywarning.SeraDataEarlyWarningUpdateParams
 import java.util.function.Consumer
 
+/** These services provide operations for manipulation and querying of on-orbit payloads. */
 interface SeraDataEarlyWarningService {
 
     /**

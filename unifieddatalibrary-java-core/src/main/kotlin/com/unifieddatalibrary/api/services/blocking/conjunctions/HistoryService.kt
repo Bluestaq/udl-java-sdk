@@ -11,6 +11,7 @@ import com.unifieddatalibrary.api.models.conjunctions.history.HistoryAodrParams
 import com.unifieddatalibrary.api.models.conjunctions.history.HistoryCountParams
 import java.util.function.Consumer
 
+/** These services provide operations for manipulation and querying of conjunctions. */
 interface HistoryService {
 
     /**

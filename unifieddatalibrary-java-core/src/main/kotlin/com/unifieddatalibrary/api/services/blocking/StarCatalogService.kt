@@ -24,6 +24,13 @@ import com.unifieddatalibrary.api.models.starcatalog.StarCatalogUpdateParams
 import com.unifieddatalibrary.api.services.blocking.starcatalog.HistoryService
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for posting and querying Star Catalog data. The Star Catalog
+ * model is a representation of astronomical data and photometric data for stars. Astronomical data
+ * includes positional information, proper motions, parallaxes and their respective uncertainties.
+ * Photometric data contains optical and near-infrared magnitudes, and their uncertainties across
+ * multiple bandpasses. Note: Multiple source catalogs may contribute to a single record.
+ */
 interface StarCatalogService {
 
     /**
@@ -38,6 +45,14 @@ interface StarCatalogService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): StarCatalogService
 
+    /**
+     * These services provide operations for posting and querying Star Catalog data. The Star
+     * Catalog model is a representation of astronomical data and photometric data for stars.
+     * Astronomical data includes positional information, proper motions, parallaxes and their
+     * respective uncertainties. Photometric data contains optical and near-infrared magnitudes, and
+     * their uncertainties across multiple bandpasses. Note: Multiple source catalogs may contribute
+     * to a single record.
+     */
     fun history(): HistoryService
 
     /**
@@ -290,6 +305,14 @@ interface StarCatalogService {
             modifier: Consumer<ClientOptions.Builder>
         ): StarCatalogService.WithRawResponse
 
+        /**
+         * These services provide operations for posting and querying Star Catalog data. The Star
+         * Catalog model is a representation of astronomical data and photometric data for stars.
+         * Astronomical data includes positional information, proper motions, parallaxes and their
+         * respective uncertainties. Photometric data contains optical and near-infrared magnitudes,
+         * and their uncertainties across multiple bandpasses. Note: Multiple source catalogs may
+         * contribute to a single record.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**

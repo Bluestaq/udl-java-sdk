@@ -16,6 +16,12 @@ import com.unifieddatalibrary.api.models.enginedetails.EngineDetailRetrieveParam
 import com.unifieddatalibrary.api.models.enginedetails.EngineDetailUpdateParams
 import java.util.function.Consumer
 
+/**
+ * Collection of launch related services which provide operations for querying and manipulation of
+ * launch site data and detailed information on launch vehicles including engines, stages, and
+ * manufacturers. Sites, engines, and stages can each have multiple 'detail' records which may be
+ * compiled by different sources.
+ */
 interface EngineDetailService {
 
     /**

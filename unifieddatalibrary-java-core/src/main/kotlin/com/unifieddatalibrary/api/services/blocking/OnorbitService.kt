@@ -24,6 +24,10 @@ import com.unifieddatalibrary.api.models.onorbit.OnorbitUpdateParams
 import com.unifieddatalibrary.api.services.blocking.onorbit.AntennaDetailService
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit objects of interest,
+ * their components, and various lists and status of those objects.
+ */
 interface OnorbitService {
 
     /**
@@ -38,6 +42,10 @@ interface OnorbitService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): OnorbitService
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     fun antennaDetails(): AntennaDetailService
 
     /**
@@ -237,6 +245,10 @@ interface OnorbitService {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): OnorbitService.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         fun antennaDetails(): AntennaDetailService.WithRawResponse
 
         /**

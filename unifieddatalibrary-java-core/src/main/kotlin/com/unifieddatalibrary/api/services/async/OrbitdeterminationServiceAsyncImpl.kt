@@ -37,6 +37,11 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for manipulating and querying Orbit Determination (OD) data.
+ * Orbit Determination data contains algorithm results that describe General Perturbations or
+ * Special Perturbations orbital updates.
+ */
 class OrbitdeterminationServiceAsyncImpl
 internal constructor(private val clientOptions: ClientOptions) : OrbitdeterminationServiceAsync {
 
@@ -55,6 +60,11 @@ internal constructor(private val clientOptions: ClientOptions) : Orbitdeterminat
             clientOptions.toBuilder().apply(modifier::accept).build()
         )
 
+    /**
+     * These services provide operations for manipulating and querying Orbit Determination (OD)
+     * data. Orbit Determination data contains algorithm results that describe General Perturbations
+     * or Special Perturbations orbital updates.
+     */
     override fun history(): HistoryServiceAsync = history
 
     override fun create(
@@ -130,6 +140,11 @@ internal constructor(private val clientOptions: ClientOptions) : Orbitdeterminat
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for manipulating and querying Orbit Determination (OD)
+         * data. Orbit Determination data contains algorithm results that describe General
+         * Perturbations or Special Perturbations orbital updates.
+         */
         override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()

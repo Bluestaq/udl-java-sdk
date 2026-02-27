@@ -23,6 +23,11 @@ import com.unifieddatalibrary.api.models.launchevent.history.HistoryListParams
 import com.unifieddatalibrary.api.models.launchevent.history.HistoryListResponse
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of LaunchEvent data. Launch Event
+ * data are known space launches, either future or historic records containing items such as the
+ * launch site, launch epoch, and object.
+ */
 class HistoryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryService {
 

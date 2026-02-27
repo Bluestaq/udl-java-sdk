@@ -22,6 +22,10 @@ import com.unifieddatalibrary.api.services.async.sitestatus.HistoryServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * This collection of services provide operations for manipulating and querying of various site
+ * related data, including site status, site operations, and site type-specific records.
+ */
 interface SiteStatusServiceAsync {
 
     /**
@@ -36,6 +40,10 @@ interface SiteStatusServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): SiteStatusServiceAsync
 
+    /**
+     * This collection of services provide operations for manipulating and querying of various site
+     * related data, including site status, site operations, and site type-specific records.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -247,6 +255,11 @@ interface SiteStatusServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): SiteStatusServiceAsync.WithRawResponse
 
+        /**
+         * This collection of services provide operations for manipulating and querying of various
+         * site related data, including site status, site operations, and site type-specific
+         * records.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**

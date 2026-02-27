@@ -35,6 +35,10 @@ import com.unifieddatalibrary.api.models.manifold.ManifoldUpdateParams
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit objects of interest,
+ * their components, and various lists and status of those objects.
+ */
 class ManifoldServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     ManifoldService {
 

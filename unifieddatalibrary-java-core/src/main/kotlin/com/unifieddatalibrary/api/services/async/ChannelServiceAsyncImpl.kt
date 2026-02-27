@@ -34,6 +34,10 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit communications
+ * payloads (Comm), including supporting data such as transponders and channels, etc.
+ */
 class ChannelServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     ChannelServiceAsync {
 

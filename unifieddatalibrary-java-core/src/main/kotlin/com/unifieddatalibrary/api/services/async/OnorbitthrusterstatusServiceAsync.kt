@@ -21,6 +21,10 @@ import com.unifieddatalibrary.api.services.async.onorbitthrusterstatus.HistorySe
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit objects of interest,
+ * their components, and various lists and status of those objects.
+ */
 interface OnorbitthrusterstatusServiceAsync {
 
     /**
@@ -35,6 +39,10 @@ interface OnorbitthrusterstatusServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): OnorbitthrusterstatusServiceAsync
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -263,6 +271,10 @@ interface OnorbitthrusterstatusServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): OnorbitthrusterstatusServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**

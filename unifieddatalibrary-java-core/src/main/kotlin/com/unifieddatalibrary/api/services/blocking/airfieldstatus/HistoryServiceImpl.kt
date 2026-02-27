@@ -21,6 +21,10 @@ import com.unifieddatalibrary.api.models.airfieldstatus.history.HistoryListPage
 import com.unifieddatalibrary.api.models.airfieldstatus.history.HistoryListParams
 import java.util.function.Consumer
 
+/**
+ * This collection of services provide operations for manipulating and querying of various site
+ * related data, including site status, site operations, and site type-specific records.
+ */
 class HistoryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryService {
 

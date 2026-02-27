@@ -15,6 +15,13 @@ import com.unifieddatalibrary.api.services.async.tdoafdoa.diffofarrival.HistoryS
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for querying and manipulation of Signal time and frequency
+ * difference of arrival (TDOA/FDOA) information obtained by using passive RF based sensor
+ * phenomenologies and sensor triangulation. The J2000 coordinate frame is the preferred frame for
+ * all observations, but in some cases observations may be in another frame depending on the
+ * provider.
+ */
 interface DiffofarrivalServiceAsync {
 
     /**
@@ -29,6 +36,13 @@ interface DiffofarrivalServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): DiffofarrivalServiceAsync
 
+    /**
+     * These services provide operations for querying and manipulation of Signal time and frequency
+     * difference of arrival (TDOA/FDOA) information obtained by using passive RF based sensor
+     * phenomenologies and sensor triangulation. The J2000 coordinate frame is the preferred frame
+     * for all observations, but in some cases observations may be in another frame depending on the
+     * provider.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -118,6 +132,13 @@ interface DiffofarrivalServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): DiffofarrivalServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for querying and manipulation of Signal time and
+         * frequency difference of arrival (TDOA/FDOA) information obtained by using passive RF
+         * based sensor phenomenologies and sensor triangulation. The J2000 coordinate frame is the
+         * preferred frame for all observations, but in some cases observations may be in another
+         * frame depending on the provider.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**

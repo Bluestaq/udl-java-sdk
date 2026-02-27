@@ -21,6 +21,7 @@ import com.unifieddatalibrary.api.services.blocking.collectresponses.HistoryServ
 import com.unifieddatalibrary.api.services.blocking.collectresponses.TupleService
 import java.util.function.Consumer
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 interface CollectResponseService {
 
     /**
@@ -35,8 +36,10 @@ interface CollectResponseService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): CollectResponseService
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     fun history(): HistoryService
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     fun tuple(): TupleService
 
     /**
@@ -206,8 +209,10 @@ interface CollectResponseService {
             modifier: Consumer<ClientOptions.Builder>
         ): CollectResponseService.WithRawResponse
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         fun history(): HistoryService.WithRawResponse
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         fun tuple(): TupleService.WithRawResponse
 
         /**

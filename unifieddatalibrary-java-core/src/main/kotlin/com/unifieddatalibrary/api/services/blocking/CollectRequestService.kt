@@ -21,6 +21,7 @@ import com.unifieddatalibrary.api.models.collectrequests.CollectRequestUnvalidat
 import com.unifieddatalibrary.api.services.blocking.collectrequests.HistoryService
 import java.util.function.Consumer
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 interface CollectRequestService {
 
     /**
@@ -35,6 +36,7 @@ interface CollectRequestService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): CollectRequestService
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     fun history(): HistoryService
 
     /**
@@ -219,6 +221,7 @@ interface CollectRequestService {
             modifier: Consumer<ClientOptions.Builder>
         ): CollectRequestService.WithRawResponse
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         fun history(): HistoryService.WithRawResponse
 
         /**

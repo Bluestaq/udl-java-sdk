@@ -35,6 +35,10 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This collection of services provide operations for manipulating and querying of equipment related
+ * data.
+ */
 class EquipmentServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     EquipmentServiceAsync {
 

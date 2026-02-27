@@ -22,6 +22,7 @@ import com.unifieddatalibrary.api.models.effectrequests.EffectRequestUnvalidated
 import com.unifieddatalibrary.api.services.blocking.effectrequests.HistoryService
 import java.util.function.Consumer
 
+/** These services provide operations for manipulation and querying of Mission Ops information. */
 interface EffectRequestService {
 
     /**
@@ -36,6 +37,9 @@ interface EffectRequestService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): EffectRequestService
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     fun history(): HistoryService
 
     /**
@@ -221,6 +225,10 @@ interface EffectRequestService {
             modifier: Consumer<ClientOptions.Builder>
         ): EffectRequestService.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**

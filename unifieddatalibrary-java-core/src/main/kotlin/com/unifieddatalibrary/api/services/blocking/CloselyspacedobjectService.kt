@@ -22,6 +22,11 @@ import com.unifieddatalibrary.api.models.closelyspacedobjects.Closelyspacedobjec
 import com.unifieddatalibrary.api.services.blocking.closelyspacedobjects.HistoryService
 import java.util.function.Consumer
 
+/**
+ * This collection of services provides operations for manipulating and querying of closely spaced
+ * objects (on orbit) operations including docking, rendezvous, proximity and reporting of payload
+ * zone engagements observed and characterized over a period of time.
+ */
 interface CloselyspacedobjectService {
 
     /**
@@ -36,6 +41,11 @@ interface CloselyspacedobjectService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): CloselyspacedobjectService
 
+    /**
+     * This collection of services provides operations for manipulating and querying of closely
+     * spaced objects (on orbit) operations including docking, rendezvous, proximity and reporting
+     * of payload zone engagements observed and characterized over a period of time.
+     */
     fun history(): HistoryService
 
     /**
@@ -225,6 +235,11 @@ interface CloselyspacedobjectService {
             modifier: Consumer<ClientOptions.Builder>
         ): CloselyspacedobjectService.WithRawResponse
 
+        /**
+         * This collection of services provides operations for manipulating and querying of closely
+         * spaced objects (on orbit) operations including docking, rendezvous, proximity and
+         * reporting of payload zone engagements observed and characterized over a period of time.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**

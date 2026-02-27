@@ -19,6 +19,11 @@ import com.unifieddatalibrary.api.models.mti.history.MtiFull
 import com.unifieddatalibrary.api.services.blocking.mti.HistoryService
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for posting and querying Moving Target Indicator (MTI) STANAG
+ * 4607 data. Detailed MTI data supports activities such as targeting or less detailed data for
+ * applications such as situational awareness used/derived by exploitation systems.
+ */
 interface MtiService {
 
     /**
@@ -33,6 +38,11 @@ interface MtiService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): MtiService
 
+    /**
+     * These services provide operations for posting and querying Moving Target Indicator (MTI)
+     * STANAG 4607 data. Detailed MTI data supports activities such as targeting or less detailed
+     * data for applications such as situational awareness used/derived by exploitation systems.
+     */
     fun history(): HistoryService
 
     /**
@@ -159,6 +169,12 @@ interface MtiService {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): MtiService.WithRawResponse
 
+        /**
+         * These services provide operations for posting and querying Moving Target Indicator (MTI)
+         * STANAG 4607 data. Detailed MTI data supports activities such as targeting or less
+         * detailed data for applications such as situational awareness used/derived by exploitation
+         * systems.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**

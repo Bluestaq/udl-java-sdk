@@ -34,6 +34,10 @@ import com.unifieddatalibrary.api.services.blocking.geostatus.HistoryServiceImpl
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit objects of interest,
+ * their components, and various lists and status of those objects.
+ */
 class GeoStatusServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     GeoStatusService {
 
@@ -48,6 +52,10 @@ class GeoStatusServiceImpl internal constructor(private val clientOptions: Clien
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): GeoStatusService =
         GeoStatusServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun history(): HistoryService = history
 
     override fun create(params: GeoStatusCreateParams, requestOptions: RequestOptions) {
@@ -106,6 +114,10 @@ class GeoStatusServiceImpl internal constructor(private val clientOptions: Clien
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()

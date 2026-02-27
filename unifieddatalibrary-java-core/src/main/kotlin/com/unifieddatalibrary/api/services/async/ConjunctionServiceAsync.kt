@@ -23,6 +23,7 @@ import com.unifieddatalibrary.api.services.async.conjunctions.HistoryServiceAsyn
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/** These services provide operations for manipulation and querying of conjunctions. */
 interface ConjunctionServiceAsync {
 
     /**
@@ -37,6 +38,7 @@ interface ConjunctionServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): ConjunctionServiceAsync
 
+    /** These services provide operations for manipulation and querying of conjunctions. */
     fun history(): HistoryServiceAsync
 
     /**
@@ -284,6 +286,7 @@ interface ConjunctionServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): ConjunctionServiceAsync.WithRawResponse
 
+        /** These services provide operations for manipulation and querying of conjunctions. */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**

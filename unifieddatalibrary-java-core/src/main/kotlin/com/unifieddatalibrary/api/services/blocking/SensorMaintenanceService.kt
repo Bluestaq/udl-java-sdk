@@ -25,6 +25,15 @@ import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceUpda
 import com.unifieddatalibrary.api.services.blocking.sensormaintenance.HistoryService
 import java.util.function.Consumer
 
+/**
+ * This service provides operations for querying and manipulation of sensor data. Sensors are
+ * terrestrial or on-orbit equipment capable of taking measurements or 'observations' of on-orbit
+ * objects via several phenomenologies such as Electro-Optical (EO), Radar, and Radio Frequency
+ * (RF). This collection of operations includes 'SensorMaintenance' schedules which define
+ * known/planned future maintenance and associated operational impact of sensors as well as
+ * 'SensorCalibration' records which contains data about a sensor's overall accuracy and is used to
+ * adjust sensor settings.
+ */
 interface SensorMaintenanceService {
 
     /**
@@ -39,6 +48,15 @@ interface SensorMaintenanceService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): SensorMaintenanceService
 
+    /**
+     * This service provides operations for querying and manipulation of sensor data. Sensors are
+     * terrestrial or on-orbit equipment capable of taking measurements or 'observations' of
+     * on-orbit objects via several phenomenologies such as Electro-Optical (EO), Radar, and Radio
+     * Frequency (RF). This collection of operations includes 'SensorMaintenance' schedules which
+     * define known/planned future maintenance and associated operational impact of sensors as well
+     * as 'SensorCalibration' records which contains data about a sensor's overall accuracy and is
+     * used to adjust sensor settings.
+     */
     fun history(): HistoryService
 
     /**
@@ -289,6 +307,15 @@ interface SensorMaintenanceService {
             modifier: Consumer<ClientOptions.Builder>
         ): SensorMaintenanceService.WithRawResponse
 
+        /**
+         * This service provides operations for querying and manipulation of sensor data. Sensors
+         * are terrestrial or on-orbit equipment capable of taking measurements or 'observations' of
+         * on-orbit objects via several phenomenologies such as Electro-Optical (EO), Radar, and
+         * Radio Frequency (RF). This collection of operations includes 'SensorMaintenance'
+         * schedules which define known/planned future maintenance and associated operational impact
+         * of sensors as well as 'SensorCalibration' records which contains data about a sensor's
+         * overall accuracy and is used to adjust sensor settings.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**

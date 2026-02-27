@@ -22,6 +22,11 @@ import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentUnva
 import com.unifieddatalibrary.api.services.blocking.featureassessment.HistoryService
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of Report and Activity
+ * information. This information includes analytic reports, significant events, route statistics,
+ * EMI Reports, and other georeferenced reports and activities.
+ */
 interface FeatureAssessmentService {
 
     /**
@@ -36,6 +41,11 @@ interface FeatureAssessmentService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): FeatureAssessmentService
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     fun history(): HistoryService
 
     /**
@@ -225,6 +235,11 @@ interface FeatureAssessmentService {
             modifier: Consumer<ClientOptions.Builder>
         ): FeatureAssessmentService.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**

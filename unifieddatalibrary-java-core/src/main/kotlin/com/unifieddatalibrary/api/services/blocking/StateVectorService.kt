@@ -23,6 +23,14 @@ import com.unifieddatalibrary.api.services.blocking.statevector.CurrentService
 import com.unifieddatalibrary.api.services.blocking.statevector.HistoryService
 import java.util.function.Consumer
 
+/**
+ * This service provides operations for querying and manipulation of state vectors for On-orbit
+ * objects. State vectors are cartesian vectors of position (r) and velocity (v) that together with
+ * their time (epoch) (t) uniquely determine the trajectory of the orbiting body in space. J2000 is
+ * the preferred coordinate frame for all state vector positions/velocities in UDL, but in some
+ * cases data may be in another frame depending on the provider and/or datatype. Please see the
+ * 'Discover' tab in the storefront to confirm coordinate frames by data provider.
+ */
 interface StateVectorService {
 
     /**
@@ -37,8 +45,24 @@ interface StateVectorService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): StateVectorService
 
+    /**
+     * This service provides operations for querying and manipulation of state vectors for On-orbit
+     * objects. State vectors are cartesian vectors of position (r) and velocity (v) that together
+     * with their time (epoch) (t) uniquely determine the trajectory of the orbiting body in space.
+     * J2000 is the preferred coordinate frame for all state vector positions/velocities in UDL, but
+     * in some cases data may be in another frame depending on the provider and/or datatype. Please
+     * see the 'Discover' tab in the storefront to confirm coordinate frames by data provider.
+     */
     fun current(): CurrentService
 
+    /**
+     * This service provides operations for querying and manipulation of state vectors for On-orbit
+     * objects. State vectors are cartesian vectors of position (r) and velocity (v) that together
+     * with their time (epoch) (t) uniquely determine the trajectory of the orbiting body in space.
+     * J2000 is the preferred coordinate frame for all state vector positions/velocities in UDL, but
+     * in some cases data may be in another frame depending on the provider and/or datatype. Please
+     * see the 'Discover' tab in the storefront to confirm coordinate frames by data provider.
+     */
     fun history(): HistoryService
 
     /**
@@ -234,8 +258,26 @@ interface StateVectorService {
             modifier: Consumer<ClientOptions.Builder>
         ): StateVectorService.WithRawResponse
 
+        /**
+         * This service provides operations for querying and manipulation of state vectors for
+         * On-orbit objects. State vectors are cartesian vectors of position (r) and velocity (v)
+         * that together with their time (epoch) (t) uniquely determine the trajectory of the
+         * orbiting body in space. J2000 is the preferred coordinate frame for all state vector
+         * positions/velocities in UDL, but in some cases data may be in another frame depending on
+         * the provider and/or datatype. Please see the 'Discover' tab in the storefront to confirm
+         * coordinate frames by data provider.
+         */
         fun current(): CurrentService.WithRawResponse
 
+        /**
+         * This service provides operations for querying and manipulation of state vectors for
+         * On-orbit objects. State vectors are cartesian vectors of position (r) and velocity (v)
+         * that together with their time (epoch) (t) uniquely determine the trajectory of the
+         * orbiting body in space. J2000 is the preferred coordinate frame for all state vector
+         * positions/velocities in UDL, but in some cases data may be in another frame depending on
+         * the provider and/or datatype. Please see the 'Discover' tab in the storefront to confirm
+         * coordinate frames by data provider.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**

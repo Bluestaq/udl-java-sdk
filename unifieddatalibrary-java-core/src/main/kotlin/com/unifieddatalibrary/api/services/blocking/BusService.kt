@@ -20,6 +20,11 @@ import com.unifieddatalibrary.api.models.buses.BusTupleParams
 import com.unifieddatalibrary.api.models.buses.BusUpdateParams
 import java.util.function.Consumer
 
+/**
+ * Services for querying and manipulation of satellite buses. A bus is the physical and software
+ * infrastructure backbone to which on-orbit satellite payloads are attached for power, control, and
+ * other support functions.
+ */
 interface BusService {
 
     /**

@@ -22,6 +22,11 @@ import com.unifieddatalibrary.api.services.async.closelyspacedobjects.HistorySer
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * This collection of services provides operations for manipulating and querying of closely spaced
+ * objects (on orbit) operations including docking, rendezvous, proximity and reporting of payload
+ * zone engagements observed and characterized over a period of time.
+ */
 interface CloselyspacedobjectServiceAsync {
 
     /**
@@ -36,6 +41,11 @@ interface CloselyspacedobjectServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): CloselyspacedobjectServiceAsync
 
+    /**
+     * This collection of services provides operations for manipulating and querying of closely
+     * spaced objects (on orbit) operations including docking, rendezvous, proximity and reporting
+     * of payload zone engagements observed and characterized over a period of time.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -242,6 +252,11 @@ interface CloselyspacedobjectServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): CloselyspacedobjectServiceAsync.WithRawResponse
 
+        /**
+         * This collection of services provides operations for manipulating and querying of closely
+         * spaced objects (on orbit) operations including docking, rendezvous, proximity and
+         * reporting of payload zone engagements observed and characterized over a period of time.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**

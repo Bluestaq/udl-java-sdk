@@ -22,6 +22,11 @@ import com.unifieddatalibrary.api.models.launchevent.LaunchEventUnvalidatedPubli
 import com.unifieddatalibrary.api.services.blocking.launchevent.HistoryService
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of LaunchEvent data. Launch Event
+ * data are known space launches, either future or historic records containing items such as the
+ * launch site, launch epoch, and object.
+ */
 interface LaunchEventService {
 
     /**
@@ -36,6 +41,11 @@ interface LaunchEventService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): LaunchEventService
 
+    /**
+     * These services provide operations for manipulation and querying of LaunchEvent data. Launch
+     * Event data are known space launches, either future or historic records containing items such
+     * as the launch site, launch epoch, and object.
+     */
     fun history(): HistoryService
 
     /**
@@ -219,6 +229,11 @@ interface LaunchEventService {
             modifier: Consumer<ClientOptions.Builder>
         ): LaunchEventService.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of LaunchEvent data.
+         * Launch Event data are known space launches, either future or historic records containing
+         * items such as the launch site, launch epoch, and object.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**

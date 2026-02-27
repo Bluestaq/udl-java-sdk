@@ -26,6 +26,10 @@ import com.unifieddatalibrary.api.services.async.sgi.HistoryServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * This service provides operations for manipulation and querying of space weather/solar,
+ * geomagnetic, and radiation belt index data.
+ */
 interface SgiServiceAsync {
 
     /**
@@ -40,6 +44,10 @@ interface SgiServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): SgiServiceAsync
 
+    /**
+     * This service provides operations for manipulation and querying of space weather/solar,
+     * geomagnetic, and radiation belt index data.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -310,6 +318,10 @@ interface SgiServiceAsync {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): SgiServiceAsync.WithRawResponse
 
+        /**
+         * This service provides operations for manipulation and querying of space weather/solar,
+         * geomagnetic, and radiation belt index data.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**

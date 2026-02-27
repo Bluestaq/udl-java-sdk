@@ -23,6 +23,12 @@ import com.unifieddatalibrary.api.models.missionassignment.MissionAssignmentUpda
 import com.unifieddatalibrary.api.services.blocking.missionassignment.HistoryService
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of mission assignment objects.
+ * MissionAssignment is used by C2 JUs and, optionally, non-C2 JUs to assign missions, designate
+ * targets, and provide target information to non-C2 JU platforms. Provision is made for the non-C2
+ * JU platforms to acknowledge the message through receipt/compliance action.
+ */
 interface MissionAssignmentService {
 
     /**
@@ -37,6 +43,12 @@ interface MissionAssignmentService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): MissionAssignmentService
 
+    /**
+     * These services provide operations for manipulation and querying of mission assignment
+     * objects. MissionAssignment is used by C2 JUs and, optionally, non-C2 JUs to assign missions,
+     * designate targets, and provide target information to non-C2 JU platforms. Provision is made
+     * for the non-C2 JU platforms to acknowledge the message through receipt/compliance action.
+     */
     fun history(): HistoryService
 
     /**
@@ -249,6 +261,13 @@ interface MissionAssignmentService {
             modifier: Consumer<ClientOptions.Builder>
         ): MissionAssignmentService.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of mission assignment
+         * objects. MissionAssignment is used by C2 JUs and, optionally, non-C2 JUs to assign
+         * missions, designate targets, and provide target information to non-C2 JU platforms.
+         * Provision is made for the non-C2 JU platforms to acknowledge the message through
+         * receipt/compliance action.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**

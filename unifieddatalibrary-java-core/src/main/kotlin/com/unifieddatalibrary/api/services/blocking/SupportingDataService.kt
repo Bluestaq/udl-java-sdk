@@ -21,8 +21,18 @@ interface SupportingDataService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): SupportingDataService
 
+    /**
+     * Service operations for querying and manipulation of miscellaneous supporting data such as
+     * countries (which can represent countries, multi-national consortiums, and international
+     * organizations), data owners, locations, entities, organizations, etc.
+     */
     fun dataTypes(): DataTypeService
 
+    /**
+     * Service operations for querying and manipulation of miscellaneous supporting data such as
+     * countries (which can represent countries, multi-national consortiums, and international
+     * organizations), data owners, locations, entities, organizations, etc.
+     */
     fun dataowner(): DataownerService
 
     /**
@@ -39,8 +49,18 @@ interface SupportingDataService {
             modifier: Consumer<ClientOptions.Builder>
         ): SupportingDataService.WithRawResponse
 
+        /**
+         * Service operations for querying and manipulation of miscellaneous supporting data such as
+         * countries (which can represent countries, multi-national consortiums, and international
+         * organizations), data owners, locations, entities, organizations, etc.
+         */
         fun dataTypes(): DataTypeService.WithRawResponse
 
+        /**
+         * Service operations for querying and manipulation of miscellaneous supporting data such as
+         * countries (which can represent countries, multi-national consortiums, and international
+         * organizations), data owners, locations, entities, organizations, etc.
+         */
         fun dataowner(): DataownerService.WithRawResponse
     }
 }

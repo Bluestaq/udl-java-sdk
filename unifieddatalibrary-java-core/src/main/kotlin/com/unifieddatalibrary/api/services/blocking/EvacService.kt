@@ -21,6 +21,7 @@ import com.unifieddatalibrary.api.services.blocking.evac.HistoryService
 import com.unifieddatalibrary.api.services.blocking.evac.TupleService
 import java.util.function.Consumer
 
+/** These services provide operations for manipulation and querying of Mission Ops information. */
 interface EvacService {
 
     /**
@@ -35,8 +36,14 @@ interface EvacService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): EvacService
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     fun history(): HistoryService
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     fun tuple(): TupleService
 
     /**
@@ -186,8 +193,16 @@ interface EvacService {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): EvacService.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         fun history(): HistoryService.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         fun tuple(): TupleService.WithRawResponse
 
         /**

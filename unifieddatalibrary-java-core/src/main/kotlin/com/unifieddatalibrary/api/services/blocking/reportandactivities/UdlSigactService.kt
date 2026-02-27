@@ -10,6 +10,11 @@ import com.unifieddatalibrary.api.models.reportandactivities.udlsigact.UdlSigact
 import com.unifieddatalibrary.api.models.reportandactivities.udlsigact.UdlSigactUnvalidatedPublishParams
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of Report and Activity
+ * information. This information includes analytic reports, significant events, route statistics,
+ * EMI Reports, and other georeferenced reports and activities.
+ */
 interface UdlSigactService {
 
     /**

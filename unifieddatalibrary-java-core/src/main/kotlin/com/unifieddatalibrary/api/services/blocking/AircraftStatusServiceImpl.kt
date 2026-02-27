@@ -35,6 +35,13 @@ import com.unifieddatalibrary.api.services.blocking.aircraftstatuses.HistoryServ
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This service provides operations for manipulation and querying of Aircraft and Aircraft Status
+ * data. Aircraft contains the static data of the specific aircraft: tail number, cruise speed, max
+ * speed, minimum required runway length, etc. The Aircraft Status contains the dynamic data
+ * associated with the specific aircraft: remaining fuel, mission readiness, and inventory for
+ * example.
+ */
 class AircraftStatusServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     AircraftStatusService {
 
@@ -49,6 +56,13 @@ class AircraftStatusServiceImpl internal constructor(private val clientOptions: 
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): AircraftStatusService =
         AircraftStatusServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * This service provides operations for manipulation and querying of Aircraft and Aircraft
+     * Status data. Aircraft contains the static data of the specific aircraft: tail number, cruise
+     * speed, max speed, minimum required runway length, etc. The Aircraft Status contains the
+     * dynamic data associated with the specific aircraft: remaining fuel, mission readiness, and
+     * inventory for example.
+     */
     override fun history(): HistoryService = history
 
     override fun create(params: AircraftStatusCreateParams, requestOptions: RequestOptions) {
@@ -115,6 +129,13 @@ class AircraftStatusServiceImpl internal constructor(private val clientOptions: 
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * This service provides operations for manipulation and querying of Aircraft and Aircraft
+         * Status data. Aircraft contains the static data of the specific aircraft: tail number,
+         * cruise speed, max speed, minimum required runway length, etc. The Aircraft Status
+         * contains the dynamic data associated with the specific aircraft: remaining fuel, mission
+         * readiness, and inventory for example.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()

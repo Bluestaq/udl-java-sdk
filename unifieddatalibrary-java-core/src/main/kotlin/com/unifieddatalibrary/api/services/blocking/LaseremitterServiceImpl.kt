@@ -36,6 +36,11 @@ import com.unifieddatalibrary.api.services.blocking.laseremitter.StagingServiceI
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This collection of services provides operations for querying and manipulation of laser related
+ * information to include the laser emitters, the laser deconflict requests, and laser deconflict
+ * responses.
+ */
 class LaseremitterServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     LaseremitterService {
 
@@ -50,6 +55,11 @@ class LaseremitterServiceImpl internal constructor(private val clientOptions: Cl
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): LaseremitterService =
         LaseremitterServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * This collection of services provides operations for querying and manipulation of laser
+     * related information to include the laser emitters, the laser deconflict requests, and laser
+     * deconflict responses.
+     */
     override fun staging(): StagingService = staging
 
     override fun create(params: LaseremitterCreateParams, requestOptions: RequestOptions) {
@@ -116,6 +126,11 @@ class LaseremitterServiceImpl internal constructor(private val clientOptions: Cl
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * This collection of services provides operations for querying and manipulation of laser
+         * related information to include the laser emitters, the laser deconflict requests, and
+         * laser deconflict responses.
+         */
         override fun staging(): StagingService.WithRawResponse = staging
 
         private val createHandler: Handler<Void?> = emptyHandler()

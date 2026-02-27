@@ -33,6 +33,10 @@ import com.unifieddatalibrary.api.models.channels.ChannelUpdateParams
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit communications
+ * payloads (Comm), including supporting data such as transponders and channels, etc.
+ */
 class ChannelServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     ChannelService {
 

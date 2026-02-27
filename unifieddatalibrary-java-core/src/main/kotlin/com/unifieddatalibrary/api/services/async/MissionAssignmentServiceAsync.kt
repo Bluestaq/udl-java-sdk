@@ -23,6 +23,12 @@ import com.unifieddatalibrary.api.services.async.missionassignment.HistoryServic
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of mission assignment objects.
+ * MissionAssignment is used by C2 JUs and, optionally, non-C2 JUs to assign missions, designate
+ * targets, and provide target information to non-C2 JU platforms. Provision is made for the non-C2
+ * JU platforms to acknowledge the message through receipt/compliance action.
+ */
 interface MissionAssignmentServiceAsync {
 
     /**
@@ -37,6 +43,12 @@ interface MissionAssignmentServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): MissionAssignmentServiceAsync
 
+    /**
+     * These services provide operations for manipulation and querying of mission assignment
+     * objects. MissionAssignment is used by C2 JUs and, optionally, non-C2 JUs to assign missions,
+     * designate targets, and provide target information to non-C2 JU platforms. Provision is made
+     * for the non-C2 JU platforms to acknowledge the message through receipt/compliance action.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -266,6 +278,13 @@ interface MissionAssignmentServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): MissionAssignmentServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of mission assignment
+         * objects. MissionAssignment is used by C2 JUs and, optionally, non-C2 JUs to assign
+         * missions, designate targets, and provide target information to non-C2 JU platforms.
+         * Provision is made for the non-C2 JU platforms to acknowledge the message through
+         * receipt/compliance action.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**

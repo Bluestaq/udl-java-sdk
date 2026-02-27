@@ -35,6 +35,7 @@ import com.unifieddatalibrary.api.services.blocking.deconflictset.HistoryService
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/** These services provide operations for manipulation and querying of Mission Ops information. */
 class DeconflictsetServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     DeconflictsetService {
 
@@ -49,6 +50,9 @@ class DeconflictsetServiceImpl internal constructor(private val clientOptions: C
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): DeconflictsetService =
         DeconflictsetServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     override fun history(): HistoryService = history
 
     override fun create(params: DeconflictsetCreateParams, requestOptions: RequestOptions) {
@@ -113,6 +117,10 @@ class DeconflictsetServiceImpl internal constructor(private val clientOptions: C
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()

@@ -26,6 +26,12 @@ import com.unifieddatalibrary.api.services.async.elsets.HistoryServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for querying and manipulation of element set data describing
+ * orbital characteristics of on-orbit objects. An element set is a collection of parameters that
+ * are used, along with an orbit propagator, to predict the motion of a satellite. The element set,
+ * or elset for short, consists of identification data, the classical elements and drag parameters.
+ */
 interface ElsetServiceAsync {
 
     /**
@@ -40,8 +46,22 @@ interface ElsetServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): ElsetServiceAsync
 
+    /**
+     * These services provide operations for querying and manipulation of element set data
+     * describing orbital characteristics of on-orbit objects. An element set is a collection of
+     * parameters that are used, along with an orbit propagator, to predict the motion of a
+     * satellite. The element set, or elset for short, consists of identification data, the
+     * classical elements and drag parameters.
+     */
     fun current(): CurrentServiceAsync
 
+    /**
+     * These services provide operations for querying and manipulation of element set data
+     * describing orbital characteristics of on-orbit objects. An element set is a collection of
+     * parameters that are used, along with an orbit propagator, to predict the motion of a
+     * satellite. The element set, or elset for short, consists of identification data, the
+     * classical elements and drag parameters.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -277,8 +297,22 @@ interface ElsetServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): ElsetServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for querying and manipulation of element set data
+         * describing orbital characteristics of on-orbit objects. An element set is a collection of
+         * parameters that are used, along with an orbit propagator, to predict the motion of a
+         * satellite. The element set, or elset for short, consists of identification data, the
+         * classical elements and drag parameters.
+         */
         fun current(): CurrentServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for querying and manipulation of element set data
+         * describing orbital characteristics of on-orbit objects. An element set is a collection of
+         * parameters that are used, along with an orbit propagator, to predict the motion of a
+         * satellite. The element set, or elset for short, consists of identification data, the
+         * classical elements and drag parameters.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**

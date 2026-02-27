@@ -35,6 +35,15 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide for posting and querying terrestrial weather conditions over a target area
+ * or region and raw sensor data used to produce condition reports. Weather Reports describe current
+ * weather conditions over a target point or region to include general temperatures, pressures, and
+ * moisture accumulation, as well as navigational considerations such as altimeter settings,
+ * visibility, wind speeds, and cloud heights etc. Weather Data contains algorithmic parameters and
+ * dynamic, raw measurements collected by individual sensors such as signal power, noise level,
+ * etc., which are generally processed across multiple sensors to produce weather reports.
+ */
 class WeatherReportServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     WeatherReportServiceAsync {
 
@@ -49,6 +58,16 @@ class WeatherReportServiceAsyncImpl internal constructor(private val clientOptio
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): WeatherReportServiceAsync =
         WeatherReportServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide for posting and querying terrestrial weather conditions over a target
+     * area or region and raw sensor data used to produce condition reports. Weather Reports
+     * describe current weather conditions over a target point or region to include general
+     * temperatures, pressures, and moisture accumulation, as well as navigational considerations
+     * such as altimeter settings, visibility, wind speeds, and cloud heights etc. Weather Data
+     * contains algorithmic parameters and dynamic, raw measurements collected by individual sensors
+     * such as signal power, noise level, etc., which are generally processed across multiple
+     * sensors to produce weather reports.
+     */
     override fun history(): HistoryServiceAsync = history
 
     override fun create(
@@ -117,6 +136,16 @@ class WeatherReportServiceAsyncImpl internal constructor(private val clientOptio
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide for posting and querying terrestrial weather conditions over a
+         * target area or region and raw sensor data used to produce condition reports. Weather
+         * Reports describe current weather conditions over a target point or region to include
+         * general temperatures, pressures, and moisture accumulation, as well as navigational
+         * considerations such as altimeter settings, visibility, wind speeds, and cloud heights
+         * etc. Weather Data contains algorithmic parameters and dynamic, raw measurements collected
+         * by individual sensors such as signal power, noise level, etc., which are generally
+         * processed across multiple sensors to produce weather reports.
+         */
         override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()

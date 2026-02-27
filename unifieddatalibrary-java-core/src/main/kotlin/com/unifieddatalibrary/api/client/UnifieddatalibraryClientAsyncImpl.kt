@@ -1001,345 +1001,1585 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
     ): UnifieddatalibraryClientAsync =
         UnifieddatalibraryClientAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+     * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+     * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+     * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and Aviation
+     * Risk Management data. Aircraft Sortie information contains static and dynamic aircraft
+     * assignments, departure and arrival times, and remarks. Aircraft Mission information contains
+     * static data for mission planning to include assigned aircraft and crews, cargo pickup and
+     * dropoff locations, unique identifiers, and prioritization. Item Tracking information contains
+     * data for tracking an item from its origin to destination and how it may be configured during
+     * transport. Flight Plan information contains schedule and route details. Air Event provides
+     * information concerning various aerial events such as fuel transfer and air drops, as well as
+     * the associated aircraft involved. Sortie PPR information contains details on operational
+     * access to a runway, taxiway, or airport service. Diplomatic Clearance information contains
+     * details on the issuance and coordination of aircraft clearance requests. Diplomatic Clearance
+     * Country provides information such as entry/exit points, requirements, and points of contact
+     * for countries diplomatic clearances are being created for. Airspace Control Order provides
+     * information concerning the allocation, restriction, and deconfliction of airspace. Air
+     * Tasking Order information contains details on the coordination of air missions and their
+     * tasks, resources, and timelines. Navigational Obstruction provides the locations,
+     * characteristics, and boundaries of obstacles and structures that can restrict or interfere
+     * with navigation. Logistics Support contains information regarding the transport and
+     * maintenance of resources and equipment to sustain air operations. Track Route information
+     * defines specific flight paths used by aircraft during the transport of fuel and other
+     * resources. Air Load Plan information provides mission actuals concerning the loading and air
+     * transport of cargo and passengers. Aviation Risk Management information help aid in mission
+     * planning by accounting for factors such as mission complexity and crew fatigue.
+     */
     override fun airEvents(): AirEventServiceAsync = airEvents
 
     override fun airOperations(): AirOperationServiceAsync = airOperations
 
+    /**
+     * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+     * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+     * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+     * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and Aviation
+     * Risk Management data. Aircraft Sortie information contains static and dynamic aircraft
+     * assignments, departure and arrival times, and remarks. Aircraft Mission information contains
+     * static data for mission planning to include assigned aircraft and crews, cargo pickup and
+     * dropoff locations, unique identifiers, and prioritization. Item Tracking information contains
+     * data for tracking an item from its origin to destination and how it may be configured during
+     * transport. Flight Plan information contains schedule and route details. Air Event provides
+     * information concerning various aerial events such as fuel transfer and air drops, as well as
+     * the associated aircraft involved. Sortie PPR information contains details on operational
+     * access to a runway, taxiway, or airport service. Diplomatic Clearance information contains
+     * details on the issuance and coordination of aircraft clearance requests. Diplomatic Clearance
+     * Country provides information such as entry/exit points, requirements, and points of contact
+     * for countries diplomatic clearances are being created for. Airspace Control Order provides
+     * information concerning the allocation, restriction, and deconfliction of airspace. Air
+     * Tasking Order information contains details on the coordination of air missions and their
+     * tasks, resources, and timelines. Navigational Obstruction provides the locations,
+     * characteristics, and boundaries of obstacles and structures that can restrict or interfere
+     * with navigation. Logistics Support contains information regarding the transport and
+     * maintenance of resources and equipment to sustain air operations. Track Route information
+     * defines specific flight paths used by aircraft during the transport of fuel and other
+     * resources. Air Load Plan information provides mission actuals concerning the loading and air
+     * transport of cargo and passengers. Aviation Risk Management information help aid in mission
+     * planning by accounting for factors such as mission complexity and crew fatigue.
+     */
     override fun airTransportMissions(): AirTransportMissionServiceAsync = airTransportMissions
 
+    /**
+     * This service provides operations for manipulation and querying of Aircraft and Aircraft
+     * Status data. Aircraft contains the static data of the specific aircraft: tail number, cruise
+     * speed, max speed, minimum required runway length, etc. The Aircraft Status contains the
+     * dynamic data associated with the specific aircraft: remaining fuel, mission readiness, and
+     * inventory for example.
+     */
     override fun aircraft(): AircraftServiceAsync = aircraft
 
+    /**
+     * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+     * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+     * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+     * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and Aviation
+     * Risk Management data. Aircraft Sortie information contains static and dynamic aircraft
+     * assignments, departure and arrival times, and remarks. Aircraft Mission information contains
+     * static data for mission planning to include assigned aircraft and crews, cargo pickup and
+     * dropoff locations, unique identifiers, and prioritization. Item Tracking information contains
+     * data for tracking an item from its origin to destination and how it may be configured during
+     * transport. Flight Plan information contains schedule and route details. Air Event provides
+     * information concerning various aerial events such as fuel transfer and air drops, as well as
+     * the associated aircraft involved. Sortie PPR information contains details on operational
+     * access to a runway, taxiway, or airport service. Diplomatic Clearance information contains
+     * details on the issuance and coordination of aircraft clearance requests. Diplomatic Clearance
+     * Country provides information such as entry/exit points, requirements, and points of contact
+     * for countries diplomatic clearances are being created for. Airspace Control Order provides
+     * information concerning the allocation, restriction, and deconfliction of airspace. Air
+     * Tasking Order information contains details on the coordination of air missions and their
+     * tasks, resources, and timelines. Navigational Obstruction provides the locations,
+     * characteristics, and boundaries of obstacles and structures that can restrict or interfere
+     * with navigation. Logistics Support contains information regarding the transport and
+     * maintenance of resources and equipment to sustain air operations. Track Route information
+     * defines specific flight paths used by aircraft during the transport of fuel and other
+     * resources. Air Load Plan information provides mission actuals concerning the loading and air
+     * transport of cargo and passengers. Aviation Risk Management information help aid in mission
+     * planning by accounting for factors such as mission complexity and crew fatigue.
+     */
     override fun aircraftSorties(): AircraftSortyServiceAsync = aircraftSorties
 
+    /**
+     * This service provides operations for manipulation and querying of Aircraft and Aircraft
+     * Status data. Aircraft contains the static data of the specific aircraft: tail number, cruise
+     * speed, max speed, minimum required runway length, etc. The Aircraft Status contains the
+     * dynamic data associated with the specific aircraft: remaining fuel, mission readiness, and
+     * inventory for example.
+     */
     override fun aircraftStatusRemarks(): AircraftStatusRemarkServiceAsync = aircraftStatusRemarks
 
+    /**
+     * This service provides operations for manipulation and querying of Aircraft and Aircraft
+     * Status data. Aircraft contains the static data of the specific aircraft: tail number, cruise
+     * speed, max speed, minimum required runway length, etc. The Aircraft Status contains the
+     * dynamic data associated with the specific aircraft: remaining fuel, mission readiness, and
+     * inventory for example.
+     */
     override fun aircraftStatuses(): AircraftStatusServiceAsync = aircraftStatuses
 
+    /**
+     * This collection of services provide operations for manipulating and querying of various site
+     * related data, including site status, site operations, and site type-specific records.
+     */
     override fun airfieldSlotConsumptions(): AirfieldSlotConsumptionServiceAsync =
         airfieldSlotConsumptions
 
+    /**
+     * This collection of services provide operations for manipulating and querying of various site
+     * related data, including site status, site operations, and site type-specific records.
+     */
     override fun airfieldSlots(): AirfieldSlotServiceAsync = airfieldSlots
 
+    /**
+     * This collection of services provide operations for manipulating and querying of various site
+     * related data, including site status, site operations, and site type-specific records.
+     */
     override fun airfieldStatus(): AirfieldStatusServiceAsync = airfieldStatus
 
+    /**
+     * This collection of services provide operations for manipulating and querying of various site
+     * related data, including site status, site operations, and site type-specific records.
+     */
     override fun airfields(): AirfieldServiceAsync = airfields
 
+    /**
+     * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+     * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+     * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+     * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and Aviation
+     * Risk Management data. Aircraft Sortie information contains static and dynamic aircraft
+     * assignments, departure and arrival times, and remarks. Aircraft Mission information contains
+     * static data for mission planning to include assigned aircraft and crews, cargo pickup and
+     * dropoff locations, unique identifiers, and prioritization. Item Tracking information contains
+     * data for tracking an item from its origin to destination and how it may be configured during
+     * transport. Flight Plan information contains schedule and route details. Air Event provides
+     * information concerning various aerial events such as fuel transfer and air drops, as well as
+     * the associated aircraft involved. Sortie PPR information contains details on operational
+     * access to a runway, taxiway, or airport service. Diplomatic Clearance information contains
+     * details on the issuance and coordination of aircraft clearance requests. Diplomatic Clearance
+     * Country provides information such as entry/exit points, requirements, and points of contact
+     * for countries diplomatic clearances are being created for. Airspace Control Order provides
+     * information concerning the allocation, restriction, and deconfliction of airspace. Air
+     * Tasking Order information contains details on the coordination of air missions and their
+     * tasks, resources, and timelines. Navigational Obstruction provides the locations,
+     * characteristics, and boundaries of obstacles and structures that can restrict or interfere
+     * with navigation. Logistics Support contains information regarding the transport and
+     * maintenance of resources and equipment to sustain air operations. Track Route information
+     * defines specific flight paths used by aircraft during the transport of fuel and other
+     * resources. Air Load Plan information provides mission actuals concerning the loading and air
+     * transport of cargo and passengers. Aviation Risk Management information help aid in mission
+     * planning by accounting for factors such as mission complexity and crew fatigue.
+     */
     override fun airloadPlans(): AirloadPlanServiceAsync = airloadPlans
 
+    /**
+     * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+     * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+     * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+     * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and Aviation
+     * Risk Management data. Aircraft Sortie information contains static and dynamic aircraft
+     * assignments, departure and arrival times, and remarks. Aircraft Mission information contains
+     * static data for mission planning to include assigned aircraft and crews, cargo pickup and
+     * dropoff locations, unique identifiers, and prioritization. Item Tracking information contains
+     * data for tracking an item from its origin to destination and how it may be configured during
+     * transport. Flight Plan information contains schedule and route details. Air Event provides
+     * information concerning various aerial events such as fuel transfer and air drops, as well as
+     * the associated aircraft involved. Sortie PPR information contains details on operational
+     * access to a runway, taxiway, or airport service. Diplomatic Clearance information contains
+     * details on the issuance and coordination of aircraft clearance requests. Diplomatic Clearance
+     * Country provides information such as entry/exit points, requirements, and points of contact
+     * for countries diplomatic clearances are being created for. Airspace Control Order provides
+     * information concerning the allocation, restriction, and deconfliction of airspace. Air
+     * Tasking Order information contains details on the coordination of air missions and their
+     * tasks, resources, and timelines. Navigational Obstruction provides the locations,
+     * characteristics, and boundaries of obstacles and structures that can restrict or interfere
+     * with navigation. Logistics Support contains information regarding the transport and
+     * maintenance of resources and equipment to sustain air operations. Track Route information
+     * defines specific flight paths used by aircraft during the transport of fuel and other
+     * resources. Air Load Plan information provides mission actuals concerning the loading and air
+     * transport of cargo and passengers. Aviation Risk Management information help aid in mission
+     * planning by accounting for factors such as mission complexity and crew fatigue.
+     */
     override fun airspaceControlOrders(): AirspaceControlOrderServiceAsync = airspaceControlOrders
 
+    /**
+     * These services provide for posting and querying of self-reported information obtained from
+     * the Automatic Identification System (AIS) equipment. This contains information such as unique
+     * identification, status, position, course, and speed. The AIS is an automatic tracking system
+     * that uses transceivers on ships and is used by vessel traffic services. Although technically
+     * and operationally distinct, the AIS system is analogous to ADS-B which performs a similar
+     * function for aircraft. AIS is intended to assist a vessel's watchstanding officers and allow
+     * maritime authorities to track and monitor vessel movements. AIS integrates a standardized VHF
+     * transceiver with a positioning system, such as Global Positioning System receiver, with other
+     * electronic navigation sensors, such as gyrocompass or rate of turn indicator. Vessels fitted
+     * with AIS transceivers can be tracked by AIS base stations located along coastlines or, when
+     * out of range of terrestrial networks, through a growing number of satellites that are fitted
+     * with special AIS receivers that are capable of deconflicting a large number of signatures.
+     */
     override fun ais(): AiServiceAsync = ais
 
+    /**
+     * These services provide for posting and querying of self-reported information obtained from
+     * the Automatic Identification System (AIS) equipment. This contains information such as unique
+     * identification, status, position, course, and speed. The AIS is an automatic tracking system
+     * that uses transceivers on ships and is used by vessel traffic services. Although technically
+     * and operationally distinct, the AIS system is analogous to ADS-B which performs a similar
+     * function for aircraft. AIS is intended to assist a vessel's watchstanding officers and allow
+     * maritime authorities to track and monitor vessel movements. AIS integrates a standardized VHF
+     * transceiver with a positioning system, such as Global Positioning System receiver, with other
+     * electronic navigation sensors, such as gyrocompass or rate of turn indicator. Vessels fitted
+     * with AIS transceivers can be tracked by AIS base stations located along coastlines or, when
+     * out of range of terrestrial networks, through a growing number of satellites that are fitted
+     * with special AIS receivers that are capable of deconflicting a large number of signatures.
+     */
     override fun aisObjects(): AisObjectServiceAsync = aisObjects
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     override fun analyticImagery(): AnalyticImageryServiceAsync = analyticImagery
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun antennas(): AntennaServiceAsync = antennas
 
+    /**
+     * These services provide operations for the posting and querying of satellite Ephemeris Point
+     * data. Each point contains a position and velocity vector and optionally, an acceleration
+     * vector and/or covariance matrix at a specified time. ECI J2K is the preferred reference frame
+     * for ephemeris and covariance, however, several user specified reference frames are
+     * accommodated. The EphemerisSet ID (esId) identifies the 'EphemerisSet' record which contains
+     * details of the underlying data and models used in the generation of the ephemeris as well as
+     * a collection of ephemeris points. Points must be retrieved by first identifying a desired
+     * EphemerisSet and pulling its points by that EphemerisSet 'esId'.
+     */
     override fun attitudeData(): AttitudeDataServiceAsync = attitudeData
 
+    /**
+     * These services provide operations for the posting and querying of satellite Ephemeris Point
+     * data. Each point contains a position and velocity vector and optionally, an acceleration
+     * vector and/or covariance matrix at a specified time. ECI J2K is the preferred reference frame
+     * for ephemeris and covariance, however, several user specified reference frames are
+     * accommodated. The EphemerisSet ID (esId) identifies the 'EphemerisSet' record which contains
+     * details of the underlying data and models used in the generation of the ephemeris as well as
+     * a collection of ephemeris points. Points must be retrieved by first identifying a desired
+     * EphemerisSet and pulling its points by that EphemerisSet 'esId'.
+     */
     override fun attitudeSets(): AttitudeSetServiceAsync = attitudeSets
 
+    /**
+     * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+     * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+     * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+     * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and Aviation
+     * Risk Management data. Aircraft Sortie information contains static and dynamic aircraft
+     * assignments, departure and arrival times, and remarks. Aircraft Mission information contains
+     * static data for mission planning to include assigned aircraft and crews, cargo pickup and
+     * dropoff locations, unique identifiers, and prioritization. Item Tracking information contains
+     * data for tracking an item from its origin to destination and how it may be configured during
+     * transport. Flight Plan information contains schedule and route details. Air Event provides
+     * information concerning various aerial events such as fuel transfer and air drops, as well as
+     * the associated aircraft involved. Sortie PPR information contains details on operational
+     * access to a runway, taxiway, or airport service. Diplomatic Clearance information contains
+     * details on the issuance and coordination of aircraft clearance requests. Diplomatic Clearance
+     * Country provides information such as entry/exit points, requirements, and points of contact
+     * for countries diplomatic clearances are being created for. Airspace Control Order provides
+     * information concerning the allocation, restriction, and deconfliction of airspace. Air
+     * Tasking Order information contains details on the coordination of air missions and their
+     * tasks, resources, and timelines. Navigational Obstruction provides the locations,
+     * characteristics, and boundaries of obstacles and structures that can restrict or interfere
+     * with navigation. Logistics Support contains information regarding the transport and
+     * maintenance of resources and equipment to sustain air operations. Track Route information
+     * defines specific flight paths used by aircraft during the transport of fuel and other
+     * resources. Air Load Plan information provides mission actuals concerning the loading and air
+     * transport of cargo and passengers. Aviation Risk Management information help aid in mission
+     * planning by accounting for factors such as mission complexity and crew fatigue.
+     */
     override fun aviationRiskManagement(): AviationRiskManagementServiceAsync =
         aviationRiskManagement
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun batteries(): BatteryServiceAsync = batteries
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun batterydetails(): BatterydetailServiceAsync = batterydetails
 
+    /**
+     * This collection of services provides operations for querying and manipulation of satellite
+     * antenna beams, and querying of beam contours and service areas. Beam contours are the
+     * geographic representation of the relative gain levels of beam power off of the maximum gain
+     * boresight points. Similarly, service areas are the geographic footprints of the areas served
+     * by a particular beam, and may be made up of multiple service regions. Well-Known Text (WKT)
+     * and GeoJSON formats are used for GIS representation and query support (see
+     * https://www.opengeospatial.org/standards/wkt-crs and https://geojson.org/ for more
+     * information on these formats).
+     */
     override fun beam(): BeamServiceAsync = beam
 
+    /**
+     * This collection of services provides operations for querying and manipulation of satellite
+     * antenna beams, and querying of beam contours and service areas. Beam contours are the
+     * geographic representation of the relative gain levels of beam power off of the maximum gain
+     * boresight points. Similarly, service areas are the geographic footprints of the areas served
+     * by a particular beam, and may be made up of multiple service regions. Well-Known Text (WKT)
+     * and GeoJSON formats are used for GIS representation and query support (see
+     * https://www.opengeospatial.org/standards/wkt-crs and https://geojson.org/ for more
+     * information on these formats).
+     */
     override fun beamContours(): BeamContourServiceAsync = beamContours
 
+    /**
+     * Services for querying and manipulation of satellite buses. A bus is the physical and software
+     * infrastructure backbone to which on-orbit satellite payloads are attached for power, control,
+     * and other support functions.
+     */
     override fun buses(): BusServiceAsync = buses
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit communications
+     * payloads (Comm), including supporting data such as transponders and channels, etc.
+     */
     override fun channels(): ChannelServiceAsync = channels
 
+    /**
+     * This collection of services provides operations for manipulating and querying of closely
+     * spaced objects (on orbit) operations including docking, rendezvous, proximity and reporting
+     * of payload zone engagements observed and characterized over a period of time.
+     */
     override fun closelyspacedobjects(): CloselyspacedobjectServiceAsync = closelyspacedobjects
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     override fun collectRequests(): CollectRequestServiceAsync = collectRequests
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     override fun collectResponses(): CollectResponseServiceAsync = collectResponses
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit communications
+     * payloads (Comm), including supporting data such as transponders and channels, etc.
+     */
     override fun comm(): CommServiceAsync = comm
 
+    /** These services provide operations for manipulation and querying of conjunctions. */
     override fun conjunctions(): ConjunctionServiceAsync = conjunctions
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     override fun cots(): CotServiceAsync = cots
 
+    /**
+     * Service operations for querying and manipulation of miscellaneous supporting data such as
+     * countries (which can represent countries, multi-national consortiums, and international
+     * organizations), data owners, locations, entities, organizations, etc.
+     */
     override fun countries(): CountryServiceAsync = countries
 
+    /**
+     * These services provide operations for posting and querying crew data. Crew data contains
+     * information about its members and their assignments.
+     */
     override fun crew(): CrewServiceAsync = crew
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     override fun deconflictset(): DeconflictsetServiceAsync = deconflictset
 
+    /**
+     * These services provide operations for querying and manipulation of Signal time and frequency
+     * difference of arrival (TDOA/FDOA) information obtained by using passive RF based sensor
+     * phenomenologies and sensor triangulation. The J2000 coordinate frame is the preferred frame
+     * for all observations, but in some cases observations may be in another frame depending on the
+     * provider.
+     */
     override fun diffOfArrival(): DiffOfArrivalServiceAsync = diffOfArrival
 
+    /**
+     * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+     * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+     * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+     * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and Aviation
+     * Risk Management data. Aircraft Sortie information contains static and dynamic aircraft
+     * assignments, departure and arrival times, and remarks. Aircraft Mission information contains
+     * static data for mission planning to include assigned aircraft and crews, cargo pickup and
+     * dropoff locations, unique identifiers, and prioritization. Item Tracking information contains
+     * data for tracking an item from its origin to destination and how it may be configured during
+     * transport. Flight Plan information contains schedule and route details. Air Event provides
+     * information concerning various aerial events such as fuel transfer and air drops, as well as
+     * the associated aircraft involved. Sortie PPR information contains details on operational
+     * access to a runway, taxiway, or airport service. Diplomatic Clearance information contains
+     * details on the issuance and coordination of aircraft clearance requests. Diplomatic Clearance
+     * Country provides information such as entry/exit points, requirements, and points of contact
+     * for countries diplomatic clearances are being created for. Airspace Control Order provides
+     * information concerning the allocation, restriction, and deconfliction of airspace. Air
+     * Tasking Order information contains details on the coordination of air missions and their
+     * tasks, resources, and timelines. Navigational Obstruction provides the locations,
+     * characteristics, and boundaries of obstacles and structures that can restrict or interfere
+     * with navigation. Logistics Support contains information regarding the transport and
+     * maintenance of resources and equipment to sustain air operations. Track Route information
+     * defines specific flight paths used by aircraft during the transport of fuel and other
+     * resources. Air Load Plan information provides mission actuals concerning the loading and air
+     * transport of cargo and passengers. Aviation Risk Management information help aid in mission
+     * planning by accounting for factors such as mission complexity and crew fatigue.
+     */
     override fun diplomaticClearance(): DiplomaticClearanceServiceAsync = diplomaticClearance
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun driftHistory(): DriftHistoryServiceAsync = driftHistory
 
+    /**
+     * This collection of services provide operations for manipulating and querying of various site
+     * related data, including site status, site operations, and site type-specific records.
+     */
     override fun dropzone(): DropzoneServiceAsync = dropzone
 
+    /**
+     * This collection of services provides operations for querying and manipulation of
+     * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+     * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+     * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+     * some cases observations may be in an alternate frame depending on the provider and/or
+     * datatype.
+     */
     override fun ecpedr(): EcpedrServiceAsync = ecpedr
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     override fun effectRequests(): EffectRequestServiceAsync = effectRequests
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     override fun effectResponses(): EffectResponseServiceAsync = effectResponses
 
+    /**
+     * These services provide operations for querying and manipulation of element set data
+     * describing orbital characteristics of on-orbit objects. An element set is a collection of
+     * parameters that are used, along with an orbit propagator, to predict the motion of a
+     * satellite. The element set, or elset for short, consists of identification data, the
+     * classical elements and drag parameters.
+     */
     override fun elsets(): ElsetServiceAsync = elsets
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     override fun emireport(): EmireportServiceAsync = emireport
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     override fun emitterGeolocation(): EmitterGeolocationServiceAsync = emitterGeolocation
 
+    /**
+     * Collection of launch related services which provide operations for querying and manipulation
+     * of launch site data and detailed information on launch vehicles including engines, stages,
+     * and manufacturers. Sites, engines, and stages can each have multiple 'detail' records which
+     * may be compiled by different sources.
+     */
     override fun engineDetails(): EngineDetailServiceAsync = engineDetails
 
+    /**
+     * Collection of launch related services which provide operations for querying and manipulation
+     * of launch site data and detailed information on launch vehicles including engines, stages,
+     * and manufacturers. Sites, engines, and stages can each have multiple 'detail' records which
+     * may be compiled by different sources.
+     */
     override fun engines(): EngineServiceAsync = engines
 
+    /**
+     * Service operations for querying and manipulation of miscellaneous supporting data such as
+     * countries (which can represent countries, multi-national consortiums, and international
+     * organizations), data owners, locations, entities, organizations, etc.
+     */
     override fun entities(): EntityServiceAsync = entities
 
+    /**
+     * This service provides operations for manipulation and querying of earth orientation parameter
+     * (EOP) data. Earth Orientation Parameters (EOP) are produced by the IERS (International Earth
+     * Rotation and Reference Systems Service). Earth Orientation Parameters describe the
+     * irregularities of the earth's rotation. Technically, they are the parameters which provide
+     * the rotation of the ITRS (International Terrestrial Reference System) to the ICRS
+     * (International Celestial Reference System) as a function of time. Universal time -- Universal
+     * time (UT1) is the time of the earth clock, which performs one revolution in about 24h. It is
+     * practically proportional to the sidereal time. The excess revolution time is called length of
+     * day (LOD). Coordinates of the pole -- x and y are the coordinates of the Celestial Ephemeris
+     * Pole (CEP) relative to the IRP, the IERS Reference Pole. The CEP differs from the
+     * instantaneous rotation axis by quasi-diurnal terms with amplitudes under 0.01" (see
+     * Seidelmann, 1982). The x-axis is in the direction of the ITRF zero-meridian; the y-axis is in
+     * the direction 90 degrees West longitude. Celestial pole offsets -- Celestial pole offsets are
+     * described in the IAU Precession and Nutation models. The observed differences with respect to
+     * the conventional celestial pole position defined by the models are monitored and reported by
+     * the IERS. IERS Bulletins A and B provide current information on the Earth's orientation in
+     * the IERS Reference System. This includes Universal Time, coordinates of the terrestrial pole,
+     * and celestial pole offsets. Bulletin A gives an advanced solution updated weekly; the
+     * standard solution is given monthly in Bulletin B. Fields suffixed with ''B'' are Bulletin B
+     * values. All solutions are continuous within their respective uncertainties. Bulletin A is
+     * issued by the IERS Rapid Service/Prediction Centre at the U.S. Naval Observatory, Washington,
+     * DC and Bulletin B is issued by the IERS Earth Orientation Centre at the Paris Observatory.
+     * IERS Bulletin A reports the latest determinations for polar motion, UT1-UTC, and nutation
+     * offsets at daily intervals based on a combination of contributed analysis results using data
+     * from Very Long Baseline Interferometry (VLBI), Satellite Laser Ranging (SLR), Global
+     * Positioning System (GPS) satellites, and Lunar Laser Ranging (LLR). Predictions for
+     * variations a year into the future are also provided. Meteorological predictions of variations
+     * in Atmospheric Angular Momentum (AAM) are used to aid in the prediction of near-term UT1-UTC
+     * changes. This publication is prepared by the IERS Rapid Service/Prediction Center.
+     */
     override fun eop(): EopServiceAsync = eop
 
+    /**
+     * These services provide operations for the posting and querying of satellite Ephemeris Point
+     * data. Each point contains a position and velocity vector and optionally, an acceleration
+     * vector and/or covariance matrix at a specified time. ECI J2K is the preferred reference frame
+     * for ephemeris and covariance, however, several user specified reference frames are
+     * accommodated. The EphemerisSet ID (esId) identifies the 'EphemerisSet' record which contains
+     * details of the underlying data and models used in the generation of the ephemeris as well as
+     * a collection of ephemeris points. Points must be retrieved by first identifying a desired
+     * EphemerisSet and pulling its points by that EphemerisSet 'esId'.
+     */
     override fun ephemeris(): EphemerisServiceAsync = ephemeris
 
+    /**
+     * These services provide operations for the posting and querying of satellite Ephemeris Point
+     * data. Each point contains a position and velocity vector and optionally, an acceleration
+     * vector and/or covariance matrix at a specified time. ECI J2K is the preferred reference frame
+     * for ephemeris and covariance, however, several user specified reference frames are
+     * accommodated. The EphemerisSet ID (esId) identifies the 'EphemerisSet' record which contains
+     * details of the underlying data and models used in the generation of the ephemeris as well as
+     * a collection of ephemeris points. Points must be retrieved by first identifying a desired
+     * EphemerisSet and pulling its points by that EphemerisSet 'esId'.
+     */
     override fun ephemerisSets(): EphemerisSetServiceAsync = ephemerisSets
 
+    /**
+     * This collection of services provide operations for manipulating and querying of equipment
+     * related data.
+     */
     override fun equipment(): EquipmentServiceAsync = equipment
 
+    /**
+     * This collection of services provide operations for manipulating and querying of equipment
+     * related data.
+     */
     override fun equipmentRemarks(): EquipmentRemarkServiceAsync = equipmentRemarks
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     override fun evac(): EvacServiceAsync = evac
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     override fun eventEvolution(): EventEvolutionServiceAsync = eventEvolution
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     override fun featureAssessment(): FeatureAssessmentServiceAsync = featureAssessment
 
+    /**
+     * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+     * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+     * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+     * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and Aviation
+     * Risk Management data. Aircraft Sortie information contains static and dynamic aircraft
+     * assignments, departure and arrival times, and remarks. Aircraft Mission information contains
+     * static data for mission planning to include assigned aircraft and crews, cargo pickup and
+     * dropoff locations, unique identifiers, and prioritization. Item Tracking information contains
+     * data for tracking an item from its origin to destination and how it may be configured during
+     * transport. Flight Plan information contains schedule and route details. Air Event provides
+     * information concerning various aerial events such as fuel transfer and air drops, as well as
+     * the associated aircraft involved. Sortie PPR information contains details on operational
+     * access to a runway, taxiway, or airport service. Diplomatic Clearance information contains
+     * details on the issuance and coordination of aircraft clearance requests. Diplomatic Clearance
+     * Country provides information such as entry/exit points, requirements, and points of contact
+     * for countries diplomatic clearances are being created for. Airspace Control Order provides
+     * information concerning the allocation, restriction, and deconfliction of airspace. Air
+     * Tasking Order information contains details on the coordination of air missions and their
+     * tasks, resources, and timelines. Navigational Obstruction provides the locations,
+     * characteristics, and boundaries of obstacles and structures that can restrict or interfere
+     * with navigation. Logistics Support contains information regarding the transport and
+     * maintenance of resources and equipment to sustain air operations. Track Route information
+     * defines specific flight paths used by aircraft during the transport of fuel and other
+     * resources. Air Load Plan information provides mission actuals concerning the loading and air
+     * transport of cargo and passengers. Aviation Risk Management information help aid in mission
+     * planning by accounting for factors such as mission complexity and crew fatigue.
+     */
     override fun flightplan(): FlightplanServiceAsync = flightplan
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun geoStatus(): GeoStatusServiceAsync = geoStatus
 
+    /**
+     * Models and Simulations is a collection of services that allow consumers to interact with data
+     * products representing independent models of various phenomenon, artificial intelligence
+     * models and predictions, or of mathematical parameters meant to feed mod and sim tools to
+     * produce estimates of environmental entities such as atmospheric models and heat maps.
+     */
     override fun globalAtmosphericModel(): GlobalAtmosphericModelServiceAsync =
         globalAtmosphericModel
 
     override fun gnssObservations(): GnssObservationServiceAsync = gnssObservations
 
+    /**
+     * This collection of services provides operations for querying and manipulation of
+     * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+     * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+     * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+     * some cases observations may be in an alternate frame depending on the provider and/or
+     * datatype.
+     */
     override fun gnssObservationset(): GnssObservationsetServiceAsync = gnssObservationset
 
+    /**
+     * This collection of services provides operations for querying and manipulation of
+     * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+     * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+     * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+     * some cases observations may be in an alternate frame depending on the provider and/or
+     * datatype.
+     */
     override fun gnssRawIf(): GnssRawIfServiceAsync = gnssRawIf
 
+    /**
+     * This collection of services provides operations for querying and manipulation of ground
+     * imagery of terrestrial regions from on-orbit, air, and other sensors. Includes metadata on
+     * the image (time, region, source, etc) as well as binary content (typically GeoTIFF). Binary
+     * content must be downloaded individually by ID using the 'getFile' operation. Well-Known Text
+     * (WKT) and GeoJSON formats are used for GIS representation and query support (see
+     * https://www.opengeospatial.org/standards/wkt-crs and https://geojson.org/ for more
+     * information on these formats).
+     */
     override fun groundImagery(): GroundImageryServiceAsync = groundImagery
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     override fun h3Geo(): H3GeoServiceAsync = h3Geo
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     override fun h3GeoHexCell(): H3GeoHexCellServiceAsync = h3GeoHexCell
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     override fun hazard(): HazardServiceAsync = hazard
 
+    /**
+     * This collection of services provides operations for querying and manipulation of
+     * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+     * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+     * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+     * some cases observations may be in an alternate frame depending on the provider and/or
+     * datatype.
+     */
     override fun ionoObservations(): IonoObservationServiceAsync = ionoObservations
 
+    /** These services provide operations for manipulation and querying of on-orbit payloads. */
     override fun ir(): IrServiceAsync = ir
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     override fun isrCollections(): IsrCollectionServiceAsync = isrCollections
 
+    /**
+     * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+     * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+     * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+     * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and Aviation
+     * Risk Management data. Aircraft Sortie information contains static and dynamic aircraft
+     * assignments, departure and arrival times, and remarks. Aircraft Mission information contains
+     * static data for mission planning to include assigned aircraft and crews, cargo pickup and
+     * dropoff locations, unique identifiers, and prioritization. Item Tracking information contains
+     * data for tracking an item from its origin to destination and how it may be configured during
+     * transport. Flight Plan information contains schedule and route details. Air Event provides
+     * information concerning various aerial events such as fuel transfer and air drops, as well as
+     * the associated aircraft involved. Sortie PPR information contains details on operational
+     * access to a runway, taxiway, or airport service. Diplomatic Clearance information contains
+     * details on the issuance and coordination of aircraft clearance requests. Diplomatic Clearance
+     * Country provides information such as entry/exit points, requirements, and points of contact
+     * for countries diplomatic clearances are being created for. Airspace Control Order provides
+     * information concerning the allocation, restriction, and deconfliction of airspace. Air
+     * Tasking Order information contains details on the coordination of air missions and their
+     * tasks, resources, and timelines. Navigational Obstruction provides the locations,
+     * characteristics, and boundaries of obstacles and structures that can restrict or interfere
+     * with navigation. Logistics Support contains information regarding the transport and
+     * maintenance of resources and equipment to sustain air operations. Track Route information
+     * defines specific flight paths used by aircraft during the transport of fuel and other
+     * resources. Air Load Plan information provides mission actuals concerning the loading and air
+     * transport of cargo and passengers. Aviation Risk Management information help aid in mission
+     * planning by accounting for factors such as mission complexity and crew fatigue.
+     */
     override fun item(): ItemServiceAsync = item
 
+    /**
+     * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+     * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+     * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+     * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and Aviation
+     * Risk Management data. Aircraft Sortie information contains static and dynamic aircraft
+     * assignments, departure and arrival times, and remarks. Aircraft Mission information contains
+     * static data for mission planning to include assigned aircraft and crews, cargo pickup and
+     * dropoff locations, unique identifiers, and prioritization. Item Tracking information contains
+     * data for tracking an item from its origin to destination and how it may be configured during
+     * transport. Flight Plan information contains schedule and route details. Air Event provides
+     * information concerning various aerial events such as fuel transfer and air drops, as well as
+     * the associated aircraft involved. Sortie PPR information contains details on operational
+     * access to a runway, taxiway, or airport service. Diplomatic Clearance information contains
+     * details on the issuance and coordination of aircraft clearance requests. Diplomatic Clearance
+     * Country provides information such as entry/exit points, requirements, and points of contact
+     * for countries diplomatic clearances are being created for. Airspace Control Order provides
+     * information concerning the allocation, restriction, and deconfliction of airspace. Air
+     * Tasking Order information contains details on the coordination of air missions and their
+     * tasks, resources, and timelines. Navigational Obstruction provides the locations,
+     * characteristics, and boundaries of obstacles and structures that can restrict or interfere
+     * with navigation. Logistics Support contains information regarding the transport and
+     * maintenance of resources and equipment to sustain air operations. Track Route information
+     * defines specific flight paths used by aircraft during the transport of fuel and other
+     * resources. Air Load Plan information provides mission actuals concerning the loading and air
+     * transport of cargo and passengers. Aviation Risk Management information help aid in mission
+     * planning by accounting for factors such as mission complexity and crew fatigue.
+     */
     override fun itemTrackings(): ItemTrackingServiceAsync = itemTrackings
 
+    /**
+     * This collection of services provides operations for querying and manipulation of laser
+     * related information to include the laser emitters, the laser deconflict requests, and laser
+     * deconflict responses.
+     */
     override fun laserdeconflictrequest(): LaserdeconflictrequestServiceAsync =
         laserdeconflictrequest
 
+    /**
+     * This collection of services provides operations for querying and manipulation of laser
+     * related information to include the laser emitters, the laser deconflict requests, and laser
+     * deconflict responses.
+     */
     override fun laseremitter(): LaseremitterServiceAsync = laseremitter
 
+    /**
+     * Collection of launch related services which provide operations for querying and manipulation
+     * of launch site data and detailed information on launch vehicles including engines, stages,
+     * and manufacturers. Sites, engines, and stages can each have multiple 'detail' records which
+     * may be compiled by different sources.
+     */
     override fun launchDetection(): LaunchDetectionServiceAsync = launchDetection
 
+    /**
+     * These services provide operations for manipulation and querying of LaunchEvent data. Launch
+     * Event data are known space launches, either future or historic records containing items such
+     * as the launch site, launch epoch, and object.
+     */
     override fun launchEvent(): LaunchEventServiceAsync = launchEvent
 
+    /**
+     * Collection of launch related services which provide operations for querying and manipulation
+     * of launch site data and detailed information on launch vehicles including engines, stages,
+     * and manufacturers. Sites, engines, and stages can each have multiple 'detail' records which
+     * may be compiled by different sources.
+     */
     override fun launchSite(): LaunchSiteServiceAsync = launchSite
 
+    /**
+     * Collection of launch related services which provide operations for querying and manipulation
+     * of launch site data and detailed information on launch vehicles including engines, stages,
+     * and manufacturers. Sites, engines, and stages can each have multiple 'detail' records which
+     * may be compiled by different sources.
+     */
     override fun launchSiteDetails(): LaunchSiteDetailServiceAsync = launchSiteDetails
 
+    /**
+     * Collection of launch related services which provide operations for querying and manipulation
+     * of launch site data and detailed information on launch vehicles including engines, stages,
+     * and manufacturers. Sites, engines, and stages can each have multiple 'detail' records which
+     * may be compiled by different sources.
+     */
     override fun launchVehicle(): LaunchVehicleServiceAsync = launchVehicle
 
+    /**
+     * Collection of launch related services which provide operations for querying and manipulation
+     * of launch site data and detailed information on launch vehicles including engines, stages,
+     * and manufacturers. Sites, engines, and stages can each have multiple 'detail' records which
+     * may be compiled by different sources.
+     */
     override fun launchVehicleDetails(): LaunchVehicleDetailServiceAsync = launchVehicleDetails
 
+    /**
+     * These services provide operations for manipulation and querying tactical data links and link
+     * statuses of beams or a satellite constellation. Communication link statuses provide
+     * definitions and status such as, positional endpoints, where each endpoint may be associated
+     * with a specific beam or with a satellite constellation. Data links provide detailed
+     * instructions regarding the operational use of a tactical data link and interface coordination
+     * through various message formats.
+     */
     override fun linkStatus(): LinkStatusServiceAsync = linkStatus
 
+    /**
+     * These services provide operations for manipulation and querying tactical data links and link
+     * statuses of beams or a satellite constellation. Communication link statuses provide
+     * definitions and status such as, positional endpoints, where each endpoint may be associated
+     * with a specific beam or with a satellite constellation. Data links provide detailed
+     * instructions regarding the operational use of a tactical data link and interface coordination
+     * through various message formats.
+     */
     override fun linkstatus(): LinkstatusServiceAsync = linkstatus
 
+    /**
+     * Service operations for querying and manipulation of miscellaneous supporting data such as
+     * countries (which can represent countries, multi-national consortiums, and international
+     * organizations), data owners, locations, entities, organizations, etc.
+     */
     override fun location(): LocationServiceAsync = location
 
+    /**
+     * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+     * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+     * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+     * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and Aviation
+     * Risk Management data. Aircraft Sortie information contains static and dynamic aircraft
+     * assignments, departure and arrival times, and remarks. Aircraft Mission information contains
+     * static data for mission planning to include assigned aircraft and crews, cargo pickup and
+     * dropoff locations, unique identifiers, and prioritization. Item Tracking information contains
+     * data for tracking an item from its origin to destination and how it may be configured during
+     * transport. Flight Plan information contains schedule and route details. Air Event provides
+     * information concerning various aerial events such as fuel transfer and air drops, as well as
+     * the associated aircraft involved. Sortie PPR information contains details on operational
+     * access to a runway, taxiway, or airport service. Diplomatic Clearance information contains
+     * details on the issuance and coordination of aircraft clearance requests. Diplomatic Clearance
+     * Country provides information such as entry/exit points, requirements, and points of contact
+     * for countries diplomatic clearances are being created for. Airspace Control Order provides
+     * information concerning the allocation, restriction, and deconfliction of airspace. Air
+     * Tasking Order information contains details on the coordination of air missions and their
+     * tasks, resources, and timelines. Navigational Obstruction provides the locations,
+     * characteristics, and boundaries of obstacles and structures that can restrict or interfere
+     * with navigation. Logistics Support contains information regarding the transport and
+     * maintenance of resources and equipment to sustain air operations. Track Route information
+     * defines specific flight paths used by aircraft during the transport of fuel and other
+     * resources. Air Load Plan information provides mission actuals concerning the loading and air
+     * transport of cargo and passengers. Aviation Risk Management information help aid in mission
+     * planning by accounting for factors such as mission complexity and crew fatigue.
+     */
     override fun logisticsSupport(): LogisticsSupportServiceAsync = logisticsSupport
 
+    /**
+     * This service provides operations for querying and manipulation of detected/possible/confirmed
+     * on-orbit maneuvers. The J2000 coordinate frame is the preferred frame for all maneuver data,
+     * but in some cases data may be in another frame depending on the provider. Check the
+     * Storefront 'Data Products' section under the 'Discover' tab for maneuver data provider
+     * information.
+     */
     override fun maneuvers(): ManeuverServiceAsync = maneuvers
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun manifold(): ManifoldServiceAsync = manifold
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun manifoldelset(): ManifoldelsetServiceAsync = manifoldelset
 
+    /**
+     * These services provide operations for posting and querying of air, space, and ground
+     * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+     * particular timestamp.
+     */
     override fun missileTracks(): MissileTrackServiceAsync = missileTracks
 
+    /**
+     * These services provide operations for manipulation and querying of mission assignment
+     * objects. MissionAssignment is used by C2 JUs and, optionally, non-C2 JUs to assign missions,
+     * designate targets, and provide target information to non-C2 JU platforms. Provision is made
+     * for the non-C2 JU platforms to acknowledge the message through receipt/compliance action.
+     */
     override fun missionAssignment(): MissionAssignmentServiceAsync = missionAssignment
 
+    /**
+     * These services provide operations for posting and querying Moving Target Indicator (MTI)
+     * STANAG 4607 data. Detailed MTI data supports activities such as targeting or less detailed
+     * data for applications such as situational awareness used/derived by exploitation systems.
+     */
     override fun mti(): MtiServiceAsync = mti
 
+    /** These services provide operations for manipulation and querying of on-orbit payloads. */
     override fun navigation(): NavigationServiceAsync = navigation
 
+    /**
+     * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+     * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+     * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+     * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and Aviation
+     * Risk Management data. Aircraft Sortie information contains static and dynamic aircraft
+     * assignments, departure and arrival times, and remarks. Aircraft Mission information contains
+     * static data for mission planning to include assigned aircraft and crews, cargo pickup and
+     * dropoff locations, unique identifiers, and prioritization. Item Tracking information contains
+     * data for tracking an item from its origin to destination and how it may be configured during
+     * transport. Flight Plan information contains schedule and route details. Air Event provides
+     * information concerning various aerial events such as fuel transfer and air drops, as well as
+     * the associated aircraft involved. Sortie PPR information contains details on operational
+     * access to a runway, taxiway, or airport service. Diplomatic Clearance information contains
+     * details on the issuance and coordination of aircraft clearance requests. Diplomatic Clearance
+     * Country provides information such as entry/exit points, requirements, and points of contact
+     * for countries diplomatic clearances are being created for. Airspace Control Order provides
+     * information concerning the allocation, restriction, and deconfliction of airspace. Air
+     * Tasking Order information contains details on the coordination of air missions and their
+     * tasks, resources, and timelines. Navigational Obstruction provides the locations,
+     * characteristics, and boundaries of obstacles and structures that can restrict or interfere
+     * with navigation. Logistics Support contains information regarding the transport and
+     * maintenance of resources and equipment to sustain air operations. Track Route information
+     * defines specific flight paths used by aircraft during the transport of fuel and other
+     * resources. Air Load Plan information provides mission actuals concerning the loading and air
+     * transport of cargo and passengers. Aviation Risk Management information help aid in mission
+     * planning by accounting for factors such as mission complexity and crew fatigue.
+     */
     override fun navigationalObstruction(): NavigationalObstructionServiceAsync =
         navigationalObstruction
 
+    /**
+     * A Notification Service allowing the broadcast of generic messages to the community. Users can
+     * send free-form messages, publish lists, and notify the community about events or alerts
+     * across various domains. Notifications and alerts are categorized by a 'msgType' field and are
+     * accessible via the UDL Secure Messaging API and REST API services.
+     */
     override fun notification(): NotificationServiceAsync = notification
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun objectOfInterest(): ObjectOfInterestServiceAsync = objectOfInterest
 
     override fun observations(): ObservationServiceAsync = observations
 
+    /**
+     * This collection of services provides operations for querying and manipulation of
+     * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+     * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+     * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+     * some cases observations may be in an alternate frame depending on the provider and/or
+     * datatype.
+     */
     override fun onboardnavigation(): OnboardnavigationServiceAsync = onboardnavigation
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun onorbit(): OnorbitServiceAsync = onorbit
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun onorbitantenna(): OnorbitantennaServiceAsync = onorbitantenna
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun onorbitbattery(): OnorbitbatteryServiceAsync = onorbitbattery
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun onorbitdetails(): OnorbitdetailServiceAsync = onorbitdetails
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun onorbitevent(): OnorbiteventServiceAsync = onorbitevent
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun onorbitlist(): OnorbitlistServiceAsync = onorbitlist
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun onorbitsolararray(): OnorbitsolararrayServiceAsync = onorbitsolararray
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun onorbitthruster(): OnorbitthrusterServiceAsync = onorbitthruster
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun onorbitthrusterstatus(): OnorbitthrusterstatusServiceAsync = onorbitthrusterstatus
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     override fun onorbitassessment(): OnorbitassessmentServiceAsync = onorbitassessment
 
+    /**
+     * Service operations for querying and manipulation of miscellaneous supporting data such as
+     * countries (which can represent countries, multi-national consortiums, and international
+     * organizations), data owners, locations, entities, organizations, etc.
+     */
     override fun operatingunit(): OperatingunitServiceAsync = operatingunit
 
+    /**
+     * Service operations for querying and manipulation of miscellaneous supporting data such as
+     * countries (which can represent countries, multi-national consortiums, and international
+     * organizations), data owners, locations, entities, organizations, etc.
+     */
     override fun operatingunitremark(): OperatingunitremarkServiceAsync = operatingunitremark
 
+    /**
+     * These services provide operations for manipulating and querying Orbit Determination (OD)
+     * data. Orbit Determination data contains algorithm results that describe General Perturbations
+     * or Special Perturbations orbital updates.
+     */
     override fun orbitdetermination(): OrbitdeterminationServiceAsync = orbitdetermination
 
+    /**
+     * These services provide operations for posting and querying of air, space, and ground
+     * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+     * particular timestamp.
+     */
     override fun orbittrack(): OrbittrackServiceAsync = orbittrack
 
+    /**
+     * Service operations for querying and manipulation of miscellaneous supporting data such as
+     * countries (which can represent countries, multi-national consortiums, and international
+     * organizations), data owners, locations, entities, organizations, etc.
+     */
     override fun organization(): OrganizationServiceAsync = organization
 
+    /**
+     * Service operations for querying and manipulation of miscellaneous supporting data such as
+     * countries (which can represent countries, multi-national consortiums, and international
+     * organizations), data owners, locations, entities, organizations, etc.
+     */
     override fun organizationdetails(): OrganizationdetailServiceAsync = organizationdetails
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     override fun personnelrecovery(): PersonnelrecoveryServiceAsync = personnelrecovery
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     override fun poi(): PoiServiceAsync = poi
 
+    /**
+     * This collection of services provide operations for manipulating and querying of various site
+     * related data, including site status, site operations, and site type-specific records.
+     */
     override fun port(): PortServiceAsync = port
 
     override fun reportAndActivities(): ReportAndActivityServiceAsync = reportAndActivities
 
+    /**
+     * This collection of services provides operations for querying and manipulation of RF related
+     * information to include RFEmitters which could potentially interfere with
+     * communications/operations of space related entities, and RFBands commonly used by various
+     * space related entities.
+     */
     override fun rfBand(): RfBandServiceAsync = rfBand
 
+    /**
+     * This collection of services provides operations for querying and manipulation of RF related
+     * information to include RFEmitters which could potentially interfere with
+     * communications/operations of space related entities, and RFBands commonly used by various
+     * space related entities.
+     */
     override fun rfBandType(): RfBandTypeServiceAsync = rfBandType
 
+    /**
+     * This collection of services provides operations for querying and manipulation of RF related
+     * information to include RFEmitters which could potentially interfere with
+     * communications/operations of space related entities, and RFBands commonly used by various
+     * space related entities.
+     */
     override fun rfEmitter(): RfEmitterServiceAsync = rfEmitter
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     override fun routeStats(): RouteStatServiceAsync = routeStats
 
+    /**
+     * This collection of services provides operations for querying and manipulation of
+     * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+     * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+     * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+     * some cases observations may be in an alternate frame depending on the provider and/or
+     * datatype.
+     */
     override fun sarObservation(): SarObservationServiceAsync = sarObservation
 
+    /** These services provide operations for manipulation and querying of on-orbit payloads. */
     override fun scientific(): ScientificServiceAsync = scientific
 
     override fun scs(): ScServiceAsync = scs
 
+    /**
+     * Secure Messaging is based on Apache Kafka which is an open-source stream-processing software
+     * platform developed by the Apache Software Foundation, written in Scala and Java. Kafka
+     * provides a unified, high-throughput, low-latency platform for handling real-time data feeds.
+     * All messaging is secured; consumers will not receive messages unless authorized to do so.
+     * J2000 is the preferred coordinate frame for all observations, but in some cases observations
+     * may be in another frame depending on the provider. Please see the 'Discover' tab in the
+     * storefront to confirm coordinate frames by data provider.
+     */
     override fun secureMessaging(): SecureMessagingServiceAsync = secureMessaging
 
+    /**
+     * This service provides operations for querying and manipulation of sensor data. Sensors are
+     * terrestrial or on-orbit equipment capable of taking measurements or 'observations' of
+     * on-orbit objects via several phenomenologies such as Electro-Optical (EO), Radar, and Radio
+     * Frequency (RF). This collection of operations includes 'SensorMaintenance' schedules which
+     * define known/planned future maintenance and associated operational impact of sensors as well
+     * as 'SensorCalibration' records which contains data about a sensor's overall accuracy and is
+     * used to adjust sensor settings.
+     */
     override fun sensor(): SensorServiceAsync = sensor
 
+    /**
+     * This service provides operations for querying and manipulation of sensor data. Sensors are
+     * terrestrial or on-orbit equipment capable of taking measurements or 'observations' of
+     * on-orbit objects via several phenomenologies such as Electro-Optical (EO), Radar, and Radio
+     * Frequency (RF). This collection of operations includes 'SensorMaintenance' schedules which
+     * define known/planned future maintenance and associated operational impact of sensors as well
+     * as 'SensorCalibration' records which contains data about a sensor's overall accuracy and is
+     * used to adjust sensor settings.
+     */
     override fun sensorStating(): SensorStatingServiceAsync = sensorStating
 
+    /**
+     * This service provides operations for querying and manipulation of sensor data. Sensors are
+     * terrestrial or on-orbit equipment capable of taking measurements or 'observations' of
+     * on-orbit objects via several phenomenologies such as Electro-Optical (EO), Radar, and Radio
+     * Frequency (RF). This collection of operations includes 'SensorMaintenance' schedules which
+     * define known/planned future maintenance and associated operational impact of sensors as well
+     * as 'SensorCalibration' records which contains data about a sensor's overall accuracy and is
+     * used to adjust sensor settings.
+     */
     override fun sensorMaintenance(): SensorMaintenanceServiceAsync = sensorMaintenance
 
+    /**
+     * This service provides operations for querying and manipulation of sensor data. Sensors are
+     * terrestrial or on-orbit equipment capable of taking measurements or 'observations' of
+     * on-orbit objects via several phenomenologies such as Electro-Optical (EO), Radar, and Radio
+     * Frequency (RF). This collection of operations includes 'SensorMaintenance' schedules which
+     * define known/planned future maintenance and associated operational impact of sensors as well
+     * as 'SensorCalibration' records which contains data about a sensor's overall accuracy and is
+     * used to adjust sensor settings.
+     */
     override fun sensorObservationType(): SensorObservationTypeServiceAsync = sensorObservationType
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     override fun sensorPlan(): SensorPlanServiceAsync = sensorPlan
 
+    /**
+     * This service provides operations for querying and manipulation of sensor data. Sensors are
+     * terrestrial or on-orbit equipment capable of taking measurements or 'observations' of
+     * on-orbit objects via several phenomenologies such as Electro-Optical (EO), Radar, and Radio
+     * Frequency (RF). This collection of operations includes 'SensorMaintenance' schedules which
+     * define known/planned future maintenance and associated operational impact of sensors as well
+     * as 'SensorCalibration' records which contains data about a sensor's overall accuracy and is
+     * used to adjust sensor settings.
+     */
     override fun sensorType(): SensorTypeServiceAsync = sensorType
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit communications
+     * payloads (Comm), including supporting data such as transponders and channels, etc.
+     */
     override fun seraDataCommDetails(): SeraDataCommDetailServiceAsync = seraDataCommDetails
 
+    /** These services provide operations for manipulation and querying of on-orbit payloads. */
     override fun seraDataEarlyWarning(): SeraDataEarlyWarningServiceAsync = seraDataEarlyWarning
 
+    /** These services provide operations for manipulation and querying of on-orbit payloads. */
     override fun seraDataNavigation(): SeraDataNavigationServiceAsync = seraDataNavigation
 
+    /**
+     * This service provides operations for querying and manipulation of sensor data. Sensors are
+     * terrestrial or on-orbit equipment capable of taking measurements or 'observations' of
+     * on-orbit objects via several phenomenologies such as Electro-Optical (EO), Radar, and Radio
+     * Frequency (RF). This collection of operations includes 'SensorMaintenance' schedules which
+     * define known/planned future maintenance and associated operational impact of sensors as well
+     * as 'SensorCalibration' records which contains data about a sensor's overall accuracy and is
+     * used to adjust sensor settings.
+     */
     override fun seradataOpticalPayload(): SeradataOpticalPayloadServiceAsync =
         seradataOpticalPayload
 
+    /**
+     * This service provides operations for querying and manipulation of sensor data. Sensors are
+     * terrestrial or on-orbit equipment capable of taking measurements or 'observations' of
+     * on-orbit objects via several phenomenologies such as Electro-Optical (EO), Radar, and Radio
+     * Frequency (RF). This collection of operations includes 'SensorMaintenance' schedules which
+     * define known/planned future maintenance and associated operational impact of sensors as well
+     * as 'SensorCalibration' records which contains data about a sensor's overall accuracy and is
+     * used to adjust sensor settings.
+     */
     override fun seradataRadarPayload(): SeradataRadarPayloadServiceAsync = seradataRadarPayload
 
+    /**
+     * This service provides operations for querying and manipulation of sensor data. Sensors are
+     * terrestrial or on-orbit equipment capable of taking measurements or 'observations' of
+     * on-orbit objects via several phenomenologies such as Electro-Optical (EO), Radar, and Radio
+     * Frequency (RF). This collection of operations includes 'SensorMaintenance' schedules which
+     * define known/planned future maintenance and associated operational impact of sensors as well
+     * as 'SensorCalibration' records which contains data about a sensor's overall accuracy and is
+     * used to adjust sensor settings.
+     */
     override fun seradataSigintPayload(): SeradataSigintPayloadServiceAsync = seradataSigintPayload
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun seradataSpacecraftDetails(): SeradataSpacecraftDetailServiceAsync =
         seradataSpacecraftDetails
 
+    /**
+     * This service provides operations for manipulation and querying of space weather/solar,
+     * geomagnetic, and radiation belt index data.
+     */
     override fun sgi(): SgiServiceAsync = sgi
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     override fun sigact(): SigactServiceAsync = sigact
 
+    /**
+     * This collection of services provide operations for manipulating and querying of various site
+     * related data, including site status, site operations, and site type-specific records.
+     */
     override fun site(): SiteServiceAsync = site
 
+    /**
+     * This collection of services provide operations for manipulating and querying of various site
+     * related data, including site status, site operations, and site type-specific records.
+     */
     override fun siteRemark(): SiteRemarkServiceAsync = siteRemark
 
+    /**
+     * This collection of services provide operations for manipulating and querying of various site
+     * related data, including site status, site operations, and site type-specific records.
+     */
     override fun siteStatus(): SiteStatusServiceAsync = siteStatus
 
+    /**
+     * This collection of services provides operations for querying and manipulation of sky imagery
+     * data. Sky imagery is ground or space based telescope imagery of RSO's and includes metadata
+     * on the image (time, source, etc) as well as binary image content (e.g. FITS, EOSSA, EOCHIP,
+     * MP4). Binary content must be downloaded individually by ID using the 'getFile' operation.
+     */
     override fun skyImagery(): SkyImageryServiceAsync = skyImagery
 
+    /**
+     * This collection of services provides operations for querying and manipulation of
+     * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+     * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+     * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+     * some cases observations may be in an alternate frame depending on the provider and/or
+     * datatype.
+     */
     override fun soiObservationSet(): SoiObservationSetServiceAsync = soiObservationSet
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun solarArray(): SolarArrayServiceAsync = solarArray
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun solarArrayDetails(): SolarArrayDetailServiceAsync = solarArrayDetails
 
+    /**
+     * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+     * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+     * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+     * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and Aviation
+     * Risk Management data. Aircraft Sortie information contains static and dynamic aircraft
+     * assignments, departure and arrival times, and remarks. Aircraft Mission information contains
+     * static data for mission planning to include assigned aircraft and crews, cargo pickup and
+     * dropoff locations, unique identifiers, and prioritization. Item Tracking information contains
+     * data for tracking an item from its origin to destination and how it may be configured during
+     * transport. Flight Plan information contains schedule and route details. Air Event provides
+     * information concerning various aerial events such as fuel transfer and air drops, as well as
+     * the associated aircraft involved. Sortie PPR information contains details on operational
+     * access to a runway, taxiway, or airport service. Diplomatic Clearance information contains
+     * details on the issuance and coordination of aircraft clearance requests. Diplomatic Clearance
+     * Country provides information such as entry/exit points, requirements, and points of contact
+     * for countries diplomatic clearances are being created for. Airspace Control Order provides
+     * information concerning the allocation, restriction, and deconfliction of airspace. Air
+     * Tasking Order information contains details on the coordination of air missions and their
+     * tasks, resources, and timelines. Navigational Obstruction provides the locations,
+     * characteristics, and boundaries of obstacles and structures that can restrict or interfere
+     * with navigation. Logistics Support contains information regarding the transport and
+     * maintenance of resources and equipment to sustain air operations. Track Route information
+     * defines specific flight paths used by aircraft during the transport of fuel and other
+     * resources. Air Load Plan information provides mission actuals concerning the loading and air
+     * transport of cargo and passengers. Aviation Risk Management information help aid in mission
+     * planning by accounting for factors such as mission complexity and crew fatigue.
+     */
     override fun sortiePpr(): SortiePprServiceAsync = sortiePpr
 
+    /**
+     * This collection of services provides operations for querying and manipulation of
+     * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+     * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+     * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+     * some cases observations may be in an alternate frame depending on the provider and/or
+     * datatype.
+     */
     override fun spaceEnvObservation(): SpaceEnvObservationServiceAsync = spaceEnvObservation
 
+    /**
+     * Collection of launch related services which provide operations for querying and manipulation
+     * of launch site data and detailed information on launch vehicles including engines, stages,
+     * and manufacturers. Sites, engines, and stages can each have multiple 'detail' records which
+     * may be compiled by different sources.
+     */
     override fun stage(): StageServiceAsync = stage
 
+    /**
+     * These services provide operations for posting and querying Star Catalog data. The Star
+     * Catalog model is a representation of astronomical data and photometric data for stars.
+     * Astronomical data includes positional information, proper motions, parallaxes and their
+     * respective uncertainties. Photometric data contains optical and near-infrared magnitudes, and
+     * their uncertainties across multiple bandpasses. Note: Multiple source catalogs may contribute
+     * to a single record.
+     */
     override fun starCatalog(): StarCatalogServiceAsync = starCatalog
 
+    /**
+     * This service provides operations for querying and manipulation of state vectors for On-orbit
+     * objects. State vectors are cartesian vectors of position (r) and velocity (v) that together
+     * with their time (epoch) (t) uniquely determine the trajectory of the orbiting body in space.
+     * J2000 is the preferred coordinate frame for all state vector positions/velocities in UDL, but
+     * in some cases data may be in another frame depending on the provider and/or datatype. Please
+     * see the 'Discover' tab in the storefront to confirm coordinate frames by data provider.
+     */
     override fun stateVector(): StateVectorServiceAsync = stateVector
 
+    /**
+     * Service operations for querying and manipulation of miscellaneous supporting data such as
+     * countries (which can represent countries, multi-national consortiums, and international
+     * organizations), data owners, locations, entities, organizations, etc.
+     */
     override fun status(): StatusServiceAsync = status
 
+    /**
+     * Service operations for querying and manipulation of miscellaneous supporting data such as
+     * countries (which can represent countries, multi-national consortiums, and international
+     * organizations), data owners, locations, entities, organizations, etc.
+     */
     override fun substatus(): SubstatusServiceAsync = substatus
 
     override fun supportingData(): SupportingDataServiceAsync = supportingData
 
+    /**
+     * This collection of services provide operations for manipulating and querying of various site
+     * related data, including site status, site operations, and site type-specific records.
+     */
     override fun surface(): SurfaceServiceAsync = surface
 
+    /**
+     * This collection of services provide operations for manipulating and querying of various site
+     * related data, including site status, site operations, and site type-specific records.
+     */
     override fun surfaceObstruction(): SurfaceObstructionServiceAsync = surfaceObstruction
 
+    /**
+     * This collection of services provides operations for querying and manipulation of
+     * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+     * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+     * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+     * some cases observations may be in an alternate frame depending on the provider and/or
+     * datatype.
+     */
     override fun swir(): SwirServiceAsync = swir
 
+    /**
+     * This service provides operations for manipulation and querying of earth orientation parameter
+     * (EOP) data. Earth Orientation Parameters (EOP) are produced by the IERS (International Earth
+     * Rotation and Reference Systems Service). Earth Orientation Parameters describe the
+     * irregularities of the earth's rotation. Technically, they are the parameters which provide
+     * the rotation of the ITRS (International Terrestrial Reference System) to the ICRS
+     * (International Celestial Reference System) as a function of time. Universal time -- Universal
+     * time (UT1) is the time of the earth clock, which performs one revolution in about 24h. It is
+     * practically proportional to the sidereal time. The excess revolution time is called length of
+     * day (LOD). Coordinates of the pole -- x and y are the coordinates of the Celestial Ephemeris
+     * Pole (CEP) relative to the IRP, the IERS Reference Pole. The CEP differs from the
+     * instantaneous rotation axis by quasi-diurnal terms with amplitudes under 0.01" (see
+     * Seidelmann, 1982). The x-axis is in the direction of the ITRF zero-meridian; the y-axis is in
+     * the direction 90 degrees West longitude. Celestial pole offsets -- Celestial pole offsets are
+     * described in the IAU Precession and Nutation models. The observed differences with respect to
+     * the conventional celestial pole position defined by the models are monitored and reported by
+     * the IERS. IERS Bulletins A and B provide current information on the Earth's orientation in
+     * the IERS Reference System. This includes Universal Time, coordinates of the terrestrial pole,
+     * and celestial pole offsets. Bulletin A gives an advanced solution updated weekly; the
+     * standard solution is given monthly in Bulletin B. Fields suffixed with ''B'' are Bulletin B
+     * values. All solutions are continuous within their respective uncertainties. Bulletin A is
+     * issued by the IERS Rapid Service/Prediction Centre at the U.S. Naval Observatory, Washington,
+     * DC and Bulletin B is issued by the IERS Earth Orientation Centre at the Paris Observatory.
+     * IERS Bulletin A reports the latest determinations for polar motion, UT1-UTC, and nutation
+     * offsets at daily intervals based on a combination of contributed analysis results using data
+     * from Very Long Baseline Interferometry (VLBI), Satellite Laser Ranging (SLR), Global
+     * Positioning System (GPS) satellites, and Lunar Laser Ranging (LLR). Predictions for
+     * variations a year into the future are also provided. Meteorological predictions of variations
+     * in Atmospheric Angular Momentum (AAM) are used to aid in the prediction of near-term UT1-UTC
+     * changes. This publication is prepared by the IERS Rapid Service/Prediction Center.
+     */
     override fun taiUtc(): TaiUtcServiceAsync = taiUtc
 
     override fun tdoaFdoa(): TdoaFdoaServiceAsync = tdoaFdoa
 
+    /**
+     * These services provide operations for posting and querying of air, space, and ground
+     * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+     * particular timestamp.
+     */
     override fun track(): TrackServiceAsync = track
 
+    /**
+     * These services provide operations for posting and querying of air, space, and ground
+     * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+     * particular timestamp.
+     */
     override fun trackDetails(): TrackDetailServiceAsync = trackDetails
 
+    /**
+     * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+     * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+     * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+     * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and Aviation
+     * Risk Management data. Aircraft Sortie information contains static and dynamic aircraft
+     * assignments, departure and arrival times, and remarks. Aircraft Mission information contains
+     * static data for mission planning to include assigned aircraft and crews, cargo pickup and
+     * dropoff locations, unique identifiers, and prioritization. Item Tracking information contains
+     * data for tracking an item from its origin to destination and how it may be configured during
+     * transport. Flight Plan information contains schedule and route details. Air Event provides
+     * information concerning various aerial events such as fuel transfer and air drops, as well as
+     * the associated aircraft involved. Sortie PPR information contains details on operational
+     * access to a runway, taxiway, or airport service. Diplomatic Clearance information contains
+     * details on the issuance and coordination of aircraft clearance requests. Diplomatic Clearance
+     * Country provides information such as entry/exit points, requirements, and points of contact
+     * for countries diplomatic clearances are being created for. Airspace Control Order provides
+     * information concerning the allocation, restriction, and deconfliction of airspace. Air
+     * Tasking Order information contains details on the coordination of air missions and their
+     * tasks, resources, and timelines. Navigational Obstruction provides the locations,
+     * characteristics, and boundaries of obstacles and structures that can restrict or interfere
+     * with navigation. Logistics Support contains information regarding the transport and
+     * maintenance of resources and equipment to sustain air operations. Track Route information
+     * defines specific flight paths used by aircraft during the transport of fuel and other
+     * resources. Air Load Plan information provides mission actuals concerning the loading and air
+     * transport of cargo and passengers. Aviation Risk Management information help aid in mission
+     * planning by accounting for factors such as mission complexity and crew fatigue.
+     */
     override fun trackRoute(): TrackRouteServiceAsync = trackRoute
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit communications
+     * payloads (Comm), including supporting data such as transponders and channels, etc.
+     */
     override fun transponder(): TransponderServiceAsync = transponder
 
     override fun user(): UserServiceAsync = user
 
+    /**
+     * This service provides operations for manipulation and querying of maritime Vessel and Vessel
+     * Status data. Vessel contains the static data of the specific vessel: mmsi, cruise speed, max
+     * speed, etc.
+     */
     override fun vessel(): VesselServiceAsync = vessel
 
+    /** This collection of services provides operations for video streaming. */
     override fun video(): VideoServiceAsync = video
 
+    /**
+     * These services provide for posting and querying terrestrial weather conditions over a target
+     * area or region and raw sensor data used to produce condition reports. Weather Reports
+     * describe current weather conditions over a target point or region to include general
+     * temperatures, pressures, and moisture accumulation, as well as navigational considerations
+     * such as altimeter settings, visibility, wind speeds, and cloud heights etc. Weather Data
+     * contains algorithmic parameters and dynamic, raw measurements collected by individual sensors
+     * such as signal power, noise level, etc., which are generally processed across multiple
+     * sensors to produce weather reports.
+     */
     override fun weatherData(): WeatherDataServiceAsync = weatherData
 
+    /**
+     * These services provide for posting and querying terrestrial weather conditions over a target
+     * area or region and raw sensor data used to produce condition reports. Weather Reports
+     * describe current weather conditions over a target point or region to include general
+     * temperatures, pressures, and moisture accumulation, as well as navigational considerations
+     * such as altimeter settings, visibility, wind speeds, and cloud heights etc. Weather Data
+     * contains algorithmic parameters and dynamic, raw measurements collected by individual sensors
+     * such as signal power, noise level, etc., which are generally processed across multiple
+     * sensors to produce weather reports.
+     */
     override fun weatherReport(): WeatherReportServiceAsync = weatherReport
 
     override fun close() = clientOptions.close()
@@ -2034,387 +3274,1690 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+         * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+         * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+         * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and
+         * Aviation Risk Management data. Aircraft Sortie information contains static and dynamic
+         * aircraft assignments, departure and arrival times, and remarks. Aircraft Mission
+         * information contains static data for mission planning to include assigned aircraft and
+         * crews, cargo pickup and dropoff locations, unique identifiers, and prioritization. Item
+         * Tracking information contains data for tracking an item from its origin to destination
+         * and how it may be configured during transport. Flight Plan information contains schedule
+         * and route details. Air Event provides information concerning various aerial events such
+         * as fuel transfer and air drops, as well as the associated aircraft involved. Sortie PPR
+         * information contains details on operational access to a runway, taxiway, or airport
+         * service. Diplomatic Clearance information contains details on the issuance and
+         * coordination of aircraft clearance requests. Diplomatic Clearance Country provides
+         * information such as entry/exit points, requirements, and points of contact for countries
+         * diplomatic clearances are being created for. Airspace Control Order provides information
+         * concerning the allocation, restriction, and deconfliction of airspace. Air Tasking Order
+         * information contains details on the coordination of air missions and their tasks,
+         * resources, and timelines. Navigational Obstruction provides the locations,
+         * characteristics, and boundaries of obstacles and structures that can restrict or
+         * interfere with navigation. Logistics Support contains information regarding the transport
+         * and maintenance of resources and equipment to sustain air operations. Track Route
+         * information defines specific flight paths used by aircraft during the transport of fuel
+         * and other resources. Air Load Plan information provides mission actuals concerning the
+         * loading and air transport of cargo and passengers. Aviation Risk Management information
+         * help aid in mission planning by accounting for factors such as mission complexity and
+         * crew fatigue.
+         */
         override fun airEvents(): AirEventServiceAsync.WithRawResponse = airEvents
 
         override fun airOperations(): AirOperationServiceAsync.WithRawResponse = airOperations
 
+        /**
+         * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+         * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+         * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+         * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and
+         * Aviation Risk Management data. Aircraft Sortie information contains static and dynamic
+         * aircraft assignments, departure and arrival times, and remarks. Aircraft Mission
+         * information contains static data for mission planning to include assigned aircraft and
+         * crews, cargo pickup and dropoff locations, unique identifiers, and prioritization. Item
+         * Tracking information contains data for tracking an item from its origin to destination
+         * and how it may be configured during transport. Flight Plan information contains schedule
+         * and route details. Air Event provides information concerning various aerial events such
+         * as fuel transfer and air drops, as well as the associated aircraft involved. Sortie PPR
+         * information contains details on operational access to a runway, taxiway, or airport
+         * service. Diplomatic Clearance information contains details on the issuance and
+         * coordination of aircraft clearance requests. Diplomatic Clearance Country provides
+         * information such as entry/exit points, requirements, and points of contact for countries
+         * diplomatic clearances are being created for. Airspace Control Order provides information
+         * concerning the allocation, restriction, and deconfliction of airspace. Air Tasking Order
+         * information contains details on the coordination of air missions and their tasks,
+         * resources, and timelines. Navigational Obstruction provides the locations,
+         * characteristics, and boundaries of obstacles and structures that can restrict or
+         * interfere with navigation. Logistics Support contains information regarding the transport
+         * and maintenance of resources and equipment to sustain air operations. Track Route
+         * information defines specific flight paths used by aircraft during the transport of fuel
+         * and other resources. Air Load Plan information provides mission actuals concerning the
+         * loading and air transport of cargo and passengers. Aviation Risk Management information
+         * help aid in mission planning by accounting for factors such as mission complexity and
+         * crew fatigue.
+         */
         override fun airTransportMissions(): AirTransportMissionServiceAsync.WithRawResponse =
             airTransportMissions
 
+        /**
+         * This service provides operations for manipulation and querying of Aircraft and Aircraft
+         * Status data. Aircraft contains the static data of the specific aircraft: tail number,
+         * cruise speed, max speed, minimum required runway length, etc. The Aircraft Status
+         * contains the dynamic data associated with the specific aircraft: remaining fuel, mission
+         * readiness, and inventory for example.
+         */
         override fun aircraft(): AircraftServiceAsync.WithRawResponse = aircraft
 
+        /**
+         * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+         * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+         * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+         * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and
+         * Aviation Risk Management data. Aircraft Sortie information contains static and dynamic
+         * aircraft assignments, departure and arrival times, and remarks. Aircraft Mission
+         * information contains static data for mission planning to include assigned aircraft and
+         * crews, cargo pickup and dropoff locations, unique identifiers, and prioritization. Item
+         * Tracking information contains data for tracking an item from its origin to destination
+         * and how it may be configured during transport. Flight Plan information contains schedule
+         * and route details. Air Event provides information concerning various aerial events such
+         * as fuel transfer and air drops, as well as the associated aircraft involved. Sortie PPR
+         * information contains details on operational access to a runway, taxiway, or airport
+         * service. Diplomatic Clearance information contains details on the issuance and
+         * coordination of aircraft clearance requests. Diplomatic Clearance Country provides
+         * information such as entry/exit points, requirements, and points of contact for countries
+         * diplomatic clearances are being created for. Airspace Control Order provides information
+         * concerning the allocation, restriction, and deconfliction of airspace. Air Tasking Order
+         * information contains details on the coordination of air missions and their tasks,
+         * resources, and timelines. Navigational Obstruction provides the locations,
+         * characteristics, and boundaries of obstacles and structures that can restrict or
+         * interfere with navigation. Logistics Support contains information regarding the transport
+         * and maintenance of resources and equipment to sustain air operations. Track Route
+         * information defines specific flight paths used by aircraft during the transport of fuel
+         * and other resources. Air Load Plan information provides mission actuals concerning the
+         * loading and air transport of cargo and passengers. Aviation Risk Management information
+         * help aid in mission planning by accounting for factors such as mission complexity and
+         * crew fatigue.
+         */
         override fun aircraftSorties(): AircraftSortyServiceAsync.WithRawResponse = aircraftSorties
 
+        /**
+         * This service provides operations for manipulation and querying of Aircraft and Aircraft
+         * Status data. Aircraft contains the static data of the specific aircraft: tail number,
+         * cruise speed, max speed, minimum required runway length, etc. The Aircraft Status
+         * contains the dynamic data associated with the specific aircraft: remaining fuel, mission
+         * readiness, and inventory for example.
+         */
         override fun aircraftStatusRemarks(): AircraftStatusRemarkServiceAsync.WithRawResponse =
             aircraftStatusRemarks
 
+        /**
+         * This service provides operations for manipulation and querying of Aircraft and Aircraft
+         * Status data. Aircraft contains the static data of the specific aircraft: tail number,
+         * cruise speed, max speed, minimum required runway length, etc. The Aircraft Status
+         * contains the dynamic data associated with the specific aircraft: remaining fuel, mission
+         * readiness, and inventory for example.
+         */
         override fun aircraftStatuses(): AircraftStatusServiceAsync.WithRawResponse =
             aircraftStatuses
 
+        /**
+         * This collection of services provide operations for manipulating and querying of various
+         * site related data, including site status, site operations, and site type-specific
+         * records.
+         */
         override fun airfieldSlotConsumptions():
             AirfieldSlotConsumptionServiceAsync.WithRawResponse = airfieldSlotConsumptions
 
+        /**
+         * This collection of services provide operations for manipulating and querying of various
+         * site related data, including site status, site operations, and site type-specific
+         * records.
+         */
         override fun airfieldSlots(): AirfieldSlotServiceAsync.WithRawResponse = airfieldSlots
 
+        /**
+         * This collection of services provide operations for manipulating and querying of various
+         * site related data, including site status, site operations, and site type-specific
+         * records.
+         */
         override fun airfieldStatus(): AirfieldStatusServiceAsync.WithRawResponse = airfieldStatus
 
+        /**
+         * This collection of services provide operations for manipulating and querying of various
+         * site related data, including site status, site operations, and site type-specific
+         * records.
+         */
         override fun airfields(): AirfieldServiceAsync.WithRawResponse = airfields
 
+        /**
+         * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+         * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+         * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+         * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and
+         * Aviation Risk Management data. Aircraft Sortie information contains static and dynamic
+         * aircraft assignments, departure and arrival times, and remarks. Aircraft Mission
+         * information contains static data for mission planning to include assigned aircraft and
+         * crews, cargo pickup and dropoff locations, unique identifiers, and prioritization. Item
+         * Tracking information contains data for tracking an item from its origin to destination
+         * and how it may be configured during transport. Flight Plan information contains schedule
+         * and route details. Air Event provides information concerning various aerial events such
+         * as fuel transfer and air drops, as well as the associated aircraft involved. Sortie PPR
+         * information contains details on operational access to a runway, taxiway, or airport
+         * service. Diplomatic Clearance information contains details on the issuance and
+         * coordination of aircraft clearance requests. Diplomatic Clearance Country provides
+         * information such as entry/exit points, requirements, and points of contact for countries
+         * diplomatic clearances are being created for. Airspace Control Order provides information
+         * concerning the allocation, restriction, and deconfliction of airspace. Air Tasking Order
+         * information contains details on the coordination of air missions and their tasks,
+         * resources, and timelines. Navigational Obstruction provides the locations,
+         * characteristics, and boundaries of obstacles and structures that can restrict or
+         * interfere with navigation. Logistics Support contains information regarding the transport
+         * and maintenance of resources and equipment to sustain air operations. Track Route
+         * information defines specific flight paths used by aircraft during the transport of fuel
+         * and other resources. Air Load Plan information provides mission actuals concerning the
+         * loading and air transport of cargo and passengers. Aviation Risk Management information
+         * help aid in mission planning by accounting for factors such as mission complexity and
+         * crew fatigue.
+         */
         override fun airloadPlans(): AirloadPlanServiceAsync.WithRawResponse = airloadPlans
 
+        /**
+         * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+         * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+         * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+         * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and
+         * Aviation Risk Management data. Aircraft Sortie information contains static and dynamic
+         * aircraft assignments, departure and arrival times, and remarks. Aircraft Mission
+         * information contains static data for mission planning to include assigned aircraft and
+         * crews, cargo pickup and dropoff locations, unique identifiers, and prioritization. Item
+         * Tracking information contains data for tracking an item from its origin to destination
+         * and how it may be configured during transport. Flight Plan information contains schedule
+         * and route details. Air Event provides information concerning various aerial events such
+         * as fuel transfer and air drops, as well as the associated aircraft involved. Sortie PPR
+         * information contains details on operational access to a runway, taxiway, or airport
+         * service. Diplomatic Clearance information contains details on the issuance and
+         * coordination of aircraft clearance requests. Diplomatic Clearance Country provides
+         * information such as entry/exit points, requirements, and points of contact for countries
+         * diplomatic clearances are being created for. Airspace Control Order provides information
+         * concerning the allocation, restriction, and deconfliction of airspace. Air Tasking Order
+         * information contains details on the coordination of air missions and their tasks,
+         * resources, and timelines. Navigational Obstruction provides the locations,
+         * characteristics, and boundaries of obstacles and structures that can restrict or
+         * interfere with navigation. Logistics Support contains information regarding the transport
+         * and maintenance of resources and equipment to sustain air operations. Track Route
+         * information defines specific flight paths used by aircraft during the transport of fuel
+         * and other resources. Air Load Plan information provides mission actuals concerning the
+         * loading and air transport of cargo and passengers. Aviation Risk Management information
+         * help aid in mission planning by accounting for factors such as mission complexity and
+         * crew fatigue.
+         */
         override fun airspaceControlOrders(): AirspaceControlOrderServiceAsync.WithRawResponse =
             airspaceControlOrders
 
+        /**
+         * These services provide for posting and querying of self-reported information obtained
+         * from the Automatic Identification System (AIS) equipment. This contains information such
+         * as unique identification, status, position, course, and speed. The AIS is an automatic
+         * tracking system that uses transceivers on ships and is used by vessel traffic services.
+         * Although technically and operationally distinct, the AIS system is analogous to ADS-B
+         * which performs a similar function for aircraft. AIS is intended to assist a vessel's
+         * watchstanding officers and allow maritime authorities to track and monitor vessel
+         * movements. AIS integrates a standardized VHF transceiver with a positioning system, such
+         * as Global Positioning System receiver, with other electronic navigation sensors, such as
+         * gyrocompass or rate of turn indicator. Vessels fitted with AIS transceivers can be
+         * tracked by AIS base stations located along coastlines or, when out of range of
+         * terrestrial networks, through a growing number of satellites that are fitted with special
+         * AIS receivers that are capable of deconflicting a large number of signatures.
+         */
         override fun ais(): AiServiceAsync.WithRawResponse = ais
 
+        /**
+         * These services provide for posting and querying of self-reported information obtained
+         * from the Automatic Identification System (AIS) equipment. This contains information such
+         * as unique identification, status, position, course, and speed. The AIS is an automatic
+         * tracking system that uses transceivers on ships and is used by vessel traffic services.
+         * Although technically and operationally distinct, the AIS system is analogous to ADS-B
+         * which performs a similar function for aircraft. AIS is intended to assist a vessel's
+         * watchstanding officers and allow maritime authorities to track and monitor vessel
+         * movements. AIS integrates a standardized VHF transceiver with a positioning system, such
+         * as Global Positioning System receiver, with other electronic navigation sensors, such as
+         * gyrocompass or rate of turn indicator. Vessels fitted with AIS transceivers can be
+         * tracked by AIS base stations located along coastlines or, when out of range of
+         * terrestrial networks, through a growing number of satellites that are fitted with special
+         * AIS receivers that are capable of deconflicting a large number of signatures.
+         */
         override fun aisObjects(): AisObjectServiceAsync.WithRawResponse = aisObjects
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         override fun analyticImagery(): AnalyticImageryServiceAsync.WithRawResponse =
             analyticImagery
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun antennas(): AntennaServiceAsync.WithRawResponse = antennas
 
+        /**
+         * These services provide operations for the posting and querying of satellite Ephemeris
+         * Point data. Each point contains a position and velocity vector and optionally, an
+         * acceleration vector and/or covariance matrix at a specified time. ECI J2K is the
+         * preferred reference frame for ephemeris and covariance, however, several user specified
+         * reference frames are accommodated. The EphemerisSet ID (esId) identifies the
+         * 'EphemerisSet' record which contains details of the underlying data and models used in
+         * the generation of the ephemeris as well as a collection of ephemeris points. Points must
+         * be retrieved by first identifying a desired EphemerisSet and pulling its points by that
+         * EphemerisSet 'esId'.
+         */
         override fun attitudeData(): AttitudeDataServiceAsync.WithRawResponse = attitudeData
 
+        /**
+         * These services provide operations for the posting and querying of satellite Ephemeris
+         * Point data. Each point contains a position and velocity vector and optionally, an
+         * acceleration vector and/or covariance matrix at a specified time. ECI J2K is the
+         * preferred reference frame for ephemeris and covariance, however, several user specified
+         * reference frames are accommodated. The EphemerisSet ID (esId) identifies the
+         * 'EphemerisSet' record which contains details of the underlying data and models used in
+         * the generation of the ephemeris as well as a collection of ephemeris points. Points must
+         * be retrieved by first identifying a desired EphemerisSet and pulling its points by that
+         * EphemerisSet 'esId'.
+         */
         override fun attitudeSets(): AttitudeSetServiceAsync.WithRawResponse = attitudeSets
 
+        /**
+         * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+         * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+         * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+         * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and
+         * Aviation Risk Management data. Aircraft Sortie information contains static and dynamic
+         * aircraft assignments, departure and arrival times, and remarks. Aircraft Mission
+         * information contains static data for mission planning to include assigned aircraft and
+         * crews, cargo pickup and dropoff locations, unique identifiers, and prioritization. Item
+         * Tracking information contains data for tracking an item from its origin to destination
+         * and how it may be configured during transport. Flight Plan information contains schedule
+         * and route details. Air Event provides information concerning various aerial events such
+         * as fuel transfer and air drops, as well as the associated aircraft involved. Sortie PPR
+         * information contains details on operational access to a runway, taxiway, or airport
+         * service. Diplomatic Clearance information contains details on the issuance and
+         * coordination of aircraft clearance requests. Diplomatic Clearance Country provides
+         * information such as entry/exit points, requirements, and points of contact for countries
+         * diplomatic clearances are being created for. Airspace Control Order provides information
+         * concerning the allocation, restriction, and deconfliction of airspace. Air Tasking Order
+         * information contains details on the coordination of air missions and their tasks,
+         * resources, and timelines. Navigational Obstruction provides the locations,
+         * characteristics, and boundaries of obstacles and structures that can restrict or
+         * interfere with navigation. Logistics Support contains information regarding the transport
+         * and maintenance of resources and equipment to sustain air operations. Track Route
+         * information defines specific flight paths used by aircraft during the transport of fuel
+         * and other resources. Air Load Plan information provides mission actuals concerning the
+         * loading and air transport of cargo and passengers. Aviation Risk Management information
+         * help aid in mission planning by accounting for factors such as mission complexity and
+         * crew fatigue.
+         */
         override fun aviationRiskManagement(): AviationRiskManagementServiceAsync.WithRawResponse =
             aviationRiskManagement
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun batteries(): BatteryServiceAsync.WithRawResponse = batteries
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun batterydetails(): BatterydetailServiceAsync.WithRawResponse = batterydetails
 
+        /**
+         * This collection of services provides operations for querying and manipulation of
+         * satellite antenna beams, and querying of beam contours and service areas. Beam contours
+         * are the geographic representation of the relative gain levels of beam power off of the
+         * maximum gain boresight points. Similarly, service areas are the geographic footprints of
+         * the areas served by a particular beam, and may be made up of multiple service regions.
+         * Well-Known Text (WKT) and GeoJSON formats are used for GIS representation and query
+         * support (see https://www.opengeospatial.org/standards/wkt-crs and https://geojson.org/
+         * for more information on these formats).
+         */
         override fun beam(): BeamServiceAsync.WithRawResponse = beam
 
+        /**
+         * This collection of services provides operations for querying and manipulation of
+         * satellite antenna beams, and querying of beam contours and service areas. Beam contours
+         * are the geographic representation of the relative gain levels of beam power off of the
+         * maximum gain boresight points. Similarly, service areas are the geographic footprints of
+         * the areas served by a particular beam, and may be made up of multiple service regions.
+         * Well-Known Text (WKT) and GeoJSON formats are used for GIS representation and query
+         * support (see https://www.opengeospatial.org/standards/wkt-crs and https://geojson.org/
+         * for more information on these formats).
+         */
         override fun beamContours(): BeamContourServiceAsync.WithRawResponse = beamContours
 
+        /**
+         * Services for querying and manipulation of satellite buses. A bus is the physical and
+         * software infrastructure backbone to which on-orbit satellite payloads are attached for
+         * power, control, and other support functions.
+         */
         override fun buses(): BusServiceAsync.WithRawResponse = buses
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit
+         * communications payloads (Comm), including supporting data such as transponders and
+         * channels, etc.
+         */
         override fun channels(): ChannelServiceAsync.WithRawResponse = channels
 
+        /**
+         * This collection of services provides operations for manipulating and querying of closely
+         * spaced objects (on orbit) operations including docking, rendezvous, proximity and
+         * reporting of payload zone engagements observed and characterized over a period of time.
+         */
         override fun closelyspacedobjects(): CloselyspacedobjectServiceAsync.WithRawResponse =
             closelyspacedobjects
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         override fun collectRequests(): CollectRequestServiceAsync.WithRawResponse = collectRequests
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         override fun collectResponses(): CollectResponseServiceAsync.WithRawResponse =
             collectResponses
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit
+         * communications payloads (Comm), including supporting data such as transponders and
+         * channels, etc.
+         */
         override fun comm(): CommServiceAsync.WithRawResponse = comm
 
+        /** These services provide operations for manipulation and querying of conjunctions. */
         override fun conjunctions(): ConjunctionServiceAsync.WithRawResponse = conjunctions
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         override fun cots(): CotServiceAsync.WithRawResponse = cots
 
+        /**
+         * Service operations for querying and manipulation of miscellaneous supporting data such as
+         * countries (which can represent countries, multi-national consortiums, and international
+         * organizations), data owners, locations, entities, organizations, etc.
+         */
         override fun countries(): CountryServiceAsync.WithRawResponse = countries
 
+        /**
+         * These services provide operations for posting and querying crew data. Crew data contains
+         * information about its members and their assignments.
+         */
         override fun crew(): CrewServiceAsync.WithRawResponse = crew
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         override fun deconflictset(): DeconflictsetServiceAsync.WithRawResponse = deconflictset
 
+        /**
+         * These services provide operations for querying and manipulation of Signal time and
+         * frequency difference of arrival (TDOA/FDOA) information obtained by using passive RF
+         * based sensor phenomenologies and sensor triangulation. The J2000 coordinate frame is the
+         * preferred frame for all observations, but in some cases observations may be in another
+         * frame depending on the provider.
+         */
         override fun diffOfArrival(): DiffOfArrivalServiceAsync.WithRawResponse = diffOfArrival
 
+        /**
+         * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+         * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+         * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+         * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and
+         * Aviation Risk Management data. Aircraft Sortie information contains static and dynamic
+         * aircraft assignments, departure and arrival times, and remarks. Aircraft Mission
+         * information contains static data for mission planning to include assigned aircraft and
+         * crews, cargo pickup and dropoff locations, unique identifiers, and prioritization. Item
+         * Tracking information contains data for tracking an item from its origin to destination
+         * and how it may be configured during transport. Flight Plan information contains schedule
+         * and route details. Air Event provides information concerning various aerial events such
+         * as fuel transfer and air drops, as well as the associated aircraft involved. Sortie PPR
+         * information contains details on operational access to a runway, taxiway, or airport
+         * service. Diplomatic Clearance information contains details on the issuance and
+         * coordination of aircraft clearance requests. Diplomatic Clearance Country provides
+         * information such as entry/exit points, requirements, and points of contact for countries
+         * diplomatic clearances are being created for. Airspace Control Order provides information
+         * concerning the allocation, restriction, and deconfliction of airspace. Air Tasking Order
+         * information contains details on the coordination of air missions and their tasks,
+         * resources, and timelines. Navigational Obstruction provides the locations,
+         * characteristics, and boundaries of obstacles and structures that can restrict or
+         * interfere with navigation. Logistics Support contains information regarding the transport
+         * and maintenance of resources and equipment to sustain air operations. Track Route
+         * information defines specific flight paths used by aircraft during the transport of fuel
+         * and other resources. Air Load Plan information provides mission actuals concerning the
+         * loading and air transport of cargo and passengers. Aviation Risk Management information
+         * help aid in mission planning by accounting for factors such as mission complexity and
+         * crew fatigue.
+         */
         override fun diplomaticClearance(): DiplomaticClearanceServiceAsync.WithRawResponse =
             diplomaticClearance
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun driftHistory(): DriftHistoryServiceAsync.WithRawResponse = driftHistory
 
+        /**
+         * This collection of services provide operations for manipulating and querying of various
+         * site related data, including site status, site operations, and site type-specific
+         * records.
+         */
         override fun dropzone(): DropzoneServiceAsync.WithRawResponse = dropzone
 
+        /**
+         * This collection of services provides operations for querying and manipulation of
+         * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+         * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+         * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+         * some cases observations may be in an alternate frame depending on the provider and/or
+         * datatype.
+         */
         override fun ecpedr(): EcpedrServiceAsync.WithRawResponse = ecpedr
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         override fun effectRequests(): EffectRequestServiceAsync.WithRawResponse = effectRequests
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         override fun effectResponses(): EffectResponseServiceAsync.WithRawResponse = effectResponses
 
+        /**
+         * These services provide operations for querying and manipulation of element set data
+         * describing orbital characteristics of on-orbit objects. An element set is a collection of
+         * parameters that are used, along with an orbit propagator, to predict the motion of a
+         * satellite. The element set, or elset for short, consists of identification data, the
+         * classical elements and drag parameters.
+         */
         override fun elsets(): ElsetServiceAsync.WithRawResponse = elsets
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         override fun emireport(): EmireportServiceAsync.WithRawResponse = emireport
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         override fun emitterGeolocation(): EmitterGeolocationServiceAsync.WithRawResponse =
             emitterGeolocation
 
+        /**
+         * Collection of launch related services which provide operations for querying and
+         * manipulation of launch site data and detailed information on launch vehicles including
+         * engines, stages, and manufacturers. Sites, engines, and stages can each have multiple
+         * 'detail' records which may be compiled by different sources.
+         */
         override fun engineDetails(): EngineDetailServiceAsync.WithRawResponse = engineDetails
 
+        /**
+         * Collection of launch related services which provide operations for querying and
+         * manipulation of launch site data and detailed information on launch vehicles including
+         * engines, stages, and manufacturers. Sites, engines, and stages can each have multiple
+         * 'detail' records which may be compiled by different sources.
+         */
         override fun engines(): EngineServiceAsync.WithRawResponse = engines
 
+        /**
+         * Service operations for querying and manipulation of miscellaneous supporting data such as
+         * countries (which can represent countries, multi-national consortiums, and international
+         * organizations), data owners, locations, entities, organizations, etc.
+         */
         override fun entities(): EntityServiceAsync.WithRawResponse = entities
 
+        /**
+         * This service provides operations for manipulation and querying of earth orientation
+         * parameter (EOP) data. Earth Orientation Parameters (EOP) are produced by the IERS
+         * (International Earth Rotation and Reference Systems Service). Earth Orientation
+         * Parameters describe the irregularities of the earth's rotation. Technically, they are the
+         * parameters which provide the rotation of the ITRS (International Terrestrial Reference
+         * System) to the ICRS (International Celestial Reference System) as a function of time.
+         * Universal time -- Universal time (UT1) is the time of the earth clock, which performs one
+         * revolution in about 24h. It is practically proportional to the sidereal time. The excess
+         * revolution time is called length of day (LOD). Coordinates of the pole -- x and y are the
+         * coordinates of the Celestial Ephemeris Pole (CEP) relative to the IRP, the IERS Reference
+         * Pole. The CEP differs from the instantaneous rotation axis by quasi-diurnal terms with
+         * amplitudes under 0.01" (see Seidelmann, 1982). The x-axis is in the direction of the ITRF
+         * zero-meridian; the y-axis is in the direction 90 degrees West longitude. Celestial pole
+         * offsets -- Celestial pole offsets are described in the IAU Precession and Nutation
+         * models. The observed differences with respect to the conventional celestial pole position
+         * defined by the models are monitored and reported by the IERS. IERS Bulletins A and B
+         * provide current information on the Earth's orientation in the IERS Reference System. This
+         * includes Universal Time, coordinates of the terrestrial pole, and celestial pole offsets.
+         * Bulletin A gives an advanced solution updated weekly; the standard solution is given
+         * monthly in Bulletin B. Fields suffixed with ''B'' are Bulletin B values. All solutions
+         * are continuous within their respective uncertainties. Bulletin A is issued by the IERS
+         * Rapid Service/Prediction Centre at the U.S. Naval Observatory, Washington, DC and
+         * Bulletin B is issued by the IERS Earth Orientation Centre at the Paris Observatory. IERS
+         * Bulletin A reports the latest determinations for polar motion, UT1-UTC, and nutation
+         * offsets at daily intervals based on a combination of contributed analysis results using
+         * data from Very Long Baseline Interferometry (VLBI), Satellite Laser Ranging (SLR), Global
+         * Positioning System (GPS) satellites, and Lunar Laser Ranging (LLR). Predictions for
+         * variations a year into the future are also provided. Meteorological predictions of
+         * variations in Atmospheric Angular Momentum (AAM) are used to aid in the prediction of
+         * near-term UT1-UTC changes. This publication is prepared by the IERS Rapid
+         * Service/Prediction Center.
+         */
         override fun eop(): EopServiceAsync.WithRawResponse = eop
 
+        /**
+         * These services provide operations for the posting and querying of satellite Ephemeris
+         * Point data. Each point contains a position and velocity vector and optionally, an
+         * acceleration vector and/or covariance matrix at a specified time. ECI J2K is the
+         * preferred reference frame for ephemeris and covariance, however, several user specified
+         * reference frames are accommodated. The EphemerisSet ID (esId) identifies the
+         * 'EphemerisSet' record which contains details of the underlying data and models used in
+         * the generation of the ephemeris as well as a collection of ephemeris points. Points must
+         * be retrieved by first identifying a desired EphemerisSet and pulling its points by that
+         * EphemerisSet 'esId'.
+         */
         override fun ephemeris(): EphemerisServiceAsync.WithRawResponse = ephemeris
 
+        /**
+         * These services provide operations for the posting and querying of satellite Ephemeris
+         * Point data. Each point contains a position and velocity vector and optionally, an
+         * acceleration vector and/or covariance matrix at a specified time. ECI J2K is the
+         * preferred reference frame for ephemeris and covariance, however, several user specified
+         * reference frames are accommodated. The EphemerisSet ID (esId) identifies the
+         * 'EphemerisSet' record which contains details of the underlying data and models used in
+         * the generation of the ephemeris as well as a collection of ephemeris points. Points must
+         * be retrieved by first identifying a desired EphemerisSet and pulling its points by that
+         * EphemerisSet 'esId'.
+         */
         override fun ephemerisSets(): EphemerisSetServiceAsync.WithRawResponse = ephemerisSets
 
+        /**
+         * This collection of services provide operations for manipulating and querying of equipment
+         * related data.
+         */
         override fun equipment(): EquipmentServiceAsync.WithRawResponse = equipment
 
+        /**
+         * This collection of services provide operations for manipulating and querying of equipment
+         * related data.
+         */
         override fun equipmentRemarks(): EquipmentRemarkServiceAsync.WithRawResponse =
             equipmentRemarks
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         override fun evac(): EvacServiceAsync.WithRawResponse = evac
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         override fun eventEvolution(): EventEvolutionServiceAsync.WithRawResponse = eventEvolution
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         override fun featureAssessment(): FeatureAssessmentServiceAsync.WithRawResponse =
             featureAssessment
 
+        /**
+         * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+         * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+         * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+         * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and
+         * Aviation Risk Management data. Aircraft Sortie information contains static and dynamic
+         * aircraft assignments, departure and arrival times, and remarks. Aircraft Mission
+         * information contains static data for mission planning to include assigned aircraft and
+         * crews, cargo pickup and dropoff locations, unique identifiers, and prioritization. Item
+         * Tracking information contains data for tracking an item from its origin to destination
+         * and how it may be configured during transport. Flight Plan information contains schedule
+         * and route details. Air Event provides information concerning various aerial events such
+         * as fuel transfer and air drops, as well as the associated aircraft involved. Sortie PPR
+         * information contains details on operational access to a runway, taxiway, or airport
+         * service. Diplomatic Clearance information contains details on the issuance and
+         * coordination of aircraft clearance requests. Diplomatic Clearance Country provides
+         * information such as entry/exit points, requirements, and points of contact for countries
+         * diplomatic clearances are being created for. Airspace Control Order provides information
+         * concerning the allocation, restriction, and deconfliction of airspace. Air Tasking Order
+         * information contains details on the coordination of air missions and their tasks,
+         * resources, and timelines. Navigational Obstruction provides the locations,
+         * characteristics, and boundaries of obstacles and structures that can restrict or
+         * interfere with navigation. Logistics Support contains information regarding the transport
+         * and maintenance of resources and equipment to sustain air operations. Track Route
+         * information defines specific flight paths used by aircraft during the transport of fuel
+         * and other resources. Air Load Plan information provides mission actuals concerning the
+         * loading and air transport of cargo and passengers. Aviation Risk Management information
+         * help aid in mission planning by accounting for factors such as mission complexity and
+         * crew fatigue.
+         */
         override fun flightplan(): FlightplanServiceAsync.WithRawResponse = flightplan
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun geoStatus(): GeoStatusServiceAsync.WithRawResponse = geoStatus
 
+        /**
+         * Models and Simulations is a collection of services that allow consumers to interact with
+         * data products representing independent models of various phenomenon, artificial
+         * intelligence models and predictions, or of mathematical parameters meant to feed mod and
+         * sim tools to produce estimates of environmental entities such as atmospheric models and
+         * heat maps.
+         */
         override fun globalAtmosphericModel(): GlobalAtmosphericModelServiceAsync.WithRawResponse =
             globalAtmosphericModel
 
         override fun gnssObservations(): GnssObservationServiceAsync.WithRawResponse =
             gnssObservations
 
+        /**
+         * This collection of services provides operations for querying and manipulation of
+         * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+         * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+         * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+         * some cases observations may be in an alternate frame depending on the provider and/or
+         * datatype.
+         */
         override fun gnssObservationset(): GnssObservationsetServiceAsync.WithRawResponse =
             gnssObservationset
 
+        /**
+         * This collection of services provides operations for querying and manipulation of
+         * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+         * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+         * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+         * some cases observations may be in an alternate frame depending on the provider and/or
+         * datatype.
+         */
         override fun gnssRawIf(): GnssRawIfServiceAsync.WithRawResponse = gnssRawIf
 
+        /**
+         * This collection of services provides operations for querying and manipulation of ground
+         * imagery of terrestrial regions from on-orbit, air, and other sensors. Includes metadata
+         * on the image (time, region, source, etc) as well as binary content (typically GeoTIFF).
+         * Binary content must be downloaded individually by ID using the 'getFile' operation.
+         * Well-Known Text (WKT) and GeoJSON formats are used for GIS representation and query
+         * support (see https://www.opengeospatial.org/standards/wkt-crs and https://geojson.org/
+         * for more information on these formats).
+         */
         override fun groundImagery(): GroundImageryServiceAsync.WithRawResponse = groundImagery
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         override fun h3Geo(): H3GeoServiceAsync.WithRawResponse = h3Geo
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         override fun h3GeoHexCell(): H3GeoHexCellServiceAsync.WithRawResponse = h3GeoHexCell
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         override fun hazard(): HazardServiceAsync.WithRawResponse = hazard
 
+        /**
+         * This collection of services provides operations for querying and manipulation of
+         * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+         * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+         * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+         * some cases observations may be in an alternate frame depending on the provider and/or
+         * datatype.
+         */
         override fun ionoObservations(): IonoObservationServiceAsync.WithRawResponse =
             ionoObservations
 
+        /** These services provide operations for manipulation and querying of on-orbit payloads. */
         override fun ir(): IrServiceAsync.WithRawResponse = ir
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         override fun isrCollections(): IsrCollectionServiceAsync.WithRawResponse = isrCollections
 
+        /**
+         * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+         * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+         * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+         * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and
+         * Aviation Risk Management data. Aircraft Sortie information contains static and dynamic
+         * aircraft assignments, departure and arrival times, and remarks. Aircraft Mission
+         * information contains static data for mission planning to include assigned aircraft and
+         * crews, cargo pickup and dropoff locations, unique identifiers, and prioritization. Item
+         * Tracking information contains data for tracking an item from its origin to destination
+         * and how it may be configured during transport. Flight Plan information contains schedule
+         * and route details. Air Event provides information concerning various aerial events such
+         * as fuel transfer and air drops, as well as the associated aircraft involved. Sortie PPR
+         * information contains details on operational access to a runway, taxiway, or airport
+         * service. Diplomatic Clearance information contains details on the issuance and
+         * coordination of aircraft clearance requests. Diplomatic Clearance Country provides
+         * information such as entry/exit points, requirements, and points of contact for countries
+         * diplomatic clearances are being created for. Airspace Control Order provides information
+         * concerning the allocation, restriction, and deconfliction of airspace. Air Tasking Order
+         * information contains details on the coordination of air missions and their tasks,
+         * resources, and timelines. Navigational Obstruction provides the locations,
+         * characteristics, and boundaries of obstacles and structures that can restrict or
+         * interfere with navigation. Logistics Support contains information regarding the transport
+         * and maintenance of resources and equipment to sustain air operations. Track Route
+         * information defines specific flight paths used by aircraft during the transport of fuel
+         * and other resources. Air Load Plan information provides mission actuals concerning the
+         * loading and air transport of cargo and passengers. Aviation Risk Management information
+         * help aid in mission planning by accounting for factors such as mission complexity and
+         * crew fatigue.
+         */
         override fun item(): ItemServiceAsync.WithRawResponse = item
 
+        /**
+         * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+         * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+         * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+         * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and
+         * Aviation Risk Management data. Aircraft Sortie information contains static and dynamic
+         * aircraft assignments, departure and arrival times, and remarks. Aircraft Mission
+         * information contains static data for mission planning to include assigned aircraft and
+         * crews, cargo pickup and dropoff locations, unique identifiers, and prioritization. Item
+         * Tracking information contains data for tracking an item from its origin to destination
+         * and how it may be configured during transport. Flight Plan information contains schedule
+         * and route details. Air Event provides information concerning various aerial events such
+         * as fuel transfer and air drops, as well as the associated aircraft involved. Sortie PPR
+         * information contains details on operational access to a runway, taxiway, or airport
+         * service. Diplomatic Clearance information contains details on the issuance and
+         * coordination of aircraft clearance requests. Diplomatic Clearance Country provides
+         * information such as entry/exit points, requirements, and points of contact for countries
+         * diplomatic clearances are being created for. Airspace Control Order provides information
+         * concerning the allocation, restriction, and deconfliction of airspace. Air Tasking Order
+         * information contains details on the coordination of air missions and their tasks,
+         * resources, and timelines. Navigational Obstruction provides the locations,
+         * characteristics, and boundaries of obstacles and structures that can restrict or
+         * interfere with navigation. Logistics Support contains information regarding the transport
+         * and maintenance of resources and equipment to sustain air operations. Track Route
+         * information defines specific flight paths used by aircraft during the transport of fuel
+         * and other resources. Air Load Plan information provides mission actuals concerning the
+         * loading and air transport of cargo and passengers. Aviation Risk Management information
+         * help aid in mission planning by accounting for factors such as mission complexity and
+         * crew fatigue.
+         */
         override fun itemTrackings(): ItemTrackingServiceAsync.WithRawResponse = itemTrackings
 
+        /**
+         * This collection of services provides operations for querying and manipulation of laser
+         * related information to include the laser emitters, the laser deconflict requests, and
+         * laser deconflict responses.
+         */
         override fun laserdeconflictrequest(): LaserdeconflictrequestServiceAsync.WithRawResponse =
             laserdeconflictrequest
 
+        /**
+         * This collection of services provides operations for querying and manipulation of laser
+         * related information to include the laser emitters, the laser deconflict requests, and
+         * laser deconflict responses.
+         */
         override fun laseremitter(): LaseremitterServiceAsync.WithRawResponse = laseremitter
 
+        /**
+         * Collection of launch related services which provide operations for querying and
+         * manipulation of launch site data and detailed information on launch vehicles including
+         * engines, stages, and manufacturers. Sites, engines, and stages can each have multiple
+         * 'detail' records which may be compiled by different sources.
+         */
         override fun launchDetection(): LaunchDetectionServiceAsync.WithRawResponse =
             launchDetection
 
+        /**
+         * These services provide operations for manipulation and querying of LaunchEvent data.
+         * Launch Event data are known space launches, either future or historic records containing
+         * items such as the launch site, launch epoch, and object.
+         */
         override fun launchEvent(): LaunchEventServiceAsync.WithRawResponse = launchEvent
 
+        /**
+         * Collection of launch related services which provide operations for querying and
+         * manipulation of launch site data and detailed information on launch vehicles including
+         * engines, stages, and manufacturers. Sites, engines, and stages can each have multiple
+         * 'detail' records which may be compiled by different sources.
+         */
         override fun launchSite(): LaunchSiteServiceAsync.WithRawResponse = launchSite
 
+        /**
+         * Collection of launch related services which provide operations for querying and
+         * manipulation of launch site data and detailed information on launch vehicles including
+         * engines, stages, and manufacturers. Sites, engines, and stages can each have multiple
+         * 'detail' records which may be compiled by different sources.
+         */
         override fun launchSiteDetails(): LaunchSiteDetailServiceAsync.WithRawResponse =
             launchSiteDetails
 
+        /**
+         * Collection of launch related services which provide operations for querying and
+         * manipulation of launch site data and detailed information on launch vehicles including
+         * engines, stages, and manufacturers. Sites, engines, and stages can each have multiple
+         * 'detail' records which may be compiled by different sources.
+         */
         override fun launchVehicle(): LaunchVehicleServiceAsync.WithRawResponse = launchVehicle
 
+        /**
+         * Collection of launch related services which provide operations for querying and
+         * manipulation of launch site data and detailed information on launch vehicles including
+         * engines, stages, and manufacturers. Sites, engines, and stages can each have multiple
+         * 'detail' records which may be compiled by different sources.
+         */
         override fun launchVehicleDetails(): LaunchVehicleDetailServiceAsync.WithRawResponse =
             launchVehicleDetails
 
+        /**
+         * These services provide operations for manipulation and querying tactical data links and
+         * link statuses of beams or a satellite constellation. Communication link statuses provide
+         * definitions and status such as, positional endpoints, where each endpoint may be
+         * associated with a specific beam or with a satellite constellation. Data links provide
+         * detailed instructions regarding the operational use of a tactical data link and interface
+         * coordination through various message formats.
+         */
         override fun linkStatus(): LinkStatusServiceAsync.WithRawResponse = linkStatus
 
+        /**
+         * These services provide operations for manipulation and querying tactical data links and
+         * link statuses of beams or a satellite constellation. Communication link statuses provide
+         * definitions and status such as, positional endpoints, where each endpoint may be
+         * associated with a specific beam or with a satellite constellation. Data links provide
+         * detailed instructions regarding the operational use of a tactical data link and interface
+         * coordination through various message formats.
+         */
         override fun linkstatus(): LinkstatusServiceAsync.WithRawResponse = linkstatus
 
+        /**
+         * Service operations for querying and manipulation of miscellaneous supporting data such as
+         * countries (which can represent countries, multi-national consortiums, and international
+         * organizations), data owners, locations, entities, organizations, etc.
+         */
         override fun location(): LocationServiceAsync.WithRawResponse = location
 
+        /**
+         * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+         * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+         * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+         * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and
+         * Aviation Risk Management data. Aircraft Sortie information contains static and dynamic
+         * aircraft assignments, departure and arrival times, and remarks. Aircraft Mission
+         * information contains static data for mission planning to include assigned aircraft and
+         * crews, cargo pickup and dropoff locations, unique identifiers, and prioritization. Item
+         * Tracking information contains data for tracking an item from its origin to destination
+         * and how it may be configured during transport. Flight Plan information contains schedule
+         * and route details. Air Event provides information concerning various aerial events such
+         * as fuel transfer and air drops, as well as the associated aircraft involved. Sortie PPR
+         * information contains details on operational access to a runway, taxiway, or airport
+         * service. Diplomatic Clearance information contains details on the issuance and
+         * coordination of aircraft clearance requests. Diplomatic Clearance Country provides
+         * information such as entry/exit points, requirements, and points of contact for countries
+         * diplomatic clearances are being created for. Airspace Control Order provides information
+         * concerning the allocation, restriction, and deconfliction of airspace. Air Tasking Order
+         * information contains details on the coordination of air missions and their tasks,
+         * resources, and timelines. Navigational Obstruction provides the locations,
+         * characteristics, and boundaries of obstacles and structures that can restrict or
+         * interfere with navigation. Logistics Support contains information regarding the transport
+         * and maintenance of resources and equipment to sustain air operations. Track Route
+         * information defines specific flight paths used by aircraft during the transport of fuel
+         * and other resources. Air Load Plan information provides mission actuals concerning the
+         * loading and air transport of cargo and passengers. Aviation Risk Management information
+         * help aid in mission planning by accounting for factors such as mission complexity and
+         * crew fatigue.
+         */
         override fun logisticsSupport(): LogisticsSupportServiceAsync.WithRawResponse =
             logisticsSupport
 
+        /**
+         * This service provides operations for querying and manipulation of
+         * detected/possible/confirmed on-orbit maneuvers. The J2000 coordinate frame is the
+         * preferred frame for all maneuver data, but in some cases data may be in another frame
+         * depending on the provider. Check the Storefront 'Data Products' section under the
+         * 'Discover' tab for maneuver data provider information.
+         */
         override fun maneuvers(): ManeuverServiceAsync.WithRawResponse = maneuvers
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun manifold(): ManifoldServiceAsync.WithRawResponse = manifold
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun manifoldelset(): ManifoldelsetServiceAsync.WithRawResponse = manifoldelset
 
+        /**
+         * These services provide operations for posting and querying of air, space, and ground
+         * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+         * particular timestamp.
+         */
         override fun missileTracks(): MissileTrackServiceAsync.WithRawResponse = missileTracks
 
+        /**
+         * These services provide operations for manipulation and querying of mission assignment
+         * objects. MissionAssignment is used by C2 JUs and, optionally, non-C2 JUs to assign
+         * missions, designate targets, and provide target information to non-C2 JU platforms.
+         * Provision is made for the non-C2 JU platforms to acknowledge the message through
+         * receipt/compliance action.
+         */
         override fun missionAssignment(): MissionAssignmentServiceAsync.WithRawResponse =
             missionAssignment
 
+        /**
+         * These services provide operations for posting and querying Moving Target Indicator (MTI)
+         * STANAG 4607 data. Detailed MTI data supports activities such as targeting or less
+         * detailed data for applications such as situational awareness used/derived by exploitation
+         * systems.
+         */
         override fun mti(): MtiServiceAsync.WithRawResponse = mti
 
+        /** These services provide operations for manipulation and querying of on-orbit payloads. */
         override fun navigation(): NavigationServiceAsync.WithRawResponse = navigation
 
+        /**
+         * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+         * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+         * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+         * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and
+         * Aviation Risk Management data. Aircraft Sortie information contains static and dynamic
+         * aircraft assignments, departure and arrival times, and remarks. Aircraft Mission
+         * information contains static data for mission planning to include assigned aircraft and
+         * crews, cargo pickup and dropoff locations, unique identifiers, and prioritization. Item
+         * Tracking information contains data for tracking an item from its origin to destination
+         * and how it may be configured during transport. Flight Plan information contains schedule
+         * and route details. Air Event provides information concerning various aerial events such
+         * as fuel transfer and air drops, as well as the associated aircraft involved. Sortie PPR
+         * information contains details on operational access to a runway, taxiway, or airport
+         * service. Diplomatic Clearance information contains details on the issuance and
+         * coordination of aircraft clearance requests. Diplomatic Clearance Country provides
+         * information such as entry/exit points, requirements, and points of contact for countries
+         * diplomatic clearances are being created for. Airspace Control Order provides information
+         * concerning the allocation, restriction, and deconfliction of airspace. Air Tasking Order
+         * information contains details on the coordination of air missions and their tasks,
+         * resources, and timelines. Navigational Obstruction provides the locations,
+         * characteristics, and boundaries of obstacles and structures that can restrict or
+         * interfere with navigation. Logistics Support contains information regarding the transport
+         * and maintenance of resources and equipment to sustain air operations. Track Route
+         * information defines specific flight paths used by aircraft during the transport of fuel
+         * and other resources. Air Load Plan information provides mission actuals concerning the
+         * loading and air transport of cargo and passengers. Aviation Risk Management information
+         * help aid in mission planning by accounting for factors such as mission complexity and
+         * crew fatigue.
+         */
         override fun navigationalObstruction():
             NavigationalObstructionServiceAsync.WithRawResponse = navigationalObstruction
 
+        /**
+         * A Notification Service allowing the broadcast of generic messages to the community. Users
+         * can send free-form messages, publish lists, and notify the community about events or
+         * alerts across various domains. Notifications and alerts are categorized by a 'msgType'
+         * field and are accessible via the UDL Secure Messaging API and REST API services.
+         */
         override fun notification(): NotificationServiceAsync.WithRawResponse = notification
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun objectOfInterest(): ObjectOfInterestServiceAsync.WithRawResponse =
             objectOfInterest
 
         override fun observations(): ObservationServiceAsync.WithRawResponse = observations
 
+        /**
+         * This collection of services provides operations for querying and manipulation of
+         * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+         * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+         * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+         * some cases observations may be in an alternate frame depending on the provider and/or
+         * datatype.
+         */
         override fun onboardnavigation(): OnboardnavigationServiceAsync.WithRawResponse =
             onboardnavigation
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun onorbit(): OnorbitServiceAsync.WithRawResponse = onorbit
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun onorbitantenna(): OnorbitantennaServiceAsync.WithRawResponse = onorbitantenna
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun onorbitbattery(): OnorbitbatteryServiceAsync.WithRawResponse = onorbitbattery
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun onorbitdetails(): OnorbitdetailServiceAsync.WithRawResponse = onorbitdetails
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun onorbitevent(): OnorbiteventServiceAsync.WithRawResponse = onorbitevent
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun onorbitlist(): OnorbitlistServiceAsync.WithRawResponse = onorbitlist
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun onorbitsolararray(): OnorbitsolararrayServiceAsync.WithRawResponse =
             onorbitsolararray
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun onorbitthruster(): OnorbitthrusterServiceAsync.WithRawResponse =
             onorbitthruster
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun onorbitthrusterstatus(): OnorbitthrusterstatusServiceAsync.WithRawResponse =
             onorbitthrusterstatus
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         override fun onorbitassessment(): OnorbitassessmentServiceAsync.WithRawResponse =
             onorbitassessment
 
+        /**
+         * Service operations for querying and manipulation of miscellaneous supporting data such as
+         * countries (which can represent countries, multi-national consortiums, and international
+         * organizations), data owners, locations, entities, organizations, etc.
+         */
         override fun operatingunit(): OperatingunitServiceAsync.WithRawResponse = operatingunit
 
+        /**
+         * Service operations for querying and manipulation of miscellaneous supporting data such as
+         * countries (which can represent countries, multi-national consortiums, and international
+         * organizations), data owners, locations, entities, organizations, etc.
+         */
         override fun operatingunitremark(): OperatingunitremarkServiceAsync.WithRawResponse =
             operatingunitremark
 
+        /**
+         * These services provide operations for manipulating and querying Orbit Determination (OD)
+         * data. Orbit Determination data contains algorithm results that describe General
+         * Perturbations or Special Perturbations orbital updates.
+         */
         override fun orbitdetermination(): OrbitdeterminationServiceAsync.WithRawResponse =
             orbitdetermination
 
+        /**
+         * These services provide operations for posting and querying of air, space, and ground
+         * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+         * particular timestamp.
+         */
         override fun orbittrack(): OrbittrackServiceAsync.WithRawResponse = orbittrack
 
+        /**
+         * Service operations for querying and manipulation of miscellaneous supporting data such as
+         * countries (which can represent countries, multi-national consortiums, and international
+         * organizations), data owners, locations, entities, organizations, etc.
+         */
         override fun organization(): OrganizationServiceAsync.WithRawResponse = organization
 
+        /**
+         * Service operations for querying and manipulation of miscellaneous supporting data such as
+         * countries (which can represent countries, multi-national consortiums, and international
+         * organizations), data owners, locations, entities, organizations, etc.
+         */
         override fun organizationdetails(): OrganizationdetailServiceAsync.WithRawResponse =
             organizationdetails
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         override fun personnelrecovery(): PersonnelrecoveryServiceAsync.WithRawResponse =
             personnelrecovery
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         override fun poi(): PoiServiceAsync.WithRawResponse = poi
 
+        /**
+         * This collection of services provide operations for manipulating and querying of various
+         * site related data, including site status, site operations, and site type-specific
+         * records.
+         */
         override fun port(): PortServiceAsync.WithRawResponse = port
 
         override fun reportAndActivities(): ReportAndActivityServiceAsync.WithRawResponse =
             reportAndActivities
 
+        /**
+         * This collection of services provides operations for querying and manipulation of RF
+         * related information to include RFEmitters which could potentially interfere with
+         * communications/operations of space related entities, and RFBands commonly used by various
+         * space related entities.
+         */
         override fun rfBand(): RfBandServiceAsync.WithRawResponse = rfBand
 
+        /**
+         * This collection of services provides operations for querying and manipulation of RF
+         * related information to include RFEmitters which could potentially interfere with
+         * communications/operations of space related entities, and RFBands commonly used by various
+         * space related entities.
+         */
         override fun rfBandType(): RfBandTypeServiceAsync.WithRawResponse = rfBandType
 
+        /**
+         * This collection of services provides operations for querying and manipulation of RF
+         * related information to include RFEmitters which could potentially interfere with
+         * communications/operations of space related entities, and RFBands commonly used by various
+         * space related entities.
+         */
         override fun rfEmitter(): RfEmitterServiceAsync.WithRawResponse = rfEmitter
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         override fun routeStats(): RouteStatServiceAsync.WithRawResponse = routeStats
 
+        /**
+         * This collection of services provides operations for querying and manipulation of
+         * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+         * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+         * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+         * some cases observations may be in an alternate frame depending on the provider and/or
+         * datatype.
+         */
         override fun sarObservation(): SarObservationServiceAsync.WithRawResponse = sarObservation
 
+        /** These services provide operations for manipulation and querying of on-orbit payloads. */
         override fun scientific(): ScientificServiceAsync.WithRawResponse = scientific
 
         override fun scs(): ScServiceAsync.WithRawResponse = scs
 
+        /**
+         * Secure Messaging is based on Apache Kafka which is an open-source stream-processing
+         * software platform developed by the Apache Software Foundation, written in Scala and Java.
+         * Kafka provides a unified, high-throughput, low-latency platform for handling real-time
+         * data feeds. All messaging is secured; consumers will not receive messages unless
+         * authorized to do so. J2000 is the preferred coordinate frame for all observations, but in
+         * some cases observations may be in another frame depending on the provider. Please see the
+         * 'Discover' tab in the storefront to confirm coordinate frames by data provider.
+         */
         override fun secureMessaging(): SecureMessagingServiceAsync.WithRawResponse =
             secureMessaging
 
+        /**
+         * This service provides operations for querying and manipulation of sensor data. Sensors
+         * are terrestrial or on-orbit equipment capable of taking measurements or 'observations' of
+         * on-orbit objects via several phenomenologies such as Electro-Optical (EO), Radar, and
+         * Radio Frequency (RF). This collection of operations includes 'SensorMaintenance'
+         * schedules which define known/planned future maintenance and associated operational impact
+         * of sensors as well as 'SensorCalibration' records which contains data about a sensor's
+         * overall accuracy and is used to adjust sensor settings.
+         */
         override fun sensor(): SensorServiceAsync.WithRawResponse = sensor
 
+        /**
+         * This service provides operations for querying and manipulation of sensor data. Sensors
+         * are terrestrial or on-orbit equipment capable of taking measurements or 'observations' of
+         * on-orbit objects via several phenomenologies such as Electro-Optical (EO), Radar, and
+         * Radio Frequency (RF). This collection of operations includes 'SensorMaintenance'
+         * schedules which define known/planned future maintenance and associated operational impact
+         * of sensors as well as 'SensorCalibration' records which contains data about a sensor's
+         * overall accuracy and is used to adjust sensor settings.
+         */
         override fun sensorStating(): SensorStatingServiceAsync.WithRawResponse = sensorStating
 
+        /**
+         * This service provides operations for querying and manipulation of sensor data. Sensors
+         * are terrestrial or on-orbit equipment capable of taking measurements or 'observations' of
+         * on-orbit objects via several phenomenologies such as Electro-Optical (EO), Radar, and
+         * Radio Frequency (RF). This collection of operations includes 'SensorMaintenance'
+         * schedules which define known/planned future maintenance and associated operational impact
+         * of sensors as well as 'SensorCalibration' records which contains data about a sensor's
+         * overall accuracy and is used to adjust sensor settings.
+         */
         override fun sensorMaintenance(): SensorMaintenanceServiceAsync.WithRawResponse =
             sensorMaintenance
 
+        /**
+         * This service provides operations for querying and manipulation of sensor data. Sensors
+         * are terrestrial or on-orbit equipment capable of taking measurements or 'observations' of
+         * on-orbit objects via several phenomenologies such as Electro-Optical (EO), Radar, and
+         * Radio Frequency (RF). This collection of operations includes 'SensorMaintenance'
+         * schedules which define known/planned future maintenance and associated operational impact
+         * of sensors as well as 'SensorCalibration' records which contains data about a sensor's
+         * overall accuracy and is used to adjust sensor settings.
+         */
         override fun sensorObservationType(): SensorObservationTypeServiceAsync.WithRawResponse =
             sensorObservationType
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         override fun sensorPlan(): SensorPlanServiceAsync.WithRawResponse = sensorPlan
 
+        /**
+         * This service provides operations for querying and manipulation of sensor data. Sensors
+         * are terrestrial or on-orbit equipment capable of taking measurements or 'observations' of
+         * on-orbit objects via several phenomenologies such as Electro-Optical (EO), Radar, and
+         * Radio Frequency (RF). This collection of operations includes 'SensorMaintenance'
+         * schedules which define known/planned future maintenance and associated operational impact
+         * of sensors as well as 'SensorCalibration' records which contains data about a sensor's
+         * overall accuracy and is used to adjust sensor settings.
+         */
         override fun sensorType(): SensorTypeServiceAsync.WithRawResponse = sensorType
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit
+         * communications payloads (Comm), including supporting data such as transponders and
+         * channels, etc.
+         */
         override fun seraDataCommDetails(): SeraDataCommDetailServiceAsync.WithRawResponse =
             seraDataCommDetails
 
+        /** These services provide operations for manipulation and querying of on-orbit payloads. */
         override fun seraDataEarlyWarning(): SeraDataEarlyWarningServiceAsync.WithRawResponse =
             seraDataEarlyWarning
 
+        /** These services provide operations for manipulation and querying of on-orbit payloads. */
         override fun seraDataNavigation(): SeraDataNavigationServiceAsync.WithRawResponse =
             seraDataNavigation
 
+        /**
+         * This service provides operations for querying and manipulation of sensor data. Sensors
+         * are terrestrial or on-orbit equipment capable of taking measurements or 'observations' of
+         * on-orbit objects via several phenomenologies such as Electro-Optical (EO), Radar, and
+         * Radio Frequency (RF). This collection of operations includes 'SensorMaintenance'
+         * schedules which define known/planned future maintenance and associated operational impact
+         * of sensors as well as 'SensorCalibration' records which contains data about a sensor's
+         * overall accuracy and is used to adjust sensor settings.
+         */
         override fun seradataOpticalPayload(): SeradataOpticalPayloadServiceAsync.WithRawResponse =
             seradataOpticalPayload
 
+        /**
+         * This service provides operations for querying and manipulation of sensor data. Sensors
+         * are terrestrial or on-orbit equipment capable of taking measurements or 'observations' of
+         * on-orbit objects via several phenomenologies such as Electro-Optical (EO), Radar, and
+         * Radio Frequency (RF). This collection of operations includes 'SensorMaintenance'
+         * schedules which define known/planned future maintenance and associated operational impact
+         * of sensors as well as 'SensorCalibration' records which contains data about a sensor's
+         * overall accuracy and is used to adjust sensor settings.
+         */
         override fun seradataRadarPayload(): SeradataRadarPayloadServiceAsync.WithRawResponse =
             seradataRadarPayload
 
+        /**
+         * This service provides operations for querying and manipulation of sensor data. Sensors
+         * are terrestrial or on-orbit equipment capable of taking measurements or 'observations' of
+         * on-orbit objects via several phenomenologies such as Electro-Optical (EO), Radar, and
+         * Radio Frequency (RF). This collection of operations includes 'SensorMaintenance'
+         * schedules which define known/planned future maintenance and associated operational impact
+         * of sensors as well as 'SensorCalibration' records which contains data about a sensor's
+         * overall accuracy and is used to adjust sensor settings.
+         */
         override fun seradataSigintPayload(): SeradataSigintPayloadServiceAsync.WithRawResponse =
             seradataSigintPayload
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun seradataSpacecraftDetails():
             SeradataSpacecraftDetailServiceAsync.WithRawResponse = seradataSpacecraftDetails
 
+        /**
+         * This service provides operations for manipulation and querying of space weather/solar,
+         * geomagnetic, and radiation belt index data.
+         */
         override fun sgi(): SgiServiceAsync.WithRawResponse = sgi
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         override fun sigact(): SigactServiceAsync.WithRawResponse = sigact
 
+        /**
+         * This collection of services provide operations for manipulating and querying of various
+         * site related data, including site status, site operations, and site type-specific
+         * records.
+         */
         override fun site(): SiteServiceAsync.WithRawResponse = site
 
+        /**
+         * This collection of services provide operations for manipulating and querying of various
+         * site related data, including site status, site operations, and site type-specific
+         * records.
+         */
         override fun siteRemark(): SiteRemarkServiceAsync.WithRawResponse = siteRemark
 
+        /**
+         * This collection of services provide operations for manipulating and querying of various
+         * site related data, including site status, site operations, and site type-specific
+         * records.
+         */
         override fun siteStatus(): SiteStatusServiceAsync.WithRawResponse = siteStatus
 
+        /**
+         * This collection of services provides operations for querying and manipulation of sky
+         * imagery data. Sky imagery is ground or space based telescope imagery of RSO's and
+         * includes metadata on the image (time, source, etc) as well as binary image content (e.g.
+         * FITS, EOSSA, EOCHIP, MP4). Binary content must be downloaded individually by ID using the
+         * 'getFile' operation.
+         */
         override fun skyImagery(): SkyImageryServiceAsync.WithRawResponse = skyImagery
 
+        /**
+         * This collection of services provides operations for querying and manipulation of
+         * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+         * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+         * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+         * some cases observations may be in an alternate frame depending on the provider and/or
+         * datatype.
+         */
         override fun soiObservationSet(): SoiObservationSetServiceAsync.WithRawResponse =
             soiObservationSet
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun solarArray(): SolarArrayServiceAsync.WithRawResponse = solarArray
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun solarArrayDetails(): SolarArrayDetailServiceAsync.WithRawResponse =
             solarArrayDetails
 
+        /**
+         * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+         * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+         * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+         * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and
+         * Aviation Risk Management data. Aircraft Sortie information contains static and dynamic
+         * aircraft assignments, departure and arrival times, and remarks. Aircraft Mission
+         * information contains static data for mission planning to include assigned aircraft and
+         * crews, cargo pickup and dropoff locations, unique identifiers, and prioritization. Item
+         * Tracking information contains data for tracking an item from its origin to destination
+         * and how it may be configured during transport. Flight Plan information contains schedule
+         * and route details. Air Event provides information concerning various aerial events such
+         * as fuel transfer and air drops, as well as the associated aircraft involved. Sortie PPR
+         * information contains details on operational access to a runway, taxiway, or airport
+         * service. Diplomatic Clearance information contains details on the issuance and
+         * coordination of aircraft clearance requests. Diplomatic Clearance Country provides
+         * information such as entry/exit points, requirements, and points of contact for countries
+         * diplomatic clearances are being created for. Airspace Control Order provides information
+         * concerning the allocation, restriction, and deconfliction of airspace. Air Tasking Order
+         * information contains details on the coordination of air missions and their tasks,
+         * resources, and timelines. Navigational Obstruction provides the locations,
+         * characteristics, and boundaries of obstacles and structures that can restrict or
+         * interfere with navigation. Logistics Support contains information regarding the transport
+         * and maintenance of resources and equipment to sustain air operations. Track Route
+         * information defines specific flight paths used by aircraft during the transport of fuel
+         * and other resources. Air Load Plan information provides mission actuals concerning the
+         * loading and air transport of cargo and passengers. Aviation Risk Management information
+         * help aid in mission planning by accounting for factors such as mission complexity and
+         * crew fatigue.
+         */
         override fun sortiePpr(): SortiePprServiceAsync.WithRawResponse = sortiePpr
 
+        /**
+         * This collection of services provides operations for querying and manipulation of
+         * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+         * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+         * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+         * some cases observations may be in an alternate frame depending on the provider and/or
+         * datatype.
+         */
         override fun spaceEnvObservation(): SpaceEnvObservationServiceAsync.WithRawResponse =
             spaceEnvObservation
 
+        /**
+         * Collection of launch related services which provide operations for querying and
+         * manipulation of launch site data and detailed information on launch vehicles including
+         * engines, stages, and manufacturers. Sites, engines, and stages can each have multiple
+         * 'detail' records which may be compiled by different sources.
+         */
         override fun stage(): StageServiceAsync.WithRawResponse = stage
 
+        /**
+         * These services provide operations for posting and querying Star Catalog data. The Star
+         * Catalog model is a representation of astronomical data and photometric data for stars.
+         * Astronomical data includes positional information, proper motions, parallaxes and their
+         * respective uncertainties. Photometric data contains optical and near-infrared magnitudes,
+         * and their uncertainties across multiple bandpasses. Note: Multiple source catalogs may
+         * contribute to a single record.
+         */
         override fun starCatalog(): StarCatalogServiceAsync.WithRawResponse = starCatalog
 
+        /**
+         * This service provides operations for querying and manipulation of state vectors for
+         * On-orbit objects. State vectors are cartesian vectors of position (r) and velocity (v)
+         * that together with their time (epoch) (t) uniquely determine the trajectory of the
+         * orbiting body in space. J2000 is the preferred coordinate frame for all state vector
+         * positions/velocities in UDL, but in some cases data may be in another frame depending on
+         * the provider and/or datatype. Please see the 'Discover' tab in the storefront to confirm
+         * coordinate frames by data provider.
+         */
         override fun stateVector(): StateVectorServiceAsync.WithRawResponse = stateVector
 
+        /**
+         * Service operations for querying and manipulation of miscellaneous supporting data such as
+         * countries (which can represent countries, multi-national consortiums, and international
+         * organizations), data owners, locations, entities, organizations, etc.
+         */
         override fun status(): StatusServiceAsync.WithRawResponse = status
 
+        /**
+         * Service operations for querying and manipulation of miscellaneous supporting data such as
+         * countries (which can represent countries, multi-national consortiums, and international
+         * organizations), data owners, locations, entities, organizations, etc.
+         */
         override fun substatus(): SubstatusServiceAsync.WithRawResponse = substatus
 
         override fun supportingData(): SupportingDataServiceAsync.WithRawResponse = supportingData
 
+        /**
+         * This collection of services provide operations for manipulating and querying of various
+         * site related data, including site status, site operations, and site type-specific
+         * records.
+         */
         override fun surface(): SurfaceServiceAsync.WithRawResponse = surface
 
+        /**
+         * This collection of services provide operations for manipulating and querying of various
+         * site related data, including site status, site operations, and site type-specific
+         * records.
+         */
         override fun surfaceObstruction(): SurfaceObstructionServiceAsync.WithRawResponse =
             surfaceObstruction
 
+        /**
+         * This collection of services provides operations for querying and manipulation of
+         * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+         * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+         * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+         * some cases observations may be in an alternate frame depending on the provider and/or
+         * datatype.
+         */
         override fun swir(): SwirServiceAsync.WithRawResponse = swir
 
+        /**
+         * This service provides operations for manipulation and querying of earth orientation
+         * parameter (EOP) data. Earth Orientation Parameters (EOP) are produced by the IERS
+         * (International Earth Rotation and Reference Systems Service). Earth Orientation
+         * Parameters describe the irregularities of the earth's rotation. Technically, they are the
+         * parameters which provide the rotation of the ITRS (International Terrestrial Reference
+         * System) to the ICRS (International Celestial Reference System) as a function of time.
+         * Universal time -- Universal time (UT1) is the time of the earth clock, which performs one
+         * revolution in about 24h. It is practically proportional to the sidereal time. The excess
+         * revolution time is called length of day (LOD). Coordinates of the pole -- x and y are the
+         * coordinates of the Celestial Ephemeris Pole (CEP) relative to the IRP, the IERS Reference
+         * Pole. The CEP differs from the instantaneous rotation axis by quasi-diurnal terms with
+         * amplitudes under 0.01" (see Seidelmann, 1982). The x-axis is in the direction of the ITRF
+         * zero-meridian; the y-axis is in the direction 90 degrees West longitude. Celestial pole
+         * offsets -- Celestial pole offsets are described in the IAU Precession and Nutation
+         * models. The observed differences with respect to the conventional celestial pole position
+         * defined by the models are monitored and reported by the IERS. IERS Bulletins A and B
+         * provide current information on the Earth's orientation in the IERS Reference System. This
+         * includes Universal Time, coordinates of the terrestrial pole, and celestial pole offsets.
+         * Bulletin A gives an advanced solution updated weekly; the standard solution is given
+         * monthly in Bulletin B. Fields suffixed with ''B'' are Bulletin B values. All solutions
+         * are continuous within their respective uncertainties. Bulletin A is issued by the IERS
+         * Rapid Service/Prediction Centre at the U.S. Naval Observatory, Washington, DC and
+         * Bulletin B is issued by the IERS Earth Orientation Centre at the Paris Observatory. IERS
+         * Bulletin A reports the latest determinations for polar motion, UT1-UTC, and nutation
+         * offsets at daily intervals based on a combination of contributed analysis results using
+         * data from Very Long Baseline Interferometry (VLBI), Satellite Laser Ranging (SLR), Global
+         * Positioning System (GPS) satellites, and Lunar Laser Ranging (LLR). Predictions for
+         * variations a year into the future are also provided. Meteorological predictions of
+         * variations in Atmospheric Angular Momentum (AAM) are used to aid in the prediction of
+         * near-term UT1-UTC changes. This publication is prepared by the IERS Rapid
+         * Service/Prediction Center.
+         */
         override fun taiUtc(): TaiUtcServiceAsync.WithRawResponse = taiUtc
 
         override fun tdoaFdoa(): TdoaFdoaServiceAsync.WithRawResponse = tdoaFdoa
 
+        /**
+         * These services provide operations for posting and querying of air, space, and ground
+         * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+         * particular timestamp.
+         */
         override fun track(): TrackServiceAsync.WithRawResponse = track
 
+        /**
+         * These services provide operations for posting and querying of air, space, and ground
+         * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+         * particular timestamp.
+         */
         override fun trackDetails(): TrackDetailServiceAsync.WithRawResponse = trackDetails
 
+        /**
+         * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+         * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+         * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+         * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and
+         * Aviation Risk Management data. Aircraft Sortie information contains static and dynamic
+         * aircraft assignments, departure and arrival times, and remarks. Aircraft Mission
+         * information contains static data for mission planning to include assigned aircraft and
+         * crews, cargo pickup and dropoff locations, unique identifiers, and prioritization. Item
+         * Tracking information contains data for tracking an item from its origin to destination
+         * and how it may be configured during transport. Flight Plan information contains schedule
+         * and route details. Air Event provides information concerning various aerial events such
+         * as fuel transfer and air drops, as well as the associated aircraft involved. Sortie PPR
+         * information contains details on operational access to a runway, taxiway, or airport
+         * service. Diplomatic Clearance information contains details on the issuance and
+         * coordination of aircraft clearance requests. Diplomatic Clearance Country provides
+         * information such as entry/exit points, requirements, and points of contact for countries
+         * diplomatic clearances are being created for. Airspace Control Order provides information
+         * concerning the allocation, restriction, and deconfliction of airspace. Air Tasking Order
+         * information contains details on the coordination of air missions and their tasks,
+         * resources, and timelines. Navigational Obstruction provides the locations,
+         * characteristics, and boundaries of obstacles and structures that can restrict or
+         * interfere with navigation. Logistics Support contains information regarding the transport
+         * and maintenance of resources and equipment to sustain air operations. Track Route
+         * information defines specific flight paths used by aircraft during the transport of fuel
+         * and other resources. Air Load Plan information provides mission actuals concerning the
+         * loading and air transport of cargo and passengers. Aviation Risk Management information
+         * help aid in mission planning by accounting for factors such as mission complexity and
+         * crew fatigue.
+         */
         override fun trackRoute(): TrackRouteServiceAsync.WithRawResponse = trackRoute
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit
+         * communications payloads (Comm), including supporting data such as transponders and
+         * channels, etc.
+         */
         override fun transponder(): TransponderServiceAsync.WithRawResponse = transponder
 
         override fun user(): UserServiceAsync.WithRawResponse = user
 
+        /**
+         * This service provides operations for manipulation and querying of maritime Vessel and
+         * Vessel Status data. Vessel contains the static data of the specific vessel: mmsi, cruise
+         * speed, max speed, etc.
+         */
         override fun vessel(): VesselServiceAsync.WithRawResponse = vessel
 
+        /** This collection of services provides operations for video streaming. */
         override fun video(): VideoServiceAsync.WithRawResponse = video
 
+        /**
+         * These services provide for posting and querying terrestrial weather conditions over a
+         * target area or region and raw sensor data used to produce condition reports. Weather
+         * Reports describe current weather conditions over a target point or region to include
+         * general temperatures, pressures, and moisture accumulation, as well as navigational
+         * considerations such as altimeter settings, visibility, wind speeds, and cloud heights
+         * etc. Weather Data contains algorithmic parameters and dynamic, raw measurements collected
+         * by individual sensors such as signal power, noise level, etc., which are generally
+         * processed across multiple sensors to produce weather reports.
+         */
         override fun weatherData(): WeatherDataServiceAsync.WithRawResponse = weatherData
 
+        /**
+         * These services provide for posting and querying terrestrial weather conditions over a
+         * target area or region and raw sensor data used to produce condition reports. Weather
+         * Reports describe current weather conditions over a target point or region to include
+         * general temperatures, pressures, and moisture accumulation, as well as navigational
+         * considerations such as altimeter settings, visibility, wind speeds, and cloud heights
+         * etc. Weather Data contains algorithmic parameters and dynamic, raw measurements collected
+         * by individual sensors such as signal power, noise level, etc., which are generally
+         * processed across multiple sensors to produce weather reports.
+         */
         override fun weatherReport(): WeatherReportServiceAsync.WithRawResponse = weatherReport
     }
 }

@@ -22,6 +22,12 @@ import com.unifieddatalibrary.api.models.maneuvers.ManeuverUnvalidatedPublishPar
 import com.unifieddatalibrary.api.services.blocking.maneuvers.HistoryService
 import java.util.function.Consumer
 
+/**
+ * This service provides operations for querying and manipulation of detected/possible/confirmed
+ * on-orbit maneuvers. The J2000 coordinate frame is the preferred frame for all maneuver data, but
+ * in some cases data may be in another frame depending on the provider. Check the Storefront 'Data
+ * Products' section under the 'Discover' tab for maneuver data provider information.
+ */
 interface ManeuverService {
 
     /**
@@ -36,6 +42,13 @@ interface ManeuverService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): ManeuverService
 
+    /**
+     * This service provides operations for querying and manipulation of detected/possible/confirmed
+     * on-orbit maneuvers. The J2000 coordinate frame is the preferred frame for all maneuver data,
+     * but in some cases data may be in another frame depending on the provider. Check the
+     * Storefront 'Data Products' section under the 'Discover' tab for maneuver data provider
+     * information.
+     */
     fun history(): HistoryService
 
     /**
@@ -206,6 +219,13 @@ interface ManeuverService {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): ManeuverService.WithRawResponse
 
+        /**
+         * This service provides operations for querying and manipulation of
+         * detected/possible/confirmed on-orbit maneuvers. The J2000 coordinate frame is the
+         * preferred frame for all maneuver data, but in some cases data may be in another frame
+         * depending on the provider. Check the Storefront 'Data Products' section under the
+         * 'Discover' tab for maneuver data provider information.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**

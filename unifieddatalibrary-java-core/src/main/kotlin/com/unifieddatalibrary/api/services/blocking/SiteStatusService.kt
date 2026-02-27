@@ -22,6 +22,10 @@ import com.unifieddatalibrary.api.models.sitestatus.SiteStatusUpdateParams
 import com.unifieddatalibrary.api.services.blocking.sitestatus.HistoryService
 import java.util.function.Consumer
 
+/**
+ * This collection of services provide operations for manipulating and querying of various site
+ * related data, including site status, site operations, and site type-specific records.
+ */
 interface SiteStatusService {
 
     /**
@@ -36,6 +40,10 @@ interface SiteStatusService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): SiteStatusService
 
+    /**
+     * This collection of services provide operations for manipulating and querying of various site
+     * related data, including site status, site operations, and site type-specific records.
+     */
     fun history(): HistoryService
 
     /**
@@ -233,6 +241,11 @@ interface SiteStatusService {
             modifier: Consumer<ClientOptions.Builder>
         ): SiteStatusService.WithRawResponse
 
+        /**
+         * This collection of services provide operations for manipulating and querying of various
+         * site related data, including site status, site operations, and site type-specific
+         * records.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**

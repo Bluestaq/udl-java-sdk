@@ -17,6 +17,11 @@ import com.unifieddatalibrary.api.core.prepare
 import com.unifieddatalibrary.api.models.cots.CotCreateParams
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of Report and Activity
+ * information. This information includes analytic reports, significant events, route statistics,
+ * EMI Reports, and other georeferenced reports and activities.
+ */
 class CotServiceImpl internal constructor(private val clientOptions: ClientOptions) : CotService {
 
     private val withRawResponse: CotService.WithRawResponse by lazy {

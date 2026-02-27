@@ -35,6 +35,10 @@ import com.unifieddatalibrary.api.services.blocking.site.OperationServiceImpl
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This collection of services provide operations for manipulating and querying of various site
+ * related data, including site status, site operations, and site type-specific records.
+ */
 class SiteServiceImpl internal constructor(private val clientOptions: ClientOptions) : SiteService {
 
     private val withRawResponse: SiteService.WithRawResponse by lazy {
@@ -48,6 +52,10 @@ class SiteServiceImpl internal constructor(private val clientOptions: ClientOpti
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): SiteService =
         SiteServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * This collection of services provide operations for manipulating and querying of various site
+     * related data, including site status, site operations, and site type-specific records.
+     */
     override fun operations(): OperationService = operations
 
     override fun create(params: SiteCreateParams, requestOptions: RequestOptions) {
@@ -103,6 +111,11 @@ class SiteServiceImpl internal constructor(private val clientOptions: ClientOpti
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * This collection of services provide operations for manipulating and querying of various
+         * site related data, including site status, site operations, and site type-specific
+         * records.
+         */
         override fun operations(): OperationService.WithRawResponse = operations
 
         private val createHandler: Handler<Void?> = emptyHandler()

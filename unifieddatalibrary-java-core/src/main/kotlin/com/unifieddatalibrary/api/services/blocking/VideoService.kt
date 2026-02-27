@@ -25,6 +25,7 @@ import com.unifieddatalibrary.api.models.video.history.VideoStreamsFull
 import com.unifieddatalibrary.api.services.blocking.video.HistoryService
 import java.util.function.Consumer
 
+/** This collection of services provides operations for video streaming. */
 interface VideoService {
 
     /**
@@ -39,6 +40,7 @@ interface VideoService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): VideoService
 
+    /** This collection of services provides operations for video streaming. */
     fun history(): HistoryService
 
     /**
@@ -210,6 +212,7 @@ interface VideoService {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): VideoService.WithRawResponse
 
+        /** This collection of services provides operations for video streaming. */
         fun history(): HistoryService.WithRawResponse
 
         /**

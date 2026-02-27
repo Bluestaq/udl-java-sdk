@@ -21,6 +21,7 @@ import com.unifieddatalibrary.api.services.async.evac.TupleServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/** These services provide operations for manipulation and querying of Mission Ops information. */
 interface EvacServiceAsync {
 
     /**
@@ -35,8 +36,14 @@ interface EvacServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): EvacServiceAsync
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     fun history(): HistoryServiceAsync
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     fun tuple(): TupleServiceAsync
 
     /**
@@ -201,8 +208,16 @@ interface EvacServiceAsync {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): EvacServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         fun tuple(): TupleServiceAsync.WithRawResponse
 
         /**

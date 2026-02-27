@@ -35,6 +35,10 @@ import com.unifieddatalibrary.api.services.blocking.onorbitthrusterstatus.Histor
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit objects of interest,
+ * their components, and various lists and status of those objects.
+ */
 class OnorbitthrusterstatusServiceImpl
 internal constructor(private val clientOptions: ClientOptions) : OnorbitthrusterstatusService {
 
@@ -51,6 +55,10 @@ internal constructor(private val clientOptions: ClientOptions) : Onorbitthruster
     ): OnorbitthrusterstatusService =
         OnorbitthrusterstatusServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun history(): HistoryService = history
 
     override fun create(params: OnorbitthrusterstatusCreateParams, requestOptions: RequestOptions) {
@@ -123,6 +131,10 @@ internal constructor(private val clientOptions: ClientOptions) : Onorbitthruster
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()

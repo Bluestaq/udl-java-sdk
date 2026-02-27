@@ -19,6 +19,11 @@ import com.unifieddatalibrary.api.models.laseremitter.staging.StagingRetrieveRes
 import com.unifieddatalibrary.api.models.laseremitter.staging.StagingUpdateParams
 import java.util.function.Consumer
 
+/**
+ * This collection of services provides operations for querying and manipulation of laser related
+ * information to include the laser emitters, the laser deconflict requests, and laser deconflict
+ * responses.
+ */
 interface StagingService {
 
     /**

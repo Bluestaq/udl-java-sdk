@@ -22,6 +22,11 @@ import com.unifieddatalibrary.api.services.async.onorbitassessment.HistoryServic
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of Report and Activity
+ * information. This information includes analytic reports, significant events, route statistics,
+ * EMI Reports, and other georeferenced reports and activities.
+ */
 interface OnorbitassessmentServiceAsync {
 
     /**
@@ -36,6 +41,11 @@ interface OnorbitassessmentServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): OnorbitassessmentServiceAsync
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -239,6 +249,11 @@ interface OnorbitassessmentServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): OnorbitassessmentServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**

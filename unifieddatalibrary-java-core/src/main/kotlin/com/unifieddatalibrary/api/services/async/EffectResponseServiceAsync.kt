@@ -22,6 +22,7 @@ import com.unifieddatalibrary.api.services.async.effectresponses.HistoryServiceA
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/** These services provide operations for manipulation and querying of Mission Ops information. */
 interface EffectResponseServiceAsync {
 
     /**
@@ -36,6 +37,9 @@ interface EffectResponseServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): EffectResponseServiceAsync
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -237,6 +241,10 @@ interface EffectResponseServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): EffectResponseServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**

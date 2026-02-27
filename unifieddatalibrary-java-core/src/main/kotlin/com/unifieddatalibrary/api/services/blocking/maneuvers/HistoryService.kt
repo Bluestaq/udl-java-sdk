@@ -13,6 +13,12 @@ import com.unifieddatalibrary.api.models.maneuvers.history.HistoryListPage
 import com.unifieddatalibrary.api.models.maneuvers.history.HistoryListParams
 import java.util.function.Consumer
 
+/**
+ * This service provides operations for querying and manipulation of detected/possible/confirmed
+ * on-orbit maneuvers. The J2000 coordinate frame is the preferred frame for all maneuver data, but
+ * in some cases data may be in another frame depending on the provider. Check the Storefront 'Data
+ * Products' section under the 'Discover' tab for maneuver data provider information.
+ */
 interface HistoryService {
 
     /**

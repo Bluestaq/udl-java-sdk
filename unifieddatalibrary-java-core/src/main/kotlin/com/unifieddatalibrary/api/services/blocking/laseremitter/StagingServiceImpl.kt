@@ -31,6 +31,11 @@ import com.unifieddatalibrary.api.models.laseremitter.staging.StagingUpdateParam
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This collection of services provides operations for querying and manipulation of laser related
+ * information to include the laser emitters, the laser deconflict requests, and laser deconflict
+ * responses.
+ */
 class StagingServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     StagingService {
 

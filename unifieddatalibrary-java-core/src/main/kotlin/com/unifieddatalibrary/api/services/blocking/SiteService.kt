@@ -21,6 +21,10 @@ import com.unifieddatalibrary.api.models.site.SiteUpdateParams
 import com.unifieddatalibrary.api.services.blocking.site.OperationService
 import java.util.function.Consumer
 
+/**
+ * This collection of services provide operations for manipulating and querying of various site
+ * related data, including site status, site operations, and site type-specific records.
+ */
 interface SiteService {
 
     /**
@@ -35,6 +39,10 @@ interface SiteService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): SiteService
 
+    /**
+     * This collection of services provide operations for manipulating and querying of various site
+     * related data, including site status, site operations, and site type-specific records.
+     */
     fun operations(): OperationService
 
     /**
@@ -188,6 +196,11 @@ interface SiteService {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): SiteService.WithRawResponse
 
+        /**
+         * This collection of services provide operations for manipulating and querying of various
+         * site related data, including site status, site operations, and site type-specific
+         * records.
+         */
         fun operations(): OperationService.WithRawResponse
 
         /**

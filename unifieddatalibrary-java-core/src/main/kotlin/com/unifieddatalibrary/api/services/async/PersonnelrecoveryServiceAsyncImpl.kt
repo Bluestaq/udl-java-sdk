@@ -36,6 +36,7 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/** These services provide operations for manipulation and querying of Mission Ops information. */
 class PersonnelrecoveryServiceAsyncImpl
 internal constructor(private val clientOptions: ClientOptions) : PersonnelrecoveryServiceAsync {
 
@@ -52,6 +53,9 @@ internal constructor(private val clientOptions: ClientOptions) : Personnelrecove
     ): PersonnelrecoveryServiceAsync =
         PersonnelrecoveryServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     override fun history(): HistoryServiceAsync = history
 
     override fun create(
@@ -127,6 +131,10 @@ internal constructor(private val clientOptions: ClientOptions) : Personnelrecove
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()

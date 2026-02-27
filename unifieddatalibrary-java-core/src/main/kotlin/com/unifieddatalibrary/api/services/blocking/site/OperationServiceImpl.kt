@@ -36,6 +36,10 @@ import com.unifieddatalibrary.api.models.site.operations.OperationUpdateParams
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This collection of services provide operations for manipulating and querying of various site
+ * related data, including site status, site operations, and site type-specific records.
+ */
 class OperationServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     OperationService {
 

@@ -33,6 +33,11 @@ import com.unifieddatalibrary.api.models.operatingunit.OperatingunitUpdateParams
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * Service operations for querying and manipulation of miscellaneous supporting data such as
+ * countries (which can represent countries, multi-national consortiums, and international
+ * organizations), data owners, locations, entities, organizations, etc.
+ */
 class OperatingunitServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     OperatingunitService {
 

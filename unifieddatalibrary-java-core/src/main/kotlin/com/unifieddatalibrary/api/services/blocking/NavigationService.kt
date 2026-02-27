@@ -21,6 +21,7 @@ import com.unifieddatalibrary.api.models.navigation.NavigationTupleResponse
 import com.unifieddatalibrary.api.models.navigation.NavigationUpdateParams
 import java.util.function.Consumer
 
+/** These services provide operations for manipulation and querying of on-orbit payloads. */
 interface NavigationService {
 
     /**

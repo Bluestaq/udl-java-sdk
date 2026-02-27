@@ -19,6 +19,11 @@ import com.unifieddatalibrary.api.models.operatingunitremark.Operatingunitremark
 import com.unifieddatalibrary.api.models.operatingunitremark.OperatingunitremarkTupleParams
 import java.util.function.Consumer
 
+/**
+ * Service operations for querying and manipulation of miscellaneous supporting data such as
+ * countries (which can represent countries, multi-national consortiums, and international
+ * organizations), data owners, locations, entities, organizations, etc.
+ */
 interface OperatingunitremarkService {
 
     /**

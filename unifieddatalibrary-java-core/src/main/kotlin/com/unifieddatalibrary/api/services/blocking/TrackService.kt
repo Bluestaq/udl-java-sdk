@@ -19,6 +19,10 @@ import com.unifieddatalibrary.api.models.track.history.TrackFull
 import com.unifieddatalibrary.api.services.blocking.track.HistoryService
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for posting and querying of air, space, and ground 'tracks'. A
+ * track is a position and optionally a heading/velocity of an object at a particular timestamp.
+ */
 interface TrackService {
 
     /**
@@ -33,6 +37,11 @@ interface TrackService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): TrackService
 
+    /**
+     * These services provide operations for posting and querying of air, space, and ground
+     * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+     * particular timestamp.
+     */
     fun history(): HistoryService
 
     /**
@@ -163,6 +172,11 @@ interface TrackService {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): TrackService.WithRawResponse
 
+        /**
+         * These services provide operations for posting and querying of air, space, and ground
+         * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+         * particular timestamp.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**

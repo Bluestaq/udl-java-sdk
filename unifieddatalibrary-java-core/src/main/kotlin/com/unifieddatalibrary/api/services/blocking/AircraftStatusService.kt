@@ -21,6 +21,13 @@ import com.unifieddatalibrary.api.models.aircraftstatuses.AircraftStatusUpdatePa
 import com.unifieddatalibrary.api.services.blocking.aircraftstatuses.HistoryService
 import java.util.function.Consumer
 
+/**
+ * This service provides operations for manipulation and querying of Aircraft and Aircraft Status
+ * data. Aircraft contains the static data of the specific aircraft: tail number, cruise speed, max
+ * speed, minimum required runway length, etc. The Aircraft Status contains the dynamic data
+ * associated with the specific aircraft: remaining fuel, mission readiness, and inventory for
+ * example.
+ */
 interface AircraftStatusService {
 
     /**
@@ -35,6 +42,13 @@ interface AircraftStatusService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): AircraftStatusService
 
+    /**
+     * This service provides operations for manipulation and querying of Aircraft and Aircraft
+     * Status data. Aircraft contains the static data of the specific aircraft: tail number, cruise
+     * speed, max speed, minimum required runway length, etc. The Aircraft Status contains the
+     * dynamic data associated with the specific aircraft: remaining fuel, mission readiness, and
+     * inventory for example.
+     */
     fun history(): HistoryService
 
     /**
@@ -236,6 +250,13 @@ interface AircraftStatusService {
             modifier: Consumer<ClientOptions.Builder>
         ): AircraftStatusService.WithRawResponse
 
+        /**
+         * This service provides operations for manipulation and querying of Aircraft and Aircraft
+         * Status data. Aircraft contains the static data of the specific aircraft: tail number,
+         * cruise speed, max speed, minimum required runway length, etc. The Aircraft Status
+         * contains the dynamic data associated with the specific aircraft: remaining fuel, mission
+         * readiness, and inventory for example.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**

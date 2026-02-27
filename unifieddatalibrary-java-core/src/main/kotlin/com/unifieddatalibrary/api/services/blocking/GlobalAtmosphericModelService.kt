@@ -21,6 +21,12 @@ import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmospheri
 import com.unifieddatalibrary.api.services.blocking.globalatmosphericmodel.HistoryService
 import java.util.function.Consumer
 
+/**
+ * Models and Simulations is a collection of services that allow consumers to interact with data
+ * products representing independent models of various phenomenon, artificial intelligence models
+ * and predictions, or of mathematical parameters meant to feed mod and sim tools to produce
+ * estimates of environmental entities such as atmospheric models and heat maps.
+ */
 interface GlobalAtmosphericModelService {
 
     /**
@@ -35,6 +41,12 @@ interface GlobalAtmosphericModelService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): GlobalAtmosphericModelService
 
+    /**
+     * Models and Simulations is a collection of services that allow consumers to interact with data
+     * products representing independent models of various phenomenon, artificial intelligence
+     * models and predictions, or of mathematical parameters meant to feed mod and sim tools to
+     * produce estimates of environmental entities such as atmospheric models and heat maps.
+     */
     fun history(): HistoryService
 
     /**
@@ -230,6 +242,13 @@ interface GlobalAtmosphericModelService {
             modifier: Consumer<ClientOptions.Builder>
         ): GlobalAtmosphericModelService.WithRawResponse
 
+        /**
+         * Models and Simulations is a collection of services that allow consumers to interact with
+         * data products representing independent models of various phenomenon, artificial
+         * intelligence models and predictions, or of mathematical parameters meant to feed mod and
+         * sim tools to produce estimates of environmental entities such as atmospheric models and
+         * heat maps.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**

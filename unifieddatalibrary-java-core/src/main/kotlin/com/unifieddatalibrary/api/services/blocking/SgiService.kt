@@ -26,6 +26,10 @@ import com.unifieddatalibrary.api.models.sgi.SgiUpdateParams
 import com.unifieddatalibrary.api.services.blocking.sgi.HistoryService
 import java.util.function.Consumer
 
+/**
+ * This service provides operations for manipulation and querying of space weather/solar,
+ * geomagnetic, and radiation belt index data.
+ */
 interface SgiService {
 
     /**
@@ -40,6 +44,10 @@ interface SgiService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): SgiService
 
+    /**
+     * This service provides operations for manipulation and querying of space weather/solar,
+     * geomagnetic, and radiation belt index data.
+     */
     fun history(): HistoryService
 
     /**
@@ -286,6 +294,10 @@ interface SgiService {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): SgiService.WithRawResponse
 
+        /**
+         * This service provides operations for manipulation and querying of space weather/solar,
+         * geomagnetic, and radiation belt index data.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**
