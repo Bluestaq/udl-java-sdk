@@ -24,6 +24,12 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These endpoints provide the ability to subscribe to SCS Event Notifications for file
+ * upload/update and folder creation events within a specific folder in the Secure Content Store. A
+ * user must be authorized to view the file/folder for which a notification was created in order to
+ * retrieve that notification.
+ */
 class NotificationServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     NotificationServiceAsync {
 
@@ -38,6 +44,12 @@ class NotificationServiceAsyncImpl internal constructor(private val clientOption
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): NotificationServiceAsync =
         NotificationServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These endpoints provide the ability to subscribe to SCS Event Notifications for file
+     * upload/update and folder creation events within a specific folder in the Secure Content
+     * Store. A user must be authorized to view the file/folder for which a notification was created
+     * in order to retrieve that notification.
+     */
     override fun offset(): OffsetServiceAsync = offset
 
     override fun list(
@@ -64,6 +76,12 @@ class NotificationServiceAsyncImpl internal constructor(private val clientOption
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These endpoints provide the ability to subscribe to SCS Event Notifications for file
+         * upload/update and folder creation events within a specific folder in the Secure Content
+         * Store. A user must be authorized to view the file/folder for which a notification was
+         * created in order to retrieve that notification.
+         */
         override fun offset(): OffsetServiceAsync.WithRawResponse = offset
 
         private val listHandler: Handler<List<NotificationListResponse>> =

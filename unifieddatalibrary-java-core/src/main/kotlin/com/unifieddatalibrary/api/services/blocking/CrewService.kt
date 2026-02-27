@@ -20,6 +20,10 @@ import com.unifieddatalibrary.api.models.crew.CrewUnvalidatedPublishParams
 import com.unifieddatalibrary.api.models.crew.CrewUpdateParams
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for posting and querying crew data. Crew data contains
+ * information about its members and their assignments.
+ */
 interface CrewService {
 
     /**

@@ -36,6 +36,7 @@ import com.unifieddatalibrary.api.services.blocking.sensorplan.HistoryServiceImp
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 class SensorPlanServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     SensorPlanService {
 
@@ -50,6 +51,7 @@ class SensorPlanServiceImpl internal constructor(private val clientOptions: Clie
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): SensorPlanService =
         SensorPlanServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     override fun history(): HistoryService = history
 
     override fun create(params: SensorPlanCreateParams, requestOptions: RequestOptions) {
@@ -119,6 +121,7 @@ class SensorPlanServiceImpl internal constructor(private val clientOptions: Clie
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()

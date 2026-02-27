@@ -20,6 +20,11 @@ import com.unifieddatalibrary.api.models.h3geo.H3GeoTupleResponse
 import com.unifieddatalibrary.api.services.blocking.h3geo.HistoryService
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of Report and Activity
+ * information. This information includes analytic reports, significant events, route statistics,
+ * EMI Reports, and other georeferenced reports and activities.
+ */
 interface H3GeoService {
 
     /**
@@ -34,6 +39,11 @@ interface H3GeoService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): H3GeoService
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     fun history(): HistoryService
 
     /**
@@ -154,6 +164,11 @@ interface H3GeoService {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): H3GeoService.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**

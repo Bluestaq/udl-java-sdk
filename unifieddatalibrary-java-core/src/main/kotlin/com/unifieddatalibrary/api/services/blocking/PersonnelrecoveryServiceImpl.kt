@@ -35,6 +35,7 @@ import com.unifieddatalibrary.api.services.blocking.personnelrecovery.HistorySer
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/** These services provide operations for manipulation and querying of Mission Ops information. */
 class PersonnelrecoveryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     PersonnelrecoveryService {
 
@@ -49,6 +50,9 @@ class PersonnelrecoveryServiceImpl internal constructor(private val clientOption
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): PersonnelrecoveryService =
         PersonnelrecoveryServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     override fun history(): HistoryService = history
 
     override fun create(params: PersonnelrecoveryCreateParams, requestOptions: RequestOptions) {
@@ -124,6 +128,10 @@ class PersonnelrecoveryServiceImpl internal constructor(private val clientOption
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()

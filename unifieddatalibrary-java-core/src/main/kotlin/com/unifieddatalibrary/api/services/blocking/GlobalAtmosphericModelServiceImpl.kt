@@ -35,6 +35,12 @@ import com.unifieddatalibrary.api.services.blocking.globalatmosphericmodel.Histo
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * Models and Simulations is a collection of services that allow consumers to interact with data
+ * products representing independent models of various phenomenon, artificial intelligence models
+ * and predictions, or of mathematical parameters meant to feed mod and sim tools to produce
+ * estimates of environmental entities such as atmospheric models and heat maps.
+ */
 class GlobalAtmosphericModelServiceImpl
 internal constructor(private val clientOptions: ClientOptions) : GlobalAtmosphericModelService {
 
@@ -51,6 +57,12 @@ internal constructor(private val clientOptions: ClientOptions) : GlobalAtmospher
     ): GlobalAtmosphericModelService =
         GlobalAtmosphericModelServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * Models and Simulations is a collection of services that allow consumers to interact with data
+     * products representing independent models of various phenomenon, artificial intelligence
+     * models and predictions, or of mathematical parameters meant to feed mod and sim tools to
+     * produce estimates of environmental entities such as atmospheric models and heat maps.
+     */
     override fun history(): HistoryService = history
 
     override fun retrieve(
@@ -120,6 +132,13 @@ internal constructor(private val clientOptions: ClientOptions) : GlobalAtmospher
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * Models and Simulations is a collection of services that allow consumers to interact with
+         * data products representing independent models of various phenomenon, artificial
+         * intelligence models and predictions, or of mathematical parameters meant to feed mod and
+         * sim tools to produce estimates of environmental entities such as atmospheric models and
+         * heat maps.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val retrieveHandler: Handler<GlobalAtmosphericModelRetrieveResponse> =

@@ -21,6 +21,14 @@ import com.unifieddatalibrary.api.services.blocking.linkstatus.DatalinkService
 import com.unifieddatalibrary.api.services.blocking.linkstatus.HistoryService
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying tactical data links and link
+ * statuses of beams or a satellite constellation. Communication link statuses provide definitions
+ * and status such as, positional endpoints, where each endpoint may be associated with a specific
+ * beam or with a satellite constellation. Data links provide detailed instructions regarding the
+ * operational use of a tactical data link and interface coordination through various message
+ * formats.
+ */
 interface LinkStatusService {
 
     /**
@@ -35,8 +43,24 @@ interface LinkStatusService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): LinkStatusService
 
+    /**
+     * These services provide operations for manipulation and querying tactical data links and link
+     * statuses of beams or a satellite constellation. Communication link statuses provide
+     * definitions and status such as, positional endpoints, where each endpoint may be associated
+     * with a specific beam or with a satellite constellation. Data links provide detailed
+     * instructions regarding the operational use of a tactical data link and interface coordination
+     * through various message formats.
+     */
     fun datalink(): DatalinkService
 
+    /**
+     * These services provide operations for manipulation and querying tactical data links and link
+     * statuses of beams or a satellite constellation. Communication link statuses provide
+     * definitions and status such as, positional endpoints, where each endpoint may be associated
+     * with a specific beam or with a satellite constellation. Data links provide detailed
+     * instructions regarding the operational use of a tactical data link and interface coordination
+     * through various message formats.
+     */
     fun history(): HistoryService
 
     /**
@@ -179,8 +203,24 @@ interface LinkStatusService {
             modifier: Consumer<ClientOptions.Builder>
         ): LinkStatusService.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying tactical data links and
+         * link statuses of beams or a satellite constellation. Communication link statuses provide
+         * definitions and status such as, positional endpoints, where each endpoint may be
+         * associated with a specific beam or with a satellite constellation. Data links provide
+         * detailed instructions regarding the operational use of a tactical data link and interface
+         * coordination through various message formats.
+         */
         fun datalink(): DatalinkService.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying tactical data links and
+         * link statuses of beams or a satellite constellation. Communication link statuses provide
+         * definitions and status such as, positional endpoints, where each endpoint may be
+         * associated with a specific beam or with a satellite constellation. Data links provide
+         * detailed instructions regarding the operational use of a tactical data link and interface
+         * coordination through various message formats.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**

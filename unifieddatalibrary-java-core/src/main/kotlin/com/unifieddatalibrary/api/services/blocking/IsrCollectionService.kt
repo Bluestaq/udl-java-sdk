@@ -19,6 +19,7 @@ import com.unifieddatalibrary.api.models.isrcollections.IsrCollectionUnvalidated
 import com.unifieddatalibrary.api.services.blocking.isrcollections.HistoryService
 import java.util.function.Consumer
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 interface IsrCollectionService {
 
     /**
@@ -33,6 +34,7 @@ interface IsrCollectionService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): IsrCollectionService
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     fun history(): HistoryService
 
     /**
@@ -171,6 +173,7 @@ interface IsrCollectionService {
             modifier: Consumer<ClientOptions.Builder>
         ): IsrCollectionService.WithRawResponse
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         fun history(): HistoryService.WithRawResponse
 
         /**

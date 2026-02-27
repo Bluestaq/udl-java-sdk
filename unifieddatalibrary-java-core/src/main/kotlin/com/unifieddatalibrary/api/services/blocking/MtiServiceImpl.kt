@@ -31,6 +31,11 @@ import com.unifieddatalibrary.api.services.blocking.mti.HistoryService
 import com.unifieddatalibrary.api.services.blocking.mti.HistoryServiceImpl
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for posting and querying Moving Target Indicator (MTI) STANAG
+ * 4607 data. Detailed MTI data supports activities such as targeting or less detailed data for
+ * applications such as situational awareness used/derived by exploitation systems.
+ */
 class MtiServiceImpl internal constructor(private val clientOptions: ClientOptions) : MtiService {
 
     private val withRawResponse: MtiService.WithRawResponse by lazy {
@@ -44,6 +49,11 @@ class MtiServiceImpl internal constructor(private val clientOptions: ClientOptio
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): MtiService =
         MtiServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for posting and querying Moving Target Indicator (MTI)
+     * STANAG 4607 data. Detailed MTI data supports activities such as targeting or less detailed
+     * data for applications such as situational awareness used/derived by exploitation systems.
+     */
     override fun history(): HistoryService = history
 
     override fun list(params: MtiListParams, requestOptions: RequestOptions): MtiListPage =
@@ -95,6 +105,12 @@ class MtiServiceImpl internal constructor(private val clientOptions: ClientOptio
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for posting and querying Moving Target Indicator (MTI)
+         * STANAG 4607 data. Detailed MTI data supports activities such as targeting or less
+         * detailed data for applications such as situational awareness used/derived by exploitation
+         * systems.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val listHandler: Handler<List<MtiListResponse>> =

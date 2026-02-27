@@ -23,6 +23,11 @@ import com.unifieddatalibrary.api.models.laserdeconflictrequest.history.HistoryL
 import com.unifieddatalibrary.api.models.laserdeconflictrequest.history.HistoryListResponse
 import java.util.function.Consumer
 
+/**
+ * This collection of services provides operations for querying and manipulation of laser related
+ * information to include the laser emitters, the laser deconflict requests, and laser deconflict
+ * responses.
+ */
 class HistoryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryService {
 

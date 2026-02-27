@@ -13,6 +13,7 @@ import com.unifieddatalibrary.api.models.deconflictset.history.HistoryListParams
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/** These services provide operations for manipulation and querying of Mission Ops information. */
 interface HistoryServiceAsync {
 
     /**

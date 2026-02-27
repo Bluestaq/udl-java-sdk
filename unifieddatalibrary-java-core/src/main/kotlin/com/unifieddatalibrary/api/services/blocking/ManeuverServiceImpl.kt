@@ -36,6 +36,12 @@ import com.unifieddatalibrary.api.services.blocking.maneuvers.HistoryServiceImpl
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This service provides operations for querying and manipulation of detected/possible/confirmed
+ * on-orbit maneuvers. The J2000 coordinate frame is the preferred frame for all maneuver data, but
+ * in some cases data may be in another frame depending on the provider. Check the Storefront 'Data
+ * Products' section under the 'Discover' tab for maneuver data provider information.
+ */
 class ManeuverServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     ManeuverService {
 
@@ -50,6 +56,13 @@ class ManeuverServiceImpl internal constructor(private val clientOptions: Client
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): ManeuverService =
         ManeuverServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * This service provides operations for querying and manipulation of detected/possible/confirmed
+     * on-orbit maneuvers. The J2000 coordinate frame is the preferred frame for all maneuver data,
+     * but in some cases data may be in another frame depending on the provider. Check the
+     * Storefront 'Data Products' section under the 'Discover' tab for maneuver data provider
+     * information.
+     */
     override fun history(): HistoryService = history
 
     override fun create(params: ManeuverCreateParams, requestOptions: RequestOptions) {
@@ -119,6 +132,13 @@ class ManeuverServiceImpl internal constructor(private val clientOptions: Client
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * This service provides operations for querying and manipulation of
+         * detected/possible/confirmed on-orbit maneuvers. The J2000 coordinate frame is the
+         * preferred frame for all maneuver data, but in some cases data may be in another frame
+         * depending on the provider. Check the Storefront 'Data Products' section under the
+         * 'Discover' tab for maneuver data provider information.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()

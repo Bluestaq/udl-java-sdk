@@ -21,6 +21,7 @@ import com.unifieddatalibrary.api.models.seradatanavigation.SeraDataNavigationTu
 import com.unifieddatalibrary.api.models.seradatanavigation.SeraDataNavigationUpdateParams
 import java.util.function.Consumer
 
+/** These services provide operations for manipulation and querying of on-orbit payloads. */
 interface SeraDataNavigationService {
 
     /**

@@ -37,6 +37,7 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/** These services provide operations for manipulation and querying of Mission Ops information. */
 class EvacServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     EvacServiceAsync {
 
@@ -53,8 +54,14 @@ class EvacServiceAsyncImpl internal constructor(private val clientOptions: Clien
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): EvacServiceAsync =
         EvacServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     override fun history(): HistoryServiceAsync = history
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     override fun tuple(): TupleServiceAsync = tuple
 
     override fun create(
@@ -127,8 +134,16 @@ class EvacServiceAsyncImpl internal constructor(private val clientOptions: Clien
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         override fun history(): HistoryServiceAsync.WithRawResponse = history
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         override fun tuple(): TupleServiceAsync.WithRawResponse = tuple
 
         private val createHandler: Handler<Void?> = emptyHandler()

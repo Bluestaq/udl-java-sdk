@@ -21,6 +21,10 @@ import com.unifieddatalibrary.api.models.onorbitthrusterstatus.history.HistoryLi
 import com.unifieddatalibrary.api.models.onorbitthrusterstatus.history.HistoryListParams
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit objects of interest,
+ * their components, and various lists and status of those objects.
+ */
 class HistoryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryService {
 

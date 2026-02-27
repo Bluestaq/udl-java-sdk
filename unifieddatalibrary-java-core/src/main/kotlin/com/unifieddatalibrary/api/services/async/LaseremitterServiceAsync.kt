@@ -22,6 +22,11 @@ import com.unifieddatalibrary.api.services.async.laseremitter.StagingServiceAsyn
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * This collection of services provides operations for querying and manipulation of laser related
+ * information to include the laser emitters, the laser deconflict requests, and laser deconflict
+ * responses.
+ */
 interface LaseremitterServiceAsync {
 
     /**
@@ -36,6 +41,11 @@ interface LaseremitterServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): LaseremitterServiceAsync
 
+    /**
+     * This collection of services provides operations for querying and manipulation of laser
+     * related information to include the laser emitters, the laser deconflict requests, and laser
+     * deconflict responses.
+     */
     fun staging(): StagingServiceAsync
 
     /**
@@ -251,6 +261,11 @@ interface LaseremitterServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): LaseremitterServiceAsync.WithRawResponse
 
+        /**
+         * This collection of services provides operations for querying and manipulation of laser
+         * related information to include the laser emitters, the laser deconflict requests, and
+         * laser deconflict responses.
+         */
         fun staging(): StagingServiceAsync.WithRawResponse
 
         /**

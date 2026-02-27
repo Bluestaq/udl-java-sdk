@@ -22,6 +22,7 @@ import com.unifieddatalibrary.api.services.async.sensorplan.HistoryServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 interface SensorPlanServiceAsync {
 
     /**
@@ -36,6 +37,7 @@ interface SensorPlanServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): SensorPlanServiceAsync
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     fun history(): HistoryServiceAsync
 
     /**
@@ -222,6 +224,7 @@ interface SensorPlanServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): SensorPlanServiceAsync.WithRawResponse
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**

@@ -37,6 +37,12 @@ import com.unifieddatalibrary.api.services.blocking.missionassignment.HistorySer
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for manipulation and querying of mission assignment objects.
+ * MissionAssignment is used by C2 JUs and, optionally, non-C2 JUs to assign missions, designate
+ * targets, and provide target information to non-C2 JU platforms. Provision is made for the non-C2
+ * JU platforms to acknowledge the message through receipt/compliance action.
+ */
 class MissionAssignmentServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     MissionAssignmentService {
 
@@ -51,6 +57,12 @@ class MissionAssignmentServiceImpl internal constructor(private val clientOption
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): MissionAssignmentService =
         MissionAssignmentServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for manipulation and querying of mission assignment
+     * objects. MissionAssignment is used by C2 JUs and, optionally, non-C2 JUs to assign missions,
+     * designate targets, and provide target information to non-C2 JU platforms. Provision is made
+     * for the non-C2 JU platforms to acknowledge the message through receipt/compliance action.
+     */
     override fun history(): HistoryService = history
 
     override fun create(params: MissionAssignmentCreateParams, requestOptions: RequestOptions) {
@@ -128,6 +140,13 @@ class MissionAssignmentServiceImpl internal constructor(private val clientOption
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for manipulation and querying of mission assignment
+         * objects. MissionAssignment is used by C2 JUs and, optionally, non-C2 JUs to assign
+         * missions, designate targets, and provide target information to non-C2 JU platforms.
+         * Provision is made for the non-C2 JU platforms to acknowledge the message through
+         * receipt/compliance action.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()

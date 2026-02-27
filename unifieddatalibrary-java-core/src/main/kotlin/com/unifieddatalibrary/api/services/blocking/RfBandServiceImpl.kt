@@ -33,6 +33,12 @@ import com.unifieddatalibrary.api.models.rfband.RfBandUpdateParams
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This collection of services provides operations for querying and manipulation of RF related
+ * information to include RFEmitters which could potentially interfere with
+ * communications/operations of space related entities, and RFBands commonly used by various space
+ * related entities.
+ */
 class RfBandServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     RfBandService {
 

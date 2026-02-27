@@ -21,6 +21,12 @@ import com.unifieddatalibrary.api.models.skyimagery.SkyImageryUploadZipParams
 import com.unifieddatalibrary.api.services.blocking.skyimagery.HistoryService
 import java.util.function.Consumer
 
+/**
+ * This collection of services provides operations for querying and manipulation of sky imagery
+ * data. Sky imagery is ground or space based telescope imagery of RSO's and includes metadata on
+ * the image (time, source, etc) as well as binary image content (e.g. FITS, EOSSA, EOCHIP, MP4).
+ * Binary content must be downloaded individually by ID using the 'getFile' operation.
+ */
 interface SkyImageryService {
 
     /**
@@ -35,6 +41,12 @@ interface SkyImageryService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): SkyImageryService
 
+    /**
+     * This collection of services provides operations for querying and manipulation of sky imagery
+     * data. Sky imagery is ground or space based telescope imagery of RSO's and includes metadata
+     * on the image (time, source, etc) as well as binary image content (e.g. FITS, EOSSA, EOCHIP,
+     * MP4). Binary content must be downloaded individually by ID using the 'getFile' operation.
+     */
     fun history(): HistoryService
 
     /**
@@ -213,6 +225,13 @@ interface SkyImageryService {
             modifier: Consumer<ClientOptions.Builder>
         ): SkyImageryService.WithRawResponse
 
+        /**
+         * This collection of services provides operations for querying and manipulation of sky
+         * imagery data. Sky imagery is ground or space based telescope imagery of RSO's and
+         * includes metadata on the image (time, source, etc) as well as binary image content (e.g.
+         * FITS, EOSSA, EOCHIP, MP4). Binary content must be downloaded individually by ID using the
+         * 'getFile' operation.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**

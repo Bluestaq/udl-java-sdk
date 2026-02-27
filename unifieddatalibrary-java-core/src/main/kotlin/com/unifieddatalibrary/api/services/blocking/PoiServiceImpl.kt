@@ -34,6 +34,11 @@ import com.unifieddatalibrary.api.models.poi.PoiUnvalidatedPublishParams
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for manipulation and querying of Report and Activity
+ * information. This information includes analytic reports, significant events, route statistics,
+ * EMI Reports, and other georeferenced reports and activities.
+ */
 class PoiServiceImpl internal constructor(private val clientOptions: ClientOptions) : PoiService {
 
     private val withRawResponse: PoiService.WithRawResponse by lazy {

@@ -18,6 +18,11 @@ import com.unifieddatalibrary.api.models.reportandactivities.udlh3geo.UdlH3geoUn
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of Report and Activity
+ * information. This information includes analytic reports, significant events, route statistics,
+ * EMI Reports, and other georeferenced reports and activities.
+ */
 class UdlH3geoServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     UdlH3geoServiceAsync {
 

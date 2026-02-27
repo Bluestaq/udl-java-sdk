@@ -33,6 +33,11 @@ import com.unifieddatalibrary.api.models.countries.CountryUpdateParams
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * Service operations for querying and manipulation of miscellaneous supporting data such as
+ * countries (which can represent countries, multi-national consortiums, and international
+ * organizations), data owners, locations, entities, organizations, etc.
+ */
 class CountryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     CountryService {
 

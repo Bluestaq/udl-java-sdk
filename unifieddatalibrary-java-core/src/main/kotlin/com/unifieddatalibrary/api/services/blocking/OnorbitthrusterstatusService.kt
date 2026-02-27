@@ -21,6 +21,10 @@ import com.unifieddatalibrary.api.models.onorbitthrusterstatus.Onorbitthrusterst
 import com.unifieddatalibrary.api.services.blocking.onorbitthrusterstatus.HistoryService
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit objects of interest,
+ * their components, and various lists and status of those objects.
+ */
 interface OnorbitthrusterstatusService {
 
     /**
@@ -35,6 +39,10 @@ interface OnorbitthrusterstatusService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): OnorbitthrusterstatusService
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     fun history(): HistoryService
 
     /**
@@ -247,6 +255,10 @@ interface OnorbitthrusterstatusService {
             modifier: Consumer<ClientOptions.Builder>
         ): OnorbitthrusterstatusService.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**

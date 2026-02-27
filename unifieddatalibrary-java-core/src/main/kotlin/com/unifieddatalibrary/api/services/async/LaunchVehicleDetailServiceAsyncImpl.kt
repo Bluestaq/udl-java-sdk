@@ -29,6 +29,12 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * Collection of launch related services which provide operations for querying and manipulation of
+ * launch site data and detailed information on launch vehicles including engines, stages, and
+ * manufacturers. Sites, engines, and stages can each have multiple 'detail' records which may be
+ * compiled by different sources.
+ */
 class LaunchVehicleDetailServiceAsyncImpl
 internal constructor(private val clientOptions: ClientOptions) : LaunchVehicleDetailServiceAsync {
 

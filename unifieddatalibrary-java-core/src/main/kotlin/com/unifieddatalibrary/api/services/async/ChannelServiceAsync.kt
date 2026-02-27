@@ -20,6 +20,10 @@ import com.unifieddatalibrary.api.models.channels.ChannelUpdateParams
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit communications
+ * payloads (Comm), including supporting data such as transponders and channels, etc.
+ */
 interface ChannelServiceAsync {
 
     /**

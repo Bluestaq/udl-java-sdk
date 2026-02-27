@@ -38,6 +38,10 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit objects of interest,
+ * their components, and various lists and status of those objects.
+ */
 class OnorbitServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     OnorbitServiceAsync {
 
@@ -54,6 +58,10 @@ class OnorbitServiceAsyncImpl internal constructor(private val clientOptions: Cl
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): OnorbitServiceAsync =
         OnorbitServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun antennaDetails(): AntennaDetailServiceAsync = antennaDetails
 
     override fun create(
@@ -136,6 +144,10 @@ class OnorbitServiceAsyncImpl internal constructor(private val clientOptions: Cl
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun antennaDetails(): AntennaDetailServiceAsync.WithRawResponse = antennaDetails
 
         private val createHandler: Handler<Void?> = emptyHandler()

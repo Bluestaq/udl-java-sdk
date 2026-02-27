@@ -13,6 +13,12 @@ import com.unifieddatalibrary.api.models.notification.history.HistoryListParams
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * A Notification Service allowing the broadcast of generic messages to the community. Users can
+ * send free-form messages, publish lists, and notify the community about events or alerts across
+ * various domains. Notifications and alerts are categorized by a 'msgType' field and are accessible
+ * via the UDL Secure Messaging API and REST API services.
+ */
 interface HistoryServiceAsync {
 
     /**

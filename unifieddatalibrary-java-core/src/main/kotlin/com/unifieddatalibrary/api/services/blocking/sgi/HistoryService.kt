@@ -13,6 +13,10 @@ import com.unifieddatalibrary.api.models.sgi.history.HistoryListPage
 import com.unifieddatalibrary.api.models.sgi.history.HistoryListParams
 import java.util.function.Consumer
 
+/**
+ * This service provides operations for manipulation and querying of space weather/solar,
+ * geomagnetic, and radiation belt index data.
+ */
 interface HistoryService {
 
     /**

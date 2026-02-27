@@ -31,6 +31,7 @@ import com.unifieddatalibrary.api.services.blocking.isrcollections.HistoryServic
 import com.unifieddatalibrary.api.services.blocking.isrcollections.HistoryServiceImpl
 import java.util.function.Consumer
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 class IsrCollectionServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     IsrCollectionService {
 
@@ -45,6 +46,7 @@ class IsrCollectionServiceImpl internal constructor(private val clientOptions: C
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): IsrCollectionService =
         IsrCollectionServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     override fun history(): HistoryService = history
 
     override fun list(
@@ -102,6 +104,7 @@ class IsrCollectionServiceImpl internal constructor(private val clientOptions: C
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val listHandler: Handler<List<IsrCollectionListResponse>> =

@@ -21,6 +21,11 @@ import com.unifieddatalibrary.api.models.vessel.VesselTupleResponse
 import com.unifieddatalibrary.api.models.vessel.VesselUpdateParams
 import java.util.function.Consumer
 
+/**
+ * This service provides operations for manipulation and querying of maritime Vessel and Vessel
+ * Status data. Vessel contains the static data of the specific vessel: mmsi, cruise speed, max
+ * speed, etc.
+ */
 interface VesselService {
 
     /**

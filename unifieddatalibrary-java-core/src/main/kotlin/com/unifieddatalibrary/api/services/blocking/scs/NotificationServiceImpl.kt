@@ -23,6 +23,12 @@ import com.unifieddatalibrary.api.services.blocking.scs.notifications.OffsetServ
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These endpoints provide the ability to subscribe to SCS Event Notifications for file
+ * upload/update and folder creation events within a specific folder in the Secure Content Store. A
+ * user must be authorized to view the file/folder for which a notification was created in order to
+ * retrieve that notification.
+ */
 class NotificationServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     NotificationService {
 
@@ -37,6 +43,12 @@ class NotificationServiceImpl internal constructor(private val clientOptions: Cl
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): NotificationService =
         NotificationServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These endpoints provide the ability to subscribe to SCS Event Notifications for file
+     * upload/update and folder creation events within a specific folder in the Secure Content
+     * Store. A user must be authorized to view the file/folder for which a notification was created
+     * in order to retrieve that notification.
+     */
     override fun offset(): OffsetService = offset
 
     override fun list(
@@ -63,6 +75,12 @@ class NotificationServiceImpl internal constructor(private val clientOptions: Cl
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These endpoints provide the ability to subscribe to SCS Event Notifications for file
+         * upload/update and folder creation events within a specific folder in the Secure Content
+         * Store. A user must be authorized to view the file/folder for which a notification was
+         * created in order to retrieve that notification.
+         */
         override fun offset(): OffsetService.WithRawResponse = offset
 
         private val listHandler: Handler<List<NotificationListResponse>> =

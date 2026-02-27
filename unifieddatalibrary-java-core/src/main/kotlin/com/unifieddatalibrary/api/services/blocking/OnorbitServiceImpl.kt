@@ -37,6 +37,10 @@ import com.unifieddatalibrary.api.services.blocking.onorbit.AntennaDetailService
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit objects of interest,
+ * their components, and various lists and status of those objects.
+ */
 class OnorbitServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     OnorbitService {
 
@@ -53,6 +57,10 @@ class OnorbitServiceImpl internal constructor(private val clientOptions: ClientO
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): OnorbitService =
         OnorbitServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun antennaDetails(): AntennaDetailService = antennaDetails
 
     override fun create(params: OnorbitCreateParams, requestOptions: RequestOptions) {
@@ -120,6 +128,10 @@ class OnorbitServiceImpl internal constructor(private val clientOptions: ClientO
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun antennaDetails(): AntennaDetailService.WithRawResponse = antennaDetails
 
         private val createHandler: Handler<Void?> = emptyHandler()

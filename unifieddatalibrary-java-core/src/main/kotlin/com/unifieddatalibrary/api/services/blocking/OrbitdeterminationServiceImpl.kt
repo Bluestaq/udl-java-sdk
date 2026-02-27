@@ -36,6 +36,11 @@ import com.unifieddatalibrary.api.services.blocking.orbitdetermination.HistorySe
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for manipulating and querying Orbit Determination (OD) data.
+ * Orbit Determination data contains algorithm results that describe General Perturbations or
+ * Special Perturbations orbital updates.
+ */
 class OrbitdeterminationServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     OrbitdeterminationService {
 
@@ -50,6 +55,11 @@ class OrbitdeterminationServiceImpl internal constructor(private val clientOptio
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): OrbitdeterminationService =
         OrbitdeterminationServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for manipulating and querying Orbit Determination (OD)
+     * data. Orbit Determination data contains algorithm results that describe General Perturbations
+     * or Special Perturbations orbital updates.
+     */
     override fun history(): HistoryService = history
 
     override fun create(params: OrbitdeterminationCreateParams, requestOptions: RequestOptions) {
@@ -125,6 +135,11 @@ class OrbitdeterminationServiceImpl internal constructor(private val clientOptio
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for manipulating and querying Orbit Determination (OD)
+         * data. Orbit Determination data contains algorithm results that describe General
+         * Perturbations or Special Perturbations orbital updates.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()

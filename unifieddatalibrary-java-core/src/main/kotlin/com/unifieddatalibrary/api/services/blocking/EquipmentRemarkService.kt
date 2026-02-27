@@ -19,6 +19,10 @@ import com.unifieddatalibrary.api.models.equipmentremarks.EquipmentRemarkRetriev
 import com.unifieddatalibrary.api.models.equipmentremarks.EquipmentRemarkTupleParams
 import java.util.function.Consumer
 
+/**
+ * This collection of services provide operations for manipulating and querying of equipment related
+ * data.
+ */
 interface EquipmentRemarkService {
 
     /**

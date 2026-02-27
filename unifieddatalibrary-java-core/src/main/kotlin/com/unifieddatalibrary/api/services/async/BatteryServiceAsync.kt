@@ -21,6 +21,10 @@ import com.unifieddatalibrary.api.models.batteries.BatteryUpdateParams
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit objects of interest,
+ * their components, and various lists and status of those objects.
+ */
 interface BatteryServiceAsync {
 
     /**

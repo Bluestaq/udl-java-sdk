@@ -21,6 +21,10 @@ import com.unifieddatalibrary.api.services.async.site.OperationServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * This collection of services provide operations for manipulating and querying of various site
+ * related data, including site status, site operations, and site type-specific records.
+ */
 interface SiteServiceAsync {
 
     /**
@@ -35,6 +39,10 @@ interface SiteServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): SiteServiceAsync
 
+    /**
+     * This collection of services provide operations for manipulating and querying of various site
+     * related data, including site status, site operations, and site type-specific records.
+     */
     fun operations(): OperationServiceAsync
 
     /**
@@ -201,6 +209,11 @@ interface SiteServiceAsync {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): SiteServiceAsync.WithRawResponse
 
+        /**
+         * This collection of services provide operations for manipulating and querying of various
+         * site related data, including site status, site operations, and site type-specific
+         * records.
+         */
         fun operations(): OperationServiceAsync.WithRawResponse
 
         /**

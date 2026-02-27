@@ -41,16 +41,45 @@ interface ScService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): ScService
 
+    /**
+     * These endpoints provide the ability to subscribe to SCS Event Notifications for file
+     * upload/update and folder creation events within a specific folder in the Secure Content
+     * Store. A user must be authorized to view the file/folder for which a notification was created
+     * in order to retrieve that notification.
+     */
     fun notifications(): NotificationService
 
+    /**
+     * These services provide soon-to-be-deprecated CRUD and Search operations for files and folders
+     * in the Secure Content Store. This documentation is provided only for backwards compatibility,
+     * please refer to SCS V2 for new SCS integrations.
+     */
     fun file(): FileService
 
+    /**
+     * These services provide soon-to-be-deprecated CRUD and Search operations for files and folders
+     * in the Secure Content Store. This documentation is provided only for backwards compatibility,
+     * please refer to SCS V2 for new SCS integrations.
+     */
     fun folders(): FolderService
 
+    /**
+     * These services provide soon-to-be-deprecated CRUD and Search operations for files and folders
+     * in the Secure Content Store. This documentation is provided only for backwards compatibility,
+     * please refer to SCS V2 for new SCS integrations.
+     */
     fun paths(): PathService
 
+    /**
+     * These services provide CRUD and search operations for files and folders in the Secure Content
+     * Store.
+     */
     fun view(): ViewService
 
+    /**
+     * These services provide CRUD and search operations for files and folders in the Secure Content
+     * Store.
+     */
     fun v2(): V2Service
 
     /**
@@ -227,16 +256,45 @@ interface ScService {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): ScService.WithRawResponse
 
+        /**
+         * These endpoints provide the ability to subscribe to SCS Event Notifications for file
+         * upload/update and folder creation events within a specific folder in the Secure Content
+         * Store. A user must be authorized to view the file/folder for which a notification was
+         * created in order to retrieve that notification.
+         */
         fun notifications(): NotificationService.WithRawResponse
 
+        /**
+         * These services provide soon-to-be-deprecated CRUD and Search operations for files and
+         * folders in the Secure Content Store. This documentation is provided only for backwards
+         * compatibility, please refer to SCS V2 for new SCS integrations.
+         */
         fun file(): FileService.WithRawResponse
 
+        /**
+         * These services provide soon-to-be-deprecated CRUD and Search operations for files and
+         * folders in the Secure Content Store. This documentation is provided only for backwards
+         * compatibility, please refer to SCS V2 for new SCS integrations.
+         */
         fun folders(): FolderService.WithRawResponse
 
+        /**
+         * These services provide soon-to-be-deprecated CRUD and Search operations for files and
+         * folders in the Secure Content Store. This documentation is provided only for backwards
+         * compatibility, please refer to SCS V2 for new SCS integrations.
+         */
         fun paths(): PathService.WithRawResponse
 
+        /**
+         * These services provide CRUD and search operations for files and folders in the Secure
+         * Content Store.
+         */
         fun view(): ViewService.WithRawResponse
 
+        /**
+         * These services provide CRUD and search operations for files and folders in the Secure
+         * Content Store.
+         */
         fun v2(): V2Service.WithRawResponse
 
         /**

@@ -21,6 +21,7 @@ import com.unifieddatalibrary.api.services.async.deconflictset.HistoryServiceAsy
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/** These services provide operations for manipulation and querying of Mission Ops information. */
 interface DeconflictsetServiceAsync {
 
     /**
@@ -35,6 +36,9 @@ interface DeconflictsetServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): DeconflictsetServiceAsync
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -194,6 +198,10 @@ interface DeconflictsetServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): DeconflictsetServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**

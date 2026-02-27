@@ -33,6 +33,11 @@ import com.unifieddatalibrary.api.models.buses.BusUpdateParams
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * Services for querying and manipulation of satellite buses. A bus is the physical and software
+ * infrastructure backbone to which on-orbit satellite payloads are attached for power, control, and
+ * other support functions.
+ */
 class BusServiceImpl internal constructor(private val clientOptions: ClientOptions) : BusService {
 
     private val withRawResponse: BusService.WithRawResponse by lazy {

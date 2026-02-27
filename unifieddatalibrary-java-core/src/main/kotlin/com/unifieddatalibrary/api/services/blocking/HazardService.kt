@@ -21,6 +21,11 @@ import com.unifieddatalibrary.api.models.hazard.HazardTupleResponse
 import com.unifieddatalibrary.api.services.blocking.hazard.HistoryService
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of Report and Activity
+ * information. This information includes analytic reports, significant events, route statistics,
+ * EMI Reports, and other georeferenced reports and activities.
+ */
 interface HazardService {
 
     /**
@@ -35,6 +40,11 @@ interface HazardService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): HazardService
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     fun history(): HistoryService
 
     /**
@@ -176,6 +186,11 @@ interface HazardService {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): HazardService.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**

@@ -34,6 +34,16 @@ import com.unifieddatalibrary.api.services.blocking.ephemerissets.HistoryService
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for the posting and querying of satellite Ephemeris Point data.
+ * Each point contains a position and velocity vector and optionally, an acceleration vector and/or
+ * covariance matrix at a specified time. ECI J2K is the preferred reference frame for ephemeris and
+ * covariance, however, several user specified reference frames are accommodated. The EphemerisSet
+ * ID (esId) identifies the 'EphemerisSet' record which contains details of the underlying data and
+ * models used in the generation of the ephemeris as well as a collection of ephemeris points.
+ * Points must be retrieved by first identifying a desired EphemerisSet and pulling its points by
+ * that EphemerisSet 'esId'.
+ */
 class EphemerisSetServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     EphemerisSetService {
 
@@ -48,6 +58,16 @@ class EphemerisSetServiceImpl internal constructor(private val clientOptions: Cl
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): EphemerisSetService =
         EphemerisSetServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for the posting and querying of satellite Ephemeris Point
+     * data. Each point contains a position and velocity vector and optionally, an acceleration
+     * vector and/or covariance matrix at a specified time. ECI J2K is the preferred reference frame
+     * for ephemeris and covariance, however, several user specified reference frames are
+     * accommodated. The EphemerisSet ID (esId) identifies the 'EphemerisSet' record which contains
+     * details of the underlying data and models used in the generation of the ephemeris as well as
+     * a collection of ephemeris points. Points must be retrieved by first identifying a desired
+     * EphemerisSet and pulling its points by that EphemerisSet 'esId'.
+     */
     override fun history(): HistoryService = history
 
     override fun create(params: EphemerisSetCreateParams, requestOptions: RequestOptions) {
@@ -111,6 +131,17 @@ class EphemerisSetServiceImpl internal constructor(private val clientOptions: Cl
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for the posting and querying of satellite Ephemeris
+         * Point data. Each point contains a position and velocity vector and optionally, an
+         * acceleration vector and/or covariance matrix at a specified time. ECI J2K is the
+         * preferred reference frame for ephemeris and covariance, however, several user specified
+         * reference frames are accommodated. The EphemerisSet ID (esId) identifies the
+         * 'EphemerisSet' record which contains details of the underlying data and models used in
+         * the generation of the ephemeris as well as a collection of ephemeris points. Points must
+         * be retrieved by first identifying a desired EphemerisSet and pulling its points by that
+         * EphemerisSet 'esId'.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()

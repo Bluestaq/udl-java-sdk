@@ -22,6 +22,11 @@ import com.unifieddatalibrary.api.services.async.orbitdetermination.HistoryServi
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulating and querying Orbit Determination (OD) data.
+ * Orbit Determination data contains algorithm results that describe General Perturbations or
+ * Special Perturbations orbital updates.
+ */
 interface OrbitdeterminationServiceAsync {
 
     /**
@@ -36,6 +41,11 @@ interface OrbitdeterminationServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): OrbitdeterminationServiceAsync
 
+    /**
+     * These services provide operations for manipulating and querying Orbit Determination (OD)
+     * data. Orbit Determination data contains algorithm results that describe General Perturbations
+     * or Special Perturbations orbital updates.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -255,6 +265,11 @@ interface OrbitdeterminationServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): OrbitdeterminationServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for manipulating and querying Orbit Determination (OD)
+         * data. Orbit Determination data contains algorithm results that describe General
+         * Perturbations or Special Perturbations orbital updates.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**

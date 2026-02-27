@@ -21,6 +21,7 @@ import com.unifieddatalibrary.api.models.ir.IrTupleResponse
 import com.unifieddatalibrary.api.models.ir.IrUpdateParams
 import java.util.function.Consumer
 
+/** These services provide operations for manipulation and querying of on-orbit payloads. */
 interface IrService {
 
     /**

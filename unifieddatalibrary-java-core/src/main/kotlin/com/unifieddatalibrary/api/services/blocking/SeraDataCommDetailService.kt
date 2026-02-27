@@ -21,6 +21,10 @@ import com.unifieddatalibrary.api.models.seradatacommdetails.SeraDataCommDetailT
 import com.unifieddatalibrary.api.models.seradatacommdetails.SeraDataCommDetailUpdateParams
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit communications
+ * payloads (Comm), including supporting data such as transponders and channels, etc.
+ */
 interface SeraDataCommDetailService {
 
     /**

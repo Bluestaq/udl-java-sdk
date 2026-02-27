@@ -35,6 +35,7 @@ import com.unifieddatalibrary.api.services.blocking.collectrequests.HistoryServi
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 class CollectRequestServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     CollectRequestService {
 
@@ -49,6 +50,7 @@ class CollectRequestServiceImpl internal constructor(private val clientOptions: 
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): CollectRequestService =
         CollectRequestServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     override fun history(): HistoryService = history
 
     override fun create(params: CollectRequestCreateParams, requestOptions: RequestOptions) {
@@ -121,6 +123,7 @@ class CollectRequestServiceImpl internal constructor(private val clientOptions: 
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()

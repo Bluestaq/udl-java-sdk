@@ -10,6 +10,11 @@ import com.unifieddatalibrary.api.models.supportingdata.datatypes.DataTypeListPa
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * Service operations for querying and manipulation of miscellaneous supporting data such as
+ * countries (which can represent countries, multi-national consortiums, and international
+ * organizations), data owners, locations, entities, organizations, etc.
+ */
 interface DataTypeServiceAsync {
 
     /**

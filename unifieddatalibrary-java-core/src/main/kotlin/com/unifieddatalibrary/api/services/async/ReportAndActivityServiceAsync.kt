@@ -24,8 +24,18 @@ interface ReportAndActivityServiceAsync {
 
     fun poi(): PoiServiceAsync
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     fun udlH3geo(): UdlH3geoServiceAsync
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     fun udlSigact(): UdlSigactServiceAsync
 
     /**
@@ -45,8 +55,18 @@ interface ReportAndActivityServiceAsync {
 
         fun poi(): PoiServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         fun udlH3geo(): UdlH3geoServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         fun udlSigact(): UdlSigactServiceAsync.WithRawResponse
     }
 }

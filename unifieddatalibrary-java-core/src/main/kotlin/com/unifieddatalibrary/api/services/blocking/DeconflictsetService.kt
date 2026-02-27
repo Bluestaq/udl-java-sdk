@@ -21,6 +21,7 @@ import com.unifieddatalibrary.api.models.deconflictset.DeconflictsetUnvalidatedP
 import com.unifieddatalibrary.api.services.blocking.deconflictset.HistoryService
 import java.util.function.Consumer
 
+/** These services provide operations for manipulation and querying of Mission Ops information. */
 interface DeconflictsetService {
 
     /**
@@ -35,6 +36,9 @@ interface DeconflictsetService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): DeconflictsetService
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     fun history(): HistoryService
 
     /**
@@ -181,6 +185,10 @@ interface DeconflictsetService {
             modifier: Consumer<ClientOptions.Builder>
         ): DeconflictsetService.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**

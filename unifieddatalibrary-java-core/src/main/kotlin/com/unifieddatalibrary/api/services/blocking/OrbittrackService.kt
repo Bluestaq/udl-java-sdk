@@ -19,6 +19,10 @@ import com.unifieddatalibrary.api.models.orbittrack.OrbittrackUnvalidatedPublish
 import com.unifieddatalibrary.api.services.blocking.orbittrack.HistoryService
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for posting and querying of air, space, and ground 'tracks'. A
+ * track is a position and optionally a heading/velocity of an object at a particular timestamp.
+ */
 interface OrbittrackService {
 
     /**
@@ -33,6 +37,11 @@ interface OrbittrackService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): OrbittrackService
 
+    /**
+     * These services provide operations for posting and querying of air, space, and ground
+     * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+     * particular timestamp.
+     */
     fun history(): HistoryService
 
     /**
@@ -167,6 +176,11 @@ interface OrbittrackService {
             modifier: Consumer<ClientOptions.Builder>
         ): OrbittrackService.WithRawResponse
 
+        /**
+         * These services provide operations for posting and querying of air, space, and ground
+         * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+         * particular timestamp.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**

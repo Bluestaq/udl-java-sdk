@@ -37,6 +37,14 @@ import com.unifieddatalibrary.api.services.blocking.statevector.HistoryServiceIm
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This service provides operations for querying and manipulation of state vectors for On-orbit
+ * objects. State vectors are cartesian vectors of position (r) and velocity (v) that together with
+ * their time (epoch) (t) uniquely determine the trajectory of the orbiting body in space. J2000 is
+ * the preferred coordinate frame for all state vector positions/velocities in UDL, but in some
+ * cases data may be in another frame depending on the provider and/or datatype. Please see the
+ * 'Discover' tab in the storefront to confirm coordinate frames by data provider.
+ */
 class StateVectorServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     StateVectorService {
 
@@ -53,8 +61,24 @@ class StateVectorServiceImpl internal constructor(private val clientOptions: Cli
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): StateVectorService =
         StateVectorServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * This service provides operations for querying and manipulation of state vectors for On-orbit
+     * objects. State vectors are cartesian vectors of position (r) and velocity (v) that together
+     * with their time (epoch) (t) uniquely determine the trajectory of the orbiting body in space.
+     * J2000 is the preferred coordinate frame for all state vector positions/velocities in UDL, but
+     * in some cases data may be in another frame depending on the provider and/or datatype. Please
+     * see the 'Discover' tab in the storefront to confirm coordinate frames by data provider.
+     */
     override fun current(): CurrentService = current
 
+    /**
+     * This service provides operations for querying and manipulation of state vectors for On-orbit
+     * objects. State vectors are cartesian vectors of position (r) and velocity (v) that together
+     * with their time (epoch) (t) uniquely determine the trajectory of the orbiting body in space.
+     * J2000 is the preferred coordinate frame for all state vector positions/velocities in UDL, but
+     * in some cases data may be in another frame depending on the provider and/or datatype. Please
+     * see the 'Discover' tab in the storefront to confirm coordinate frames by data provider.
+     */
     override fun history(): HistoryService = history
 
     override fun create(params: StateVectorCreateParams, requestOptions: RequestOptions) {
@@ -128,8 +152,26 @@ class StateVectorServiceImpl internal constructor(private val clientOptions: Cli
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * This service provides operations for querying and manipulation of state vectors for
+         * On-orbit objects. State vectors are cartesian vectors of position (r) and velocity (v)
+         * that together with their time (epoch) (t) uniquely determine the trajectory of the
+         * orbiting body in space. J2000 is the preferred coordinate frame for all state vector
+         * positions/velocities in UDL, but in some cases data may be in another frame depending on
+         * the provider and/or datatype. Please see the 'Discover' tab in the storefront to confirm
+         * coordinate frames by data provider.
+         */
         override fun current(): CurrentService.WithRawResponse = current
 
+        /**
+         * This service provides operations for querying and manipulation of state vectors for
+         * On-orbit objects. State vectors are cartesian vectors of position (r) and velocity (v)
+         * that together with their time (epoch) (t) uniquely determine the trajectory of the
+         * orbiting body in space. J2000 is the preferred coordinate frame for all state vector
+         * positions/velocities in UDL, but in some cases data may be in another frame depending on
+         * the provider and/or datatype. Please see the 'Discover' tab in the storefront to confirm
+         * coordinate frames by data provider.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()

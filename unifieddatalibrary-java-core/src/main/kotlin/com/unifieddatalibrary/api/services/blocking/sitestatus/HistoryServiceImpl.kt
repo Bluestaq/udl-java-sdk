@@ -21,6 +21,10 @@ import com.unifieddatalibrary.api.models.sitestatus.history.HistoryListParams
 import com.unifieddatalibrary.api.models.sitestatus.history.HistoryListResponse
 import java.util.function.Consumer
 
+/**
+ * This collection of services provide operations for manipulating and querying of various site
+ * related data, including site status, site operations, and site type-specific records.
+ */
 class HistoryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryService {
 

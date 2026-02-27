@@ -36,6 +36,10 @@ import com.unifieddatalibrary.api.services.blocking.sitestatus.HistoryServiceImp
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This collection of services provide operations for manipulating and querying of various site
+ * related data, including site status, site operations, and site type-specific records.
+ */
 class SiteStatusServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     SiteStatusService {
 
@@ -50,6 +54,10 @@ class SiteStatusServiceImpl internal constructor(private val clientOptions: Clie
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): SiteStatusService =
         SiteStatusServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * This collection of services provide operations for manipulating and querying of various site
+     * related data, including site status, site operations, and site type-specific records.
+     */
     override fun history(): HistoryService = history
 
     override fun create(params: SiteStatusCreateParams, requestOptions: RequestOptions) {
@@ -116,6 +124,11 @@ class SiteStatusServiceImpl internal constructor(private val clientOptions: Clie
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * This collection of services provide operations for manipulating and querying of various
+         * site related data, including site status, site operations, and site type-specific
+         * records.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()

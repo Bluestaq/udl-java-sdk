@@ -20,6 +20,13 @@ interface TdoaFdoaServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): TdoaFdoaServiceAsync
 
+    /**
+     * These services provide operations for querying and manipulation of Signal time and frequency
+     * difference of arrival (TDOA/FDOA) information obtained by using passive RF based sensor
+     * phenomenologies and sensor triangulation. The J2000 coordinate frame is the preferred frame
+     * for all observations, but in some cases observations may be in another frame depending on the
+     * provider.
+     */
     fun diffofarrival(): DiffofarrivalServiceAsync
 
     /**
@@ -36,6 +43,13 @@ interface TdoaFdoaServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): TdoaFdoaServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for querying and manipulation of Signal time and
+         * frequency difference of arrival (TDOA/FDOA) information obtained by using passive RF
+         * based sensor phenomenologies and sensor triangulation. The J2000 coordinate frame is the
+         * preferred frame for all observations, but in some cases observations may be in another
+         * frame depending on the provider.
+         */
         fun diffofarrival(): DiffofarrivalServiceAsync.WithRawResponse
     }
 }

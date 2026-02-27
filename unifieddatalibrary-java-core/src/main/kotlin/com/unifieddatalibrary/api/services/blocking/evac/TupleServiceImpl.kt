@@ -19,6 +19,7 @@ import com.unifieddatalibrary.api.models.evac.tuple.TupleListPage
 import com.unifieddatalibrary.api.models.evac.tuple.TupleListParams
 import java.util.function.Consumer
 
+/** These services provide operations for manipulation and querying of Mission Ops information. */
 class TupleServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     TupleService {
 

@@ -18,6 +18,10 @@ import com.unifieddatalibrary.api.services.async.trackdetails.HistoryServiceAsyn
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for posting and querying of air, space, and ground 'tracks'. A
+ * track is a position and optionally a heading/velocity of an object at a particular timestamp.
+ */
 interface TrackDetailServiceAsync {
 
     /**
@@ -32,6 +36,11 @@ interface TrackDetailServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): TrackDetailServiceAsync
 
+    /**
+     * These services provide operations for posting and querying of air, space, and ground
+     * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+     * particular timestamp.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -146,6 +155,11 @@ interface TrackDetailServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): TrackDetailServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for posting and querying of air, space, and ground
+         * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+         * particular timestamp.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**

@@ -19,6 +19,10 @@ import com.unifieddatalibrary.api.models.scs.v2.V2UpdateParams
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide CRUD and search operations for files and folders in the Secure Content
+ * Store.
+ */
 interface V2ServiceAsync {
 
     /**

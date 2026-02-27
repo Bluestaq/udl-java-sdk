@@ -27,6 +27,13 @@ import com.unifieddatalibrary.api.services.blocking.tdoafdoa.diffofarrival.Histo
 import com.unifieddatalibrary.api.services.blocking.tdoafdoa.diffofarrival.HistoryServiceImpl
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for querying and manipulation of Signal time and frequency
+ * difference of arrival (TDOA/FDOA) information obtained by using passive RF based sensor
+ * phenomenologies and sensor triangulation. The J2000 coordinate frame is the preferred frame for
+ * all observations, but in some cases observations may be in another frame depending on the
+ * provider.
+ */
 class DiffofarrivalServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     DiffofarrivalService {
 
@@ -41,6 +48,13 @@ class DiffofarrivalServiceImpl internal constructor(private val clientOptions: C
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): DiffofarrivalService =
         DiffofarrivalServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for querying and manipulation of Signal time and frequency
+     * difference of arrival (TDOA/FDOA) information obtained by using passive RF based sensor
+     * phenomenologies and sensor triangulation. The J2000 coordinate frame is the preferred frame
+     * for all observations, but in some cases observations may be in another frame depending on the
+     * provider.
+     */
     override fun history(): HistoryService = history
 
     override fun create(params: DiffofarrivalCreateParams, requestOptions: RequestOptions) {
@@ -81,6 +95,13 @@ class DiffofarrivalServiceImpl internal constructor(private val clientOptions: C
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for querying and manipulation of Signal time and
+         * frequency difference of arrival (TDOA/FDOA) information obtained by using passive RF
+         * based sensor phenomenologies and sensor triangulation. The J2000 coordinate frame is the
+         * preferred frame for all observations, but in some cases observations may be in another
+         * frame depending on the provider.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()

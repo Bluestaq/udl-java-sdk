@@ -38,6 +38,7 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/** These services provide operations for manipulation and querying of conjunctions. */
 class ConjunctionServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     ConjunctionServiceAsync {
 
@@ -52,6 +53,7 @@ class ConjunctionServiceAsyncImpl internal constructor(private val clientOptions
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): ConjunctionServiceAsync =
         ConjunctionServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /** These services provide operations for manipulation and querying of conjunctions. */
     override fun history(): HistoryServiceAsync = history
 
     override fun retrieve(
@@ -141,6 +143,7 @@ class ConjunctionServiceAsyncImpl internal constructor(private val clientOptions
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /** These services provide operations for manipulation and querying of conjunctions. */
         override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val retrieveHandler: Handler<ConjunctionFull> =

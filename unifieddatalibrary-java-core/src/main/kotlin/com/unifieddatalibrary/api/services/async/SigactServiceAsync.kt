@@ -19,6 +19,11 @@ import com.unifieddatalibrary.api.services.async.sigact.HistoryServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of Report and Activity
+ * information. This information includes analytic reports, significant events, route statistics,
+ * EMI Reports, and other georeferenced reports and activities.
+ */
 interface SigactServiceAsync {
 
     /**
@@ -33,6 +38,11 @@ interface SigactServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): SigactServiceAsync
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -173,6 +183,11 @@ interface SigactServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): SigactServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**

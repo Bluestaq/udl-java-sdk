@@ -36,6 +36,7 @@ import com.unifieddatalibrary.api.services.blocking.collectresponses.TupleServic
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 class CollectResponseServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     CollectResponseService {
 
@@ -52,8 +53,10 @@ class CollectResponseServiceImpl internal constructor(private val clientOptions:
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): CollectResponseService =
         CollectResponseServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     override fun history(): HistoryService = history
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     override fun tuple(): TupleService = tuple
 
     override fun create(params: CollectResponseCreateParams, requestOptions: RequestOptions) {
@@ -123,8 +126,10 @@ class CollectResponseServiceImpl internal constructor(private val clientOptions:
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         override fun history(): HistoryService.WithRawResponse = history
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         override fun tuple(): TupleService.WithRawResponse = tuple
 
         private val createHandler: Handler<Void?> = emptyHandler()

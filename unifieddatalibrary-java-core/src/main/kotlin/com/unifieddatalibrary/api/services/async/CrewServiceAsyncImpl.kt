@@ -34,6 +34,10 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for posting and querying crew data. Crew data contains
+ * information about its members and their assignments.
+ */
 class CrewServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     CrewServiceAsync {
 

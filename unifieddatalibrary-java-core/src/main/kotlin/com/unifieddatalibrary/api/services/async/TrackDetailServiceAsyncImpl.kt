@@ -31,6 +31,10 @@ import com.unifieddatalibrary.api.services.async.trackdetails.HistoryServiceAsyn
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for posting and querying of air, space, and ground 'tracks'. A
+ * track is a position and optionally a heading/velocity of an object at a particular timestamp.
+ */
 class TrackDetailServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     TrackDetailServiceAsync {
 
@@ -45,6 +49,11 @@ class TrackDetailServiceAsyncImpl internal constructor(private val clientOptions
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): TrackDetailServiceAsync =
         TrackDetailServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for posting and querying of air, space, and ground
+     * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+     * particular timestamp.
+     */
     override fun history(): HistoryServiceAsync = history
 
     override fun list(
@@ -99,6 +108,11 @@ class TrackDetailServiceAsyncImpl internal constructor(private val clientOptions
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for posting and querying of air, space, and ground
+         * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+         * particular timestamp.
+         */
         override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val listHandler: Handler<List<TrackDetailListResponse>> =

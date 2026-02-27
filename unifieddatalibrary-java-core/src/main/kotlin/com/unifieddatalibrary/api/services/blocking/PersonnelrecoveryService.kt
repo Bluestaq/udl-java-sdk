@@ -21,6 +21,7 @@ import com.unifieddatalibrary.api.models.personnelrecovery.PersonnelrecoveryTupl
 import com.unifieddatalibrary.api.services.blocking.personnelrecovery.HistoryService
 import java.util.function.Consumer
 
+/** These services provide operations for manipulation and querying of Mission Ops information. */
 interface PersonnelrecoveryService {
 
     /**
@@ -35,6 +36,9 @@ interface PersonnelrecoveryService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): PersonnelrecoveryService
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     fun history(): HistoryService
 
     /**
@@ -216,6 +220,10 @@ interface PersonnelrecoveryService {
             modifier: Consumer<ClientOptions.Builder>
         ): PersonnelrecoveryService.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**

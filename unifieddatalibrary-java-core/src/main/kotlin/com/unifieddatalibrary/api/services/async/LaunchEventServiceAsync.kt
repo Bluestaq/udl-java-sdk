@@ -22,6 +22,11 @@ import com.unifieddatalibrary.api.services.async.launchevent.HistoryServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of LaunchEvent data. Launch Event
+ * data are known space launches, either future or historic records containing items such as the
+ * launch site, launch epoch, and object.
+ */
 interface LaunchEventServiceAsync {
 
     /**
@@ -36,6 +41,11 @@ interface LaunchEventServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): LaunchEventServiceAsync
 
+    /**
+     * These services provide operations for manipulation and querying of LaunchEvent data. Launch
+     * Event data are known space launches, either future or historic records containing items such
+     * as the launch site, launch epoch, and object.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -228,6 +238,11 @@ interface LaunchEventServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): LaunchEventServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of LaunchEvent data.
+         * Launch Event data are known space launches, either future or historic records containing
+         * items such as the launch site, launch epoch, and object.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**

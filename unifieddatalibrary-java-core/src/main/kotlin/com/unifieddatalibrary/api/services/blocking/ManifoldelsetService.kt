@@ -22,6 +22,10 @@ import com.unifieddatalibrary.api.models.manifoldelset.ManifoldelsetTupleRespons
 import com.unifieddatalibrary.api.models.manifoldelset.ManifoldelsetUpdateParams
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit objects of interest,
+ * their components, and various lists and status of those objects.
+ */
 interface ManifoldelsetService {
 
     /**

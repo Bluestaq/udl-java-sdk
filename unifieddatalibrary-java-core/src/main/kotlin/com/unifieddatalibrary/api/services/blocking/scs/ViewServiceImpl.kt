@@ -16,6 +16,10 @@ import com.unifieddatalibrary.api.models.scs.view.ViewGetParams
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide CRUD and search operations for files and folders in the Secure Content
+ * Store.
+ */
 class ViewServiceImpl internal constructor(private val clientOptions: ClientOptions) : ViewService {
 
     private val withRawResponse: ViewService.WithRawResponse by lazy {

@@ -34,6 +34,11 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * Services for querying and manipulation of satellite buses. A bus is the physical and software
+ * infrastructure backbone to which on-orbit satellite payloads are attached for power, control, and
+ * other support functions.
+ */
 class BusServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     BusServiceAsync {
 

@@ -19,6 +19,7 @@ import com.unifieddatalibrary.api.models.collectresponses.tuple.TupleListPage
 import com.unifieddatalibrary.api.models.collectresponses.tuple.TupleListParams
 import java.util.function.Consumer
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 class TupleServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     TupleService {
 

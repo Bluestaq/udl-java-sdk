@@ -32,6 +32,10 @@ import com.unifieddatalibrary.api.models.equipmentremarks.EquipmentRemarkTuplePa
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This collection of services provide operations for manipulating and querying of equipment related
+ * data.
+ */
 class EquipmentRemarkServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     EquipmentRemarkService {
 

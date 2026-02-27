@@ -23,6 +23,7 @@ import com.unifieddatalibrary.api.models.effectrequests.history.HistoryListParam
 import com.unifieddatalibrary.api.models.effectrequests.history.HistoryListResponse
 import java.util.function.Consumer
 
+/** These services provide operations for manipulation and querying of Mission Ops information. */
 class HistoryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryService {
 

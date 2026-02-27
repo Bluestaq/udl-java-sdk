@@ -32,6 +32,7 @@ import com.unifieddatalibrary.api.services.async.isrcollections.HistoryServiceAs
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 class IsrCollectionServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     IsrCollectionServiceAsync {
 
@@ -46,6 +47,7 @@ class IsrCollectionServiceAsyncImpl internal constructor(private val clientOptio
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): IsrCollectionServiceAsync =
         IsrCollectionServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     override fun history(): HistoryServiceAsync = history
 
     override fun list(
@@ -107,6 +109,7 @@ class IsrCollectionServiceAsyncImpl internal constructor(private val clientOptio
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val listHandler: Handler<List<IsrCollectionListResponse>> =

@@ -35,6 +35,36 @@ import com.unifieddatalibrary.api.services.blocking.taiutc.HistoryServiceImpl
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This service provides operations for manipulation and querying of earth orientation parameter
+ * (EOP) data. Earth Orientation Parameters (EOP) are produced by the IERS (International Earth
+ * Rotation and Reference Systems Service). Earth Orientation Parameters describe the irregularities
+ * of the earth's rotation. Technically, they are the parameters which provide the rotation of the
+ * ITRS (International Terrestrial Reference System) to the ICRS (International Celestial Reference
+ * System) as a function of time. Universal time -- Universal time (UT1) is the time of the earth
+ * clock, which performs one revolution in about 24h. It is practically proportional to the sidereal
+ * time. The excess revolution time is called length of day (LOD). Coordinates of the pole -- x and
+ * y are the coordinates of the Celestial Ephemeris Pole (CEP) relative to the IRP, the IERS
+ * Reference Pole. The CEP differs from the instantaneous rotation axis by quasi-diurnal terms with
+ * amplitudes under 0.01" (see Seidelmann, 1982). The x-axis is in the direction of the ITRF
+ * zero-meridian; the y-axis is in the direction 90 degrees West longitude. Celestial pole offsets
+ * -- Celestial pole offsets are described in the IAU Precession and Nutation models. The observed
+ * differences with respect to the conventional celestial pole position defined by the models are
+ * monitored and reported by the IERS. IERS Bulletins A and B provide current information on the
+ * Earth's orientation in the IERS Reference System. This includes Universal Time, coordinates of
+ * the terrestrial pole, and celestial pole offsets. Bulletin A gives an advanced solution updated
+ * weekly; the standard solution is given monthly in Bulletin B. Fields suffixed with ''B'' are
+ * Bulletin B values. All solutions are continuous within their respective uncertainties. Bulletin A
+ * is issued by the IERS Rapid Service/Prediction Centre at the U.S. Naval Observatory, Washington,
+ * DC and Bulletin B is issued by the IERS Earth Orientation Centre at the Paris Observatory. IERS
+ * Bulletin A reports the latest determinations for polar motion, UT1-UTC, and nutation offsets at
+ * daily intervals based on a combination of contributed analysis results using data from Very Long
+ * Baseline Interferometry (VLBI), Satellite Laser Ranging (SLR), Global Positioning System (GPS)
+ * satellites, and Lunar Laser Ranging (LLR). Predictions for variations a year into the future are
+ * also provided. Meteorological predictions of variations in Atmospheric Angular Momentum (AAM) are
+ * used to aid in the prediction of near-term UT1-UTC changes. This publication is prepared by the
+ * IERS Rapid Service/Prediction Center.
+ */
 class TaiUtcServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     TaiUtcService {
 
@@ -49,6 +79,37 @@ class TaiUtcServiceImpl internal constructor(private val clientOptions: ClientOp
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): TaiUtcService =
         TaiUtcServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * This service provides operations for manipulation and querying of earth orientation parameter
+     * (EOP) data. Earth Orientation Parameters (EOP) are produced by the IERS (International Earth
+     * Rotation and Reference Systems Service). Earth Orientation Parameters describe the
+     * irregularities of the earth's rotation. Technically, they are the parameters which provide
+     * the rotation of the ITRS (International Terrestrial Reference System) to the ICRS
+     * (International Celestial Reference System) as a function of time. Universal time -- Universal
+     * time (UT1) is the time of the earth clock, which performs one revolution in about 24h. It is
+     * practically proportional to the sidereal time. The excess revolution time is called length of
+     * day (LOD). Coordinates of the pole -- x and y are the coordinates of the Celestial Ephemeris
+     * Pole (CEP) relative to the IRP, the IERS Reference Pole. The CEP differs from the
+     * instantaneous rotation axis by quasi-diurnal terms with amplitudes under 0.01" (see
+     * Seidelmann, 1982). The x-axis is in the direction of the ITRF zero-meridian; the y-axis is in
+     * the direction 90 degrees West longitude. Celestial pole offsets -- Celestial pole offsets are
+     * described in the IAU Precession and Nutation models. The observed differences with respect to
+     * the conventional celestial pole position defined by the models are monitored and reported by
+     * the IERS. IERS Bulletins A and B provide current information on the Earth's orientation in
+     * the IERS Reference System. This includes Universal Time, coordinates of the terrestrial pole,
+     * and celestial pole offsets. Bulletin A gives an advanced solution updated weekly; the
+     * standard solution is given monthly in Bulletin B. Fields suffixed with ''B'' are Bulletin B
+     * values. All solutions are continuous within their respective uncertainties. Bulletin A is
+     * issued by the IERS Rapid Service/Prediction Centre at the U.S. Naval Observatory, Washington,
+     * DC and Bulletin B is issued by the IERS Earth Orientation Centre at the Paris Observatory.
+     * IERS Bulletin A reports the latest determinations for polar motion, UT1-UTC, and nutation
+     * offsets at daily intervals based on a combination of contributed analysis results using data
+     * from Very Long Baseline Interferometry (VLBI), Satellite Laser Ranging (SLR), Global
+     * Positioning System (GPS) satellites, and Lunar Laser Ranging (LLR). Predictions for
+     * variations a year into the future are also provided. Meteorological predictions of variations
+     * in Atmospheric Angular Momentum (AAM) are used to aid in the prediction of near-term UT1-UTC
+     * changes. This publication is prepared by the IERS Rapid Service/Prediction Center.
+     */
     override fun history(): HistoryService = history
 
     override fun create(params: TaiUtcCreateParams, requestOptions: RequestOptions) {
@@ -109,6 +170,39 @@ class TaiUtcServiceImpl internal constructor(private val clientOptions: ClientOp
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * This service provides operations for manipulation and querying of earth orientation
+         * parameter (EOP) data. Earth Orientation Parameters (EOP) are produced by the IERS
+         * (International Earth Rotation and Reference Systems Service). Earth Orientation
+         * Parameters describe the irregularities of the earth's rotation. Technically, they are the
+         * parameters which provide the rotation of the ITRS (International Terrestrial Reference
+         * System) to the ICRS (International Celestial Reference System) as a function of time.
+         * Universal time -- Universal time (UT1) is the time of the earth clock, which performs one
+         * revolution in about 24h. It is practically proportional to the sidereal time. The excess
+         * revolution time is called length of day (LOD). Coordinates of the pole -- x and y are the
+         * coordinates of the Celestial Ephemeris Pole (CEP) relative to the IRP, the IERS Reference
+         * Pole. The CEP differs from the instantaneous rotation axis by quasi-diurnal terms with
+         * amplitudes under 0.01" (see Seidelmann, 1982). The x-axis is in the direction of the ITRF
+         * zero-meridian; the y-axis is in the direction 90 degrees West longitude. Celestial pole
+         * offsets -- Celestial pole offsets are described in the IAU Precession and Nutation
+         * models. The observed differences with respect to the conventional celestial pole position
+         * defined by the models are monitored and reported by the IERS. IERS Bulletins A and B
+         * provide current information on the Earth's orientation in the IERS Reference System. This
+         * includes Universal Time, coordinates of the terrestrial pole, and celestial pole offsets.
+         * Bulletin A gives an advanced solution updated weekly; the standard solution is given
+         * monthly in Bulletin B. Fields suffixed with ''B'' are Bulletin B values. All solutions
+         * are continuous within their respective uncertainties. Bulletin A is issued by the IERS
+         * Rapid Service/Prediction Centre at the U.S. Naval Observatory, Washington, DC and
+         * Bulletin B is issued by the IERS Earth Orientation Centre at the Paris Observatory. IERS
+         * Bulletin A reports the latest determinations for polar motion, UT1-UTC, and nutation
+         * offsets at daily intervals based on a combination of contributed analysis results using
+         * data from Very Long Baseline Interferometry (VLBI), Satellite Laser Ranging (SLR), Global
+         * Positioning System (GPS) satellites, and Lunar Laser Ranging (LLR). Predictions for
+         * variations a year into the future are also provided. Meteorological predictions of
+         * variations in Atmospheric Angular Momentum (AAM) are used to aid in the prediction of
+         * near-term UT1-UTC changes. This publication is prepared by the IERS Rapid
+         * Service/Prediction Center.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()

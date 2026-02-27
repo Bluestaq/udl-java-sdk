@@ -21,6 +21,7 @@ import com.unifieddatalibrary.api.services.async.personnelrecovery.HistoryServic
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/** These services provide operations for manipulation and querying of Mission Ops information. */
 interface PersonnelrecoveryServiceAsync {
 
     /**
@@ -35,6 +36,9 @@ interface PersonnelrecoveryServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): PersonnelrecoveryServiceAsync
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -227,6 +231,10 @@ interface PersonnelrecoveryServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): PersonnelrecoveryServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**

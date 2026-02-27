@@ -13,6 +13,12 @@ import com.unifieddatalibrary.api.models.skyimagery.history.HistoryListParams
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * This collection of services provides operations for querying and manipulation of sky imagery
+ * data. Sky imagery is ground or space based telescope imagery of RSO's and includes metadata on
+ * the image (time, source, etc) as well as binary image content (e.g. FITS, EOSSA, EOCHIP, MP4).
+ * Binary content must be downloaded individually by ID using the 'getFile' operation.
+ */
 interface HistoryServiceAsync {
 
     /**

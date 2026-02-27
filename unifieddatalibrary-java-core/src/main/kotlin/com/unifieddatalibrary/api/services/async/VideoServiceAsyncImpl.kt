@@ -40,6 +40,7 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/** This collection of services provides operations for video streaming. */
 class VideoServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     VideoServiceAsync {
 
@@ -54,6 +55,7 @@ class VideoServiceAsyncImpl internal constructor(private val clientOptions: Clie
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): VideoServiceAsync =
         VideoServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /** This collection of services provides operations for video streaming. */
     override fun history(): HistoryServiceAsync = history
 
     override fun create(
@@ -136,6 +138,7 @@ class VideoServiceAsyncImpl internal constructor(private val clientOptions: Clie
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /** This collection of services provides operations for video streaming. */
         override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()

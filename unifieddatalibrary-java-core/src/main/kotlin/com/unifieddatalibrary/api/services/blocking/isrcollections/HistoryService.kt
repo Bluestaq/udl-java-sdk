@@ -13,6 +13,7 @@ import com.unifieddatalibrary.api.models.isrcollections.history.HistoryListPage
 import com.unifieddatalibrary.api.models.isrcollections.history.HistoryListParams
 import java.util.function.Consumer
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 interface HistoryService {
 
     /**

@@ -72,16 +72,45 @@ class ScServiceAsyncImpl internal constructor(private val clientOptions: ClientO
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): ScServiceAsync =
         ScServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These endpoints provide the ability to subscribe to SCS Event Notifications for file
+     * upload/update and folder creation events within a specific folder in the Secure Content
+     * Store. A user must be authorized to view the file/folder for which a notification was created
+     * in order to retrieve that notification.
+     */
     override fun notifications(): NotificationServiceAsync = notifications
 
+    /**
+     * These services provide soon-to-be-deprecated CRUD and Search operations for files and folders
+     * in the Secure Content Store. This documentation is provided only for backwards compatibility,
+     * please refer to SCS V2 for new SCS integrations.
+     */
     override fun file(): FileServiceAsync = file
 
+    /**
+     * These services provide soon-to-be-deprecated CRUD and Search operations for files and folders
+     * in the Secure Content Store. This documentation is provided only for backwards compatibility,
+     * please refer to SCS V2 for new SCS integrations.
+     */
     override fun folders(): FolderServiceAsync = folders
 
+    /**
+     * These services provide soon-to-be-deprecated CRUD and Search operations for files and folders
+     * in the Secure Content Store. This documentation is provided only for backwards compatibility,
+     * please refer to SCS V2 for new SCS integrations.
+     */
     override fun paths(): PathServiceAsync = paths
 
+    /**
+     * These services provide CRUD and search operations for files and folders in the Secure Content
+     * Store.
+     */
     override fun view(): ViewServiceAsync = view
 
+    /**
+     * These services provide CRUD and search operations for files and folders in the Secure Content
+     * Store.
+     */
     override fun v2(): V2ServiceAsync = v2
 
     @Deprecated("deprecated")
@@ -204,16 +233,45 @@ class ScServiceAsyncImpl internal constructor(private val clientOptions: ClientO
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These endpoints provide the ability to subscribe to SCS Event Notifications for file
+         * upload/update and folder creation events within a specific folder in the Secure Content
+         * Store. A user must be authorized to view the file/folder for which a notification was
+         * created in order to retrieve that notification.
+         */
         override fun notifications(): NotificationServiceAsync.WithRawResponse = notifications
 
+        /**
+         * These services provide soon-to-be-deprecated CRUD and Search operations for files and
+         * folders in the Secure Content Store. This documentation is provided only for backwards
+         * compatibility, please refer to SCS V2 for new SCS integrations.
+         */
         override fun file(): FileServiceAsync.WithRawResponse = file
 
+        /**
+         * These services provide soon-to-be-deprecated CRUD and Search operations for files and
+         * folders in the Secure Content Store. This documentation is provided only for backwards
+         * compatibility, please refer to SCS V2 for new SCS integrations.
+         */
         override fun folders(): FolderServiceAsync.WithRawResponse = folders
 
+        /**
+         * These services provide soon-to-be-deprecated CRUD and Search operations for files and
+         * folders in the Secure Content Store. This documentation is provided only for backwards
+         * compatibility, please refer to SCS V2 for new SCS integrations.
+         */
         override fun paths(): PathServiceAsync.WithRawResponse = paths
 
+        /**
+         * These services provide CRUD and search operations for files and folders in the Secure
+         * Content Store.
+         */
         override fun view(): ViewServiceAsync.WithRawResponse = view
 
+        /**
+         * These services provide CRUD and search operations for files and folders in the Secure
+         * Content Store.
+         */
         override fun v2(): V2ServiceAsync.WithRawResponse = v2
 
         private val deleteHandler: Handler<Void?> = emptyHandler()

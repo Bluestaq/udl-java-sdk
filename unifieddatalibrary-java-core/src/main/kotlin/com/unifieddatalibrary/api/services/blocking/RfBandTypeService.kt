@@ -21,6 +21,12 @@ import com.unifieddatalibrary.api.models.rfbandtype.RfBandTypeTupleResponse
 import com.unifieddatalibrary.api.models.rfbandtype.RfBandTypeUpdateParams
 import java.util.function.Consumer
 
+/**
+ * This collection of services provides operations for querying and manipulation of RF related
+ * information to include RFEmitters which could potentially interfere with
+ * communications/operations of space related entities, and RFBands commonly used by various space
+ * related entities.
+ */
 interface RfBandTypeService {
 
     /**

@@ -23,6 +23,7 @@ import com.unifieddatalibrary.api.models.collectrequests.history.HistoryListPage
 import com.unifieddatalibrary.api.models.collectrequests.history.HistoryListParams
 import java.util.function.Consumer
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 class HistoryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryService {
 

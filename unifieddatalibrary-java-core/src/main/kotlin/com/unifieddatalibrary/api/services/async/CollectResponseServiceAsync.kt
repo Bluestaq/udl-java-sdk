@@ -21,6 +21,7 @@ import com.unifieddatalibrary.api.services.async.collectresponses.TupleServiceAs
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 interface CollectResponseServiceAsync {
 
     /**
@@ -35,8 +36,10 @@ interface CollectResponseServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): CollectResponseServiceAsync
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     fun history(): HistoryServiceAsync
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     fun tuple(): TupleServiceAsync
 
     /**
@@ -218,8 +221,10 @@ interface CollectResponseServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): CollectResponseServiceAsync.WithRawResponse
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         fun history(): HistoryServiceAsync.WithRawResponse
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         fun tuple(): TupleServiceAsync.WithRawResponse
 
         /**

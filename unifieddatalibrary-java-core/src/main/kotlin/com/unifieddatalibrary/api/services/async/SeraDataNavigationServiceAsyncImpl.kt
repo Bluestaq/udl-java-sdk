@@ -35,6 +35,7 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/** These services provide operations for manipulation and querying of on-orbit payloads. */
 class SeraDataNavigationServiceAsyncImpl
 internal constructor(private val clientOptions: ClientOptions) : SeraDataNavigationServiceAsync {
 
