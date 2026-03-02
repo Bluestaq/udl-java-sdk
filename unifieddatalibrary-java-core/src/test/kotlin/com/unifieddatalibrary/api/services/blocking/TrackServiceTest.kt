@@ -92,6 +92,7 @@ internal class TrackServiceTest {
                     )
                     .course(215.2)
                     .cov(listOf(1.1, 2.2, 3.3))
+                    .covReferenceFrame(TrackCreateBulkParams.Body.CovReferenceFrame.ECR_ECEF)
                     .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                     .createdBy("some.user")
                     .ecefAcc(listOf(-0.0265, -0.2764, -0.1773))
@@ -104,6 +105,7 @@ internal class TrackServiceTest {
                     .env("LAND")
                     .envConf(1.23)
                     .errEllp(listOf(1.23, 2.34, 3.45))
+                    .grndSpd(60.23)
                     .hdng(215.7)
                     .identAmp("ZOMBIE")
                     .identCred(0)
@@ -236,6 +238,9 @@ internal class TrackServiceTest {
                     )
                     .course(215.2)
                     .cov(listOf(1.1, 2.2, 3.3))
+                    .covReferenceFrame(
+                        TrackUnvalidatedPublishParams.Body.CovReferenceFrame.ECR_ECEF
+                    )
                     .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                     .createdBy("some.user")
                     .ecefAcc(listOf(-0.0265, -0.2764, -0.1773))
@@ -248,6 +253,7 @@ internal class TrackServiceTest {
                     .env("LAND")
                     .envConf(1.23)
                     .errEllp(listOf(1.23, 2.34, 3.45))
+                    .grndSpd(60.23)
                     .hdng(215.7)
                     .identAmp("ZOMBIE")
                     .identCred(0)

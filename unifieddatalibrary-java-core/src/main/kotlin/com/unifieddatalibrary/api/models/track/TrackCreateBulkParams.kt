@@ -233,6 +233,7 @@ private constructor(
         private val contextValues: JsonField<List<String>>,
         private val course: JsonField<Double>,
         private val cov: JsonField<List<Double>>,
+        private val covReferenceFrame: JsonField<CovReferenceFrame>,
         private val createdAt: JsonField<OffsetDateTime>,
         private val createdBy: JsonField<String>,
         private val ecefAcc: JsonField<List<Double>>,
@@ -245,6 +246,7 @@ private constructor(
         private val env: JsonField<String>,
         private val envConf: JsonField<Double>,
         private val errEllp: JsonField<List<Double>>,
+        private val grndSpd: JsonField<Double>,
         private val hdng: JsonField<Double>,
         private val identAmp: JsonField<String>,
         private val identCred: JsonField<Int>,
@@ -331,6 +333,9 @@ private constructor(
             contextValues: JsonField<List<String>> = JsonMissing.of(),
             @JsonProperty("course") @ExcludeMissing course: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("cov") @ExcludeMissing cov: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("covReferenceFrame")
+            @ExcludeMissing
+            covReferenceFrame: JsonField<CovReferenceFrame> = JsonMissing.of(),
             @JsonProperty("createdAt")
             @ExcludeMissing
             createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
@@ -363,6 +368,7 @@ private constructor(
             @JsonProperty("errEllp")
             @ExcludeMissing
             errEllp: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("grndSpd") @ExcludeMissing grndSpd: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("hdng") @ExcludeMissing hdng: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("identAmp")
             @ExcludeMissing
@@ -459,6 +465,7 @@ private constructor(
             contextValues,
             course,
             cov,
+            covReferenceFrame,
             createdAt,
             createdBy,
             ecefAcc,
@@ -471,6 +478,7 @@ private constructor(
             env,
             envConf,
             errEllp,
+            grndSpd,
             hdng,
             identAmp,
             identCred,
@@ -726,6 +734,16 @@ private constructor(
         fun cov(): Optional<List<Double>> = cov.getOptional("cov")
 
         /**
+         * The reference frame of the covariance matrix elements (ENU, ECR/ECEF, LOCAL, LAT-LONG,
+         * LAT-LONG-ALT). If the covReferenceFrame is null it is assumed to be ECR/ECEF.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun covReferenceFrame(): Optional<CovReferenceFrame> =
+            covReferenceFrame.getOptional("covReferenceFrame")
+
+        /**
          * Time the row was created in the database, auto-populated by the system.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
@@ -846,6 +864,14 @@ private constructor(
         fun errEllp(): Optional<List<Double>> = errEllp.getOptional("errEllp")
 
         /**
+         * Target ground speed, as opposed to air speed, in meters per second.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun grndSpd(): Optional<Double> = grndSpd.getOptional("grndSpd")
+
+        /**
          * The track object heading, in degrees clockwise from true North at the object location
          * (0-360 degrees).
          *
@@ -935,7 +961,7 @@ private constructor(
         fun lcPos(): Optional<List<Double>> = lcPos.getOptional("lcPos")
 
         /**
-         * x, y, and z-axis rotations (degrees) about ECEF that define a local cartesian system.
+         * The x, y, and z-axis rotations (degrees) about ECEF that define a local cartesian system.
          * When provided, array must always contain 3 values.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
@@ -1219,7 +1245,8 @@ private constructor(
         fun sourceDl(): Optional<String> = sourceDl.getOptional("sourceDL")
 
         /**
-         * Track object speed, in meters per second.
+         * Track object speed, in its environment, in meters per second. For example, this would be
+         * air speed for an aircraft.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1480,6 +1507,16 @@ private constructor(
         @JsonProperty("cov") @ExcludeMissing fun _cov(): JsonField<List<Double>> = cov
 
         /**
+         * Returns the raw JSON value of [covReferenceFrame].
+         *
+         * Unlike [covReferenceFrame], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("covReferenceFrame")
+        @ExcludeMissing
+        fun _covReferenceFrame(): JsonField<CovReferenceFrame> = covReferenceFrame
+
+        /**
          * Returns the raw JSON value of [createdAt].
          *
          * Unlike [createdAt], this method doesn't throw if the JSON field has an unexpected type.
@@ -1567,6 +1604,13 @@ private constructor(
          * Unlike [errEllp], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("errEllp") @ExcludeMissing fun _errEllp(): JsonField<List<Double>> = errEllp
+
+        /**
+         * Returns the raw JSON value of [grndSpd].
+         *
+         * Unlike [grndSpd], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("grndSpd") @ExcludeMissing fun _grndSpd(): JsonField<Double> = grndSpd
 
         /**
          * Returns the raw JSON value of [hdng].
@@ -1965,6 +2009,7 @@ private constructor(
             private var contextValues: JsonField<MutableList<String>>? = null
             private var course: JsonField<Double> = JsonMissing.of()
             private var cov: JsonField<MutableList<Double>>? = null
+            private var covReferenceFrame: JsonField<CovReferenceFrame> = JsonMissing.of()
             private var createdAt: JsonField<OffsetDateTime> = JsonMissing.of()
             private var createdBy: JsonField<String> = JsonMissing.of()
             private var ecefAcc: JsonField<MutableList<Double>>? = null
@@ -1977,6 +2022,7 @@ private constructor(
             private var env: JsonField<String> = JsonMissing.of()
             private var envConf: JsonField<Double> = JsonMissing.of()
             private var errEllp: JsonField<MutableList<Double>>? = null
+            private var grndSpd: JsonField<Double> = JsonMissing.of()
             private var hdng: JsonField<Double> = JsonMissing.of()
             private var identAmp: JsonField<String> = JsonMissing.of()
             private var identCred: JsonField<Int> = JsonMissing.of()
@@ -2046,6 +2092,7 @@ private constructor(
                 contextValues = body.contextValues.map { it.toMutableList() }
                 course = body.course
                 cov = body.cov.map { it.toMutableList() }
+                covReferenceFrame = body.covReferenceFrame
                 createdAt = body.createdAt
                 createdBy = body.createdBy
                 ecefAcc = body.ecefAcc.map { it.toMutableList() }
@@ -2058,6 +2105,7 @@ private constructor(
                 env = body.env
                 envConf = body.envConf
                 errEllp = body.errEllp.map { it.toMutableList() }
+                grndSpd = body.grndSpd
                 hdng = body.hdng
                 identAmp = body.identAmp
                 identCred = body.identCred
@@ -2470,6 +2518,25 @@ private constructor(
                     }
             }
 
+            /**
+             * The reference frame of the covariance matrix elements (ENU, ECR/ECEF, LOCAL,
+             * LAT-LONG, LAT-LONG-ALT). If the covReferenceFrame is null it is assumed to be
+             * ECR/ECEF.
+             */
+            fun covReferenceFrame(covReferenceFrame: CovReferenceFrame) =
+                covReferenceFrame(JsonField.of(covReferenceFrame))
+
+            /**
+             * Sets [Builder.covReferenceFrame] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.covReferenceFrame] with a well-typed
+             * [CovReferenceFrame] value instead. This method is primarily for setting the field to
+             * an undocumented or not yet supported value.
+             */
+            fun covReferenceFrame(covReferenceFrame: JsonField<CovReferenceFrame>) = apply {
+                this.covReferenceFrame = covReferenceFrame
+            }
+
             /** Time the row was created in the database, auto-populated by the system. */
             fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
 
@@ -2773,6 +2840,18 @@ private constructor(
                     }
             }
 
+            /** Target ground speed, as opposed to air speed, in meters per second. */
+            fun grndSpd(grndSpd: Double) = grndSpd(JsonField.of(grndSpd))
+
+            /**
+             * Sets [Builder.grndSpd] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.grndSpd] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun grndSpd(grndSpd: JsonField<Double>) = apply { this.grndSpd = grndSpd }
+
             /**
              * The track object heading, in degrees clockwise from true North at the object location
              * (0-360 degrees).
@@ -2953,8 +3032,8 @@ private constructor(
             }
 
             /**
-             * x, y, and z-axis rotations (degrees) about ECEF that define a local cartesian system.
-             * When provided, array must always contain 3 values.
+             * The x, y, and z-axis rotations (degrees) about ECEF that define a local cartesian
+             * system. When provided, array must always contain 3 values.
              */
             fun lcs(lcs: List<Double>) = lcs(JsonField.of(lcs))
 
@@ -3407,7 +3486,10 @@ private constructor(
              */
             fun sourceDl(sourceDl: JsonField<String>) = apply { this.sourceDl = sourceDl }
 
-            /** Track object speed, in meters per second. */
+            /**
+             * Track object speed, in its environment, in meters per second. For example, this would
+             * be air speed for an aircraft.
+             */
             fun spd(spd: Double) = spd(JsonField.of(spd))
 
             /**
@@ -3714,6 +3796,7 @@ private constructor(
                     (contextValues ?: JsonMissing.of()).map { it.toImmutable() },
                     course,
                     (cov ?: JsonMissing.of()).map { it.toImmutable() },
+                    covReferenceFrame,
                     createdAt,
                     createdBy,
                     (ecefAcc ?: JsonMissing.of()).map { it.toImmutable() },
@@ -3726,6 +3809,7 @@ private constructor(
                     env,
                     envConf,
                     (errEllp ?: JsonMissing.of()).map { it.toImmutable() },
+                    grndSpd,
                     hdng,
                     identAmp,
                     identCred,
@@ -3802,6 +3886,7 @@ private constructor(
             contextValues()
             course()
             cov()
+            covReferenceFrame().ifPresent { it.validate() }
             createdAt()
             createdBy()
             ecefAcc()
@@ -3814,6 +3899,7 @@ private constructor(
             env()
             envConf()
             errEllp()
+            grndSpd()
             hdng()
             identAmp()
             identCred()
@@ -3898,6 +3984,7 @@ private constructor(
                 (contextValues.asKnown().getOrNull()?.size ?: 0) +
                 (if (course.asKnown().isPresent) 1 else 0) +
                 (cov.asKnown().getOrNull()?.size ?: 0) +
+                (covReferenceFrame.asKnown().getOrNull()?.validity() ?: 0) +
                 (if (createdAt.asKnown().isPresent) 1 else 0) +
                 (if (createdBy.asKnown().isPresent) 1 else 0) +
                 (ecefAcc.asKnown().getOrNull()?.size ?: 0) +
@@ -3910,6 +3997,7 @@ private constructor(
                 (if (env.asKnown().isPresent) 1 else 0) +
                 (if (envConf.asKnown().isPresent) 1 else 0) +
                 (errEllp.asKnown().getOrNull()?.size ?: 0) +
+                (if (grndSpd.asKnown().isPresent) 1 else 0) +
                 (if (hdng.asKnown().isPresent) 1 else 0) +
                 (if (identAmp.asKnown().isPresent) 1 else 0) +
                 (if (identCred.asKnown().isPresent) 1 else 0) +
@@ -4116,6 +4204,164 @@ private constructor(
             override fun toString() = value.toString()
         }
 
+        /**
+         * The reference frame of the covariance matrix elements (ENU, ECR/ECEF, LOCAL, LAT-LONG,
+         * LAT-LONG-ALT). If the covReferenceFrame is null it is assumed to be ECR/ECEF.
+         */
+        class CovReferenceFrame
+        @JsonCreator
+        private constructor(private val value: JsonField<String>) : Enum {
+
+            /**
+             * Returns this class instance's raw value.
+             *
+             * This is usually only useful if this instance was deserialized from data that doesn't
+             * match any known member, and you want to know that value. For example, if the SDK is
+             * on an older version than the API, then the API may respond with new members that the
+             * SDK is unaware of.
+             */
+            @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+
+            companion object {
+
+                @JvmField val ENU = of("ENU")
+
+                @JvmField val ECR_ECEF = of("ECR/ECEF")
+
+                @JvmField val LOCAL = of("LOCAL")
+
+                @JvmField val LAT_LONG = of("LAT-LONG")
+
+                @JvmField val LAT_LONG_ALT = of("LAT-LONG-ALT")
+
+                @JvmStatic fun of(value: String) = CovReferenceFrame(JsonField.of(value))
+            }
+
+            /** An enum containing [CovReferenceFrame]'s known values. */
+            enum class Known {
+                ENU,
+                ECR_ECEF,
+                LOCAL,
+                LAT_LONG,
+                LAT_LONG_ALT,
+            }
+
+            /**
+             * An enum containing [CovReferenceFrame]'s known values, as well as an [_UNKNOWN]
+             * member.
+             *
+             * An instance of [CovReferenceFrame] can contain an unknown value in a couple of cases:
+             * - It was deserialized from data that doesn't match any known member. For example, if
+             *   the SDK is on an older version than the API, then the API may respond with new
+             *   members that the SDK is unaware of.
+             * - It was constructed with an arbitrary value using the [of] method.
+             */
+            enum class Value {
+                ENU,
+                ECR_ECEF,
+                LOCAL,
+                LAT_LONG,
+                LAT_LONG_ALT,
+                /**
+                 * An enum member indicating that [CovReferenceFrame] was instantiated with an
+                 * unknown value.
+                 */
+                _UNKNOWN,
+            }
+
+            /**
+             * Returns an enum member corresponding to this class instance's value, or
+             * [Value._UNKNOWN] if the class was instantiated with an unknown value.
+             *
+             * Use the [known] method instead if you're certain the value is always known or if you
+             * want to throw for the unknown case.
+             */
+            fun value(): Value =
+                when (this) {
+                    ENU -> Value.ENU
+                    ECR_ECEF -> Value.ECR_ECEF
+                    LOCAL -> Value.LOCAL
+                    LAT_LONG -> Value.LAT_LONG
+                    LAT_LONG_ALT -> Value.LAT_LONG_ALT
+                    else -> Value._UNKNOWN
+                }
+
+            /**
+             * Returns an enum member corresponding to this class instance's value.
+             *
+             * Use the [value] method instead if you're uncertain the value is always known and
+             * don't want to throw for the unknown case.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a
+             *   not a known member.
+             */
+            fun known(): Known =
+                when (this) {
+                    ENU -> Known.ENU
+                    ECR_ECEF -> Known.ECR_ECEF
+                    LOCAL -> Known.LOCAL
+                    LAT_LONG -> Known.LAT_LONG
+                    LAT_LONG_ALT -> Known.LAT_LONG_ALT
+                    else ->
+                        throw UnifieddatalibraryInvalidDataException(
+                            "Unknown CovReferenceFrame: $value"
+                        )
+                }
+
+            /**
+             * Returns this class instance's primitive wire representation.
+             *
+             * This differs from the [toString] method because that method is primarily for
+             * debugging and generally doesn't throw.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value does
+             *   not have the expected primitive type.
+             */
+            fun asString(): String =
+                _value().asString().orElseThrow {
+                    UnifieddatalibraryInvalidDataException("Value is not a String")
+                }
+
+            private var validated: Boolean = false
+
+            fun validate(): CovReferenceFrame = apply {
+                if (validated) {
+                    return@apply
+                }
+
+                known()
+                validated = true
+            }
+
+            fun isValid(): Boolean =
+                try {
+                    validate()
+                    true
+                } catch (e: UnifieddatalibraryInvalidDataException) {
+                    false
+                }
+
+            /**
+             * Returns a score indicating how many valid values are contained in this object
+             * recursively.
+             *
+             * Used for best match union deserialization.
+             */
+            @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
+            override fun equals(other: Any?): Boolean {
+                if (this === other) {
+                    return true
+                }
+
+                return other is CovReferenceFrame && value == other.value
+            }
+
+            override fun hashCode() = value.hashCode()
+
+            override fun toString() = value.toString()
+        }
+
         override fun equals(other: Any?): Boolean {
             if (this === other) {
                 return true
@@ -4138,6 +4384,7 @@ private constructor(
                 contextValues == other.contextValues &&
                 course == other.course &&
                 cov == other.cov &&
+                covReferenceFrame == other.covReferenceFrame &&
                 createdAt == other.createdAt &&
                 createdBy == other.createdBy &&
                 ecefAcc == other.ecefAcc &&
@@ -4150,6 +4397,7 @@ private constructor(
                 env == other.env &&
                 envConf == other.envConf &&
                 errEllp == other.errEllp &&
+                grndSpd == other.grndSpd &&
                 hdng == other.hdng &&
                 identAmp == other.identAmp &&
                 identCred == other.identCred &&
@@ -4220,6 +4468,7 @@ private constructor(
                 contextValues,
                 course,
                 cov,
+                covReferenceFrame,
                 createdAt,
                 createdBy,
                 ecefAcc,
@@ -4232,6 +4481,7 @@ private constructor(
                 env,
                 envConf,
                 errEllp,
+                grndSpd,
                 hdng,
                 identAmp,
                 identCred,
@@ -4288,7 +4538,7 @@ private constructor(
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, ts=$ts, id=$id, alt=$alt, asset=$asset, assetNat=$assetNat, attitude=$attitude, attitudeRate=$attitudeRate, callSign=$callSign, cntct=$cntct, contextKeys=$contextKeys, contextValues=$contextValues, course=$course, cov=$cov, createdAt=$createdAt, createdBy=$createdBy, ecefAcc=$ecefAcc, ecefPos=$ecefPos, ecefVel=$ecefVel, eNuAcc=$eNuAcc, eNuGroundVel=$eNuGroundVel, eNuPos=$eNuPos, eNuVel=$eNuVel, env=$env, envConf=$envConf, errEllp=$errEllp, hdng=$hdng, identAmp=$identAmp, identCred=$identCred, identRel=$identRel, jSeries=$jSeries, lat=$lat, lcAcc=$lcAcc, lco=$lco, lcPos=$lcPos, lcs=$lcs, lcVel=$lcVel, lon=$lon, m1=$m1, m1v=$m1v, m2=$m2, m2v=$m2v, m3a=$m3a, m3av=$m3av, modType=$modType, msgTs=$msgTs, msnId=$msnId, multiSource=$multiSource, objAct=$objAct, objDescription=$objDescription, objId=$objId, objIdent=$objIdent, objNat=$objNat, objPlat=$objPlat, objSpec=$objSpec, objType=$objType, origin=$origin, origNetwork=$origNetwork, sen=$sen, senQual=$senQual, sourceDl=$sourceDl, spd=$spd, srcIds=$srcIds, srcTyps=$srcTyps, strength=$strength, tags=$tags, trkConf=$trkConf, trkId=$trkId, trkItmId=$trkItmId, trkNum=$trkNum, trkPtType=$trkPtType, trkQual=$trkQual, trkStat=$trkStat, vertUnc=$vertUnc, wanderAng=$wanderAng, additionalProperties=$additionalProperties}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, ts=$ts, id=$id, alt=$alt, asset=$asset, assetNat=$assetNat, attitude=$attitude, attitudeRate=$attitudeRate, callSign=$callSign, cntct=$cntct, contextKeys=$contextKeys, contextValues=$contextValues, course=$course, cov=$cov, covReferenceFrame=$covReferenceFrame, createdAt=$createdAt, createdBy=$createdBy, ecefAcc=$ecefAcc, ecefPos=$ecefPos, ecefVel=$ecefVel, eNuAcc=$eNuAcc, eNuGroundVel=$eNuGroundVel, eNuPos=$eNuPos, eNuVel=$eNuVel, env=$env, envConf=$envConf, errEllp=$errEllp, grndSpd=$grndSpd, hdng=$hdng, identAmp=$identAmp, identCred=$identCred, identRel=$identRel, jSeries=$jSeries, lat=$lat, lcAcc=$lcAcc, lco=$lco, lcPos=$lcPos, lcs=$lcs, lcVel=$lcVel, lon=$lon, m1=$m1, m1v=$m1v, m2=$m2, m2v=$m2v, m3a=$m3a, m3av=$m3av, modType=$modType, msgTs=$msgTs, msnId=$msnId, multiSource=$multiSource, objAct=$objAct, objDescription=$objDescription, objId=$objId, objIdent=$objIdent, objNat=$objNat, objPlat=$objPlat, objSpec=$objSpec, objType=$objType, origin=$origin, origNetwork=$origNetwork, sen=$sen, senQual=$senQual, sourceDl=$sourceDl, spd=$spd, srcIds=$srcIds, srcTyps=$srcTyps, strength=$strength, tags=$tags, trkConf=$trkConf, trkId=$trkId, trkItmId=$trkItmId, trkNum=$trkNum, trkPtType=$trkPtType, trkQual=$trkQual, trkStat=$trkStat, vertUnc=$vertUnc, wanderAng=$wanderAng, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {
