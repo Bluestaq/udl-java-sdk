@@ -35,12 +35,13 @@ private constructor(
 ) : Params {
 
     /**
-     * Originating astrometric catalog for this object. Enum: [GAIADR3, HIPPARCOS, USNOBSC].
+     * Originating astrometric catalog for this object (GA (GAIA), HI (HIPPARCOS), UB (USNOBSC), AL,
+     * AP, CA, CR, DU, FK6_I, FK6_III, PS, SK, TD, TP, TX, UC, UL, UH, UP, VH, VS, WD).
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
      *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
-    fun astrometryOrigin(): AstrometryOrigin = body.astrometryOrigin()
+    fun astrometryOrigin(): String = body.astrometryOrigin()
 
     /**
      * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -51,7 +52,8 @@ private constructor(
     fun classificationMarking(): String = body.classificationMarking()
 
     /**
-     * The ID of this object in the specific catalog associated with this record.
+     * The ID of this object in the specific catalog associated with this record. This field will
+     * either contain the value in the gncCatId or sdaCatId field.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
      *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
@@ -121,7 +123,145 @@ private constructor(
     fun id(): Optional<String> = body.id()
 
     /**
-     * The ID of this object in the All Wide-field Infrared Survey Explorer (AllWISE) catalog.
+     * The American Association of Variable Star Observers (AAVSO) Variable Star Index (VSX) (VX)
+     * object ID of this object.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun aavsoVsxId(): Optional<Int> = body.aavsoVsxId()
+
+    /**
+     * Optical AB g magnitude.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun abgmag(): Optional<Double> = body.abgmag()
+
+    /**
+     * Catalog of origin of optical AB g magnitude.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun abgmagOrigin(): Optional<String> = body.abgmagOrigin()
+
+    /**
+     * Uncertainty of optical AB g magnitude.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun abgmagUnc(): Optional<Double> = body.abgmagUnc()
+
+    /**
+     * Optical AB i magnitude.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun abimag(): Optional<Double> = body.abimag()
+
+    /**
+     * Catalog of origin of optical AB i magnitude.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun abimagOrigin(): Optional<String> = body.abimagOrigin()
+
+    /**
+     * Uncertainty of optical AB i magnitude.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun abimagUnc(): Optional<Double> = body.abimagUnc()
+
+    /**
+     * Optical AB r magnitude.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun abrmag(): Optional<Double> = body.abrmag()
+
+    /**
+     * Catalog of origin of optical AB r magnitude.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun abrmagOrigin(): Optional<String> = body.abrmagOrigin()
+
+    /**
+     * Uncertainty of optical AB r magnitude.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun abrmagUnc(): Optional<Double> = body.abrmagUnc()
+
+    /**
+     * Optical AB y magnitude.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun abymag(): Optional<Double> = body.abymag()
+
+    /**
+     * Catalog of origin of optical AB y magnitude.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun abymagOrigin(): Optional<String> = body.abymagOrigin()
+
+    /**
+     * Uncertainty of optical AB y magnitude.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun abymagUnc(): Optional<Double> = body.abymagUnc()
+
+    /**
+     * Optical AB z magnitude.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun abzmag(): Optional<Double> = body.abzmag()
+
+    /**
+     * Catalog of origin of optical AB z magnitude.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun abzmagOrigin(): Optional<String> = body.abzmagOrigin()
+
+    /**
+     * Uncertainty of optical AB z magnitude.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun abzmagUnc(): Optional<Double> = body.abzmagUnc()
+
+    /**
+     * Contamination and confusion indicator in AllWISE.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun allWisEccInd(): Optional<String> = body.allWisEccInd()
+
+    /**
+     * The designation of this object in the All Wide-field Infrared Survey Explorer (AllWISE)
+     * catalog (AL).
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -129,79 +269,72 @@ private constructor(
     fun allWiseId(): Optional<String> = body.allWiseId()
 
     /**
-     * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric W1-band (3.4
-     * microns) magnitude in the Vega system.
+     * Active deblending indicator in AllWISE.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun allWisew1Mag(): Optional<Double> = body.allWisew1Mag()
+    fun allWisEnaInd(): Optional<Int> = body.allWisEnaInd()
 
     /**
-     * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric W1-band (3.4
-     * microns) magnitude uncertainty in the Vega system.
+     * Photometric quality indicator in AllWISE.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun allWisew1MagUnc(): Optional<Double> = body.allWisew1MagUnc()
+    fun allWisEphQualInd(): Optional<String> = body.allWisEphQualInd()
 
     /**
-     * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric W2-band (4.6
-     * microns) magnitude in the Vega system.
+     * The American Association of Variable Star Observers (AAVSO) Photometric All-Sky Survey
+     * (APASS) (AP) name of this object.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun allWisew2Mag(): Optional<Double> = body.allWisew2Mag()
+    fun apassId(): Optional<String> = body.apassId()
 
     /**
-     * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric W2-band (4.6
-     * microns) magnitude uncertainty in the Vega system.
+     * Astrometric excess noise in the Gaia catalog measured in milliarcseconds.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun allWisew2MagUnc(): Optional<Double> = body.allWisew2MagUnc()
+    fun astrometricExcessNoise(): Optional<Double> = body.astrometricExcessNoise()
 
     /**
-     * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric W3-band (12
-     * microns) magnitude in the Vega system.
+     * Astrometric excess noise sigma in Gaia.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun allWisew3Mag(): Optional<Double> = body.allWisew3Mag()
+    fun astrometricExcessNoiseSig(): Optional<Double> = body.astrometricExcessNoiseSig()
 
     /**
-     * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric W3-band (12
-     * microns) magnitude uncertainty in the Vega system.
+     * Optical Johnson B magnitude measured in magnitudes.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun allWisew3MagUnc(): Optional<Double> = body.allWisew3MagUnc()
+    fun bmag(): Optional<Double> = body.bmag()
 
     /**
-     * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric W4-band (22
-     * microns) magnitude in the Vega system.
+     * Catalog of origin of optical Johnson B magnitude (AP, CR, HI).
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun allWisew4Mag(): Optional<Double> = body.allWisew4Mag()
+    fun bmagOrigin(): Optional<String> = body.bmagOrigin()
 
     /**
-     * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric W4-band (22
-     * microns) magnitude uncertainty in the Vega system.
+     * Uncertainty of optical Johnson B magnitude measured in magnitudes.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun allWisew4MagUnc(): Optional<Double> = body.allWisew4MagUnc()
+    fun bmagUnc(): Optional<Double> = body.bmagUnc()
 
     /**
-     * Gaia DR3 optical photometric Bp-band magnitude in the Vega scale.
+     * Gaia optical photometric Bp-band in the Vega scale measured in magnitudes.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -209,12 +342,20 @@ private constructor(
     fun bpmag(): Optional<Double> = body.bpmag()
 
     /**
-     * Gaia DR3 optical Bp-band magnitude uncertainty in the Vega scale.
+     * Gaia optical Bp-band uncertainty in the Vega scale measured in magnitudes.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
     fun bpmagUnc(): Optional<Double> = body.bpmagUnc()
+
+    /**
+     * The Carrasco catalog (CR) identifier of this object.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun carrascoCatId(): Optional<Int> = body.carrascoCatId()
 
     /**
      * The version of the catalog associated with this object.
@@ -223,6 +364,14 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun catVersion(): Optional<String> = body.catVersion()
+
+    /**
+     * The CatWISE2020 (CA) catalog source ID of this object.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun catWise2020Id(): Optional<String> = body.catWise2020Id()
 
     /**
      * Time the row was created in the database, auto-populated by the system.
@@ -249,7 +398,15 @@ private constructor(
     fun decUnc(): Optional<Double> = body.decUnc()
 
     /**
-     * The ID of this object in the Gaia DR3 Catalog.
+     * The Ducati catalog (DU) name of this object.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun ducatiCatId(): Optional<String> = body.ducatiCatId()
+
+    /**
+     * The source ID of this object in the Gaia DR3 Catalog (GA).
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -257,7 +414,7 @@ private constructor(
     fun gaiadr3CatId(): Optional<Long> = body.gaiadr3CatId()
 
     /**
-     * Gaia DR3 optical photometric G-band magnitude in the Vega scale.
+     * Gaia optical photometric G-band in the Vega scale measured in magnitudes.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -265,7 +422,7 @@ private constructor(
     fun gmag(): Optional<Double> = body.gmag()
 
     /**
-     * Gaia DR3 optical photometric G-band magnitude uncertainty in the Vega scale.
+     * Gaia optical photometric G-band uncertainty in the Vega scale measured in magnitudes.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -273,7 +430,8 @@ private constructor(
     fun gmagUnc(): Optional<Double> = body.gmagUnc()
 
     /**
-     * The ID of this object in the Guidance and Navagation Control (GNC) Catalog.
+     * The ID of this object in the Guidance and Navigation Control (GNC) Catalog. If this field is
+     * populated it shall match the csId field.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -281,7 +439,15 @@ private constructor(
     fun gncCatId(): Optional<Int> = body.gncCatId()
 
     /**
-     * The ID of this object in the Hipparcos Catalog.
+     * The Healpix index. Consumers should contact the provider for details on the indexing scheme.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun healpixIndex(): Optional<Int> = body.healpixIndex()
+
+    /**
+     * The HIP ID of this object in the Hipparcos Catalog (HI).
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -289,8 +455,7 @@ private constructor(
     fun hipCatId(): Optional<Int> = body.hipCatId()
 
     /**
-     * Two Micron All Sky Survey (2MASS) Point Source Catalog (PSC) near-infrared photometric H-band
-     * magnitude in the Vega scale.
+     * Near-infrared photometric H-band magnitude in the Vega scale measured in magnitudes.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -298,8 +463,16 @@ private constructor(
     fun hmag(): Optional<Double> = body.hmag()
 
     /**
-     * Two Micron All Sky Survey (2MASS) Point Source Catalog (PSC) near-infrared photometric H-band
-     * magnitude uncertainty in the Vega scale.
+     * Near-infrared photometric H-band catalog of origin in the Vega scale (TP, UC, UL, UP, VH).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun hmagOrigin(): Optional<String> = body.hmagOrigin()
+
+    /**
+     * Near-infrared photometric H-band magnitude uncertainty in the Vega scale measured in
+     * magnitudes.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -307,8 +480,31 @@ private constructor(
     fun hmagUnc(): Optional<Double> = body.hmagUnc()
 
     /**
-     * Two Micron All Sky Survey (2MASS) Point Source Catalog (PSC) near-infrared photometric J-band
-     * magnitude in the Vega scale.
+     * Optical Johnson I magnitude measured in magnitudes.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun imag(): Optional<Double> = body.imag()
+
+    /**
+     * Catalog of origin of optical Johnson I magnitude (CR, GA, HI).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun imagOrigin(): Optional<String> = body.imagOrigin()
+
+    /**
+     * Uncertainty of optical Johnson I magnitude measured in magnitudes.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun imagUnc(): Optional<Double> = body.imagUnc()
+
+    /**
+     * Near-infrared photometric J-band magnitude in the Vega scale measured in magnitudes.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -316,8 +512,16 @@ private constructor(
     fun jmag(): Optional<Double> = body.jmag()
 
     /**
-     * Two Micron All Sky Survey (2MASS) Point Source Catalog (PSC) near-infrared photometric J-band
-     * magnitude uncertainty in the Vega scale.
+     * Near-infrared photometric J-band catalog of origin in the Vega scale (TP, UH, UL, UP, VH).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun jmagOrigin(): Optional<String> = body.jmagOrigin()
+
+    /**
+     * Near-infrared photometric J-band magnitude uncertainty in the Vega scale measured in
+     * magnitudes.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -325,8 +529,7 @@ private constructor(
     fun jmagUnc(): Optional<Double> = body.jmagUnc()
 
     /**
-     * Two Micron All Sky Survey (2MASS) Point Source Catalog (PSC) near-infrared photometric K-band
-     * magnitude in the Vega scale.
+     * Near-infrared photometric K-band magnitude in the Vega scale measured in magnitudes.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -334,13 +537,30 @@ private constructor(
     fun kmag(): Optional<Double> = body.kmag()
 
     /**
-     * Two Micron All Sky Survey (2MASS) Point Source Catalog (PSC) near-infrared photometric K-band
-     * magnitude uncertainty in the Vega scale.
+     * Near-infrared photometric K-band catalog of origin in the Vega scale (TP, UC, UH, UL, UP,
+     * VH).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun kmagOrigin(): Optional<String> = body.kmagOrigin()
+
+    /**
+     * Near-infrared photometric K-band magnitude uncertainty in the Vega scale measured in
+     * magnitudes.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
     fun kmagUnc(): Optional<Double> = body.kmagUnc()
+
+    /**
+     * Morphology indicator.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun morphologyInd(): Optional<Int> = body.morphologyInd()
 
     /**
      * Flag indicating that this is a multiple object source.
@@ -358,6 +578,14 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun multiplicity(): Optional<String> = body.multiplicity()
+
+    /**
+     * Dec of nearest neighbor measured in degrees.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun neighborDec(): Optional<Double> = body.neighborDec()
 
     /**
      * Distance between source and nearest neighbor, in arcseconds.
@@ -384,6 +612,14 @@ private constructor(
     fun neighborId(): Optional<Int> = body.neighborId()
 
     /**
+     * RA of nearest neighbor measured in degrees.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun neighborRa(): Optional<Double> = body.neighborRa()
+
+    /**
      * Identifier indicating the source is a non-single star and additional information is available
      * in non-single star tables. Consumers should contact the provider for details on the
      * specifications.
@@ -392,6 +628,14 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun nonSingleStar(): Optional<String> = body.nonSingleStar()
+
+    /**
+     * Number of neighbors.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun numNeighbors(): Optional<Int> = body.numNeighbors()
 
     /**
      * Originating system or organization which produced the data, if different from the source. The
@@ -413,6 +657,14 @@ private constructor(
     fun origNetwork(): Optional<String> = body.origNetwork()
 
     /**
+     * The Panoramic Survey Telescope and Rapid Response System (Pan-STARRS) (PS) object ID.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun panStarrsId(): Optional<Long> = body.panStarrsId()
+
+    /**
      * Absolute stellar parallax of the source, in milliarcseconds.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
@@ -429,7 +681,8 @@ private constructor(
     fun parallaxUnc(): Optional<Double> = body.parallaxUnc()
 
     /**
-     * Proper motion in declination of the source, in milliarcseconds/year, at the reference epoch.
+     * Proper motion in declination of the source, in milliarcseconds per year, at the reference
+     * epoch.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -437,7 +690,7 @@ private constructor(
     fun pmdec(): Optional<Double> = body.pmdec()
 
     /**
-     * Uncertainty of proper motion in declination, in milliarcseconds/year.
+     * Uncertainty of proper motion in declination, in milliarcseconds per year.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -445,7 +698,7 @@ private constructor(
     fun pmdecUnc(): Optional<Double> = body.pmdecUnc()
 
     /**
-     * Proper motion in right ascension of the source, in milliarcseconds/year, at the reference
+     * Proper motion in right ascension of the source, in milliarcseconds per year, at the reference
      * epoch.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
@@ -454,7 +707,7 @@ private constructor(
     fun pmra(): Optional<Double> = body.pmra()
 
     /**
-     * Uncertainty of proper motion in right ascension, in milliarcseconds/year.
+     * Uncertainty of proper motion in right ascension, in milliarcseconds per year.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -463,7 +716,7 @@ private constructor(
 
     /**
      * Flag indicating that the proper motion uncertainty in either ra or dec is greater than 10
-     * milliarcseconds/year.
+     * milliarcseconds per year.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -480,6 +733,30 @@ private constructor(
     fun posUncFlag(): Optional<Boolean> = body.posUncFlag()
 
     /**
+     * Astrometry correction flag in Pan-STARRS.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun ps1astrometryCorrectionFlag(): Optional<Int> = body.ps1astrometryCorrectionFlag()
+
+    /**
+     * Object information flag in Pan-STARRS.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun ps1ObjInfoFlag(): Optional<Int> = body.ps1ObjInfoFlag()
+
+    /**
+     * Quality flag in Pan-STARRS.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun ps1QualityFlag(): Optional<Int> = body.ps1QualityFlag()
+
+    /**
      * Uncertainty of the right ascension of the source, in milliarcseconds, at the reference epoch.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
@@ -488,7 +765,31 @@ private constructor(
     fun raUnc(): Optional<Double> = body.raUnc()
 
     /**
-     * Gaia DR3 optical Rp-band magnitude in the Vega scale.
+     * Optical Johnson R magnitude measured in magnitudes.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun rmag(): Optional<Double> = body.rmag()
+
+    /**
+     * Catalog of origin of the Optical Johnson R magnitude (CR, GA).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun rmagOrigin(): Optional<String> = body.rmagOrigin()
+
+    /**
+     * Uncertainty of the Optical Johnson R magnitude measured in magnitudes.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun rmagUnc(): Optional<Double> = body.rmagUnc()
+
+    /**
+     * Gaia optical Rp-band in the Vega scale measured in magnitudes.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -496,12 +797,46 @@ private constructor(
     fun rpmag(): Optional<Double> = body.rpmag()
 
     /**
-     * Gaia DR3 optical photometric Rp-band magnitude uncertainty in the Vega scale.
+     * Gaia optical photometric Rp-band uncertainty in the Vega scale measured in magnitudes.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
     fun rpmagUnc(): Optional<Double> = body.rpmagUnc()
+
+    /**
+     * RUWE in Gaia.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun ruwe(): Optional<Double> = body.ruwe()
+
+    /**
+     * The ID of this object in the Space Domain Awareness (SDA) Catalog. If this field is populated
+     * it shall match the csId field.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun sdaCatId(): Optional<Long> = body.sdaCatId()
+
+    /**
+     * Original G magnitude if the source is in Gaia, otherwise the magnitude is converted from
+     * other photometric passbands, when possible, measured in magnitudes.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun sgmag(): Optional<Double> = body.sgmag()
+
+    /**
+     * Uncertainty of sgmag measured in magnitudes.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun sgmagUnc(): Optional<Double> = body.sgmagUnc()
 
     /**
      * Photocentric shift caused by neighbors, in arcseconds.
@@ -538,7 +873,16 @@ private constructor(
     fun shiftFwhm6(): Optional<Double> = body.shiftFwhm6()
 
     /**
-     * The ID of this object in the Two Micron All Sky Survey (2MASS) Point Source Catalog (PSC).
+     * The SkyMapper (SK) catalog object ID.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun skyMapperId(): Optional<Int> = body.skyMapperId()
+
+    /**
+     * The designation of this object in the Two Micron All Sky Survey (2MASS) Point Source Catalog
+     * (TP).
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -546,7 +890,76 @@ private constructor(
     fun twoMassId(): Optional<String> = body.twoMassId()
 
     /**
-     * Time the row was updated in the database.
+     * Photometric (PH) quality indicator in 2MASS PSC.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun twoMassPhQualInd(): Optional<String> = body.twoMassPhQualInd()
+
+    /**
+     * Read flag in 2MASS PSC.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun twoMassReadFlag(): Optional<String> = body.twoMassReadFlag()
+
+    /**
+     * The Two Micron All Sky Survey (2MASS) Extended Source Catalog (XSC) (TX) designation of this
+     * object.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun twoMassXscId(): Optional<String> = body.twoMassXscId()
+
+    /**
+     * The Tycho Double Star Catalog (TD) identifier (specified as Tycho-2 ID) of this object.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun tychoDscId(): Optional<Long> = body.tychoDscId()
+
+    /**
+     * The United Kingdom Infrared Telescope (UKIRT) Hemispheric Survey (UHS) (UH) source ID of this
+     * object.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun uhsId(): Optional<Long> = body.uhsId()
+
+    /**
+     * The United Kingdom Infrared Deep Sky Survey (UKIDSS) Galactic Clusters Survey (GCS) (UC)
+     * source ID of this object.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun ukidssGcsId(): Optional<Long> = body.ukidssGcsId()
+
+    /**
+     * The United Kingdom Infrared Deep Sky Survey (UKIDSS) Galactic Plane Survey (GPS) (UP) source
+     * ID of this object.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun ukidssGpsId(): Optional<Long> = body.ukidssGpsId()
+
+    /**
+     * The United Kingdom Infrared Deep Sky Survey (UKIDSS) Large Area Survey (LAS) (UL) source ID
+     * of this object.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun ukidssLasId(): Optional<Long> = body.ukidssLasId()
+
+    /**
+     * Time the row was last updated in the database, auto-populated by the system.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -554,7 +967,7 @@ private constructor(
     fun updatedAt(): Optional<OffsetDateTime> = body.updatedAt()
 
     /**
-     * Application user who updated the row in the database.
+     * Application user who updated the row in the database, auto-populated by the system.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -579,12 +992,190 @@ private constructor(
     fun variability(): Optional<String> = body.variability()
 
     /**
+     * The Visible and Infrared Survey Telescope for Astronomy (VISTA) Hemisphere Survey (VHS) (VS)
+     * source ID of this object.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun vhsId(): Optional<Long> = body.vhsId()
+
+    /**
+     * Optical Johnson V magnitude measured in magnitudes.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun vmag(): Optional<Double> = body.vmag()
+
+    /**
+     * Catalog of origin of Optical Johnson V magnitude (AP, CR, DU, GA, HI).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun vmagOrigin(): Optional<String> = body.vmagOrigin()
+
+    /**
+     * Uncertainty of the Optical Johnson V magnitude measured in magnitudes.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun vmagUnc(): Optional<Double> = body.vmagUnc()
+
+    /**
+     * Mid-infrared photometric W1-band (3.4 microns) magnitude in the Vega system measured in
+     * magnitudes.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun w1mag(): Optional<Double> = body.w1mag()
+
+    /**
+     * Mid-infrared photometric W1-band (3.4 microns) catalog of origin in the Vega system (AL, CA).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun w1magOrigin(): Optional<String> = body.w1magOrigin()
+
+    /**
+     * Mid-infrared photometric W1-band (3.4 microns) magnitude uncertainty in the Vega system
+     * measured in magnitudes.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun w1magUnc(): Optional<Double> = body.w1magUnc()
+
+    /**
+     * Mid-infrared photometric W1-band (3.4 microns) saturated pixel fraction in the Vega system
+     * measured in magnitudes.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun w1sat(): Optional<Double> = body.w1sat()
+
+    /**
+     * Mid-infrared photometric W2-band (4.6 microns) magnitude in the Vega system measured in
+     * magnitudes.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun w2mag(): Optional<Double> = body.w2mag()
+
+    /**
+     * Mid-infrared photometric W2-band (4.6 microns) catalog of origin in the Vega system (AL, CA).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun w2magOrigin(): Optional<String> = body.w2magOrigin()
+
+    /**
+     * Mid-infrared photometric W2-band (4.6 microns) magnitude uncertainty in the Vega system
+     * measured in magnitudes.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun w2magUnc(): Optional<Double> = body.w2magUnc()
+
+    /**
+     * Mid-infrared photometric W2-band (4.6 microns) saturated pixel fraction in the Vega system.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun w2sat(): Optional<Double> = body.w2sat()
+
+    /**
+     * Mid-infrared photometric W3-band (12 microns) magnitude in the Vega system measured in
+     * magnitudes.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun w3mag(): Optional<Double> = body.w3mag()
+
+    /**
+     * Mid-infrared photometric W3-band (12 microns) catalog of origin in the Vega system (AL).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun w3magOrigin(): Optional<String> = body.w3magOrigin()
+
+    /**
+     * Mid-infrared photometric W3-band (12 microns) magnitude uncertainty in the Vega system
+     * measured in magnitudes.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun w3magUnc(): Optional<Double> = body.w3magUnc()
+
+    /**
+     * Mid-infrared photometric W3-band (12 microns) saturated pixel fraction in the Vega system.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun w3sat(): Optional<Double> = body.w3sat()
+
+    /**
+     * Mid-infrared photometric W4-band (22 microns) magnitude in the Vega system measured in
+     * magnitudes.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun w4mag(): Optional<Double> = body.w4mag()
+
+    /**
+     * Mid-infrared photometric W4-band (22 microns) catalog of origin in the Vega system (AL).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun w4magOrigin(): Optional<String> = body.w4magOrigin()
+
+    /**
+     * Mid-infrared photometric W4-band (22 microns) magnitude uncertainty in the Vega system
+     * measured in magnitudes.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun w4magUnc(): Optional<Double> = body.w4magUnc()
+
+    /**
+     * Mid-infrared photometric W4-band (22 microns) saturated pixel fraction in the Vega system.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun w4sat(): Optional<Double> = body.w4sat()
+
+    /**
+     * The Washington Double Star Catalog (WD) identifier of this object.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun wdsCatId(): Optional<String> = body.wdsCatId()
+
+    /**
      * Returns the raw JSON value of [astrometryOrigin].
      *
      * Unlike [astrometryOrigin], this method doesn't throw if the JSON field has an unexpected
      * type.
      */
-    fun _astrometryOrigin(): JsonField<AstrometryOrigin> = body._astrometryOrigin()
+    fun _astrometryOrigin(): JsonField<String> = body._astrometryOrigin()
 
     /**
      * Returns the raw JSON value of [classificationMarking].
@@ -644,6 +1235,125 @@ private constructor(
     fun _id(): JsonField<String> = body._id()
 
     /**
+     * Returns the raw JSON value of [aavsoVsxId].
+     *
+     * Unlike [aavsoVsxId], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _aavsoVsxId(): JsonField<Int> = body._aavsoVsxId()
+
+    /**
+     * Returns the raw JSON value of [abgmag].
+     *
+     * Unlike [abgmag], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _abgmag(): JsonField<Double> = body._abgmag()
+
+    /**
+     * Returns the raw JSON value of [abgmagOrigin].
+     *
+     * Unlike [abgmagOrigin], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _abgmagOrigin(): JsonField<String> = body._abgmagOrigin()
+
+    /**
+     * Returns the raw JSON value of [abgmagUnc].
+     *
+     * Unlike [abgmagUnc], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _abgmagUnc(): JsonField<Double> = body._abgmagUnc()
+
+    /**
+     * Returns the raw JSON value of [abimag].
+     *
+     * Unlike [abimag], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _abimag(): JsonField<Double> = body._abimag()
+
+    /**
+     * Returns the raw JSON value of [abimagOrigin].
+     *
+     * Unlike [abimagOrigin], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _abimagOrigin(): JsonField<String> = body._abimagOrigin()
+
+    /**
+     * Returns the raw JSON value of [abimagUnc].
+     *
+     * Unlike [abimagUnc], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _abimagUnc(): JsonField<Double> = body._abimagUnc()
+
+    /**
+     * Returns the raw JSON value of [abrmag].
+     *
+     * Unlike [abrmag], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _abrmag(): JsonField<Double> = body._abrmag()
+
+    /**
+     * Returns the raw JSON value of [abrmagOrigin].
+     *
+     * Unlike [abrmagOrigin], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _abrmagOrigin(): JsonField<String> = body._abrmagOrigin()
+
+    /**
+     * Returns the raw JSON value of [abrmagUnc].
+     *
+     * Unlike [abrmagUnc], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _abrmagUnc(): JsonField<Double> = body._abrmagUnc()
+
+    /**
+     * Returns the raw JSON value of [abymag].
+     *
+     * Unlike [abymag], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _abymag(): JsonField<Double> = body._abymag()
+
+    /**
+     * Returns the raw JSON value of [abymagOrigin].
+     *
+     * Unlike [abymagOrigin], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _abymagOrigin(): JsonField<String> = body._abymagOrigin()
+
+    /**
+     * Returns the raw JSON value of [abymagUnc].
+     *
+     * Unlike [abymagUnc], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _abymagUnc(): JsonField<Double> = body._abymagUnc()
+
+    /**
+     * Returns the raw JSON value of [abzmag].
+     *
+     * Unlike [abzmag], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _abzmag(): JsonField<Double> = body._abzmag()
+
+    /**
+     * Returns the raw JSON value of [abzmagOrigin].
+     *
+     * Unlike [abzmagOrigin], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _abzmagOrigin(): JsonField<String> = body._abzmagOrigin()
+
+    /**
+     * Returns the raw JSON value of [abzmagUnc].
+     *
+     * Unlike [abzmagUnc], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _abzmagUnc(): JsonField<Double> = body._abzmagUnc()
+
+    /**
+     * Returns the raw JSON value of [allWisEccInd].
+     *
+     * Unlike [allWisEccInd], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _allWisEccInd(): JsonField<String> = body._allWisEccInd()
+
+    /**
      * Returns the raw JSON value of [allWiseId].
      *
      * Unlike [allWiseId], this method doesn't throw if the JSON field has an unexpected type.
@@ -651,60 +1361,63 @@ private constructor(
     fun _allWiseId(): JsonField<String> = body._allWiseId()
 
     /**
-     * Returns the raw JSON value of [allWisew1Mag].
+     * Returns the raw JSON value of [allWisEnaInd].
      *
-     * Unlike [allWisew1Mag], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [allWisEnaInd], this method doesn't throw if the JSON field has an unexpected type.
      */
-    fun _allWisew1Mag(): JsonField<Double> = body._allWisew1Mag()
+    fun _allWisEnaInd(): JsonField<Int> = body._allWisEnaInd()
 
     /**
-     * Returns the raw JSON value of [allWisew1MagUnc].
+     * Returns the raw JSON value of [allWisEphQualInd].
      *
-     * Unlike [allWisew1MagUnc], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [allWisEphQualInd], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
-    fun _allWisew1MagUnc(): JsonField<Double> = body._allWisew1MagUnc()
+    fun _allWisEphQualInd(): JsonField<String> = body._allWisEphQualInd()
 
     /**
-     * Returns the raw JSON value of [allWisew2Mag].
+     * Returns the raw JSON value of [apassId].
      *
-     * Unlike [allWisew2Mag], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [apassId], this method doesn't throw if the JSON field has an unexpected type.
      */
-    fun _allWisew2Mag(): JsonField<Double> = body._allWisew2Mag()
+    fun _apassId(): JsonField<String> = body._apassId()
 
     /**
-     * Returns the raw JSON value of [allWisew2MagUnc].
+     * Returns the raw JSON value of [astrometricExcessNoise].
      *
-     * Unlike [allWisew2MagUnc], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [astrometricExcessNoise], this method doesn't throw if the JSON field has an
+     * unexpected type.
      */
-    fun _allWisew2MagUnc(): JsonField<Double> = body._allWisew2MagUnc()
+    fun _astrometricExcessNoise(): JsonField<Double> = body._astrometricExcessNoise()
 
     /**
-     * Returns the raw JSON value of [allWisew3Mag].
+     * Returns the raw JSON value of [astrometricExcessNoiseSig].
      *
-     * Unlike [allWisew3Mag], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [astrometricExcessNoiseSig], this method doesn't throw if the JSON field has an
+     * unexpected type.
      */
-    fun _allWisew3Mag(): JsonField<Double> = body._allWisew3Mag()
+    fun _astrometricExcessNoiseSig(): JsonField<Double> = body._astrometricExcessNoiseSig()
 
     /**
-     * Returns the raw JSON value of [allWisew3MagUnc].
+     * Returns the raw JSON value of [bmag].
      *
-     * Unlike [allWisew3MagUnc], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [bmag], this method doesn't throw if the JSON field has an unexpected type.
      */
-    fun _allWisew3MagUnc(): JsonField<Double> = body._allWisew3MagUnc()
+    fun _bmag(): JsonField<Double> = body._bmag()
 
     /**
-     * Returns the raw JSON value of [allWisew4Mag].
+     * Returns the raw JSON value of [bmagOrigin].
      *
-     * Unlike [allWisew4Mag], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [bmagOrigin], this method doesn't throw if the JSON field has an unexpected type.
      */
-    fun _allWisew4Mag(): JsonField<Double> = body._allWisew4Mag()
+    fun _bmagOrigin(): JsonField<String> = body._bmagOrigin()
 
     /**
-     * Returns the raw JSON value of [allWisew4MagUnc].
+     * Returns the raw JSON value of [bmagUnc].
      *
-     * Unlike [allWisew4MagUnc], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [bmagUnc], this method doesn't throw if the JSON field has an unexpected type.
      */
-    fun _allWisew4MagUnc(): JsonField<Double> = body._allWisew4MagUnc()
+    fun _bmagUnc(): JsonField<Double> = body._bmagUnc()
 
     /**
      * Returns the raw JSON value of [bpmag].
@@ -721,11 +1434,25 @@ private constructor(
     fun _bpmagUnc(): JsonField<Double> = body._bpmagUnc()
 
     /**
+     * Returns the raw JSON value of [carrascoCatId].
+     *
+     * Unlike [carrascoCatId], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _carrascoCatId(): JsonField<Int> = body._carrascoCatId()
+
+    /**
      * Returns the raw JSON value of [catVersion].
      *
      * Unlike [catVersion], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _catVersion(): JsonField<String> = body._catVersion()
+
+    /**
+     * Returns the raw JSON value of [catWise2020Id].
+     *
+     * Unlike [catWise2020Id], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _catWise2020Id(): JsonField<String> = body._catWise2020Id()
 
     /**
      * Returns the raw JSON value of [createdAt].
@@ -747,6 +1474,13 @@ private constructor(
      * Unlike [decUnc], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _decUnc(): JsonField<Double> = body._decUnc()
+
+    /**
+     * Returns the raw JSON value of [ducatiCatId].
+     *
+     * Unlike [ducatiCatId], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _ducatiCatId(): JsonField<String> = body._ducatiCatId()
 
     /**
      * Returns the raw JSON value of [gaiadr3CatId].
@@ -777,6 +1511,13 @@ private constructor(
     fun _gncCatId(): JsonField<Int> = body._gncCatId()
 
     /**
+     * Returns the raw JSON value of [healpixIndex].
+     *
+     * Unlike [healpixIndex], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _healpixIndex(): JsonField<Int> = body._healpixIndex()
+
+    /**
      * Returns the raw JSON value of [hipCatId].
      *
      * Unlike [hipCatId], this method doesn't throw if the JSON field has an unexpected type.
@@ -791,6 +1532,13 @@ private constructor(
     fun _hmag(): JsonField<Double> = body._hmag()
 
     /**
+     * Returns the raw JSON value of [hmagOrigin].
+     *
+     * Unlike [hmagOrigin], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _hmagOrigin(): JsonField<String> = body._hmagOrigin()
+
+    /**
      * Returns the raw JSON value of [hmagUnc].
      *
      * Unlike [hmagUnc], this method doesn't throw if the JSON field has an unexpected type.
@@ -798,11 +1546,39 @@ private constructor(
     fun _hmagUnc(): JsonField<Double> = body._hmagUnc()
 
     /**
+     * Returns the raw JSON value of [imag].
+     *
+     * Unlike [imag], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _imag(): JsonField<Double> = body._imag()
+
+    /**
+     * Returns the raw JSON value of [imagOrigin].
+     *
+     * Unlike [imagOrigin], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _imagOrigin(): JsonField<String> = body._imagOrigin()
+
+    /**
+     * Returns the raw JSON value of [imagUnc].
+     *
+     * Unlike [imagUnc], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _imagUnc(): JsonField<Double> = body._imagUnc()
+
+    /**
      * Returns the raw JSON value of [jmag].
      *
      * Unlike [jmag], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _jmag(): JsonField<Double> = body._jmag()
+
+    /**
+     * Returns the raw JSON value of [jmagOrigin].
+     *
+     * Unlike [jmagOrigin], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _jmagOrigin(): JsonField<String> = body._jmagOrigin()
 
     /**
      * Returns the raw JSON value of [jmagUnc].
@@ -819,11 +1595,25 @@ private constructor(
     fun _kmag(): JsonField<Double> = body._kmag()
 
     /**
+     * Returns the raw JSON value of [kmagOrigin].
+     *
+     * Unlike [kmagOrigin], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _kmagOrigin(): JsonField<String> = body._kmagOrigin()
+
+    /**
      * Returns the raw JSON value of [kmagUnc].
      *
      * Unlike [kmagUnc], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _kmagUnc(): JsonField<Double> = body._kmagUnc()
+
+    /**
+     * Returns the raw JSON value of [morphologyInd].
+     *
+     * Unlike [morphologyInd], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _morphologyInd(): JsonField<Int> = body._morphologyInd()
 
     /**
      * Returns the raw JSON value of [multFlag].
@@ -838,6 +1628,13 @@ private constructor(
      * Unlike [multiplicity], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _multiplicity(): JsonField<String> = body._multiplicity()
+
+    /**
+     * Returns the raw JSON value of [neighborDec].
+     *
+     * Unlike [neighborDec], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _neighborDec(): JsonField<Double> = body._neighborDec()
 
     /**
      * Returns the raw JSON value of [neighborDistance].
@@ -862,11 +1659,25 @@ private constructor(
     fun _neighborId(): JsonField<Int> = body._neighborId()
 
     /**
+     * Returns the raw JSON value of [neighborRa].
+     *
+     * Unlike [neighborRa], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _neighborRa(): JsonField<Double> = body._neighborRa()
+
+    /**
      * Returns the raw JSON value of [nonSingleStar].
      *
      * Unlike [nonSingleStar], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _nonSingleStar(): JsonField<String> = body._nonSingleStar()
+
+    /**
+     * Returns the raw JSON value of [numNeighbors].
+     *
+     * Unlike [numNeighbors], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _numNeighbors(): JsonField<Int> = body._numNeighbors()
 
     /**
      * Returns the raw JSON value of [origin].
@@ -881,6 +1692,13 @@ private constructor(
      * Unlike [origNetwork], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _origNetwork(): JsonField<String> = body._origNetwork()
+
+    /**
+     * Returns the raw JSON value of [panStarrsId].
+     *
+     * Unlike [panStarrsId], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _panStarrsId(): JsonField<Long> = body._panStarrsId()
 
     /**
      * Returns the raw JSON value of [parallax].
@@ -939,11 +1757,54 @@ private constructor(
     fun _posUncFlag(): JsonField<Boolean> = body._posUncFlag()
 
     /**
+     * Returns the raw JSON value of [ps1astrometryCorrectionFlag].
+     *
+     * Unlike [ps1astrometryCorrectionFlag], this method doesn't throw if the JSON field has an
+     * unexpected type.
+     */
+    fun _ps1astrometryCorrectionFlag(): JsonField<Int> = body._ps1astrometryCorrectionFlag()
+
+    /**
+     * Returns the raw JSON value of [ps1ObjInfoFlag].
+     *
+     * Unlike [ps1ObjInfoFlag], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _ps1ObjInfoFlag(): JsonField<Int> = body._ps1ObjInfoFlag()
+
+    /**
+     * Returns the raw JSON value of [ps1QualityFlag].
+     *
+     * Unlike [ps1QualityFlag], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _ps1QualityFlag(): JsonField<Int> = body._ps1QualityFlag()
+
+    /**
      * Returns the raw JSON value of [raUnc].
      *
      * Unlike [raUnc], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _raUnc(): JsonField<Double> = body._raUnc()
+
+    /**
+     * Returns the raw JSON value of [rmag].
+     *
+     * Unlike [rmag], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _rmag(): JsonField<Double> = body._rmag()
+
+    /**
+     * Returns the raw JSON value of [rmagOrigin].
+     *
+     * Unlike [rmagOrigin], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _rmagOrigin(): JsonField<String> = body._rmagOrigin()
+
+    /**
+     * Returns the raw JSON value of [rmagUnc].
+     *
+     * Unlike [rmagUnc], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _rmagUnc(): JsonField<Double> = body._rmagUnc()
 
     /**
      * Returns the raw JSON value of [rpmag].
@@ -958,6 +1819,34 @@ private constructor(
      * Unlike [rpmagUnc], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _rpmagUnc(): JsonField<Double> = body._rpmagUnc()
+
+    /**
+     * Returns the raw JSON value of [ruwe].
+     *
+     * Unlike [ruwe], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _ruwe(): JsonField<Double> = body._ruwe()
+
+    /**
+     * Returns the raw JSON value of [sdaCatId].
+     *
+     * Unlike [sdaCatId], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _sdaCatId(): JsonField<Long> = body._sdaCatId()
+
+    /**
+     * Returns the raw JSON value of [sgmag].
+     *
+     * Unlike [sgmag], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _sgmag(): JsonField<Double> = body._sgmag()
+
+    /**
+     * Returns the raw JSON value of [sgmagUnc].
+     *
+     * Unlike [sgmagUnc], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _sgmagUnc(): JsonField<Double> = body._sgmagUnc()
 
     /**
      * Returns the raw JSON value of [shift].
@@ -988,11 +1877,75 @@ private constructor(
     fun _shiftFwhm6(): JsonField<Double> = body._shiftFwhm6()
 
     /**
+     * Returns the raw JSON value of [skyMapperId].
+     *
+     * Unlike [skyMapperId], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _skyMapperId(): JsonField<Int> = body._skyMapperId()
+
+    /**
      * Returns the raw JSON value of [twoMassId].
      *
      * Unlike [twoMassId], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _twoMassId(): JsonField<String> = body._twoMassId()
+
+    /**
+     * Returns the raw JSON value of [twoMassPhQualInd].
+     *
+     * Unlike [twoMassPhQualInd], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    fun _twoMassPhQualInd(): JsonField<String> = body._twoMassPhQualInd()
+
+    /**
+     * Returns the raw JSON value of [twoMassReadFlag].
+     *
+     * Unlike [twoMassReadFlag], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _twoMassReadFlag(): JsonField<String> = body._twoMassReadFlag()
+
+    /**
+     * Returns the raw JSON value of [twoMassXscId].
+     *
+     * Unlike [twoMassXscId], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _twoMassXscId(): JsonField<String> = body._twoMassXscId()
+
+    /**
+     * Returns the raw JSON value of [tychoDscId].
+     *
+     * Unlike [tychoDscId], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _tychoDscId(): JsonField<Long> = body._tychoDscId()
+
+    /**
+     * Returns the raw JSON value of [uhsId].
+     *
+     * Unlike [uhsId], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _uhsId(): JsonField<Long> = body._uhsId()
+
+    /**
+     * Returns the raw JSON value of [ukidssGcsId].
+     *
+     * Unlike [ukidssGcsId], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _ukidssGcsId(): JsonField<Long> = body._ukidssGcsId()
+
+    /**
+     * Returns the raw JSON value of [ukidssGpsId].
+     *
+     * Unlike [ukidssGpsId], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _ukidssGpsId(): JsonField<Long> = body._ukidssGpsId()
+
+    /**
+     * Returns the raw JSON value of [ukidssLasId].
+     *
+     * Unlike [ukidssLasId], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _ukidssLasId(): JsonField<Long> = body._ukidssLasId()
 
     /**
      * Returns the raw JSON value of [updatedAt].
@@ -1021,6 +1974,153 @@ private constructor(
      * Unlike [variability], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _variability(): JsonField<String> = body._variability()
+
+    /**
+     * Returns the raw JSON value of [vhsId].
+     *
+     * Unlike [vhsId], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _vhsId(): JsonField<Long> = body._vhsId()
+
+    /**
+     * Returns the raw JSON value of [vmag].
+     *
+     * Unlike [vmag], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _vmag(): JsonField<Double> = body._vmag()
+
+    /**
+     * Returns the raw JSON value of [vmagOrigin].
+     *
+     * Unlike [vmagOrigin], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _vmagOrigin(): JsonField<String> = body._vmagOrigin()
+
+    /**
+     * Returns the raw JSON value of [vmagUnc].
+     *
+     * Unlike [vmagUnc], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _vmagUnc(): JsonField<Double> = body._vmagUnc()
+
+    /**
+     * Returns the raw JSON value of [w1mag].
+     *
+     * Unlike [w1mag], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _w1mag(): JsonField<Double> = body._w1mag()
+
+    /**
+     * Returns the raw JSON value of [w1magOrigin].
+     *
+     * Unlike [w1magOrigin], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _w1magOrigin(): JsonField<String> = body._w1magOrigin()
+
+    /**
+     * Returns the raw JSON value of [w1magUnc].
+     *
+     * Unlike [w1magUnc], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _w1magUnc(): JsonField<Double> = body._w1magUnc()
+
+    /**
+     * Returns the raw JSON value of [w1sat].
+     *
+     * Unlike [w1sat], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _w1sat(): JsonField<Double> = body._w1sat()
+
+    /**
+     * Returns the raw JSON value of [w2mag].
+     *
+     * Unlike [w2mag], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _w2mag(): JsonField<Double> = body._w2mag()
+
+    /**
+     * Returns the raw JSON value of [w2magOrigin].
+     *
+     * Unlike [w2magOrigin], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _w2magOrigin(): JsonField<String> = body._w2magOrigin()
+
+    /**
+     * Returns the raw JSON value of [w2magUnc].
+     *
+     * Unlike [w2magUnc], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _w2magUnc(): JsonField<Double> = body._w2magUnc()
+
+    /**
+     * Returns the raw JSON value of [w2sat].
+     *
+     * Unlike [w2sat], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _w2sat(): JsonField<Double> = body._w2sat()
+
+    /**
+     * Returns the raw JSON value of [w3mag].
+     *
+     * Unlike [w3mag], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _w3mag(): JsonField<Double> = body._w3mag()
+
+    /**
+     * Returns the raw JSON value of [w3magOrigin].
+     *
+     * Unlike [w3magOrigin], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _w3magOrigin(): JsonField<String> = body._w3magOrigin()
+
+    /**
+     * Returns the raw JSON value of [w3magUnc].
+     *
+     * Unlike [w3magUnc], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _w3magUnc(): JsonField<Double> = body._w3magUnc()
+
+    /**
+     * Returns the raw JSON value of [w3sat].
+     *
+     * Unlike [w3sat], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _w3sat(): JsonField<Double> = body._w3sat()
+
+    /**
+     * Returns the raw JSON value of [w4mag].
+     *
+     * Unlike [w4mag], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _w4mag(): JsonField<Double> = body._w4mag()
+
+    /**
+     * Returns the raw JSON value of [w4magOrigin].
+     *
+     * Unlike [w4magOrigin], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _w4magOrigin(): JsonField<String> = body._w4magOrigin()
+
+    /**
+     * Returns the raw JSON value of [w4magUnc].
+     *
+     * Unlike [w4magUnc], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _w4magUnc(): JsonField<Double> = body._w4magUnc()
+
+    /**
+     * Returns the raw JSON value of [w4sat].
+     *
+     * Unlike [w4sat], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _w4sat(): JsonField<Double> = body._w4sat()
+
+    /**
+     * Returns the raw JSON value of [wdsCatId].
+     *
+     * Unlike [wdsCatId], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _wdsCatId(): JsonField<String> = body._wdsCatId()
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = body._additionalProperties()
 
@@ -1080,19 +2180,22 @@ private constructor(
          */
         fun body(body: Body) = apply { this.body = body.toBuilder() }
 
-        /** Originating astrometric catalog for this object. Enum: [GAIADR3, HIPPARCOS, USNOBSC]. */
-        fun astrometryOrigin(astrometryOrigin: AstrometryOrigin) = apply {
+        /**
+         * Originating astrometric catalog for this object (GA (GAIA), HI (HIPPARCOS), UB (USNOBSC),
+         * AL, AP, CA, CR, DU, FK6_I, FK6_III, PS, SK, TD, TP, TX, UC, UL, UH, UP, VH, VS, WD).
+         */
+        fun astrometryOrigin(astrometryOrigin: String) = apply {
             body.astrometryOrigin(astrometryOrigin)
         }
 
         /**
          * Sets [Builder.astrometryOrigin] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.astrometryOrigin] with a well-typed [AstrometryOrigin]
-         * value instead. This method is primarily for setting the field to an undocumented or not
-         * yet supported value.
+         * You should usually call [Builder.astrometryOrigin] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun astrometryOrigin(astrometryOrigin: JsonField<AstrometryOrigin>) = apply {
+        fun astrometryOrigin(astrometryOrigin: JsonField<String>) = apply {
             body.astrometryOrigin(astrometryOrigin)
         }
 
@@ -1112,7 +2215,10 @@ private constructor(
             body.classificationMarking(classificationMarking)
         }
 
-        /** The ID of this object in the specific catalog associated with this record. */
+        /**
+         * The ID of this object in the specific catalog associated with this record. This field
+         * will either contain the value in the gncCatId or sdaCatId field.
+         */
         fun csId(csId: Long) = apply { body.csId(csId) }
 
         /**
@@ -1214,7 +2320,221 @@ private constructor(
         fun id(id: JsonField<String>) = apply { body.id(id) }
 
         /**
-         * The ID of this object in the All Wide-field Infrared Survey Explorer (AllWISE) catalog.
+         * The American Association of Variable Star Observers (AAVSO) Variable Star Index (VSX)
+         * (VX) object ID of this object.
+         */
+        fun aavsoVsxId(aavsoVsxId: Int) = apply { body.aavsoVsxId(aavsoVsxId) }
+
+        /**
+         * Sets [Builder.aavsoVsxId] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.aavsoVsxId] with a well-typed [Int] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun aavsoVsxId(aavsoVsxId: JsonField<Int>) = apply { body.aavsoVsxId(aavsoVsxId) }
+
+        /** Optical AB g magnitude. */
+        fun abgmag(abgmag: Double) = apply { body.abgmag(abgmag) }
+
+        /**
+         * Sets [Builder.abgmag] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.abgmag] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun abgmag(abgmag: JsonField<Double>) = apply { body.abgmag(abgmag) }
+
+        /** Catalog of origin of optical AB g magnitude. */
+        fun abgmagOrigin(abgmagOrigin: String) = apply { body.abgmagOrigin(abgmagOrigin) }
+
+        /**
+         * Sets [Builder.abgmagOrigin] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.abgmagOrigin] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun abgmagOrigin(abgmagOrigin: JsonField<String>) = apply {
+            body.abgmagOrigin(abgmagOrigin)
+        }
+
+        /** Uncertainty of optical AB g magnitude. */
+        fun abgmagUnc(abgmagUnc: Double) = apply { body.abgmagUnc(abgmagUnc) }
+
+        /**
+         * Sets [Builder.abgmagUnc] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.abgmagUnc] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun abgmagUnc(abgmagUnc: JsonField<Double>) = apply { body.abgmagUnc(abgmagUnc) }
+
+        /** Optical AB i magnitude. */
+        fun abimag(abimag: Double) = apply { body.abimag(abimag) }
+
+        /**
+         * Sets [Builder.abimag] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.abimag] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun abimag(abimag: JsonField<Double>) = apply { body.abimag(abimag) }
+
+        /** Catalog of origin of optical AB i magnitude. */
+        fun abimagOrigin(abimagOrigin: String) = apply { body.abimagOrigin(abimagOrigin) }
+
+        /**
+         * Sets [Builder.abimagOrigin] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.abimagOrigin] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun abimagOrigin(abimagOrigin: JsonField<String>) = apply {
+            body.abimagOrigin(abimagOrigin)
+        }
+
+        /** Uncertainty of optical AB i magnitude. */
+        fun abimagUnc(abimagUnc: Double) = apply { body.abimagUnc(abimagUnc) }
+
+        /**
+         * Sets [Builder.abimagUnc] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.abimagUnc] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun abimagUnc(abimagUnc: JsonField<Double>) = apply { body.abimagUnc(abimagUnc) }
+
+        /** Optical AB r magnitude. */
+        fun abrmag(abrmag: Double) = apply { body.abrmag(abrmag) }
+
+        /**
+         * Sets [Builder.abrmag] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.abrmag] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun abrmag(abrmag: JsonField<Double>) = apply { body.abrmag(abrmag) }
+
+        /** Catalog of origin of optical AB r magnitude. */
+        fun abrmagOrigin(abrmagOrigin: String) = apply { body.abrmagOrigin(abrmagOrigin) }
+
+        /**
+         * Sets [Builder.abrmagOrigin] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.abrmagOrigin] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun abrmagOrigin(abrmagOrigin: JsonField<String>) = apply {
+            body.abrmagOrigin(abrmagOrigin)
+        }
+
+        /** Uncertainty of optical AB r magnitude. */
+        fun abrmagUnc(abrmagUnc: Double) = apply { body.abrmagUnc(abrmagUnc) }
+
+        /**
+         * Sets [Builder.abrmagUnc] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.abrmagUnc] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun abrmagUnc(abrmagUnc: JsonField<Double>) = apply { body.abrmagUnc(abrmagUnc) }
+
+        /** Optical AB y magnitude. */
+        fun abymag(abymag: Double) = apply { body.abymag(abymag) }
+
+        /**
+         * Sets [Builder.abymag] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.abymag] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun abymag(abymag: JsonField<Double>) = apply { body.abymag(abymag) }
+
+        /** Catalog of origin of optical AB y magnitude. */
+        fun abymagOrigin(abymagOrigin: String) = apply { body.abymagOrigin(abymagOrigin) }
+
+        /**
+         * Sets [Builder.abymagOrigin] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.abymagOrigin] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun abymagOrigin(abymagOrigin: JsonField<String>) = apply {
+            body.abymagOrigin(abymagOrigin)
+        }
+
+        /** Uncertainty of optical AB y magnitude. */
+        fun abymagUnc(abymagUnc: Double) = apply { body.abymagUnc(abymagUnc) }
+
+        /**
+         * Sets [Builder.abymagUnc] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.abymagUnc] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun abymagUnc(abymagUnc: JsonField<Double>) = apply { body.abymagUnc(abymagUnc) }
+
+        /** Optical AB z magnitude. */
+        fun abzmag(abzmag: Double) = apply { body.abzmag(abzmag) }
+
+        /**
+         * Sets [Builder.abzmag] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.abzmag] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun abzmag(abzmag: JsonField<Double>) = apply { body.abzmag(abzmag) }
+
+        /** Catalog of origin of optical AB z magnitude. */
+        fun abzmagOrigin(abzmagOrigin: String) = apply { body.abzmagOrigin(abzmagOrigin) }
+
+        /**
+         * Sets [Builder.abzmagOrigin] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.abzmagOrigin] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun abzmagOrigin(abzmagOrigin: JsonField<String>) = apply {
+            body.abzmagOrigin(abzmagOrigin)
+        }
+
+        /** Uncertainty of optical AB z magnitude. */
+        fun abzmagUnc(abzmagUnc: Double) = apply { body.abzmagUnc(abzmagUnc) }
+
+        /**
+         * Sets [Builder.abzmagUnc] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.abzmagUnc] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun abzmagUnc(abzmagUnc: JsonField<Double>) = apply { body.abzmagUnc(abzmagUnc) }
+
+        /** Contamination and confusion indicator in AllWISE. */
+        fun allWisEccInd(allWisEccInd: String) = apply { body.allWisEccInd(allWisEccInd) }
+
+        /**
+         * Sets [Builder.allWisEccInd] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.allWisEccInd] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun allWisEccInd(allWisEccInd: JsonField<String>) = apply {
+            body.allWisEccInd(allWisEccInd)
+        }
+
+        /**
+         * The designation of this object in the All Wide-field Infrared Survey Explorer (AllWISE)
+         * catalog (AL).
          */
         fun allWiseId(allWiseId: String) = apply { body.allWiseId(allWiseId) }
 
@@ -1227,151 +2547,115 @@ private constructor(
          */
         fun allWiseId(allWiseId: JsonField<String>) = apply { body.allWiseId(allWiseId) }
 
-        /**
-         * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric W1-band
-         * (3.4 microns) magnitude in the Vega system.
-         */
-        fun allWisew1Mag(allWisew1Mag: Double) = apply { body.allWisew1Mag(allWisew1Mag) }
+        /** Active deblending indicator in AllWISE. */
+        fun allWisEnaInd(allWisEnaInd: Int) = apply { body.allWisEnaInd(allWisEnaInd) }
 
         /**
-         * Sets [Builder.allWisew1Mag] to an arbitrary JSON value.
+         * Sets [Builder.allWisEnaInd] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.allWisew1Mag] with a well-typed [Double] value instead.
+         * You should usually call [Builder.allWisEnaInd] with a well-typed [Int] value instead.
          * This method is primarily for setting the field to an undocumented or not yet supported
          * value.
          */
-        fun allWisew1Mag(allWisew1Mag: JsonField<Double>) = apply {
-            body.allWisew1Mag(allWisew1Mag)
+        fun allWisEnaInd(allWisEnaInd: JsonField<Int>) = apply { body.allWisEnaInd(allWisEnaInd) }
+
+        /** Photometric quality indicator in AllWISE. */
+        fun allWisEphQualInd(allWisEphQualInd: String) = apply {
+            body.allWisEphQualInd(allWisEphQualInd)
         }
 
         /**
-         * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric W1-band
-         * (3.4 microns) magnitude uncertainty in the Vega system.
-         */
-        fun allWisew1MagUnc(allWisew1MagUnc: Double) = apply {
-            body.allWisew1MagUnc(allWisew1MagUnc)
-        }
-
-        /**
-         * Sets [Builder.allWisew1MagUnc] to an arbitrary JSON value.
+         * Sets [Builder.allWisEphQualInd] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.allWisew1MagUnc] with a well-typed [Double] value
+         * You should usually call [Builder.allWisEphQualInd] with a well-typed [String] value
          * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun allWisew1MagUnc(allWisew1MagUnc: JsonField<Double>) = apply {
-            body.allWisew1MagUnc(allWisew1MagUnc)
+        fun allWisEphQualInd(allWisEphQualInd: JsonField<String>) = apply {
+            body.allWisEphQualInd(allWisEphQualInd)
         }
 
         /**
-         * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric W2-band
-         * (4.6 microns) magnitude in the Vega system.
+         * The American Association of Variable Star Observers (AAVSO) Photometric All-Sky Survey
+         * (APASS) (AP) name of this object.
          */
-        fun allWisew2Mag(allWisew2Mag: Double) = apply { body.allWisew2Mag(allWisew2Mag) }
+        fun apassId(apassId: String) = apply { body.apassId(apassId) }
 
         /**
-         * Sets [Builder.allWisew2Mag] to an arbitrary JSON value.
+         * Sets [Builder.apassId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.allWisew2Mag] with a well-typed [Double] value instead.
+         * You should usually call [Builder.apassId] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun apassId(apassId: JsonField<String>) = apply { body.apassId(apassId) }
+
+        /** Astrometric excess noise in the Gaia catalog measured in milliarcseconds. */
+        fun astrometricExcessNoise(astrometricExcessNoise: Double) = apply {
+            body.astrometricExcessNoise(astrometricExcessNoise)
+        }
+
+        /**
+         * Sets [Builder.astrometricExcessNoise] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.astrometricExcessNoise] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun astrometricExcessNoise(astrometricExcessNoise: JsonField<Double>) = apply {
+            body.astrometricExcessNoise(astrometricExcessNoise)
+        }
+
+        /** Astrometric excess noise sigma in Gaia. */
+        fun astrometricExcessNoiseSig(astrometricExcessNoiseSig: Double) = apply {
+            body.astrometricExcessNoiseSig(astrometricExcessNoiseSig)
+        }
+
+        /**
+         * Sets [Builder.astrometricExcessNoiseSig] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.astrometricExcessNoiseSig] with a well-typed [Double]
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
+         */
+        fun astrometricExcessNoiseSig(astrometricExcessNoiseSig: JsonField<Double>) = apply {
+            body.astrometricExcessNoiseSig(astrometricExcessNoiseSig)
+        }
+
+        /** Optical Johnson B magnitude measured in magnitudes. */
+        fun bmag(bmag: Double) = apply { body.bmag(bmag) }
+
+        /**
+         * Sets [Builder.bmag] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.bmag] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun bmag(bmag: JsonField<Double>) = apply { body.bmag(bmag) }
+
+        /** Catalog of origin of optical Johnson B magnitude (AP, CR, HI). */
+        fun bmagOrigin(bmagOrigin: String) = apply { body.bmagOrigin(bmagOrigin) }
+
+        /**
+         * Sets [Builder.bmagOrigin] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.bmagOrigin] with a well-typed [String] value instead.
          * This method is primarily for setting the field to an undocumented or not yet supported
          * value.
          */
-        fun allWisew2Mag(allWisew2Mag: JsonField<Double>) = apply {
-            body.allWisew2Mag(allWisew2Mag)
-        }
+        fun bmagOrigin(bmagOrigin: JsonField<String>) = apply { body.bmagOrigin(bmagOrigin) }
+
+        /** Uncertainty of optical Johnson B magnitude measured in magnitudes. */
+        fun bmagUnc(bmagUnc: Double) = apply { body.bmagUnc(bmagUnc) }
 
         /**
-         * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric W2-band
-         * (4.6 microns) magnitude uncertainty in the Vega system.
-         */
-        fun allWisew2MagUnc(allWisew2MagUnc: Double) = apply {
-            body.allWisew2MagUnc(allWisew2MagUnc)
-        }
-
-        /**
-         * Sets [Builder.allWisew2MagUnc] to an arbitrary JSON value.
+         * Sets [Builder.bmagUnc] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.allWisew2MagUnc] with a well-typed [Double] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.bmagUnc] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun allWisew2MagUnc(allWisew2MagUnc: JsonField<Double>) = apply {
-            body.allWisew2MagUnc(allWisew2MagUnc)
-        }
+        fun bmagUnc(bmagUnc: JsonField<Double>) = apply { body.bmagUnc(bmagUnc) }
 
-        /**
-         * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric W3-band
-         * (12 microns) magnitude in the Vega system.
-         */
-        fun allWisew3Mag(allWisew3Mag: Double) = apply { body.allWisew3Mag(allWisew3Mag) }
-
-        /**
-         * Sets [Builder.allWisew3Mag] to an arbitrary JSON value.
-         *
-         * You should usually call [Builder.allWisew3Mag] with a well-typed [Double] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
-         */
-        fun allWisew3Mag(allWisew3Mag: JsonField<Double>) = apply {
-            body.allWisew3Mag(allWisew3Mag)
-        }
-
-        /**
-         * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric W3-band
-         * (12 microns) magnitude uncertainty in the Vega system.
-         */
-        fun allWisew3MagUnc(allWisew3MagUnc: Double) = apply {
-            body.allWisew3MagUnc(allWisew3MagUnc)
-        }
-
-        /**
-         * Sets [Builder.allWisew3MagUnc] to an arbitrary JSON value.
-         *
-         * You should usually call [Builder.allWisew3MagUnc] with a well-typed [Double] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
-         */
-        fun allWisew3MagUnc(allWisew3MagUnc: JsonField<Double>) = apply {
-            body.allWisew3MagUnc(allWisew3MagUnc)
-        }
-
-        /**
-         * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric W4-band
-         * (22 microns) magnitude in the Vega system.
-         */
-        fun allWisew4Mag(allWisew4Mag: Double) = apply { body.allWisew4Mag(allWisew4Mag) }
-
-        /**
-         * Sets [Builder.allWisew4Mag] to an arbitrary JSON value.
-         *
-         * You should usually call [Builder.allWisew4Mag] with a well-typed [Double] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
-         */
-        fun allWisew4Mag(allWisew4Mag: JsonField<Double>) = apply {
-            body.allWisew4Mag(allWisew4Mag)
-        }
-
-        /**
-         * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric W4-band
-         * (22 microns) magnitude uncertainty in the Vega system.
-         */
-        fun allWisew4MagUnc(allWisew4MagUnc: Double) = apply {
-            body.allWisew4MagUnc(allWisew4MagUnc)
-        }
-
-        /**
-         * Sets [Builder.allWisew4MagUnc] to an arbitrary JSON value.
-         *
-         * You should usually call [Builder.allWisew4MagUnc] with a well-typed [Double] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
-         */
-        fun allWisew4MagUnc(allWisew4MagUnc: JsonField<Double>) = apply {
-            body.allWisew4MagUnc(allWisew4MagUnc)
-        }
-
-        /** Gaia DR3 optical photometric Bp-band magnitude in the Vega scale. */
+        /** Gaia optical photometric Bp-band in the Vega scale measured in magnitudes. */
         fun bpmag(bpmag: Double) = apply { body.bpmag(bpmag) }
 
         /**
@@ -1382,7 +2666,7 @@ private constructor(
          */
         fun bpmag(bpmag: JsonField<Double>) = apply { body.bpmag(bpmag) }
 
-        /** Gaia DR3 optical Bp-band magnitude uncertainty in the Vega scale. */
+        /** Gaia optical Bp-band uncertainty in the Vega scale measured in magnitudes. */
         fun bpmagUnc(bpmagUnc: Double) = apply { body.bpmagUnc(bpmagUnc) }
 
         /**
@@ -1392,6 +2676,20 @@ private constructor(
          * method is primarily for setting the field to an undocumented or not yet supported value.
          */
         fun bpmagUnc(bpmagUnc: JsonField<Double>) = apply { body.bpmagUnc(bpmagUnc) }
+
+        /** The Carrasco catalog (CR) identifier of this object. */
+        fun carrascoCatId(carrascoCatId: Int) = apply { body.carrascoCatId(carrascoCatId) }
+
+        /**
+         * Sets [Builder.carrascoCatId] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.carrascoCatId] with a well-typed [Int] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun carrascoCatId(carrascoCatId: JsonField<Int>) = apply {
+            body.carrascoCatId(carrascoCatId)
+        }
 
         /** The version of the catalog associated with this object. */
         fun catVersion(catVersion: String) = apply { body.catVersion(catVersion) }
@@ -1404,6 +2702,20 @@ private constructor(
          * value.
          */
         fun catVersion(catVersion: JsonField<String>) = apply { body.catVersion(catVersion) }
+
+        /** The CatWISE2020 (CA) catalog source ID of this object. */
+        fun catWise2020Id(catWise2020Id: String) = apply { body.catWise2020Id(catWise2020Id) }
+
+        /**
+         * Sets [Builder.catWise2020Id] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.catWise2020Id] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun catWise2020Id(catWise2020Id: JsonField<String>) = apply {
+            body.catWise2020Id(catWise2020Id)
+        }
 
         /** Time the row was created in the database, auto-populated by the system. */
         fun createdAt(createdAt: OffsetDateTime) = apply { body.createdAt(createdAt) }
@@ -1442,7 +2754,19 @@ private constructor(
          */
         fun decUnc(decUnc: JsonField<Double>) = apply { body.decUnc(decUnc) }
 
-        /** The ID of this object in the Gaia DR3 Catalog. */
+        /** The Ducati catalog (DU) name of this object. */
+        fun ducatiCatId(ducatiCatId: String) = apply { body.ducatiCatId(ducatiCatId) }
+
+        /**
+         * Sets [Builder.ducatiCatId] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.ducatiCatId] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun ducatiCatId(ducatiCatId: JsonField<String>) = apply { body.ducatiCatId(ducatiCatId) }
+
+        /** The source ID of this object in the Gaia DR3 Catalog (GA). */
         fun gaiadr3CatId(gaiadr3CatId: Long) = apply { body.gaiadr3CatId(gaiadr3CatId) }
 
         /**
@@ -1454,7 +2778,7 @@ private constructor(
          */
         fun gaiadr3CatId(gaiadr3CatId: JsonField<Long>) = apply { body.gaiadr3CatId(gaiadr3CatId) }
 
-        /** Gaia DR3 optical photometric G-band magnitude in the Vega scale. */
+        /** Gaia optical photometric G-band in the Vega scale measured in magnitudes. */
         fun gmag(gmag: Double) = apply { body.gmag(gmag) }
 
         /**
@@ -1465,7 +2789,7 @@ private constructor(
          */
         fun gmag(gmag: JsonField<Double>) = apply { body.gmag(gmag) }
 
-        /** Gaia DR3 optical photometric G-band magnitude uncertainty in the Vega scale. */
+        /** Gaia optical photometric G-band uncertainty in the Vega scale measured in magnitudes. */
         fun gmagUnc(gmagUnc: Double) = apply { body.gmagUnc(gmagUnc) }
 
         /**
@@ -1476,7 +2800,10 @@ private constructor(
          */
         fun gmagUnc(gmagUnc: JsonField<Double>) = apply { body.gmagUnc(gmagUnc) }
 
-        /** The ID of this object in the Guidance and Navagation Control (GNC) Catalog. */
+        /**
+         * The ID of this object in the Guidance and Navigation Control (GNC) Catalog. If this field
+         * is populated it shall match the csId field.
+         */
         fun gncCatId(gncCatId: Int) = apply { body.gncCatId(gncCatId) }
 
         /**
@@ -1487,7 +2814,22 @@ private constructor(
          */
         fun gncCatId(gncCatId: JsonField<Int>) = apply { body.gncCatId(gncCatId) }
 
-        /** The ID of this object in the Hipparcos Catalog. */
+        /**
+         * The Healpix index. Consumers should contact the provider for details on the indexing
+         * scheme.
+         */
+        fun healpixIndex(healpixIndex: Int) = apply { body.healpixIndex(healpixIndex) }
+
+        /**
+         * Sets [Builder.healpixIndex] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.healpixIndex] with a well-typed [Int] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun healpixIndex(healpixIndex: JsonField<Int>) = apply { body.healpixIndex(healpixIndex) }
+
+        /** The HIP ID of this object in the Hipparcos Catalog (HI). */
         fun hipCatId(hipCatId: Int) = apply { body.hipCatId(hipCatId) }
 
         /**
@@ -1498,10 +2840,7 @@ private constructor(
          */
         fun hipCatId(hipCatId: JsonField<Int>) = apply { body.hipCatId(hipCatId) }
 
-        /**
-         * Two Micron All Sky Survey (2MASS) Point Source Catalog (PSC) near-infrared photometric
-         * H-band magnitude in the Vega scale.
-         */
+        /** Near-infrared photometric H-band magnitude in the Vega scale measured in magnitudes. */
         fun hmag(hmag: Double) = apply { body.hmag(hmag) }
 
         /**
@@ -1513,8 +2852,23 @@ private constructor(
         fun hmag(hmag: JsonField<Double>) = apply { body.hmag(hmag) }
 
         /**
-         * Two Micron All Sky Survey (2MASS) Point Source Catalog (PSC) near-infrared photometric
-         * H-band magnitude uncertainty in the Vega scale.
+         * Near-infrared photometric H-band catalog of origin in the Vega scale (TP, UC, UL, UP,
+         * VH).
+         */
+        fun hmagOrigin(hmagOrigin: String) = apply { body.hmagOrigin(hmagOrigin) }
+
+        /**
+         * Sets [Builder.hmagOrigin] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.hmagOrigin] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun hmagOrigin(hmagOrigin: JsonField<String>) = apply { body.hmagOrigin(hmagOrigin) }
+
+        /**
+         * Near-infrared photometric H-band magnitude uncertainty in the Vega scale measured in
+         * magnitudes.
          */
         fun hmagUnc(hmagUnc: Double) = apply { body.hmagUnc(hmagUnc) }
 
@@ -1526,10 +2880,41 @@ private constructor(
          */
         fun hmagUnc(hmagUnc: JsonField<Double>) = apply { body.hmagUnc(hmagUnc) }
 
+        /** Optical Johnson I magnitude measured in magnitudes. */
+        fun imag(imag: Double) = apply { body.imag(imag) }
+
         /**
-         * Two Micron All Sky Survey (2MASS) Point Source Catalog (PSC) near-infrared photometric
-         * J-band magnitude in the Vega scale.
+         * Sets [Builder.imag] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.imag] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
+        fun imag(imag: JsonField<Double>) = apply { body.imag(imag) }
+
+        /** Catalog of origin of optical Johnson I magnitude (CR, GA, HI). */
+        fun imagOrigin(imagOrigin: String) = apply { body.imagOrigin(imagOrigin) }
+
+        /**
+         * Sets [Builder.imagOrigin] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.imagOrigin] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun imagOrigin(imagOrigin: JsonField<String>) = apply { body.imagOrigin(imagOrigin) }
+
+        /** Uncertainty of optical Johnson I magnitude measured in magnitudes. */
+        fun imagUnc(imagUnc: Double) = apply { body.imagUnc(imagUnc) }
+
+        /**
+         * Sets [Builder.imagUnc] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.imagUnc] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun imagUnc(imagUnc: JsonField<Double>) = apply { body.imagUnc(imagUnc) }
+
+        /** Near-infrared photometric J-band magnitude in the Vega scale measured in magnitudes. */
         fun jmag(jmag: Double) = apply { body.jmag(jmag) }
 
         /**
@@ -1541,8 +2926,23 @@ private constructor(
         fun jmag(jmag: JsonField<Double>) = apply { body.jmag(jmag) }
 
         /**
-         * Two Micron All Sky Survey (2MASS) Point Source Catalog (PSC) near-infrared photometric
-         * J-band magnitude uncertainty in the Vega scale.
+         * Near-infrared photometric J-band catalog of origin in the Vega scale (TP, UH, UL, UP,
+         * VH).
+         */
+        fun jmagOrigin(jmagOrigin: String) = apply { body.jmagOrigin(jmagOrigin) }
+
+        /**
+         * Sets [Builder.jmagOrigin] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.jmagOrigin] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun jmagOrigin(jmagOrigin: JsonField<String>) = apply { body.jmagOrigin(jmagOrigin) }
+
+        /**
+         * Near-infrared photometric J-band magnitude uncertainty in the Vega scale measured in
+         * magnitudes.
          */
         fun jmagUnc(jmagUnc: Double) = apply { body.jmagUnc(jmagUnc) }
 
@@ -1554,10 +2954,7 @@ private constructor(
          */
         fun jmagUnc(jmagUnc: JsonField<Double>) = apply { body.jmagUnc(jmagUnc) }
 
-        /**
-         * Two Micron All Sky Survey (2MASS) Point Source Catalog (PSC) near-infrared photometric
-         * K-band magnitude in the Vega scale.
-         */
+        /** Near-infrared photometric K-band magnitude in the Vega scale measured in magnitudes. */
         fun kmag(kmag: Double) = apply { body.kmag(kmag) }
 
         /**
@@ -1569,8 +2966,23 @@ private constructor(
         fun kmag(kmag: JsonField<Double>) = apply { body.kmag(kmag) }
 
         /**
-         * Two Micron All Sky Survey (2MASS) Point Source Catalog (PSC) near-infrared photometric
-         * K-band magnitude uncertainty in the Vega scale.
+         * Near-infrared photometric K-band catalog of origin in the Vega scale (TP, UC, UH, UL, UP,
+         * VH).
+         */
+        fun kmagOrigin(kmagOrigin: String) = apply { body.kmagOrigin(kmagOrigin) }
+
+        /**
+         * Sets [Builder.kmagOrigin] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.kmagOrigin] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun kmagOrigin(kmagOrigin: JsonField<String>) = apply { body.kmagOrigin(kmagOrigin) }
+
+        /**
+         * Near-infrared photometric K-band magnitude uncertainty in the Vega scale measured in
+         * magnitudes.
          */
         fun kmagUnc(kmagUnc: Double) = apply { body.kmagUnc(kmagUnc) }
 
@@ -1581,6 +2993,20 @@ private constructor(
          * method is primarily for setting the field to an undocumented or not yet supported value.
          */
         fun kmagUnc(kmagUnc: JsonField<Double>) = apply { body.kmagUnc(kmagUnc) }
+
+        /** Morphology indicator. */
+        fun morphologyInd(morphologyInd: Int) = apply { body.morphologyInd(morphologyInd) }
+
+        /**
+         * Sets [Builder.morphologyInd] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.morphologyInd] with a well-typed [Int] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun morphologyInd(morphologyInd: JsonField<Int>) = apply {
+            body.morphologyInd(morphologyInd)
+        }
 
         /** Flag indicating that this is a multiple object source. */
         fun multFlag(multFlag: Boolean) = apply { body.multFlag(multFlag) }
@@ -1610,6 +3036,18 @@ private constructor(
         fun multiplicity(multiplicity: JsonField<String>) = apply {
             body.multiplicity(multiplicity)
         }
+
+        /** Dec of nearest neighbor measured in degrees. */
+        fun neighborDec(neighborDec: Double) = apply { body.neighborDec(neighborDec) }
+
+        /**
+         * Sets [Builder.neighborDec] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.neighborDec] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun neighborDec(neighborDec: JsonField<Double>) = apply { body.neighborDec(neighborDec) }
 
         /** Distance between source and nearest neighbor, in arcseconds. */
         fun neighborDistance(neighborDistance: Double) = apply {
@@ -1652,6 +3090,18 @@ private constructor(
          */
         fun neighborId(neighborId: JsonField<Int>) = apply { body.neighborId(neighborId) }
 
+        /** RA of nearest neighbor measured in degrees. */
+        fun neighborRa(neighborRa: Double) = apply { body.neighborRa(neighborRa) }
+
+        /**
+         * Sets [Builder.neighborRa] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.neighborRa] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun neighborRa(neighborRa: JsonField<Double>) = apply { body.neighborRa(neighborRa) }
+
         /**
          * Identifier indicating the source is a non-single star and additional information is
          * available in non-single star tables. Consumers should contact the provider for details on
@@ -1669,6 +3119,18 @@ private constructor(
         fun nonSingleStar(nonSingleStar: JsonField<String>) = apply {
             body.nonSingleStar(nonSingleStar)
         }
+
+        /** Number of neighbors. */
+        fun numNeighbors(numNeighbors: Int) = apply { body.numNeighbors(numNeighbors) }
+
+        /**
+         * Sets [Builder.numNeighbors] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.numNeighbors] with a well-typed [Int] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun numNeighbors(numNeighbors: JsonField<Int>) = apply { body.numNeighbors(numNeighbors) }
 
         /**
          * Originating system or organization which produced the data, if different from the source.
@@ -1701,6 +3163,18 @@ private constructor(
          */
         fun origNetwork(origNetwork: JsonField<String>) = apply { body.origNetwork(origNetwork) }
 
+        /** The Panoramic Survey Telescope and Rapid Response System (Pan-STARRS) (PS) object ID. */
+        fun panStarrsId(panStarrsId: Long) = apply { body.panStarrsId(panStarrsId) }
+
+        /**
+         * Sets [Builder.panStarrsId] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.panStarrsId] with a well-typed [Long] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun panStarrsId(panStarrsId: JsonField<Long>) = apply { body.panStarrsId(panStarrsId) }
+
         /** Absolute stellar parallax of the source, in milliarcseconds. */
         fun parallax(parallax: Double) = apply { body.parallax(parallax) }
 
@@ -1725,7 +3199,7 @@ private constructor(
         fun parallaxUnc(parallaxUnc: JsonField<Double>) = apply { body.parallaxUnc(parallaxUnc) }
 
         /**
-         * Proper motion in declination of the source, in milliarcseconds/year, at the reference
+         * Proper motion in declination of the source, in milliarcseconds per year, at the reference
          * epoch.
          */
         fun pmdec(pmdec: Double) = apply { body.pmdec(pmdec) }
@@ -1738,7 +3212,7 @@ private constructor(
          */
         fun pmdec(pmdec: JsonField<Double>) = apply { body.pmdec(pmdec) }
 
-        /** Uncertainty of proper motion in declination, in milliarcseconds/year. */
+        /** Uncertainty of proper motion in declination, in milliarcseconds per year. */
         fun pmdecUnc(pmdecUnc: Double) = apply { body.pmdecUnc(pmdecUnc) }
 
         /**
@@ -1750,8 +3224,8 @@ private constructor(
         fun pmdecUnc(pmdecUnc: JsonField<Double>) = apply { body.pmdecUnc(pmdecUnc) }
 
         /**
-         * Proper motion in right ascension of the source, in milliarcseconds/year, at the reference
-         * epoch.
+         * Proper motion in right ascension of the source, in milliarcseconds per year, at the
+         * reference epoch.
          */
         fun pmra(pmra: Double) = apply { body.pmra(pmra) }
 
@@ -1763,7 +3237,7 @@ private constructor(
          */
         fun pmra(pmra: JsonField<Double>) = apply { body.pmra(pmra) }
 
-        /** Uncertainty of proper motion in right ascension, in milliarcseconds/year. */
+        /** Uncertainty of proper motion in right ascension, in milliarcseconds per year. */
         fun pmraUnc(pmraUnc: Double) = apply { body.pmraUnc(pmraUnc) }
 
         /**
@@ -1776,7 +3250,7 @@ private constructor(
 
         /**
          * Flag indicating that the proper motion uncertainty in either ra or dec is greater than 10
-         * milliarcseconds/year.
+         * milliarcseconds per year.
          */
         fun pmUncFlag(pmUncFlag: Boolean) = apply { body.pmUncFlag(pmUncFlag) }
 
@@ -1804,6 +3278,50 @@ private constructor(
          */
         fun posUncFlag(posUncFlag: JsonField<Boolean>) = apply { body.posUncFlag(posUncFlag) }
 
+        /** Astrometry correction flag in Pan-STARRS. */
+        fun ps1astrometryCorrectionFlag(ps1astrometryCorrectionFlag: Int) = apply {
+            body.ps1astrometryCorrectionFlag(ps1astrometryCorrectionFlag)
+        }
+
+        /**
+         * Sets [Builder.ps1astrometryCorrectionFlag] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.ps1astrometryCorrectionFlag] with a well-typed [Int]
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
+         */
+        fun ps1astrometryCorrectionFlag(ps1astrometryCorrectionFlag: JsonField<Int>) = apply {
+            body.ps1astrometryCorrectionFlag(ps1astrometryCorrectionFlag)
+        }
+
+        /** Object information flag in Pan-STARRS. */
+        fun ps1ObjInfoFlag(ps1ObjInfoFlag: Int) = apply { body.ps1ObjInfoFlag(ps1ObjInfoFlag) }
+
+        /**
+         * Sets [Builder.ps1ObjInfoFlag] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.ps1ObjInfoFlag] with a well-typed [Int] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun ps1ObjInfoFlag(ps1ObjInfoFlag: JsonField<Int>) = apply {
+            body.ps1ObjInfoFlag(ps1ObjInfoFlag)
+        }
+
+        /** Quality flag in Pan-STARRS. */
+        fun ps1QualityFlag(ps1QualityFlag: Int) = apply { body.ps1QualityFlag(ps1QualityFlag) }
+
+        /**
+         * Sets [Builder.ps1QualityFlag] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.ps1QualityFlag] with a well-typed [Int] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun ps1QualityFlag(ps1QualityFlag: JsonField<Int>) = apply {
+            body.ps1QualityFlag(ps1QualityFlag)
+        }
+
         /**
          * Uncertainty of the right ascension of the source, in milliarcseconds, at the reference
          * epoch.
@@ -1818,7 +3336,41 @@ private constructor(
          */
         fun raUnc(raUnc: JsonField<Double>) = apply { body.raUnc(raUnc) }
 
-        /** Gaia DR3 optical Rp-band magnitude in the Vega scale. */
+        /** Optical Johnson R magnitude measured in magnitudes. */
+        fun rmag(rmag: Double) = apply { body.rmag(rmag) }
+
+        /**
+         * Sets [Builder.rmag] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.rmag] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun rmag(rmag: JsonField<Double>) = apply { body.rmag(rmag) }
+
+        /** Catalog of origin of the Optical Johnson R magnitude (CR, GA). */
+        fun rmagOrigin(rmagOrigin: String) = apply { body.rmagOrigin(rmagOrigin) }
+
+        /**
+         * Sets [Builder.rmagOrigin] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.rmagOrigin] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun rmagOrigin(rmagOrigin: JsonField<String>) = apply { body.rmagOrigin(rmagOrigin) }
+
+        /** Uncertainty of the Optical Johnson R magnitude measured in magnitudes. */
+        fun rmagUnc(rmagUnc: Double) = apply { body.rmagUnc(rmagUnc) }
+
+        /**
+         * Sets [Builder.rmagUnc] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.rmagUnc] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun rmagUnc(rmagUnc: JsonField<Double>) = apply { body.rmagUnc(rmagUnc) }
+
+        /** Gaia optical Rp-band in the Vega scale measured in magnitudes. */
         fun rpmag(rpmag: Double) = apply { body.rpmag(rpmag) }
 
         /**
@@ -1829,7 +3381,9 @@ private constructor(
          */
         fun rpmag(rpmag: JsonField<Double>) = apply { body.rpmag(rpmag) }
 
-        /** Gaia DR3 optical photometric Rp-band magnitude uncertainty in the Vega scale. */
+        /**
+         * Gaia optical photometric Rp-band uncertainty in the Vega scale measured in magnitudes.
+         */
         fun rpmagUnc(rpmagUnc: Double) = apply { body.rpmagUnc(rpmagUnc) }
 
         /**
@@ -1839,6 +3393,56 @@ private constructor(
          * method is primarily for setting the field to an undocumented or not yet supported value.
          */
         fun rpmagUnc(rpmagUnc: JsonField<Double>) = apply { body.rpmagUnc(rpmagUnc) }
+
+        /** RUWE in Gaia. */
+        fun ruwe(ruwe: Double) = apply { body.ruwe(ruwe) }
+
+        /**
+         * Sets [Builder.ruwe] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.ruwe] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun ruwe(ruwe: JsonField<Double>) = apply { body.ruwe(ruwe) }
+
+        /**
+         * The ID of this object in the Space Domain Awareness (SDA) Catalog. If this field is
+         * populated it shall match the csId field.
+         */
+        fun sdaCatId(sdaCatId: Long) = apply { body.sdaCatId(sdaCatId) }
+
+        /**
+         * Sets [Builder.sdaCatId] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.sdaCatId] with a well-typed [Long] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun sdaCatId(sdaCatId: JsonField<Long>) = apply { body.sdaCatId(sdaCatId) }
+
+        /**
+         * Original G magnitude if the source is in Gaia, otherwise the magnitude is converted from
+         * other photometric passbands, when possible, measured in magnitudes.
+         */
+        fun sgmag(sgmag: Double) = apply { body.sgmag(sgmag) }
+
+        /**
+         * Sets [Builder.sgmag] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.sgmag] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun sgmag(sgmag: JsonField<Double>) = apply { body.sgmag(sgmag) }
+
+        /** Uncertainty of sgmag measured in magnitudes. */
+        fun sgmagUnc(sgmagUnc: Double) = apply { body.sgmagUnc(sgmagUnc) }
+
+        /**
+         * Sets [Builder.sgmagUnc] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.sgmagUnc] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun sgmagUnc(sgmagUnc: JsonField<Double>) = apply { body.sgmagUnc(sgmagUnc) }
 
         /** Photocentric shift caused by neighbors, in arcseconds. */
         fun shift(shift: Double) = apply { body.shift(shift) }
@@ -1893,9 +3497,20 @@ private constructor(
          */
         fun shiftFwhm6(shiftFwhm6: JsonField<Double>) = apply { body.shiftFwhm6(shiftFwhm6) }
 
+        /** The SkyMapper (SK) catalog object ID. */
+        fun skyMapperId(skyMapperId: Int) = apply { body.skyMapperId(skyMapperId) }
+
         /**
-         * The ID of this object in the Two Micron All Sky Survey (2MASS) Point Source Catalog
-         * (PSC).
+         * Sets [Builder.skyMapperId] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.skyMapperId] with a well-typed [Int] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun skyMapperId(skyMapperId: JsonField<Int>) = apply { body.skyMapperId(skyMapperId) }
+
+        /**
+         * The designation of this object in the Two Micron All Sky Survey (2MASS) Point Source
+         * Catalog (TP).
          */
         fun twoMassId(twoMassId: String) = apply { body.twoMassId(twoMassId) }
 
@@ -1908,7 +3523,128 @@ private constructor(
          */
         fun twoMassId(twoMassId: JsonField<String>) = apply { body.twoMassId(twoMassId) }
 
-        /** Time the row was updated in the database. */
+        /** Photometric (PH) quality indicator in 2MASS PSC. */
+        fun twoMassPhQualInd(twoMassPhQualInd: String) = apply {
+            body.twoMassPhQualInd(twoMassPhQualInd)
+        }
+
+        /**
+         * Sets [Builder.twoMassPhQualInd] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.twoMassPhQualInd] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun twoMassPhQualInd(twoMassPhQualInd: JsonField<String>) = apply {
+            body.twoMassPhQualInd(twoMassPhQualInd)
+        }
+
+        /** Read flag in 2MASS PSC. */
+        fun twoMassReadFlag(twoMassReadFlag: String) = apply {
+            body.twoMassReadFlag(twoMassReadFlag)
+        }
+
+        /**
+         * Sets [Builder.twoMassReadFlag] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.twoMassReadFlag] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun twoMassReadFlag(twoMassReadFlag: JsonField<String>) = apply {
+            body.twoMassReadFlag(twoMassReadFlag)
+        }
+
+        /**
+         * The Two Micron All Sky Survey (2MASS) Extended Source Catalog (XSC) (TX) designation of
+         * this object.
+         */
+        fun twoMassXscId(twoMassXscId: String) = apply { body.twoMassXscId(twoMassXscId) }
+
+        /**
+         * Sets [Builder.twoMassXscId] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.twoMassXscId] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun twoMassXscId(twoMassXscId: JsonField<String>) = apply {
+            body.twoMassXscId(twoMassXscId)
+        }
+
+        /**
+         * The Tycho Double Star Catalog (TD) identifier (specified as Tycho-2 ID) of this object.
+         */
+        fun tychoDscId(tychoDscId: Long) = apply { body.tychoDscId(tychoDscId) }
+
+        /**
+         * Sets [Builder.tychoDscId] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.tychoDscId] with a well-typed [Long] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun tychoDscId(tychoDscId: JsonField<Long>) = apply { body.tychoDscId(tychoDscId) }
+
+        /**
+         * The United Kingdom Infrared Telescope (UKIRT) Hemispheric Survey (UHS) (UH) source ID of
+         * this object.
+         */
+        fun uhsId(uhsId: Long) = apply { body.uhsId(uhsId) }
+
+        /**
+         * Sets [Builder.uhsId] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.uhsId] with a well-typed [Long] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun uhsId(uhsId: JsonField<Long>) = apply { body.uhsId(uhsId) }
+
+        /**
+         * The United Kingdom Infrared Deep Sky Survey (UKIDSS) Galactic Clusters Survey (GCS) (UC)
+         * source ID of this object.
+         */
+        fun ukidssGcsId(ukidssGcsId: Long) = apply { body.ukidssGcsId(ukidssGcsId) }
+
+        /**
+         * Sets [Builder.ukidssGcsId] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.ukidssGcsId] with a well-typed [Long] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun ukidssGcsId(ukidssGcsId: JsonField<Long>) = apply { body.ukidssGcsId(ukidssGcsId) }
+
+        /**
+         * The United Kingdom Infrared Deep Sky Survey (UKIDSS) Galactic Plane Survey (GPS) (UP)
+         * source ID of this object.
+         */
+        fun ukidssGpsId(ukidssGpsId: Long) = apply { body.ukidssGpsId(ukidssGpsId) }
+
+        /**
+         * Sets [Builder.ukidssGpsId] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.ukidssGpsId] with a well-typed [Long] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun ukidssGpsId(ukidssGpsId: JsonField<Long>) = apply { body.ukidssGpsId(ukidssGpsId) }
+
+        /**
+         * The United Kingdom Infrared Deep Sky Survey (UKIDSS) Large Area Survey (LAS) (UL) source
+         * ID of this object.
+         */
+        fun ukidssLasId(ukidssLasId: Long) = apply { body.ukidssLasId(ukidssLasId) }
+
+        /**
+         * Sets [Builder.ukidssLasId] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.ukidssLasId] with a well-typed [Long] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun ukidssLasId(ukidssLasId: JsonField<Long>) = apply { body.ukidssLasId(ukidssLasId) }
+
+        /** Time the row was last updated in the database, auto-populated by the system. */
         fun updatedAt(updatedAt: OffsetDateTime) = apply { body.updatedAt(updatedAt) }
 
         /**
@@ -1920,7 +3656,7 @@ private constructor(
          */
         fun updatedAt(updatedAt: JsonField<OffsetDateTime>) = apply { body.updatedAt(updatedAt) }
 
-        /** Application user who updated the row in the database. */
+        /** Application user who updated the row in the database, auto-populated by the system. */
         fun updatedBy(updatedBy: String) = apply { body.updatedBy(updatedBy) }
 
         /**
@@ -1957,6 +3693,291 @@ private constructor(
          * value.
          */
         fun variability(variability: JsonField<String>) = apply { body.variability(variability) }
+
+        /**
+         * The Visible and Infrared Survey Telescope for Astronomy (VISTA) Hemisphere Survey (VHS)
+         * (VS) source ID of this object.
+         */
+        fun vhsId(vhsId: Long) = apply { body.vhsId(vhsId) }
+
+        /**
+         * Sets [Builder.vhsId] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.vhsId] with a well-typed [Long] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun vhsId(vhsId: JsonField<Long>) = apply { body.vhsId(vhsId) }
+
+        /** Optical Johnson V magnitude measured in magnitudes. */
+        fun vmag(vmag: Double) = apply { body.vmag(vmag) }
+
+        /**
+         * Sets [Builder.vmag] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.vmag] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun vmag(vmag: JsonField<Double>) = apply { body.vmag(vmag) }
+
+        /** Catalog of origin of Optical Johnson V magnitude (AP, CR, DU, GA, HI). */
+        fun vmagOrigin(vmagOrigin: String) = apply { body.vmagOrigin(vmagOrigin) }
+
+        /**
+         * Sets [Builder.vmagOrigin] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.vmagOrigin] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun vmagOrigin(vmagOrigin: JsonField<String>) = apply { body.vmagOrigin(vmagOrigin) }
+
+        /** Uncertainty of the Optical Johnson V magnitude measured in magnitudes. */
+        fun vmagUnc(vmagUnc: Double) = apply { body.vmagUnc(vmagUnc) }
+
+        /**
+         * Sets [Builder.vmagUnc] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.vmagUnc] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun vmagUnc(vmagUnc: JsonField<Double>) = apply { body.vmagUnc(vmagUnc) }
+
+        /**
+         * Mid-infrared photometric W1-band (3.4 microns) magnitude in the Vega system measured in
+         * magnitudes.
+         */
+        fun w1mag(w1mag: Double) = apply { body.w1mag(w1mag) }
+
+        /**
+         * Sets [Builder.w1mag] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.w1mag] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun w1mag(w1mag: JsonField<Double>) = apply { body.w1mag(w1mag) }
+
+        /**
+         * Mid-infrared photometric W1-band (3.4 microns) catalog of origin in the Vega system (AL,
+         * CA).
+         */
+        fun w1magOrigin(w1magOrigin: String) = apply { body.w1magOrigin(w1magOrigin) }
+
+        /**
+         * Sets [Builder.w1magOrigin] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.w1magOrigin] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun w1magOrigin(w1magOrigin: JsonField<String>) = apply { body.w1magOrigin(w1magOrigin) }
+
+        /**
+         * Mid-infrared photometric W1-band (3.4 microns) magnitude uncertainty in the Vega system
+         * measured in magnitudes.
+         */
+        fun w1magUnc(w1magUnc: Double) = apply { body.w1magUnc(w1magUnc) }
+
+        /**
+         * Sets [Builder.w1magUnc] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.w1magUnc] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun w1magUnc(w1magUnc: JsonField<Double>) = apply { body.w1magUnc(w1magUnc) }
+
+        /**
+         * Mid-infrared photometric W1-band (3.4 microns) saturated pixel fraction in the Vega
+         * system measured in magnitudes.
+         */
+        fun w1sat(w1sat: Double) = apply { body.w1sat(w1sat) }
+
+        /**
+         * Sets [Builder.w1sat] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.w1sat] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun w1sat(w1sat: JsonField<Double>) = apply { body.w1sat(w1sat) }
+
+        /**
+         * Mid-infrared photometric W2-band (4.6 microns) magnitude in the Vega system measured in
+         * magnitudes.
+         */
+        fun w2mag(w2mag: Double) = apply { body.w2mag(w2mag) }
+
+        /**
+         * Sets [Builder.w2mag] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.w2mag] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun w2mag(w2mag: JsonField<Double>) = apply { body.w2mag(w2mag) }
+
+        /**
+         * Mid-infrared photometric W2-band (4.6 microns) catalog of origin in the Vega system (AL,
+         * CA).
+         */
+        fun w2magOrigin(w2magOrigin: String) = apply { body.w2magOrigin(w2magOrigin) }
+
+        /**
+         * Sets [Builder.w2magOrigin] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.w2magOrigin] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun w2magOrigin(w2magOrigin: JsonField<String>) = apply { body.w2magOrigin(w2magOrigin) }
+
+        /**
+         * Mid-infrared photometric W2-band (4.6 microns) magnitude uncertainty in the Vega system
+         * measured in magnitudes.
+         */
+        fun w2magUnc(w2magUnc: Double) = apply { body.w2magUnc(w2magUnc) }
+
+        /**
+         * Sets [Builder.w2magUnc] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.w2magUnc] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun w2magUnc(w2magUnc: JsonField<Double>) = apply { body.w2magUnc(w2magUnc) }
+
+        /**
+         * Mid-infrared photometric W2-band (4.6 microns) saturated pixel fraction in the Vega
+         * system.
+         */
+        fun w2sat(w2sat: Double) = apply { body.w2sat(w2sat) }
+
+        /**
+         * Sets [Builder.w2sat] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.w2sat] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun w2sat(w2sat: JsonField<Double>) = apply { body.w2sat(w2sat) }
+
+        /**
+         * Mid-infrared photometric W3-band (12 microns) magnitude in the Vega system measured in
+         * magnitudes.
+         */
+        fun w3mag(w3mag: Double) = apply { body.w3mag(w3mag) }
+
+        /**
+         * Sets [Builder.w3mag] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.w3mag] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun w3mag(w3mag: JsonField<Double>) = apply { body.w3mag(w3mag) }
+
+        /**
+         * Mid-infrared photometric W3-band (12 microns) catalog of origin in the Vega system (AL).
+         */
+        fun w3magOrigin(w3magOrigin: String) = apply { body.w3magOrigin(w3magOrigin) }
+
+        /**
+         * Sets [Builder.w3magOrigin] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.w3magOrigin] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun w3magOrigin(w3magOrigin: JsonField<String>) = apply { body.w3magOrigin(w3magOrigin) }
+
+        /**
+         * Mid-infrared photometric W3-band (12 microns) magnitude uncertainty in the Vega system
+         * measured in magnitudes.
+         */
+        fun w3magUnc(w3magUnc: Double) = apply { body.w3magUnc(w3magUnc) }
+
+        /**
+         * Sets [Builder.w3magUnc] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.w3magUnc] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun w3magUnc(w3magUnc: JsonField<Double>) = apply { body.w3magUnc(w3magUnc) }
+
+        /**
+         * Mid-infrared photometric W3-band (12 microns) saturated pixel fraction in the Vega
+         * system.
+         */
+        fun w3sat(w3sat: Double) = apply { body.w3sat(w3sat) }
+
+        /**
+         * Sets [Builder.w3sat] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.w3sat] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun w3sat(w3sat: JsonField<Double>) = apply { body.w3sat(w3sat) }
+
+        /**
+         * Mid-infrared photometric W4-band (22 microns) magnitude in the Vega system measured in
+         * magnitudes.
+         */
+        fun w4mag(w4mag: Double) = apply { body.w4mag(w4mag) }
+
+        /**
+         * Sets [Builder.w4mag] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.w4mag] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun w4mag(w4mag: JsonField<Double>) = apply { body.w4mag(w4mag) }
+
+        /**
+         * Mid-infrared photometric W4-band (22 microns) catalog of origin in the Vega system (AL).
+         */
+        fun w4magOrigin(w4magOrigin: String) = apply { body.w4magOrigin(w4magOrigin) }
+
+        /**
+         * Sets [Builder.w4magOrigin] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.w4magOrigin] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun w4magOrigin(w4magOrigin: JsonField<String>) = apply { body.w4magOrigin(w4magOrigin) }
+
+        /**
+         * Mid-infrared photometric W4-band (22 microns) magnitude uncertainty in the Vega system
+         * measured in magnitudes.
+         */
+        fun w4magUnc(w4magUnc: Double) = apply { body.w4magUnc(w4magUnc) }
+
+        /**
+         * Sets [Builder.w4magUnc] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.w4magUnc] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun w4magUnc(w4magUnc: JsonField<Double>) = apply { body.w4magUnc(w4magUnc) }
+
+        /**
+         * Mid-infrared photometric W4-band (22 microns) saturated pixel fraction in the Vega
+         * system.
+         */
+        fun w4sat(w4sat: Double) = apply { body.w4sat(w4sat) }
+
+        /**
+         * Sets [Builder.w4sat] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.w4sat] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun w4sat(w4sat: JsonField<Double>) = apply { body.w4sat(w4sat) }
+
+        /** The Washington Double Star Catalog (WD) identifier of this object. */
+        fun wdsCatId(wdsCatId: String) = apply { body.wdsCatId(wdsCatId) }
+
+        /**
+         * Sets [Builder.wdsCatId] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.wdsCatId] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun wdsCatId(wdsCatId: JsonField<String>) = apply { body.wdsCatId(wdsCatId) }
 
         fun additionalBodyProperties(additionalBodyProperties: Map<String, JsonValue>) = apply {
             body.additionalProperties(additionalBodyProperties)
@@ -2115,7 +4136,7 @@ private constructor(
     class Body
     @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        private val astrometryOrigin: JsonField<AstrometryOrigin>,
+        private val astrometryOrigin: JsonField<String>,
         private val classificationMarking: JsonField<String>,
         private val csId: JsonField<Long>,
         private val dataMode: JsonField<DataMode>,
@@ -2124,40 +4145,72 @@ private constructor(
         private val source: JsonField<String>,
         private val starEpoch: JsonField<Double>,
         private val id: JsonField<String>,
+        private val aavsoVsxId: JsonField<Int>,
+        private val abgmag: JsonField<Double>,
+        private val abgmagOrigin: JsonField<String>,
+        private val abgmagUnc: JsonField<Double>,
+        private val abimag: JsonField<Double>,
+        private val abimagOrigin: JsonField<String>,
+        private val abimagUnc: JsonField<Double>,
+        private val abrmag: JsonField<Double>,
+        private val abrmagOrigin: JsonField<String>,
+        private val abrmagUnc: JsonField<Double>,
+        private val abymag: JsonField<Double>,
+        private val abymagOrigin: JsonField<String>,
+        private val abymagUnc: JsonField<Double>,
+        private val abzmag: JsonField<Double>,
+        private val abzmagOrigin: JsonField<String>,
+        private val abzmagUnc: JsonField<Double>,
+        private val allWisEccInd: JsonField<String>,
         private val allWiseId: JsonField<String>,
-        private val allWisew1Mag: JsonField<Double>,
-        private val allWisew1MagUnc: JsonField<Double>,
-        private val allWisew2Mag: JsonField<Double>,
-        private val allWisew2MagUnc: JsonField<Double>,
-        private val allWisew3Mag: JsonField<Double>,
-        private val allWisew3MagUnc: JsonField<Double>,
-        private val allWisew4Mag: JsonField<Double>,
-        private val allWisew4MagUnc: JsonField<Double>,
+        private val allWisEnaInd: JsonField<Int>,
+        private val allWisEphQualInd: JsonField<String>,
+        private val apassId: JsonField<String>,
+        private val astrometricExcessNoise: JsonField<Double>,
+        private val astrometricExcessNoiseSig: JsonField<Double>,
+        private val bmag: JsonField<Double>,
+        private val bmagOrigin: JsonField<String>,
+        private val bmagUnc: JsonField<Double>,
         private val bpmag: JsonField<Double>,
         private val bpmagUnc: JsonField<Double>,
+        private val carrascoCatId: JsonField<Int>,
         private val catVersion: JsonField<String>,
+        private val catWise2020Id: JsonField<String>,
         private val createdAt: JsonField<OffsetDateTime>,
         private val createdBy: JsonField<String>,
         private val decUnc: JsonField<Double>,
+        private val ducatiCatId: JsonField<String>,
         private val gaiadr3CatId: JsonField<Long>,
         private val gmag: JsonField<Double>,
         private val gmagUnc: JsonField<Double>,
         private val gncCatId: JsonField<Int>,
+        private val healpixIndex: JsonField<Int>,
         private val hipCatId: JsonField<Int>,
         private val hmag: JsonField<Double>,
+        private val hmagOrigin: JsonField<String>,
         private val hmagUnc: JsonField<Double>,
+        private val imag: JsonField<Double>,
+        private val imagOrigin: JsonField<String>,
+        private val imagUnc: JsonField<Double>,
         private val jmag: JsonField<Double>,
+        private val jmagOrigin: JsonField<String>,
         private val jmagUnc: JsonField<Double>,
         private val kmag: JsonField<Double>,
+        private val kmagOrigin: JsonField<String>,
         private val kmagUnc: JsonField<Double>,
+        private val morphologyInd: JsonField<Int>,
         private val multFlag: JsonField<Boolean>,
         private val multiplicity: JsonField<String>,
+        private val neighborDec: JsonField<Double>,
         private val neighborDistance: JsonField<Double>,
         private val neighborFlag: JsonField<Boolean>,
         private val neighborId: JsonField<Int>,
+        private val neighborRa: JsonField<Double>,
         private val nonSingleStar: JsonField<String>,
+        private val numNeighbors: JsonField<Int>,
         private val origin: JsonField<String>,
         private val origNetwork: JsonField<String>,
+        private val panStarrsId: JsonField<Long>,
         private val parallax: JsonField<Double>,
         private val parallaxUnc: JsonField<Double>,
         private val pmdec: JsonField<Double>,
@@ -2166,18 +4219,58 @@ private constructor(
         private val pmraUnc: JsonField<Double>,
         private val pmUncFlag: JsonField<Boolean>,
         private val posUncFlag: JsonField<Boolean>,
+        private val ps1astrometryCorrectionFlag: JsonField<Int>,
+        private val ps1ObjInfoFlag: JsonField<Int>,
+        private val ps1QualityFlag: JsonField<Int>,
         private val raUnc: JsonField<Double>,
+        private val rmag: JsonField<Double>,
+        private val rmagOrigin: JsonField<String>,
+        private val rmagUnc: JsonField<Double>,
         private val rpmag: JsonField<Double>,
         private val rpmagUnc: JsonField<Double>,
+        private val ruwe: JsonField<Double>,
+        private val sdaCatId: JsonField<Long>,
+        private val sgmag: JsonField<Double>,
+        private val sgmagUnc: JsonField<Double>,
         private val shift: JsonField<Double>,
         private val shiftFlag: JsonField<Boolean>,
         private val shiftFwhm1: JsonField<Double>,
         private val shiftFwhm6: JsonField<Double>,
+        private val skyMapperId: JsonField<Int>,
         private val twoMassId: JsonField<String>,
+        private val twoMassPhQualInd: JsonField<String>,
+        private val twoMassReadFlag: JsonField<String>,
+        private val twoMassXscId: JsonField<String>,
+        private val tychoDscId: JsonField<Long>,
+        private val uhsId: JsonField<Long>,
+        private val ukidssGcsId: JsonField<Long>,
+        private val ukidssGpsId: JsonField<Long>,
+        private val ukidssLasId: JsonField<Long>,
         private val updatedAt: JsonField<OffsetDateTime>,
         private val updatedBy: JsonField<String>,
         private val varFlag: JsonField<Boolean>,
         private val variability: JsonField<String>,
+        private val vhsId: JsonField<Long>,
+        private val vmag: JsonField<Double>,
+        private val vmagOrigin: JsonField<String>,
+        private val vmagUnc: JsonField<Double>,
+        private val w1mag: JsonField<Double>,
+        private val w1magOrigin: JsonField<String>,
+        private val w1magUnc: JsonField<Double>,
+        private val w1sat: JsonField<Double>,
+        private val w2mag: JsonField<Double>,
+        private val w2magOrigin: JsonField<String>,
+        private val w2magUnc: JsonField<Double>,
+        private val w2sat: JsonField<Double>,
+        private val w3mag: JsonField<Double>,
+        private val w3magOrigin: JsonField<String>,
+        private val w3magUnc: JsonField<Double>,
+        private val w3sat: JsonField<Double>,
+        private val w4mag: JsonField<Double>,
+        private val w4magOrigin: JsonField<String>,
+        private val w4magUnc: JsonField<Double>,
+        private val w4sat: JsonField<Double>,
+        private val wdsCatId: JsonField<String>,
         private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
 
@@ -2185,7 +4278,7 @@ private constructor(
         private constructor(
             @JsonProperty("astrometryOrigin")
             @ExcludeMissing
-            astrometryOrigin: JsonField<AstrometryOrigin> = JsonMissing.of(),
+            astrometryOrigin: JsonField<String> = JsonMissing.of(),
             @JsonProperty("classificationMarking")
             @ExcludeMissing
             classificationMarking: JsonField<String> = JsonMissing.of(),
@@ -2200,40 +4293,81 @@ private constructor(
             @ExcludeMissing
             starEpoch: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("aavsoVsxId")
+            @ExcludeMissing
+            aavsoVsxId: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("abgmag") @ExcludeMissing abgmag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("abgmagOrigin")
+            @ExcludeMissing
+            abgmagOrigin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("abgmagUnc")
+            @ExcludeMissing
+            abgmagUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("abimag") @ExcludeMissing abimag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("abimagOrigin")
+            @ExcludeMissing
+            abimagOrigin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("abimagUnc")
+            @ExcludeMissing
+            abimagUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("abrmag") @ExcludeMissing abrmag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("abrmagOrigin")
+            @ExcludeMissing
+            abrmagOrigin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("abrmagUnc")
+            @ExcludeMissing
+            abrmagUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("abymag") @ExcludeMissing abymag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("abymagOrigin")
+            @ExcludeMissing
+            abymagOrigin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("abymagUnc")
+            @ExcludeMissing
+            abymagUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("abzmag") @ExcludeMissing abzmag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("abzmagOrigin")
+            @ExcludeMissing
+            abzmagOrigin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("abzmagUnc")
+            @ExcludeMissing
+            abzmagUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("allWISEccInd")
+            @ExcludeMissing
+            allWisEccInd: JsonField<String> = JsonMissing.of(),
             @JsonProperty("allWISEId")
             @ExcludeMissing
             allWiseId: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("allWISEW1Mag")
+            @JsonProperty("allWISEnaInd")
             @ExcludeMissing
-            allWisew1Mag: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("allWISEW1MagUnc")
+            allWisEnaInd: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("allWISEphQualInd")
             @ExcludeMissing
-            allWisew1MagUnc: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("allWISEW2Mag")
+            allWisEphQualInd: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("apassId") @ExcludeMissing apassId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("astrometricExcessNoise")
             @ExcludeMissing
-            allWisew2Mag: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("allWISEW2MagUnc")
+            astrometricExcessNoise: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("astrometricExcessNoiseSig")
             @ExcludeMissing
-            allWisew2MagUnc: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("allWISEW3Mag")
+            astrometricExcessNoiseSig: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("bmag") @ExcludeMissing bmag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("bmagOrigin")
             @ExcludeMissing
-            allWisew3Mag: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("allWISEW3MagUnc")
-            @ExcludeMissing
-            allWisew3MagUnc: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("allWISEW4Mag")
-            @ExcludeMissing
-            allWisew4Mag: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("allWISEW4MagUnc")
-            @ExcludeMissing
-            allWisew4MagUnc: JsonField<Double> = JsonMissing.of(),
+            bmagOrigin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("bmagUnc") @ExcludeMissing bmagUnc: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("bpmag") @ExcludeMissing bpmag: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("bpmagUnc")
             @ExcludeMissing
             bpmagUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("carrascoCatId")
+            @ExcludeMissing
+            carrascoCatId: JsonField<Int> = JsonMissing.of(),
             @JsonProperty("catVersion")
             @ExcludeMissing
             catVersion: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("catWise2020Id")
+            @ExcludeMissing
+            catWise2020Id: JsonField<String> = JsonMissing.of(),
             @JsonProperty("createdAt")
             @ExcludeMissing
             createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
@@ -2241,25 +4375,51 @@ private constructor(
             @ExcludeMissing
             createdBy: JsonField<String> = JsonMissing.of(),
             @JsonProperty("decUnc") @ExcludeMissing decUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("ducatiCatId")
+            @ExcludeMissing
+            ducatiCatId: JsonField<String> = JsonMissing.of(),
             @JsonProperty("gaiadr3CatId")
             @ExcludeMissing
             gaiadr3CatId: JsonField<Long> = JsonMissing.of(),
             @JsonProperty("gmag") @ExcludeMissing gmag: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("gmagUnc") @ExcludeMissing gmagUnc: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("gncCatId") @ExcludeMissing gncCatId: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("healpixIndex")
+            @ExcludeMissing
+            healpixIndex: JsonField<Int> = JsonMissing.of(),
             @JsonProperty("hipCatId") @ExcludeMissing hipCatId: JsonField<Int> = JsonMissing.of(),
             @JsonProperty("hmag") @ExcludeMissing hmag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("hmagOrigin")
+            @ExcludeMissing
+            hmagOrigin: JsonField<String> = JsonMissing.of(),
             @JsonProperty("hmagUnc") @ExcludeMissing hmagUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("imag") @ExcludeMissing imag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("imagOrigin")
+            @ExcludeMissing
+            imagOrigin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("imagUnc") @ExcludeMissing imagUnc: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("jmag") @ExcludeMissing jmag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("jmagOrigin")
+            @ExcludeMissing
+            jmagOrigin: JsonField<String> = JsonMissing.of(),
             @JsonProperty("jmagUnc") @ExcludeMissing jmagUnc: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("kmag") @ExcludeMissing kmag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("kmagOrigin")
+            @ExcludeMissing
+            kmagOrigin: JsonField<String> = JsonMissing.of(),
             @JsonProperty("kmagUnc") @ExcludeMissing kmagUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("morphologyInd")
+            @ExcludeMissing
+            morphologyInd: JsonField<Int> = JsonMissing.of(),
             @JsonProperty("multFlag")
             @ExcludeMissing
             multFlag: JsonField<Boolean> = JsonMissing.of(),
             @JsonProperty("multiplicity")
             @ExcludeMissing
             multiplicity: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("neighborDec")
+            @ExcludeMissing
+            neighborDec: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("neighborDistance")
             @ExcludeMissing
             neighborDistance: JsonField<Double> = JsonMissing.of(),
@@ -2269,13 +4429,22 @@ private constructor(
             @JsonProperty("neighborId")
             @ExcludeMissing
             neighborId: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("neighborRa")
+            @ExcludeMissing
+            neighborRa: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("nonSingleStar")
             @ExcludeMissing
             nonSingleStar: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("numNeighbors")
+            @ExcludeMissing
+            numNeighbors: JsonField<Int> = JsonMissing.of(),
             @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
             @JsonProperty("origNetwork")
             @ExcludeMissing
             origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("panStarrsId")
+            @ExcludeMissing
+            panStarrsId: JsonField<Long> = JsonMissing.of(),
             @JsonProperty("parallax")
             @ExcludeMissing
             parallax: JsonField<Double> = JsonMissing.of(),
@@ -2294,11 +4463,31 @@ private constructor(
             @JsonProperty("posUncFlag")
             @ExcludeMissing
             posUncFlag: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("ps1astrometryCorrectionFlag")
+            @ExcludeMissing
+            ps1astrometryCorrectionFlag: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("ps1ObjInfoFlag")
+            @ExcludeMissing
+            ps1ObjInfoFlag: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("ps1QualityFlag")
+            @ExcludeMissing
+            ps1QualityFlag: JsonField<Int> = JsonMissing.of(),
             @JsonProperty("raUnc") @ExcludeMissing raUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rmag") @ExcludeMissing rmag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rmagOrigin")
+            @ExcludeMissing
+            rmagOrigin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("rmagUnc") @ExcludeMissing rmagUnc: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("rpmag") @ExcludeMissing rpmag: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("rpmagUnc")
             @ExcludeMissing
             rpmagUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("ruwe") @ExcludeMissing ruwe: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("sdaCatId") @ExcludeMissing sdaCatId: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("sgmag") @ExcludeMissing sgmag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("sgmagUnc")
+            @ExcludeMissing
+            sgmagUnc: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("shift") @ExcludeMissing shift: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("shiftFlag")
             @ExcludeMissing
@@ -2309,9 +4498,34 @@ private constructor(
             @JsonProperty("shiftFWHM6")
             @ExcludeMissing
             shiftFwhm6: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("skyMapperId")
+            @ExcludeMissing
+            skyMapperId: JsonField<Int> = JsonMissing.of(),
             @JsonProperty("twoMASSId")
             @ExcludeMissing
             twoMassId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("twoMassPHQualInd")
+            @ExcludeMissing
+            twoMassPhQualInd: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("twoMassReadFlag")
+            @ExcludeMissing
+            twoMassReadFlag: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("twoMassXscId")
+            @ExcludeMissing
+            twoMassXscId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tychoDscId")
+            @ExcludeMissing
+            tychoDscId: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("uhsId") @ExcludeMissing uhsId: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("ukidssGCSId")
+            @ExcludeMissing
+            ukidssGcsId: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("ukidssGPSId")
+            @ExcludeMissing
+            ukidssGpsId: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("ukidssLASId")
+            @ExcludeMissing
+            ukidssLasId: JsonField<Long> = JsonMissing.of(),
             @JsonProperty("updatedAt")
             @ExcludeMissing
             updatedAt: JsonField<OffsetDateTime> = JsonMissing.of(),
@@ -2322,6 +4536,45 @@ private constructor(
             @JsonProperty("variability")
             @ExcludeMissing
             variability: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("vhsId") @ExcludeMissing vhsId: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("vmag") @ExcludeMissing vmag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("vmagOrigin")
+            @ExcludeMissing
+            vmagOrigin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("vmagUnc") @ExcludeMissing vmagUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("w1mag") @ExcludeMissing w1mag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("w1magOrigin")
+            @ExcludeMissing
+            w1magOrigin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("w1magUnc")
+            @ExcludeMissing
+            w1magUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("w1sat") @ExcludeMissing w1sat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("w2mag") @ExcludeMissing w2mag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("w2magOrigin")
+            @ExcludeMissing
+            w2magOrigin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("w2magUnc")
+            @ExcludeMissing
+            w2magUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("w2sat") @ExcludeMissing w2sat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("w3mag") @ExcludeMissing w3mag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("w3magOrigin")
+            @ExcludeMissing
+            w3magOrigin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("w3magUnc")
+            @ExcludeMissing
+            w3magUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("w3sat") @ExcludeMissing w3sat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("w4mag") @ExcludeMissing w4mag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("w4magOrigin")
+            @ExcludeMissing
+            w4magOrigin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("w4magUnc")
+            @ExcludeMissing
+            w4magUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("w4sat") @ExcludeMissing w4sat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("wdsCatId") @ExcludeMissing wdsCatId: JsonField<String> = JsonMissing.of(),
         ) : this(
             astrometryOrigin,
             classificationMarking,
@@ -2332,40 +4585,72 @@ private constructor(
             source,
             starEpoch,
             id,
+            aavsoVsxId,
+            abgmag,
+            abgmagOrigin,
+            abgmagUnc,
+            abimag,
+            abimagOrigin,
+            abimagUnc,
+            abrmag,
+            abrmagOrigin,
+            abrmagUnc,
+            abymag,
+            abymagOrigin,
+            abymagUnc,
+            abzmag,
+            abzmagOrigin,
+            abzmagUnc,
+            allWisEccInd,
             allWiseId,
-            allWisew1Mag,
-            allWisew1MagUnc,
-            allWisew2Mag,
-            allWisew2MagUnc,
-            allWisew3Mag,
-            allWisew3MagUnc,
-            allWisew4Mag,
-            allWisew4MagUnc,
+            allWisEnaInd,
+            allWisEphQualInd,
+            apassId,
+            astrometricExcessNoise,
+            astrometricExcessNoiseSig,
+            bmag,
+            bmagOrigin,
+            bmagUnc,
             bpmag,
             bpmagUnc,
+            carrascoCatId,
             catVersion,
+            catWise2020Id,
             createdAt,
             createdBy,
             decUnc,
+            ducatiCatId,
             gaiadr3CatId,
             gmag,
             gmagUnc,
             gncCatId,
+            healpixIndex,
             hipCatId,
             hmag,
+            hmagOrigin,
             hmagUnc,
+            imag,
+            imagOrigin,
+            imagUnc,
             jmag,
+            jmagOrigin,
             jmagUnc,
             kmag,
+            kmagOrigin,
             kmagUnc,
+            morphologyInd,
             multFlag,
             multiplicity,
+            neighborDec,
             neighborDistance,
             neighborFlag,
             neighborId,
+            neighborRa,
             nonSingleStar,
+            numNeighbors,
             origin,
             origNetwork,
+            panStarrsId,
             parallax,
             parallaxUnc,
             pmdec,
@@ -2374,29 +4659,70 @@ private constructor(
             pmraUnc,
             pmUncFlag,
             posUncFlag,
+            ps1astrometryCorrectionFlag,
+            ps1ObjInfoFlag,
+            ps1QualityFlag,
             raUnc,
+            rmag,
+            rmagOrigin,
+            rmagUnc,
             rpmag,
             rpmagUnc,
+            ruwe,
+            sdaCatId,
+            sgmag,
+            sgmagUnc,
             shift,
             shiftFlag,
             shiftFwhm1,
             shiftFwhm6,
+            skyMapperId,
             twoMassId,
+            twoMassPhQualInd,
+            twoMassReadFlag,
+            twoMassXscId,
+            tychoDscId,
+            uhsId,
+            ukidssGcsId,
+            ukidssGpsId,
+            ukidssLasId,
             updatedAt,
             updatedBy,
             varFlag,
             variability,
+            vhsId,
+            vmag,
+            vmagOrigin,
+            vmagUnc,
+            w1mag,
+            w1magOrigin,
+            w1magUnc,
+            w1sat,
+            w2mag,
+            w2magOrigin,
+            w2magUnc,
+            w2sat,
+            w3mag,
+            w3magOrigin,
+            w3magUnc,
+            w3sat,
+            w4mag,
+            w4magOrigin,
+            w4magUnc,
+            w4sat,
+            wdsCatId,
             mutableMapOf(),
         )
 
         /**
-         * Originating astrometric catalog for this object. Enum: [GAIADR3, HIPPARCOS, USNOBSC].
+         * Originating astrometric catalog for this object (GA (GAIA), HI (HIPPARCOS), UB (USNOBSC),
+         * AL, AP, CA, CR, DU, FK6_I, FK6_III, PS, SK, TD, TP, TX, UC, UL, UH, UP, VH, VS, WD).
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
          *   value).
          */
-        fun astrometryOrigin(): AstrometryOrigin = astrometryOrigin.getRequired("astrometryOrigin")
+        fun astrometryOrigin(): String = astrometryOrigin.getRequired("astrometryOrigin")
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -2409,7 +4735,8 @@ private constructor(
             classificationMarking.getRequired("classificationMarking")
 
         /**
-         * The ID of this object in the specific catalog associated with this record.
+         * The ID of this object in the specific catalog associated with this record. This field
+         * will either contain the value in the gncCatId or sdaCatId field.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
@@ -2485,7 +4812,145 @@ private constructor(
         fun id(): Optional<String> = id.getOptional("id")
 
         /**
-         * The ID of this object in the All Wide-field Infrared Survey Explorer (AllWISE) catalog.
+         * The American Association of Variable Star Observers (AAVSO) Variable Star Index (VSX)
+         * (VX) object ID of this object.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun aavsoVsxId(): Optional<Int> = aavsoVsxId.getOptional("aavsoVsxId")
+
+        /**
+         * Optical AB g magnitude.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun abgmag(): Optional<Double> = abgmag.getOptional("abgmag")
+
+        /**
+         * Catalog of origin of optical AB g magnitude.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun abgmagOrigin(): Optional<String> = abgmagOrigin.getOptional("abgmagOrigin")
+
+        /**
+         * Uncertainty of optical AB g magnitude.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun abgmagUnc(): Optional<Double> = abgmagUnc.getOptional("abgmagUnc")
+
+        /**
+         * Optical AB i magnitude.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun abimag(): Optional<Double> = abimag.getOptional("abimag")
+
+        /**
+         * Catalog of origin of optical AB i magnitude.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun abimagOrigin(): Optional<String> = abimagOrigin.getOptional("abimagOrigin")
+
+        /**
+         * Uncertainty of optical AB i magnitude.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun abimagUnc(): Optional<Double> = abimagUnc.getOptional("abimagUnc")
+
+        /**
+         * Optical AB r magnitude.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun abrmag(): Optional<Double> = abrmag.getOptional("abrmag")
+
+        /**
+         * Catalog of origin of optical AB r magnitude.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun abrmagOrigin(): Optional<String> = abrmagOrigin.getOptional("abrmagOrigin")
+
+        /**
+         * Uncertainty of optical AB r magnitude.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun abrmagUnc(): Optional<Double> = abrmagUnc.getOptional("abrmagUnc")
+
+        /**
+         * Optical AB y magnitude.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun abymag(): Optional<Double> = abymag.getOptional("abymag")
+
+        /**
+         * Catalog of origin of optical AB y magnitude.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun abymagOrigin(): Optional<String> = abymagOrigin.getOptional("abymagOrigin")
+
+        /**
+         * Uncertainty of optical AB y magnitude.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun abymagUnc(): Optional<Double> = abymagUnc.getOptional("abymagUnc")
+
+        /**
+         * Optical AB z magnitude.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun abzmag(): Optional<Double> = abzmag.getOptional("abzmag")
+
+        /**
+         * Catalog of origin of optical AB z magnitude.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun abzmagOrigin(): Optional<String> = abzmagOrigin.getOptional("abzmagOrigin")
+
+        /**
+         * Uncertainty of optical AB z magnitude.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun abzmagUnc(): Optional<Double> = abzmagUnc.getOptional("abzmagUnc")
+
+        /**
+         * Contamination and confusion indicator in AllWISE.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun allWisEccInd(): Optional<String> = allWisEccInd.getOptional("allWISEccInd")
+
+        /**
+         * The designation of this object in the All Wide-field Infrared Survey Explorer (AllWISE)
+         * catalog (AL).
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2493,79 +4958,74 @@ private constructor(
         fun allWiseId(): Optional<String> = allWiseId.getOptional("allWISEId")
 
         /**
-         * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric W1-band
-         * (3.4 microns) magnitude in the Vega system.
+         * Active deblending indicator in AllWISE.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun allWisew1Mag(): Optional<Double> = allWisew1Mag.getOptional("allWISEW1Mag")
+        fun allWisEnaInd(): Optional<Int> = allWisEnaInd.getOptional("allWISEnaInd")
 
         /**
-         * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric W1-band
-         * (3.4 microns) magnitude uncertainty in the Vega system.
+         * Photometric quality indicator in AllWISE.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun allWisew1MagUnc(): Optional<Double> = allWisew1MagUnc.getOptional("allWISEW1MagUnc")
+        fun allWisEphQualInd(): Optional<String> = allWisEphQualInd.getOptional("allWISEphQualInd")
 
         /**
-         * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric W2-band
-         * (4.6 microns) magnitude in the Vega system.
+         * The American Association of Variable Star Observers (AAVSO) Photometric All-Sky Survey
+         * (APASS) (AP) name of this object.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun allWisew2Mag(): Optional<Double> = allWisew2Mag.getOptional("allWISEW2Mag")
+        fun apassId(): Optional<String> = apassId.getOptional("apassId")
 
         /**
-         * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric W2-band
-         * (4.6 microns) magnitude uncertainty in the Vega system.
+         * Astrometric excess noise in the Gaia catalog measured in milliarcseconds.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun allWisew2MagUnc(): Optional<Double> = allWisew2MagUnc.getOptional("allWISEW2MagUnc")
+        fun astrometricExcessNoise(): Optional<Double> =
+            astrometricExcessNoise.getOptional("astrometricExcessNoise")
 
         /**
-         * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric W3-band
-         * (12 microns) magnitude in the Vega system.
+         * Astrometric excess noise sigma in Gaia.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun allWisew3Mag(): Optional<Double> = allWisew3Mag.getOptional("allWISEW3Mag")
+        fun astrometricExcessNoiseSig(): Optional<Double> =
+            astrometricExcessNoiseSig.getOptional("astrometricExcessNoiseSig")
 
         /**
-         * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric W3-band
-         * (12 microns) magnitude uncertainty in the Vega system.
+         * Optical Johnson B magnitude measured in magnitudes.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun allWisew3MagUnc(): Optional<Double> = allWisew3MagUnc.getOptional("allWISEW3MagUnc")
+        fun bmag(): Optional<Double> = bmag.getOptional("bmag")
 
         /**
-         * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric W4-band
-         * (22 microns) magnitude in the Vega system.
+         * Catalog of origin of optical Johnson B magnitude (AP, CR, HI).
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun allWisew4Mag(): Optional<Double> = allWisew4Mag.getOptional("allWISEW4Mag")
+        fun bmagOrigin(): Optional<String> = bmagOrigin.getOptional("bmagOrigin")
 
         /**
-         * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric W4-band
-         * (22 microns) magnitude uncertainty in the Vega system.
+         * Uncertainty of optical Johnson B magnitude measured in magnitudes.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun allWisew4MagUnc(): Optional<Double> = allWisew4MagUnc.getOptional("allWISEW4MagUnc")
+        fun bmagUnc(): Optional<Double> = bmagUnc.getOptional("bmagUnc")
 
         /**
-         * Gaia DR3 optical photometric Bp-band magnitude in the Vega scale.
+         * Gaia optical photometric Bp-band in the Vega scale measured in magnitudes.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2573,12 +5033,20 @@ private constructor(
         fun bpmag(): Optional<Double> = bpmag.getOptional("bpmag")
 
         /**
-         * Gaia DR3 optical Bp-band magnitude uncertainty in the Vega scale.
+         * Gaia optical Bp-band uncertainty in the Vega scale measured in magnitudes.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
         fun bpmagUnc(): Optional<Double> = bpmagUnc.getOptional("bpmagUnc")
+
+        /**
+         * The Carrasco catalog (CR) identifier of this object.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun carrascoCatId(): Optional<Int> = carrascoCatId.getOptional("carrascoCatId")
 
         /**
          * The version of the catalog associated with this object.
@@ -2587,6 +5055,14 @@ private constructor(
          *   (e.g. if the server responded with an unexpected value).
          */
         fun catVersion(): Optional<String> = catVersion.getOptional("catVersion")
+
+        /**
+         * The CatWISE2020 (CA) catalog source ID of this object.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun catWise2020Id(): Optional<String> = catWise2020Id.getOptional("catWise2020Id")
 
         /**
          * Time the row was created in the database, auto-populated by the system.
@@ -2613,7 +5089,15 @@ private constructor(
         fun decUnc(): Optional<Double> = decUnc.getOptional("decUnc")
 
         /**
-         * The ID of this object in the Gaia DR3 Catalog.
+         * The Ducati catalog (DU) name of this object.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun ducatiCatId(): Optional<String> = ducatiCatId.getOptional("ducatiCatId")
+
+        /**
+         * The source ID of this object in the Gaia DR3 Catalog (GA).
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2621,7 +5105,7 @@ private constructor(
         fun gaiadr3CatId(): Optional<Long> = gaiadr3CatId.getOptional("gaiadr3CatId")
 
         /**
-         * Gaia DR3 optical photometric G-band magnitude in the Vega scale.
+         * Gaia optical photometric G-band in the Vega scale measured in magnitudes.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2629,7 +5113,7 @@ private constructor(
         fun gmag(): Optional<Double> = gmag.getOptional("gmag")
 
         /**
-         * Gaia DR3 optical photometric G-band magnitude uncertainty in the Vega scale.
+         * Gaia optical photometric G-band uncertainty in the Vega scale measured in magnitudes.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2637,7 +5121,8 @@ private constructor(
         fun gmagUnc(): Optional<Double> = gmagUnc.getOptional("gmagUnc")
 
         /**
-         * The ID of this object in the Guidance and Navagation Control (GNC) Catalog.
+         * The ID of this object in the Guidance and Navigation Control (GNC) Catalog. If this field
+         * is populated it shall match the csId field.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2645,7 +5130,16 @@ private constructor(
         fun gncCatId(): Optional<Int> = gncCatId.getOptional("gncCatId")
 
         /**
-         * The ID of this object in the Hipparcos Catalog.
+         * The Healpix index. Consumers should contact the provider for details on the indexing
+         * scheme.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun healpixIndex(): Optional<Int> = healpixIndex.getOptional("healpixIndex")
+
+        /**
+         * The HIP ID of this object in the Hipparcos Catalog (HI).
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2653,8 +5147,7 @@ private constructor(
         fun hipCatId(): Optional<Int> = hipCatId.getOptional("hipCatId")
 
         /**
-         * Two Micron All Sky Survey (2MASS) Point Source Catalog (PSC) near-infrared photometric
-         * H-band magnitude in the Vega scale.
+         * Near-infrared photometric H-band magnitude in the Vega scale measured in magnitudes.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2662,8 +5155,17 @@ private constructor(
         fun hmag(): Optional<Double> = hmag.getOptional("hmag")
 
         /**
-         * Two Micron All Sky Survey (2MASS) Point Source Catalog (PSC) near-infrared photometric
-         * H-band magnitude uncertainty in the Vega scale.
+         * Near-infrared photometric H-band catalog of origin in the Vega scale (TP, UC, UL, UP,
+         * VH).
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun hmagOrigin(): Optional<String> = hmagOrigin.getOptional("hmagOrigin")
+
+        /**
+         * Near-infrared photometric H-band magnitude uncertainty in the Vega scale measured in
+         * magnitudes.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2671,8 +5173,31 @@ private constructor(
         fun hmagUnc(): Optional<Double> = hmagUnc.getOptional("hmagUnc")
 
         /**
-         * Two Micron All Sky Survey (2MASS) Point Source Catalog (PSC) near-infrared photometric
-         * J-band magnitude in the Vega scale.
+         * Optical Johnson I magnitude measured in magnitudes.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun imag(): Optional<Double> = imag.getOptional("imag")
+
+        /**
+         * Catalog of origin of optical Johnson I magnitude (CR, GA, HI).
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun imagOrigin(): Optional<String> = imagOrigin.getOptional("imagOrigin")
+
+        /**
+         * Uncertainty of optical Johnson I magnitude measured in magnitudes.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun imagUnc(): Optional<Double> = imagUnc.getOptional("imagUnc")
+
+        /**
+         * Near-infrared photometric J-band magnitude in the Vega scale measured in magnitudes.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2680,8 +5205,17 @@ private constructor(
         fun jmag(): Optional<Double> = jmag.getOptional("jmag")
 
         /**
-         * Two Micron All Sky Survey (2MASS) Point Source Catalog (PSC) near-infrared photometric
-         * J-band magnitude uncertainty in the Vega scale.
+         * Near-infrared photometric J-band catalog of origin in the Vega scale (TP, UH, UL, UP,
+         * VH).
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun jmagOrigin(): Optional<String> = jmagOrigin.getOptional("jmagOrigin")
+
+        /**
+         * Near-infrared photometric J-band magnitude uncertainty in the Vega scale measured in
+         * magnitudes.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2689,8 +5223,7 @@ private constructor(
         fun jmagUnc(): Optional<Double> = jmagUnc.getOptional("jmagUnc")
 
         /**
-         * Two Micron All Sky Survey (2MASS) Point Source Catalog (PSC) near-infrared photometric
-         * K-band magnitude in the Vega scale.
+         * Near-infrared photometric K-band magnitude in the Vega scale measured in magnitudes.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2698,13 +5231,30 @@ private constructor(
         fun kmag(): Optional<Double> = kmag.getOptional("kmag")
 
         /**
-         * Two Micron All Sky Survey (2MASS) Point Source Catalog (PSC) near-infrared photometric
-         * K-band magnitude uncertainty in the Vega scale.
+         * Near-infrared photometric K-band catalog of origin in the Vega scale (TP, UC, UH, UL, UP,
+         * VH).
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun kmagOrigin(): Optional<String> = kmagOrigin.getOptional("kmagOrigin")
+
+        /**
+         * Near-infrared photometric K-band magnitude uncertainty in the Vega scale measured in
+         * magnitudes.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
         fun kmagUnc(): Optional<Double> = kmagUnc.getOptional("kmagUnc")
+
+        /**
+         * Morphology indicator.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun morphologyInd(): Optional<Int> = morphologyInd.getOptional("morphologyInd")
 
         /**
          * Flag indicating that this is a multiple object source.
@@ -2722,6 +5272,14 @@ private constructor(
          *   (e.g. if the server responded with an unexpected value).
          */
         fun multiplicity(): Optional<String> = multiplicity.getOptional("multiplicity")
+
+        /**
+         * Dec of nearest neighbor measured in degrees.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun neighborDec(): Optional<Double> = neighborDec.getOptional("neighborDec")
 
         /**
          * Distance between source and nearest neighbor, in arcseconds.
@@ -2748,6 +5306,14 @@ private constructor(
         fun neighborId(): Optional<Int> = neighborId.getOptional("neighborId")
 
         /**
+         * RA of nearest neighbor measured in degrees.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun neighborRa(): Optional<Double> = neighborRa.getOptional("neighborRa")
+
+        /**
          * Identifier indicating the source is a non-single star and additional information is
          * available in non-single star tables. Consumers should contact the provider for details on
          * the specifications.
@@ -2756,6 +5322,14 @@ private constructor(
          *   (e.g. if the server responded with an unexpected value).
          */
         fun nonSingleStar(): Optional<String> = nonSingleStar.getOptional("nonSingleStar")
+
+        /**
+         * Number of neighbors.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun numNeighbors(): Optional<Int> = numNeighbors.getOptional("numNeighbors")
 
         /**
          * Originating system or organization which produced the data, if different from the source.
@@ -2778,6 +5352,14 @@ private constructor(
         fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
 
         /**
+         * The Panoramic Survey Telescope and Rapid Response System (Pan-STARRS) (PS) object ID.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun panStarrsId(): Optional<Long> = panStarrsId.getOptional("panStarrsId")
+
+        /**
          * Absolute stellar parallax of the source, in milliarcseconds.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
@@ -2794,7 +5376,7 @@ private constructor(
         fun parallaxUnc(): Optional<Double> = parallaxUnc.getOptional("parallaxUnc")
 
         /**
-         * Proper motion in declination of the source, in milliarcseconds/year, at the reference
+         * Proper motion in declination of the source, in milliarcseconds per year, at the reference
          * epoch.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
@@ -2803,7 +5385,7 @@ private constructor(
         fun pmdec(): Optional<Double> = pmdec.getOptional("pmdec")
 
         /**
-         * Uncertainty of proper motion in declination, in milliarcseconds/year.
+         * Uncertainty of proper motion in declination, in milliarcseconds per year.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2811,8 +5393,8 @@ private constructor(
         fun pmdecUnc(): Optional<Double> = pmdecUnc.getOptional("pmdecUnc")
 
         /**
-         * Proper motion in right ascension of the source, in milliarcseconds/year, at the reference
-         * epoch.
+         * Proper motion in right ascension of the source, in milliarcseconds per year, at the
+         * reference epoch.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2820,7 +5402,7 @@ private constructor(
         fun pmra(): Optional<Double> = pmra.getOptional("pmra")
 
         /**
-         * Uncertainty of proper motion in right ascension, in milliarcseconds/year.
+         * Uncertainty of proper motion in right ascension, in milliarcseconds per year.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2829,7 +5411,7 @@ private constructor(
 
         /**
          * Flag indicating that the proper motion uncertainty in either ra or dec is greater than 10
-         * milliarcseconds/year.
+         * milliarcseconds per year.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2846,6 +5428,31 @@ private constructor(
         fun posUncFlag(): Optional<Boolean> = posUncFlag.getOptional("posUncFlag")
 
         /**
+         * Astrometry correction flag in Pan-STARRS.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun ps1astrometryCorrectionFlag(): Optional<Int> =
+            ps1astrometryCorrectionFlag.getOptional("ps1astrometryCorrectionFlag")
+
+        /**
+         * Object information flag in Pan-STARRS.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun ps1ObjInfoFlag(): Optional<Int> = ps1ObjInfoFlag.getOptional("ps1ObjInfoFlag")
+
+        /**
+         * Quality flag in Pan-STARRS.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun ps1QualityFlag(): Optional<Int> = ps1QualityFlag.getOptional("ps1QualityFlag")
+
+        /**
          * Uncertainty of the right ascension of the source, in milliarcseconds, at the reference
          * epoch.
          *
@@ -2855,7 +5462,31 @@ private constructor(
         fun raUnc(): Optional<Double> = raUnc.getOptional("raUnc")
 
         /**
-         * Gaia DR3 optical Rp-band magnitude in the Vega scale.
+         * Optical Johnson R magnitude measured in magnitudes.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun rmag(): Optional<Double> = rmag.getOptional("rmag")
+
+        /**
+         * Catalog of origin of the Optical Johnson R magnitude (CR, GA).
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun rmagOrigin(): Optional<String> = rmagOrigin.getOptional("rmagOrigin")
+
+        /**
+         * Uncertainty of the Optical Johnson R magnitude measured in magnitudes.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun rmagUnc(): Optional<Double> = rmagUnc.getOptional("rmagUnc")
+
+        /**
+         * Gaia optical Rp-band in the Vega scale measured in magnitudes.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2863,12 +5494,46 @@ private constructor(
         fun rpmag(): Optional<Double> = rpmag.getOptional("rpmag")
 
         /**
-         * Gaia DR3 optical photometric Rp-band magnitude uncertainty in the Vega scale.
+         * Gaia optical photometric Rp-band uncertainty in the Vega scale measured in magnitudes.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
         fun rpmagUnc(): Optional<Double> = rpmagUnc.getOptional("rpmagUnc")
+
+        /**
+         * RUWE in Gaia.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun ruwe(): Optional<Double> = ruwe.getOptional("ruwe")
+
+        /**
+         * The ID of this object in the Space Domain Awareness (SDA) Catalog. If this field is
+         * populated it shall match the csId field.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun sdaCatId(): Optional<Long> = sdaCatId.getOptional("sdaCatId")
+
+        /**
+         * Original G magnitude if the source is in Gaia, otherwise the magnitude is converted from
+         * other photometric passbands, when possible, measured in magnitudes.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun sgmag(): Optional<Double> = sgmag.getOptional("sgmag")
+
+        /**
+         * Uncertainty of sgmag measured in magnitudes.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun sgmagUnc(): Optional<Double> = sgmagUnc.getOptional("sgmagUnc")
 
         /**
          * Photocentric shift caused by neighbors, in arcseconds.
@@ -2905,8 +5570,16 @@ private constructor(
         fun shiftFwhm6(): Optional<Double> = shiftFwhm6.getOptional("shiftFWHM6")
 
         /**
-         * The ID of this object in the Two Micron All Sky Survey (2MASS) Point Source Catalog
-         * (PSC).
+         * The SkyMapper (SK) catalog object ID.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun skyMapperId(): Optional<Int> = skyMapperId.getOptional("skyMapperId")
+
+        /**
+         * The designation of this object in the Two Micron All Sky Survey (2MASS) Point Source
+         * Catalog (TP).
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2914,7 +5587,76 @@ private constructor(
         fun twoMassId(): Optional<String> = twoMassId.getOptional("twoMASSId")
 
         /**
-         * Time the row was updated in the database.
+         * Photometric (PH) quality indicator in 2MASS PSC.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun twoMassPhQualInd(): Optional<String> = twoMassPhQualInd.getOptional("twoMassPHQualInd")
+
+        /**
+         * Read flag in 2MASS PSC.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun twoMassReadFlag(): Optional<String> = twoMassReadFlag.getOptional("twoMassReadFlag")
+
+        /**
+         * The Two Micron All Sky Survey (2MASS) Extended Source Catalog (XSC) (TX) designation of
+         * this object.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun twoMassXscId(): Optional<String> = twoMassXscId.getOptional("twoMassXscId")
+
+        /**
+         * The Tycho Double Star Catalog (TD) identifier (specified as Tycho-2 ID) of this object.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun tychoDscId(): Optional<Long> = tychoDscId.getOptional("tychoDscId")
+
+        /**
+         * The United Kingdom Infrared Telescope (UKIRT) Hemispheric Survey (UHS) (UH) source ID of
+         * this object.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun uhsId(): Optional<Long> = uhsId.getOptional("uhsId")
+
+        /**
+         * The United Kingdom Infrared Deep Sky Survey (UKIDSS) Galactic Clusters Survey (GCS) (UC)
+         * source ID of this object.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun ukidssGcsId(): Optional<Long> = ukidssGcsId.getOptional("ukidssGCSId")
+
+        /**
+         * The United Kingdom Infrared Deep Sky Survey (UKIDSS) Galactic Plane Survey (GPS) (UP)
+         * source ID of this object.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun ukidssGpsId(): Optional<Long> = ukidssGpsId.getOptional("ukidssGPSId")
+
+        /**
+         * The United Kingdom Infrared Deep Sky Survey (UKIDSS) Large Area Survey (LAS) (UL) source
+         * ID of this object.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun ukidssLasId(): Optional<Long> = ukidssLasId.getOptional("ukidssLASId")
+
+        /**
+         * Time the row was last updated in the database, auto-populated by the system.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2922,7 +5664,7 @@ private constructor(
         fun updatedAt(): Optional<OffsetDateTime> = updatedAt.getOptional("updatedAt")
 
         /**
-         * Application user who updated the row in the database.
+         * Application user who updated the row in the database, auto-populated by the system.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2947,6 +5689,189 @@ private constructor(
         fun variability(): Optional<String> = variability.getOptional("variability")
 
         /**
+         * The Visible and Infrared Survey Telescope for Astronomy (VISTA) Hemisphere Survey (VHS)
+         * (VS) source ID of this object.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun vhsId(): Optional<Long> = vhsId.getOptional("vhsId")
+
+        /**
+         * Optical Johnson V magnitude measured in magnitudes.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun vmag(): Optional<Double> = vmag.getOptional("vmag")
+
+        /**
+         * Catalog of origin of Optical Johnson V magnitude (AP, CR, DU, GA, HI).
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun vmagOrigin(): Optional<String> = vmagOrigin.getOptional("vmagOrigin")
+
+        /**
+         * Uncertainty of the Optical Johnson V magnitude measured in magnitudes.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun vmagUnc(): Optional<Double> = vmagUnc.getOptional("vmagUnc")
+
+        /**
+         * Mid-infrared photometric W1-band (3.4 microns) magnitude in the Vega system measured in
+         * magnitudes.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun w1mag(): Optional<Double> = w1mag.getOptional("w1mag")
+
+        /**
+         * Mid-infrared photometric W1-band (3.4 microns) catalog of origin in the Vega system (AL,
+         * CA).
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun w1magOrigin(): Optional<String> = w1magOrigin.getOptional("w1magOrigin")
+
+        /**
+         * Mid-infrared photometric W1-band (3.4 microns) magnitude uncertainty in the Vega system
+         * measured in magnitudes.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun w1magUnc(): Optional<Double> = w1magUnc.getOptional("w1magUnc")
+
+        /**
+         * Mid-infrared photometric W1-band (3.4 microns) saturated pixel fraction in the Vega
+         * system measured in magnitudes.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun w1sat(): Optional<Double> = w1sat.getOptional("w1sat")
+
+        /**
+         * Mid-infrared photometric W2-band (4.6 microns) magnitude in the Vega system measured in
+         * magnitudes.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun w2mag(): Optional<Double> = w2mag.getOptional("w2mag")
+
+        /**
+         * Mid-infrared photometric W2-band (4.6 microns) catalog of origin in the Vega system (AL,
+         * CA).
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun w2magOrigin(): Optional<String> = w2magOrigin.getOptional("w2magOrigin")
+
+        /**
+         * Mid-infrared photometric W2-band (4.6 microns) magnitude uncertainty in the Vega system
+         * measured in magnitudes.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun w2magUnc(): Optional<Double> = w2magUnc.getOptional("w2magUnc")
+
+        /**
+         * Mid-infrared photometric W2-band (4.6 microns) saturated pixel fraction in the Vega
+         * system.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun w2sat(): Optional<Double> = w2sat.getOptional("w2sat")
+
+        /**
+         * Mid-infrared photometric W3-band (12 microns) magnitude in the Vega system measured in
+         * magnitudes.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun w3mag(): Optional<Double> = w3mag.getOptional("w3mag")
+
+        /**
+         * Mid-infrared photometric W3-band (12 microns) catalog of origin in the Vega system (AL).
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun w3magOrigin(): Optional<String> = w3magOrigin.getOptional("w3magOrigin")
+
+        /**
+         * Mid-infrared photometric W3-band (12 microns) magnitude uncertainty in the Vega system
+         * measured in magnitudes.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun w3magUnc(): Optional<Double> = w3magUnc.getOptional("w3magUnc")
+
+        /**
+         * Mid-infrared photometric W3-band (12 microns) saturated pixel fraction in the Vega
+         * system.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun w3sat(): Optional<Double> = w3sat.getOptional("w3sat")
+
+        /**
+         * Mid-infrared photometric W4-band (22 microns) magnitude in the Vega system measured in
+         * magnitudes.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun w4mag(): Optional<Double> = w4mag.getOptional("w4mag")
+
+        /**
+         * Mid-infrared photometric W4-band (22 microns) catalog of origin in the Vega system (AL).
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun w4magOrigin(): Optional<String> = w4magOrigin.getOptional("w4magOrigin")
+
+        /**
+         * Mid-infrared photometric W4-band (22 microns) magnitude uncertainty in the Vega system
+         * measured in magnitudes.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun w4magUnc(): Optional<Double> = w4magUnc.getOptional("w4magUnc")
+
+        /**
+         * Mid-infrared photometric W4-band (22 microns) saturated pixel fraction in the Vega
+         * system.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun w4sat(): Optional<Double> = w4sat.getOptional("w4sat")
+
+        /**
+         * The Washington Double Star Catalog (WD) identifier of this object.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun wdsCatId(): Optional<String> = wdsCatId.getOptional("wdsCatId")
+
+        /**
          * Returns the raw JSON value of [astrometryOrigin].
          *
          * Unlike [astrometryOrigin], this method doesn't throw if the JSON field has an unexpected
@@ -2954,7 +5879,7 @@ private constructor(
          */
         @JsonProperty("astrometryOrigin")
         @ExcludeMissing
-        fun _astrometryOrigin(): JsonField<AstrometryOrigin> = astrometryOrigin
+        fun _astrometryOrigin(): JsonField<String> = astrometryOrigin
 
         /**
          * Returns the raw JSON value of [classificationMarking].
@@ -3016,6 +5941,143 @@ private constructor(
         @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
 
         /**
+         * Returns the raw JSON value of [aavsoVsxId].
+         *
+         * Unlike [aavsoVsxId], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("aavsoVsxId") @ExcludeMissing fun _aavsoVsxId(): JsonField<Int> = aavsoVsxId
+
+        /**
+         * Returns the raw JSON value of [abgmag].
+         *
+         * Unlike [abgmag], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("abgmag") @ExcludeMissing fun _abgmag(): JsonField<Double> = abgmag
+
+        /**
+         * Returns the raw JSON value of [abgmagOrigin].
+         *
+         * Unlike [abgmagOrigin], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("abgmagOrigin")
+        @ExcludeMissing
+        fun _abgmagOrigin(): JsonField<String> = abgmagOrigin
+
+        /**
+         * Returns the raw JSON value of [abgmagUnc].
+         *
+         * Unlike [abgmagUnc], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("abgmagUnc") @ExcludeMissing fun _abgmagUnc(): JsonField<Double> = abgmagUnc
+
+        /**
+         * Returns the raw JSON value of [abimag].
+         *
+         * Unlike [abimag], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("abimag") @ExcludeMissing fun _abimag(): JsonField<Double> = abimag
+
+        /**
+         * Returns the raw JSON value of [abimagOrigin].
+         *
+         * Unlike [abimagOrigin], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("abimagOrigin")
+        @ExcludeMissing
+        fun _abimagOrigin(): JsonField<String> = abimagOrigin
+
+        /**
+         * Returns the raw JSON value of [abimagUnc].
+         *
+         * Unlike [abimagUnc], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("abimagUnc") @ExcludeMissing fun _abimagUnc(): JsonField<Double> = abimagUnc
+
+        /**
+         * Returns the raw JSON value of [abrmag].
+         *
+         * Unlike [abrmag], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("abrmag") @ExcludeMissing fun _abrmag(): JsonField<Double> = abrmag
+
+        /**
+         * Returns the raw JSON value of [abrmagOrigin].
+         *
+         * Unlike [abrmagOrigin], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("abrmagOrigin")
+        @ExcludeMissing
+        fun _abrmagOrigin(): JsonField<String> = abrmagOrigin
+
+        /**
+         * Returns the raw JSON value of [abrmagUnc].
+         *
+         * Unlike [abrmagUnc], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("abrmagUnc") @ExcludeMissing fun _abrmagUnc(): JsonField<Double> = abrmagUnc
+
+        /**
+         * Returns the raw JSON value of [abymag].
+         *
+         * Unlike [abymag], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("abymag") @ExcludeMissing fun _abymag(): JsonField<Double> = abymag
+
+        /**
+         * Returns the raw JSON value of [abymagOrigin].
+         *
+         * Unlike [abymagOrigin], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("abymagOrigin")
+        @ExcludeMissing
+        fun _abymagOrigin(): JsonField<String> = abymagOrigin
+
+        /**
+         * Returns the raw JSON value of [abymagUnc].
+         *
+         * Unlike [abymagUnc], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("abymagUnc") @ExcludeMissing fun _abymagUnc(): JsonField<Double> = abymagUnc
+
+        /**
+         * Returns the raw JSON value of [abzmag].
+         *
+         * Unlike [abzmag], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("abzmag") @ExcludeMissing fun _abzmag(): JsonField<Double> = abzmag
+
+        /**
+         * Returns the raw JSON value of [abzmagOrigin].
+         *
+         * Unlike [abzmagOrigin], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("abzmagOrigin")
+        @ExcludeMissing
+        fun _abzmagOrigin(): JsonField<String> = abzmagOrigin
+
+        /**
+         * Returns the raw JSON value of [abzmagUnc].
+         *
+         * Unlike [abzmagUnc], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("abzmagUnc") @ExcludeMissing fun _abzmagUnc(): JsonField<Double> = abzmagUnc
+
+        /**
+         * Returns the raw JSON value of [allWisEccInd].
+         *
+         * Unlike [allWisEccInd], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("allWISEccInd")
+        @ExcludeMissing
+        fun _allWisEccInd(): JsonField<String> = allWisEccInd
+
+        /**
          * Returns the raw JSON value of [allWiseId].
          *
          * Unlike [allWiseId], this method doesn't throw if the JSON field has an unexpected type.
@@ -3023,84 +6085,74 @@ private constructor(
         @JsonProperty("allWISEId") @ExcludeMissing fun _allWiseId(): JsonField<String> = allWiseId
 
         /**
-         * Returns the raw JSON value of [allWisew1Mag].
+         * Returns the raw JSON value of [allWisEnaInd].
          *
-         * Unlike [allWisew1Mag], this method doesn't throw if the JSON field has an unexpected
+         * Unlike [allWisEnaInd], this method doesn't throw if the JSON field has an unexpected
          * type.
          */
-        @JsonProperty("allWISEW1Mag")
+        @JsonProperty("allWISEnaInd")
         @ExcludeMissing
-        fun _allWisew1Mag(): JsonField<Double> = allWisew1Mag
+        fun _allWisEnaInd(): JsonField<Int> = allWisEnaInd
 
         /**
-         * Returns the raw JSON value of [allWisew1MagUnc].
+         * Returns the raw JSON value of [allWisEphQualInd].
          *
-         * Unlike [allWisew1MagUnc], this method doesn't throw if the JSON field has an unexpected
+         * Unlike [allWisEphQualInd], this method doesn't throw if the JSON field has an unexpected
          * type.
          */
-        @JsonProperty("allWISEW1MagUnc")
+        @JsonProperty("allWISEphQualInd")
         @ExcludeMissing
-        fun _allWisew1MagUnc(): JsonField<Double> = allWisew1MagUnc
+        fun _allWisEphQualInd(): JsonField<String> = allWisEphQualInd
 
         /**
-         * Returns the raw JSON value of [allWisew2Mag].
+         * Returns the raw JSON value of [apassId].
          *
-         * Unlike [allWisew2Mag], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [apassId], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("allWISEW2Mag")
-        @ExcludeMissing
-        fun _allWisew2Mag(): JsonField<Double> = allWisew2Mag
+        @JsonProperty("apassId") @ExcludeMissing fun _apassId(): JsonField<String> = apassId
 
         /**
-         * Returns the raw JSON value of [allWisew2MagUnc].
+         * Returns the raw JSON value of [astrometricExcessNoise].
          *
-         * Unlike [allWisew2MagUnc], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [astrometricExcessNoise], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
-        @JsonProperty("allWISEW2MagUnc")
+        @JsonProperty("astrometricExcessNoise")
         @ExcludeMissing
-        fun _allWisew2MagUnc(): JsonField<Double> = allWisew2MagUnc
+        fun _astrometricExcessNoise(): JsonField<Double> = astrometricExcessNoise
 
         /**
-         * Returns the raw JSON value of [allWisew3Mag].
+         * Returns the raw JSON value of [astrometricExcessNoiseSig].
          *
-         * Unlike [allWisew3Mag], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [astrometricExcessNoiseSig], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
-        @JsonProperty("allWISEW3Mag")
+        @JsonProperty("astrometricExcessNoiseSig")
         @ExcludeMissing
-        fun _allWisew3Mag(): JsonField<Double> = allWisew3Mag
+        fun _astrometricExcessNoiseSig(): JsonField<Double> = astrometricExcessNoiseSig
 
         /**
-         * Returns the raw JSON value of [allWisew3MagUnc].
+         * Returns the raw JSON value of [bmag].
          *
-         * Unlike [allWisew3MagUnc], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [bmag], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("allWISEW3MagUnc")
-        @ExcludeMissing
-        fun _allWisew3MagUnc(): JsonField<Double> = allWisew3MagUnc
+        @JsonProperty("bmag") @ExcludeMissing fun _bmag(): JsonField<Double> = bmag
 
         /**
-         * Returns the raw JSON value of [allWisew4Mag].
+         * Returns the raw JSON value of [bmagOrigin].
          *
-         * Unlike [allWisew4Mag], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [bmagOrigin], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("allWISEW4Mag")
+        @JsonProperty("bmagOrigin")
         @ExcludeMissing
-        fun _allWisew4Mag(): JsonField<Double> = allWisew4Mag
+        fun _bmagOrigin(): JsonField<String> = bmagOrigin
 
         /**
-         * Returns the raw JSON value of [allWisew4MagUnc].
+         * Returns the raw JSON value of [bmagUnc].
          *
-         * Unlike [allWisew4MagUnc], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [bmagUnc], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("allWISEW4MagUnc")
-        @ExcludeMissing
-        fun _allWisew4MagUnc(): JsonField<Double> = allWisew4MagUnc
+        @JsonProperty("bmagUnc") @ExcludeMissing fun _bmagUnc(): JsonField<Double> = bmagUnc
 
         /**
          * Returns the raw JSON value of [bpmag].
@@ -3117,6 +6169,16 @@ private constructor(
         @JsonProperty("bpmagUnc") @ExcludeMissing fun _bpmagUnc(): JsonField<Double> = bpmagUnc
 
         /**
+         * Returns the raw JSON value of [carrascoCatId].
+         *
+         * Unlike [carrascoCatId], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("carrascoCatId")
+        @ExcludeMissing
+        fun _carrascoCatId(): JsonField<Int> = carrascoCatId
+
+        /**
          * Returns the raw JSON value of [catVersion].
          *
          * Unlike [catVersion], this method doesn't throw if the JSON field has an unexpected type.
@@ -3124,6 +6186,16 @@ private constructor(
         @JsonProperty("catVersion")
         @ExcludeMissing
         fun _catVersion(): JsonField<String> = catVersion
+
+        /**
+         * Returns the raw JSON value of [catWise2020Id].
+         *
+         * Unlike [catWise2020Id], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("catWise2020Id")
+        @ExcludeMissing
+        fun _catWise2020Id(): JsonField<String> = catWise2020Id
 
         /**
          * Returns the raw JSON value of [createdAt].
@@ -3147,6 +6219,15 @@ private constructor(
          * Unlike [decUnc], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("decUnc") @ExcludeMissing fun _decUnc(): JsonField<Double> = decUnc
+
+        /**
+         * Returns the raw JSON value of [ducatiCatId].
+         *
+         * Unlike [ducatiCatId], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("ducatiCatId")
+        @ExcludeMissing
+        fun _ducatiCatId(): JsonField<String> = ducatiCatId
 
         /**
          * Returns the raw JSON value of [gaiadr3CatId].
@@ -3180,6 +6261,16 @@ private constructor(
         @JsonProperty("gncCatId") @ExcludeMissing fun _gncCatId(): JsonField<Int> = gncCatId
 
         /**
+         * Returns the raw JSON value of [healpixIndex].
+         *
+         * Unlike [healpixIndex], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("healpixIndex")
+        @ExcludeMissing
+        fun _healpixIndex(): JsonField<Int> = healpixIndex
+
+        /**
          * Returns the raw JSON value of [hipCatId].
          *
          * Unlike [hipCatId], this method doesn't throw if the JSON field has an unexpected type.
@@ -3194,6 +6285,15 @@ private constructor(
         @JsonProperty("hmag") @ExcludeMissing fun _hmag(): JsonField<Double> = hmag
 
         /**
+         * Returns the raw JSON value of [hmagOrigin].
+         *
+         * Unlike [hmagOrigin], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("hmagOrigin")
+        @ExcludeMissing
+        fun _hmagOrigin(): JsonField<String> = hmagOrigin
+
+        /**
          * Returns the raw JSON value of [hmagUnc].
          *
          * Unlike [hmagUnc], this method doesn't throw if the JSON field has an unexpected type.
@@ -3201,11 +6301,43 @@ private constructor(
         @JsonProperty("hmagUnc") @ExcludeMissing fun _hmagUnc(): JsonField<Double> = hmagUnc
 
         /**
+         * Returns the raw JSON value of [imag].
+         *
+         * Unlike [imag], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("imag") @ExcludeMissing fun _imag(): JsonField<Double> = imag
+
+        /**
+         * Returns the raw JSON value of [imagOrigin].
+         *
+         * Unlike [imagOrigin], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("imagOrigin")
+        @ExcludeMissing
+        fun _imagOrigin(): JsonField<String> = imagOrigin
+
+        /**
+         * Returns the raw JSON value of [imagUnc].
+         *
+         * Unlike [imagUnc], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("imagUnc") @ExcludeMissing fun _imagUnc(): JsonField<Double> = imagUnc
+
+        /**
          * Returns the raw JSON value of [jmag].
          *
          * Unlike [jmag], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("jmag") @ExcludeMissing fun _jmag(): JsonField<Double> = jmag
+
+        /**
+         * Returns the raw JSON value of [jmagOrigin].
+         *
+         * Unlike [jmagOrigin], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("jmagOrigin")
+        @ExcludeMissing
+        fun _jmagOrigin(): JsonField<String> = jmagOrigin
 
         /**
          * Returns the raw JSON value of [jmagUnc].
@@ -3222,11 +6354,30 @@ private constructor(
         @JsonProperty("kmag") @ExcludeMissing fun _kmag(): JsonField<Double> = kmag
 
         /**
+         * Returns the raw JSON value of [kmagOrigin].
+         *
+         * Unlike [kmagOrigin], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("kmagOrigin")
+        @ExcludeMissing
+        fun _kmagOrigin(): JsonField<String> = kmagOrigin
+
+        /**
          * Returns the raw JSON value of [kmagUnc].
          *
          * Unlike [kmagUnc], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("kmagUnc") @ExcludeMissing fun _kmagUnc(): JsonField<Double> = kmagUnc
+
+        /**
+         * Returns the raw JSON value of [morphologyInd].
+         *
+         * Unlike [morphologyInd], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("morphologyInd")
+        @ExcludeMissing
+        fun _morphologyInd(): JsonField<Int> = morphologyInd
 
         /**
          * Returns the raw JSON value of [multFlag].
@@ -3244,6 +6395,15 @@ private constructor(
         @JsonProperty("multiplicity")
         @ExcludeMissing
         fun _multiplicity(): JsonField<String> = multiplicity
+
+        /**
+         * Returns the raw JSON value of [neighborDec].
+         *
+         * Unlike [neighborDec], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("neighborDec")
+        @ExcludeMissing
+        fun _neighborDec(): JsonField<Double> = neighborDec
 
         /**
          * Returns the raw JSON value of [neighborDistance].
@@ -3273,6 +6433,15 @@ private constructor(
         @JsonProperty("neighborId") @ExcludeMissing fun _neighborId(): JsonField<Int> = neighborId
 
         /**
+         * Returns the raw JSON value of [neighborRa].
+         *
+         * Unlike [neighborRa], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("neighborRa")
+        @ExcludeMissing
+        fun _neighborRa(): JsonField<Double> = neighborRa
+
+        /**
          * Returns the raw JSON value of [nonSingleStar].
          *
          * Unlike [nonSingleStar], this method doesn't throw if the JSON field has an unexpected
@@ -3281,6 +6450,16 @@ private constructor(
         @JsonProperty("nonSingleStar")
         @ExcludeMissing
         fun _nonSingleStar(): JsonField<String> = nonSingleStar
+
+        /**
+         * Returns the raw JSON value of [numNeighbors].
+         *
+         * Unlike [numNeighbors], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("numNeighbors")
+        @ExcludeMissing
+        fun _numNeighbors(): JsonField<Int> = numNeighbors
 
         /**
          * Returns the raw JSON value of [origin].
@@ -3297,6 +6476,15 @@ private constructor(
         @JsonProperty("origNetwork")
         @ExcludeMissing
         fun _origNetwork(): JsonField<String> = origNetwork
+
+        /**
+         * Returns the raw JSON value of [panStarrsId].
+         *
+         * Unlike [panStarrsId], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("panStarrsId")
+        @ExcludeMissing
+        fun _panStarrsId(): JsonField<Long> = panStarrsId
 
         /**
          * Returns the raw JSON value of [parallax].
@@ -3359,11 +6547,64 @@ private constructor(
         fun _posUncFlag(): JsonField<Boolean> = posUncFlag
 
         /**
+         * Returns the raw JSON value of [ps1astrometryCorrectionFlag].
+         *
+         * Unlike [ps1astrometryCorrectionFlag], this method doesn't throw if the JSON field has an
+         * unexpected type.
+         */
+        @JsonProperty("ps1astrometryCorrectionFlag")
+        @ExcludeMissing
+        fun _ps1astrometryCorrectionFlag(): JsonField<Int> = ps1astrometryCorrectionFlag
+
+        /**
+         * Returns the raw JSON value of [ps1ObjInfoFlag].
+         *
+         * Unlike [ps1ObjInfoFlag], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("ps1ObjInfoFlag")
+        @ExcludeMissing
+        fun _ps1ObjInfoFlag(): JsonField<Int> = ps1ObjInfoFlag
+
+        /**
+         * Returns the raw JSON value of [ps1QualityFlag].
+         *
+         * Unlike [ps1QualityFlag], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("ps1QualityFlag")
+        @ExcludeMissing
+        fun _ps1QualityFlag(): JsonField<Int> = ps1QualityFlag
+
+        /**
          * Returns the raw JSON value of [raUnc].
          *
          * Unlike [raUnc], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("raUnc") @ExcludeMissing fun _raUnc(): JsonField<Double> = raUnc
+
+        /**
+         * Returns the raw JSON value of [rmag].
+         *
+         * Unlike [rmag], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("rmag") @ExcludeMissing fun _rmag(): JsonField<Double> = rmag
+
+        /**
+         * Returns the raw JSON value of [rmagOrigin].
+         *
+         * Unlike [rmagOrigin], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("rmagOrigin")
+        @ExcludeMissing
+        fun _rmagOrigin(): JsonField<String> = rmagOrigin
+
+        /**
+         * Returns the raw JSON value of [rmagUnc].
+         *
+         * Unlike [rmagUnc], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("rmagUnc") @ExcludeMissing fun _rmagUnc(): JsonField<Double> = rmagUnc
 
         /**
          * Returns the raw JSON value of [rpmag].
@@ -3378,6 +6619,34 @@ private constructor(
          * Unlike [rpmagUnc], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("rpmagUnc") @ExcludeMissing fun _rpmagUnc(): JsonField<Double> = rpmagUnc
+
+        /**
+         * Returns the raw JSON value of [ruwe].
+         *
+         * Unlike [ruwe], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("ruwe") @ExcludeMissing fun _ruwe(): JsonField<Double> = ruwe
+
+        /**
+         * Returns the raw JSON value of [sdaCatId].
+         *
+         * Unlike [sdaCatId], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("sdaCatId") @ExcludeMissing fun _sdaCatId(): JsonField<Long> = sdaCatId
+
+        /**
+         * Returns the raw JSON value of [sgmag].
+         *
+         * Unlike [sgmag], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("sgmag") @ExcludeMissing fun _sgmag(): JsonField<Double> = sgmag
+
+        /**
+         * Returns the raw JSON value of [sgmagUnc].
+         *
+         * Unlike [sgmagUnc], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("sgmagUnc") @ExcludeMissing fun _sgmagUnc(): JsonField<Double> = sgmagUnc
 
         /**
          * Returns the raw JSON value of [shift].
@@ -3412,11 +6681,91 @@ private constructor(
         fun _shiftFwhm6(): JsonField<Double> = shiftFwhm6
 
         /**
+         * Returns the raw JSON value of [skyMapperId].
+         *
+         * Unlike [skyMapperId], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("skyMapperId")
+        @ExcludeMissing
+        fun _skyMapperId(): JsonField<Int> = skyMapperId
+
+        /**
          * Returns the raw JSON value of [twoMassId].
          *
          * Unlike [twoMassId], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("twoMASSId") @ExcludeMissing fun _twoMassId(): JsonField<String> = twoMassId
+
+        /**
+         * Returns the raw JSON value of [twoMassPhQualInd].
+         *
+         * Unlike [twoMassPhQualInd], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("twoMassPHQualInd")
+        @ExcludeMissing
+        fun _twoMassPhQualInd(): JsonField<String> = twoMassPhQualInd
+
+        /**
+         * Returns the raw JSON value of [twoMassReadFlag].
+         *
+         * Unlike [twoMassReadFlag], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("twoMassReadFlag")
+        @ExcludeMissing
+        fun _twoMassReadFlag(): JsonField<String> = twoMassReadFlag
+
+        /**
+         * Returns the raw JSON value of [twoMassXscId].
+         *
+         * Unlike [twoMassXscId], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("twoMassXscId")
+        @ExcludeMissing
+        fun _twoMassXscId(): JsonField<String> = twoMassXscId
+
+        /**
+         * Returns the raw JSON value of [tychoDscId].
+         *
+         * Unlike [tychoDscId], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("tychoDscId") @ExcludeMissing fun _tychoDscId(): JsonField<Long> = tychoDscId
+
+        /**
+         * Returns the raw JSON value of [uhsId].
+         *
+         * Unlike [uhsId], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("uhsId") @ExcludeMissing fun _uhsId(): JsonField<Long> = uhsId
+
+        /**
+         * Returns the raw JSON value of [ukidssGcsId].
+         *
+         * Unlike [ukidssGcsId], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("ukidssGCSId")
+        @ExcludeMissing
+        fun _ukidssGcsId(): JsonField<Long> = ukidssGcsId
+
+        /**
+         * Returns the raw JSON value of [ukidssGpsId].
+         *
+         * Unlike [ukidssGpsId], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("ukidssGPSId")
+        @ExcludeMissing
+        fun _ukidssGpsId(): JsonField<Long> = ukidssGpsId
+
+        /**
+         * Returns the raw JSON value of [ukidssLasId].
+         *
+         * Unlike [ukidssLasId], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("ukidssLASId")
+        @ExcludeMissing
+        fun _ukidssLasId(): JsonField<Long> = ukidssLasId
 
         /**
          * Returns the raw JSON value of [updatedAt].
@@ -3449,6 +6798,163 @@ private constructor(
         @JsonProperty("variability")
         @ExcludeMissing
         fun _variability(): JsonField<String> = variability
+
+        /**
+         * Returns the raw JSON value of [vhsId].
+         *
+         * Unlike [vhsId], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("vhsId") @ExcludeMissing fun _vhsId(): JsonField<Long> = vhsId
+
+        /**
+         * Returns the raw JSON value of [vmag].
+         *
+         * Unlike [vmag], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("vmag") @ExcludeMissing fun _vmag(): JsonField<Double> = vmag
+
+        /**
+         * Returns the raw JSON value of [vmagOrigin].
+         *
+         * Unlike [vmagOrigin], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("vmagOrigin")
+        @ExcludeMissing
+        fun _vmagOrigin(): JsonField<String> = vmagOrigin
+
+        /**
+         * Returns the raw JSON value of [vmagUnc].
+         *
+         * Unlike [vmagUnc], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("vmagUnc") @ExcludeMissing fun _vmagUnc(): JsonField<Double> = vmagUnc
+
+        /**
+         * Returns the raw JSON value of [w1mag].
+         *
+         * Unlike [w1mag], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("w1mag") @ExcludeMissing fun _w1mag(): JsonField<Double> = w1mag
+
+        /**
+         * Returns the raw JSON value of [w1magOrigin].
+         *
+         * Unlike [w1magOrigin], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("w1magOrigin")
+        @ExcludeMissing
+        fun _w1magOrigin(): JsonField<String> = w1magOrigin
+
+        /**
+         * Returns the raw JSON value of [w1magUnc].
+         *
+         * Unlike [w1magUnc], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("w1magUnc") @ExcludeMissing fun _w1magUnc(): JsonField<Double> = w1magUnc
+
+        /**
+         * Returns the raw JSON value of [w1sat].
+         *
+         * Unlike [w1sat], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("w1sat") @ExcludeMissing fun _w1sat(): JsonField<Double> = w1sat
+
+        /**
+         * Returns the raw JSON value of [w2mag].
+         *
+         * Unlike [w2mag], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("w2mag") @ExcludeMissing fun _w2mag(): JsonField<Double> = w2mag
+
+        /**
+         * Returns the raw JSON value of [w2magOrigin].
+         *
+         * Unlike [w2magOrigin], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("w2magOrigin")
+        @ExcludeMissing
+        fun _w2magOrigin(): JsonField<String> = w2magOrigin
+
+        /**
+         * Returns the raw JSON value of [w2magUnc].
+         *
+         * Unlike [w2magUnc], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("w2magUnc") @ExcludeMissing fun _w2magUnc(): JsonField<Double> = w2magUnc
+
+        /**
+         * Returns the raw JSON value of [w2sat].
+         *
+         * Unlike [w2sat], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("w2sat") @ExcludeMissing fun _w2sat(): JsonField<Double> = w2sat
+
+        /**
+         * Returns the raw JSON value of [w3mag].
+         *
+         * Unlike [w3mag], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("w3mag") @ExcludeMissing fun _w3mag(): JsonField<Double> = w3mag
+
+        /**
+         * Returns the raw JSON value of [w3magOrigin].
+         *
+         * Unlike [w3magOrigin], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("w3magOrigin")
+        @ExcludeMissing
+        fun _w3magOrigin(): JsonField<String> = w3magOrigin
+
+        /**
+         * Returns the raw JSON value of [w3magUnc].
+         *
+         * Unlike [w3magUnc], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("w3magUnc") @ExcludeMissing fun _w3magUnc(): JsonField<Double> = w3magUnc
+
+        /**
+         * Returns the raw JSON value of [w3sat].
+         *
+         * Unlike [w3sat], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("w3sat") @ExcludeMissing fun _w3sat(): JsonField<Double> = w3sat
+
+        /**
+         * Returns the raw JSON value of [w4mag].
+         *
+         * Unlike [w4mag], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("w4mag") @ExcludeMissing fun _w4mag(): JsonField<Double> = w4mag
+
+        /**
+         * Returns the raw JSON value of [w4magOrigin].
+         *
+         * Unlike [w4magOrigin], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("w4magOrigin")
+        @ExcludeMissing
+        fun _w4magOrigin(): JsonField<String> = w4magOrigin
+
+        /**
+         * Returns the raw JSON value of [w4magUnc].
+         *
+         * Unlike [w4magUnc], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("w4magUnc") @ExcludeMissing fun _w4magUnc(): JsonField<Double> = w4magUnc
+
+        /**
+         * Returns the raw JSON value of [w4sat].
+         *
+         * Unlike [w4sat], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("w4sat") @ExcludeMissing fun _w4sat(): JsonField<Double> = w4sat
+
+        /**
+         * Returns the raw JSON value of [wdsCatId].
+         *
+         * Unlike [wdsCatId], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("wdsCatId") @ExcludeMissing fun _wdsCatId(): JsonField<String> = wdsCatId
 
         @JsonAnySetter
         private fun putAdditionalProperty(key: String, value: JsonValue) {
@@ -3485,7 +6991,7 @@ private constructor(
         /** A builder for [Body]. */
         class Builder internal constructor() {
 
-            private var astrometryOrigin: JsonField<AstrometryOrigin>? = null
+            private var astrometryOrigin: JsonField<String>? = null
             private var classificationMarking: JsonField<String>? = null
             private var csId: JsonField<Long>? = null
             private var dataMode: JsonField<DataMode>? = null
@@ -3494,40 +7000,72 @@ private constructor(
             private var source: JsonField<String>? = null
             private var starEpoch: JsonField<Double>? = null
             private var id: JsonField<String> = JsonMissing.of()
+            private var aavsoVsxId: JsonField<Int> = JsonMissing.of()
+            private var abgmag: JsonField<Double> = JsonMissing.of()
+            private var abgmagOrigin: JsonField<String> = JsonMissing.of()
+            private var abgmagUnc: JsonField<Double> = JsonMissing.of()
+            private var abimag: JsonField<Double> = JsonMissing.of()
+            private var abimagOrigin: JsonField<String> = JsonMissing.of()
+            private var abimagUnc: JsonField<Double> = JsonMissing.of()
+            private var abrmag: JsonField<Double> = JsonMissing.of()
+            private var abrmagOrigin: JsonField<String> = JsonMissing.of()
+            private var abrmagUnc: JsonField<Double> = JsonMissing.of()
+            private var abymag: JsonField<Double> = JsonMissing.of()
+            private var abymagOrigin: JsonField<String> = JsonMissing.of()
+            private var abymagUnc: JsonField<Double> = JsonMissing.of()
+            private var abzmag: JsonField<Double> = JsonMissing.of()
+            private var abzmagOrigin: JsonField<String> = JsonMissing.of()
+            private var abzmagUnc: JsonField<Double> = JsonMissing.of()
+            private var allWisEccInd: JsonField<String> = JsonMissing.of()
             private var allWiseId: JsonField<String> = JsonMissing.of()
-            private var allWisew1Mag: JsonField<Double> = JsonMissing.of()
-            private var allWisew1MagUnc: JsonField<Double> = JsonMissing.of()
-            private var allWisew2Mag: JsonField<Double> = JsonMissing.of()
-            private var allWisew2MagUnc: JsonField<Double> = JsonMissing.of()
-            private var allWisew3Mag: JsonField<Double> = JsonMissing.of()
-            private var allWisew3MagUnc: JsonField<Double> = JsonMissing.of()
-            private var allWisew4Mag: JsonField<Double> = JsonMissing.of()
-            private var allWisew4MagUnc: JsonField<Double> = JsonMissing.of()
+            private var allWisEnaInd: JsonField<Int> = JsonMissing.of()
+            private var allWisEphQualInd: JsonField<String> = JsonMissing.of()
+            private var apassId: JsonField<String> = JsonMissing.of()
+            private var astrometricExcessNoise: JsonField<Double> = JsonMissing.of()
+            private var astrometricExcessNoiseSig: JsonField<Double> = JsonMissing.of()
+            private var bmag: JsonField<Double> = JsonMissing.of()
+            private var bmagOrigin: JsonField<String> = JsonMissing.of()
+            private var bmagUnc: JsonField<Double> = JsonMissing.of()
             private var bpmag: JsonField<Double> = JsonMissing.of()
             private var bpmagUnc: JsonField<Double> = JsonMissing.of()
+            private var carrascoCatId: JsonField<Int> = JsonMissing.of()
             private var catVersion: JsonField<String> = JsonMissing.of()
+            private var catWise2020Id: JsonField<String> = JsonMissing.of()
             private var createdAt: JsonField<OffsetDateTime> = JsonMissing.of()
             private var createdBy: JsonField<String> = JsonMissing.of()
             private var decUnc: JsonField<Double> = JsonMissing.of()
+            private var ducatiCatId: JsonField<String> = JsonMissing.of()
             private var gaiadr3CatId: JsonField<Long> = JsonMissing.of()
             private var gmag: JsonField<Double> = JsonMissing.of()
             private var gmagUnc: JsonField<Double> = JsonMissing.of()
             private var gncCatId: JsonField<Int> = JsonMissing.of()
+            private var healpixIndex: JsonField<Int> = JsonMissing.of()
             private var hipCatId: JsonField<Int> = JsonMissing.of()
             private var hmag: JsonField<Double> = JsonMissing.of()
+            private var hmagOrigin: JsonField<String> = JsonMissing.of()
             private var hmagUnc: JsonField<Double> = JsonMissing.of()
+            private var imag: JsonField<Double> = JsonMissing.of()
+            private var imagOrigin: JsonField<String> = JsonMissing.of()
+            private var imagUnc: JsonField<Double> = JsonMissing.of()
             private var jmag: JsonField<Double> = JsonMissing.of()
+            private var jmagOrigin: JsonField<String> = JsonMissing.of()
             private var jmagUnc: JsonField<Double> = JsonMissing.of()
             private var kmag: JsonField<Double> = JsonMissing.of()
+            private var kmagOrigin: JsonField<String> = JsonMissing.of()
             private var kmagUnc: JsonField<Double> = JsonMissing.of()
+            private var morphologyInd: JsonField<Int> = JsonMissing.of()
             private var multFlag: JsonField<Boolean> = JsonMissing.of()
             private var multiplicity: JsonField<String> = JsonMissing.of()
+            private var neighborDec: JsonField<Double> = JsonMissing.of()
             private var neighborDistance: JsonField<Double> = JsonMissing.of()
             private var neighborFlag: JsonField<Boolean> = JsonMissing.of()
             private var neighborId: JsonField<Int> = JsonMissing.of()
+            private var neighborRa: JsonField<Double> = JsonMissing.of()
             private var nonSingleStar: JsonField<String> = JsonMissing.of()
+            private var numNeighbors: JsonField<Int> = JsonMissing.of()
             private var origin: JsonField<String> = JsonMissing.of()
             private var origNetwork: JsonField<String> = JsonMissing.of()
+            private var panStarrsId: JsonField<Long> = JsonMissing.of()
             private var parallax: JsonField<Double> = JsonMissing.of()
             private var parallaxUnc: JsonField<Double> = JsonMissing.of()
             private var pmdec: JsonField<Double> = JsonMissing.of()
@@ -3536,18 +7074,58 @@ private constructor(
             private var pmraUnc: JsonField<Double> = JsonMissing.of()
             private var pmUncFlag: JsonField<Boolean> = JsonMissing.of()
             private var posUncFlag: JsonField<Boolean> = JsonMissing.of()
+            private var ps1astrometryCorrectionFlag: JsonField<Int> = JsonMissing.of()
+            private var ps1ObjInfoFlag: JsonField<Int> = JsonMissing.of()
+            private var ps1QualityFlag: JsonField<Int> = JsonMissing.of()
             private var raUnc: JsonField<Double> = JsonMissing.of()
+            private var rmag: JsonField<Double> = JsonMissing.of()
+            private var rmagOrigin: JsonField<String> = JsonMissing.of()
+            private var rmagUnc: JsonField<Double> = JsonMissing.of()
             private var rpmag: JsonField<Double> = JsonMissing.of()
             private var rpmagUnc: JsonField<Double> = JsonMissing.of()
+            private var ruwe: JsonField<Double> = JsonMissing.of()
+            private var sdaCatId: JsonField<Long> = JsonMissing.of()
+            private var sgmag: JsonField<Double> = JsonMissing.of()
+            private var sgmagUnc: JsonField<Double> = JsonMissing.of()
             private var shift: JsonField<Double> = JsonMissing.of()
             private var shiftFlag: JsonField<Boolean> = JsonMissing.of()
             private var shiftFwhm1: JsonField<Double> = JsonMissing.of()
             private var shiftFwhm6: JsonField<Double> = JsonMissing.of()
+            private var skyMapperId: JsonField<Int> = JsonMissing.of()
             private var twoMassId: JsonField<String> = JsonMissing.of()
+            private var twoMassPhQualInd: JsonField<String> = JsonMissing.of()
+            private var twoMassReadFlag: JsonField<String> = JsonMissing.of()
+            private var twoMassXscId: JsonField<String> = JsonMissing.of()
+            private var tychoDscId: JsonField<Long> = JsonMissing.of()
+            private var uhsId: JsonField<Long> = JsonMissing.of()
+            private var ukidssGcsId: JsonField<Long> = JsonMissing.of()
+            private var ukidssGpsId: JsonField<Long> = JsonMissing.of()
+            private var ukidssLasId: JsonField<Long> = JsonMissing.of()
             private var updatedAt: JsonField<OffsetDateTime> = JsonMissing.of()
             private var updatedBy: JsonField<String> = JsonMissing.of()
             private var varFlag: JsonField<Boolean> = JsonMissing.of()
             private var variability: JsonField<String> = JsonMissing.of()
+            private var vhsId: JsonField<Long> = JsonMissing.of()
+            private var vmag: JsonField<Double> = JsonMissing.of()
+            private var vmagOrigin: JsonField<String> = JsonMissing.of()
+            private var vmagUnc: JsonField<Double> = JsonMissing.of()
+            private var w1mag: JsonField<Double> = JsonMissing.of()
+            private var w1magOrigin: JsonField<String> = JsonMissing.of()
+            private var w1magUnc: JsonField<Double> = JsonMissing.of()
+            private var w1sat: JsonField<Double> = JsonMissing.of()
+            private var w2mag: JsonField<Double> = JsonMissing.of()
+            private var w2magOrigin: JsonField<String> = JsonMissing.of()
+            private var w2magUnc: JsonField<Double> = JsonMissing.of()
+            private var w2sat: JsonField<Double> = JsonMissing.of()
+            private var w3mag: JsonField<Double> = JsonMissing.of()
+            private var w3magOrigin: JsonField<String> = JsonMissing.of()
+            private var w3magUnc: JsonField<Double> = JsonMissing.of()
+            private var w3sat: JsonField<Double> = JsonMissing.of()
+            private var w4mag: JsonField<Double> = JsonMissing.of()
+            private var w4magOrigin: JsonField<String> = JsonMissing.of()
+            private var w4magUnc: JsonField<Double> = JsonMissing.of()
+            private var w4sat: JsonField<Double> = JsonMissing.of()
+            private var wdsCatId: JsonField<String> = JsonMissing.of()
             private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
@@ -3561,40 +7139,72 @@ private constructor(
                 source = body.source
                 starEpoch = body.starEpoch
                 id = body.id
+                aavsoVsxId = body.aavsoVsxId
+                abgmag = body.abgmag
+                abgmagOrigin = body.abgmagOrigin
+                abgmagUnc = body.abgmagUnc
+                abimag = body.abimag
+                abimagOrigin = body.abimagOrigin
+                abimagUnc = body.abimagUnc
+                abrmag = body.abrmag
+                abrmagOrigin = body.abrmagOrigin
+                abrmagUnc = body.abrmagUnc
+                abymag = body.abymag
+                abymagOrigin = body.abymagOrigin
+                abymagUnc = body.abymagUnc
+                abzmag = body.abzmag
+                abzmagOrigin = body.abzmagOrigin
+                abzmagUnc = body.abzmagUnc
+                allWisEccInd = body.allWisEccInd
                 allWiseId = body.allWiseId
-                allWisew1Mag = body.allWisew1Mag
-                allWisew1MagUnc = body.allWisew1MagUnc
-                allWisew2Mag = body.allWisew2Mag
-                allWisew2MagUnc = body.allWisew2MagUnc
-                allWisew3Mag = body.allWisew3Mag
-                allWisew3MagUnc = body.allWisew3MagUnc
-                allWisew4Mag = body.allWisew4Mag
-                allWisew4MagUnc = body.allWisew4MagUnc
+                allWisEnaInd = body.allWisEnaInd
+                allWisEphQualInd = body.allWisEphQualInd
+                apassId = body.apassId
+                astrometricExcessNoise = body.astrometricExcessNoise
+                astrometricExcessNoiseSig = body.astrometricExcessNoiseSig
+                bmag = body.bmag
+                bmagOrigin = body.bmagOrigin
+                bmagUnc = body.bmagUnc
                 bpmag = body.bpmag
                 bpmagUnc = body.bpmagUnc
+                carrascoCatId = body.carrascoCatId
                 catVersion = body.catVersion
+                catWise2020Id = body.catWise2020Id
                 createdAt = body.createdAt
                 createdBy = body.createdBy
                 decUnc = body.decUnc
+                ducatiCatId = body.ducatiCatId
                 gaiadr3CatId = body.gaiadr3CatId
                 gmag = body.gmag
                 gmagUnc = body.gmagUnc
                 gncCatId = body.gncCatId
+                healpixIndex = body.healpixIndex
                 hipCatId = body.hipCatId
                 hmag = body.hmag
+                hmagOrigin = body.hmagOrigin
                 hmagUnc = body.hmagUnc
+                imag = body.imag
+                imagOrigin = body.imagOrigin
+                imagUnc = body.imagUnc
                 jmag = body.jmag
+                jmagOrigin = body.jmagOrigin
                 jmagUnc = body.jmagUnc
                 kmag = body.kmag
+                kmagOrigin = body.kmagOrigin
                 kmagUnc = body.kmagUnc
+                morphologyInd = body.morphologyInd
                 multFlag = body.multFlag
                 multiplicity = body.multiplicity
+                neighborDec = body.neighborDec
                 neighborDistance = body.neighborDistance
                 neighborFlag = body.neighborFlag
                 neighborId = body.neighborId
+                neighborRa = body.neighborRa
                 nonSingleStar = body.nonSingleStar
+                numNeighbors = body.numNeighbors
                 origin = body.origin
                 origNetwork = body.origNetwork
+                panStarrsId = body.panStarrsId
                 parallax = body.parallax
                 parallaxUnc = body.parallaxUnc
                 pmdec = body.pmdec
@@ -3603,35 +7213,77 @@ private constructor(
                 pmraUnc = body.pmraUnc
                 pmUncFlag = body.pmUncFlag
                 posUncFlag = body.posUncFlag
+                ps1astrometryCorrectionFlag = body.ps1astrometryCorrectionFlag
+                ps1ObjInfoFlag = body.ps1ObjInfoFlag
+                ps1QualityFlag = body.ps1QualityFlag
                 raUnc = body.raUnc
+                rmag = body.rmag
+                rmagOrigin = body.rmagOrigin
+                rmagUnc = body.rmagUnc
                 rpmag = body.rpmag
                 rpmagUnc = body.rpmagUnc
+                ruwe = body.ruwe
+                sdaCatId = body.sdaCatId
+                sgmag = body.sgmag
+                sgmagUnc = body.sgmagUnc
                 shift = body.shift
                 shiftFlag = body.shiftFlag
                 shiftFwhm1 = body.shiftFwhm1
                 shiftFwhm6 = body.shiftFwhm6
+                skyMapperId = body.skyMapperId
                 twoMassId = body.twoMassId
+                twoMassPhQualInd = body.twoMassPhQualInd
+                twoMassReadFlag = body.twoMassReadFlag
+                twoMassXscId = body.twoMassXscId
+                tychoDscId = body.tychoDscId
+                uhsId = body.uhsId
+                ukidssGcsId = body.ukidssGcsId
+                ukidssGpsId = body.ukidssGpsId
+                ukidssLasId = body.ukidssLasId
                 updatedAt = body.updatedAt
                 updatedBy = body.updatedBy
                 varFlag = body.varFlag
                 variability = body.variability
+                vhsId = body.vhsId
+                vmag = body.vmag
+                vmagOrigin = body.vmagOrigin
+                vmagUnc = body.vmagUnc
+                w1mag = body.w1mag
+                w1magOrigin = body.w1magOrigin
+                w1magUnc = body.w1magUnc
+                w1sat = body.w1sat
+                w2mag = body.w2mag
+                w2magOrigin = body.w2magOrigin
+                w2magUnc = body.w2magUnc
+                w2sat = body.w2sat
+                w3mag = body.w3mag
+                w3magOrigin = body.w3magOrigin
+                w3magUnc = body.w3magUnc
+                w3sat = body.w3sat
+                w4mag = body.w4mag
+                w4magOrigin = body.w4magOrigin
+                w4magUnc = body.w4magUnc
+                w4sat = body.w4sat
+                wdsCatId = body.wdsCatId
                 additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /**
-             * Originating astrometric catalog for this object. Enum: [GAIADR3, HIPPARCOS, USNOBSC].
+             * Originating astrometric catalog for this object (GA (GAIA), HI (HIPPARCOS), UB
+             * (USNOBSC), AL, AP, CA, CR, DU, FK6_I, FK6_III, PS, SK, TD, TP, TX, UC, UL, UH, UP,
+             * VH, VS, WD).
              */
-            fun astrometryOrigin(astrometryOrigin: AstrometryOrigin) =
+            fun astrometryOrigin(astrometryOrigin: String) =
                 astrometryOrigin(JsonField.of(astrometryOrigin))
 
             /**
              * Sets [Builder.astrometryOrigin] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.astrometryOrigin] with a well-typed
-             * [AstrometryOrigin] value instead. This method is primarily for setting the field to
-             * an undocumented or not yet supported value.
+             * You should usually call [Builder.astrometryOrigin] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun astrometryOrigin(astrometryOrigin: JsonField<AstrometryOrigin>) = apply {
+            fun astrometryOrigin(astrometryOrigin: JsonField<String>) = apply {
                 this.astrometryOrigin = astrometryOrigin
             }
 
@@ -3650,7 +7302,10 @@ private constructor(
                 this.classificationMarking = classificationMarking
             }
 
-            /** The ID of this object in the specific catalog associated with this record. */
+            /**
+             * The ID of this object in the specific catalog associated with this record. This field
+             * will either contain the value in the gncCatId or sdaCatId field.
+             */
             fun csId(csId: Long) = csId(JsonField.of(csId))
 
             /**
@@ -3758,8 +7413,227 @@ private constructor(
             fun id(id: JsonField<String>) = apply { this.id = id }
 
             /**
-             * The ID of this object in the All Wide-field Infrared Survey Explorer (AllWISE)
-             * catalog.
+             * The American Association of Variable Star Observers (AAVSO) Variable Star Index (VSX)
+             * (VX) object ID of this object.
+             */
+            fun aavsoVsxId(aavsoVsxId: Int) = aavsoVsxId(JsonField.of(aavsoVsxId))
+
+            /**
+             * Sets [Builder.aavsoVsxId] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.aavsoVsxId] with a well-typed [Int] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun aavsoVsxId(aavsoVsxId: JsonField<Int>) = apply { this.aavsoVsxId = aavsoVsxId }
+
+            /** Optical AB g magnitude. */
+            fun abgmag(abgmag: Double) = abgmag(JsonField.of(abgmag))
+
+            /**
+             * Sets [Builder.abgmag] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.abgmag] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun abgmag(abgmag: JsonField<Double>) = apply { this.abgmag = abgmag }
+
+            /** Catalog of origin of optical AB g magnitude. */
+            fun abgmagOrigin(abgmagOrigin: String) = abgmagOrigin(JsonField.of(abgmagOrigin))
+
+            /**
+             * Sets [Builder.abgmagOrigin] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.abgmagOrigin] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun abgmagOrigin(abgmagOrigin: JsonField<String>) = apply {
+                this.abgmagOrigin = abgmagOrigin
+            }
+
+            /** Uncertainty of optical AB g magnitude. */
+            fun abgmagUnc(abgmagUnc: Double) = abgmagUnc(JsonField.of(abgmagUnc))
+
+            /**
+             * Sets [Builder.abgmagUnc] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.abgmagUnc] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun abgmagUnc(abgmagUnc: JsonField<Double>) = apply { this.abgmagUnc = abgmagUnc }
+
+            /** Optical AB i magnitude. */
+            fun abimag(abimag: Double) = abimag(JsonField.of(abimag))
+
+            /**
+             * Sets [Builder.abimag] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.abimag] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun abimag(abimag: JsonField<Double>) = apply { this.abimag = abimag }
+
+            /** Catalog of origin of optical AB i magnitude. */
+            fun abimagOrigin(abimagOrigin: String) = abimagOrigin(JsonField.of(abimagOrigin))
+
+            /**
+             * Sets [Builder.abimagOrigin] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.abimagOrigin] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun abimagOrigin(abimagOrigin: JsonField<String>) = apply {
+                this.abimagOrigin = abimagOrigin
+            }
+
+            /** Uncertainty of optical AB i magnitude. */
+            fun abimagUnc(abimagUnc: Double) = abimagUnc(JsonField.of(abimagUnc))
+
+            /**
+             * Sets [Builder.abimagUnc] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.abimagUnc] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun abimagUnc(abimagUnc: JsonField<Double>) = apply { this.abimagUnc = abimagUnc }
+
+            /** Optical AB r magnitude. */
+            fun abrmag(abrmag: Double) = abrmag(JsonField.of(abrmag))
+
+            /**
+             * Sets [Builder.abrmag] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.abrmag] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun abrmag(abrmag: JsonField<Double>) = apply { this.abrmag = abrmag }
+
+            /** Catalog of origin of optical AB r magnitude. */
+            fun abrmagOrigin(abrmagOrigin: String) = abrmagOrigin(JsonField.of(abrmagOrigin))
+
+            /**
+             * Sets [Builder.abrmagOrigin] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.abrmagOrigin] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun abrmagOrigin(abrmagOrigin: JsonField<String>) = apply {
+                this.abrmagOrigin = abrmagOrigin
+            }
+
+            /** Uncertainty of optical AB r magnitude. */
+            fun abrmagUnc(abrmagUnc: Double) = abrmagUnc(JsonField.of(abrmagUnc))
+
+            /**
+             * Sets [Builder.abrmagUnc] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.abrmagUnc] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun abrmagUnc(abrmagUnc: JsonField<Double>) = apply { this.abrmagUnc = abrmagUnc }
+
+            /** Optical AB y magnitude. */
+            fun abymag(abymag: Double) = abymag(JsonField.of(abymag))
+
+            /**
+             * Sets [Builder.abymag] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.abymag] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun abymag(abymag: JsonField<Double>) = apply { this.abymag = abymag }
+
+            /** Catalog of origin of optical AB y magnitude. */
+            fun abymagOrigin(abymagOrigin: String) = abymagOrigin(JsonField.of(abymagOrigin))
+
+            /**
+             * Sets [Builder.abymagOrigin] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.abymagOrigin] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun abymagOrigin(abymagOrigin: JsonField<String>) = apply {
+                this.abymagOrigin = abymagOrigin
+            }
+
+            /** Uncertainty of optical AB y magnitude. */
+            fun abymagUnc(abymagUnc: Double) = abymagUnc(JsonField.of(abymagUnc))
+
+            /**
+             * Sets [Builder.abymagUnc] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.abymagUnc] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun abymagUnc(abymagUnc: JsonField<Double>) = apply { this.abymagUnc = abymagUnc }
+
+            /** Optical AB z magnitude. */
+            fun abzmag(abzmag: Double) = abzmag(JsonField.of(abzmag))
+
+            /**
+             * Sets [Builder.abzmag] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.abzmag] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun abzmag(abzmag: JsonField<Double>) = apply { this.abzmag = abzmag }
+
+            /** Catalog of origin of optical AB z magnitude. */
+            fun abzmagOrigin(abzmagOrigin: String) = abzmagOrigin(JsonField.of(abzmagOrigin))
+
+            /**
+             * Sets [Builder.abzmagOrigin] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.abzmagOrigin] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun abzmagOrigin(abzmagOrigin: JsonField<String>) = apply {
+                this.abzmagOrigin = abzmagOrigin
+            }
+
+            /** Uncertainty of optical AB z magnitude. */
+            fun abzmagUnc(abzmagUnc: Double) = abzmagUnc(JsonField.of(abzmagUnc))
+
+            /**
+             * Sets [Builder.abzmagUnc] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.abzmagUnc] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun abzmagUnc(abzmagUnc: JsonField<Double>) = apply { this.abzmagUnc = abzmagUnc }
+
+            /** Contamination and confusion indicator in AllWISE. */
+            fun allWisEccInd(allWisEccInd: String) = allWisEccInd(JsonField.of(allWisEccInd))
+
+            /**
+             * Sets [Builder.allWisEccInd] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.allWisEccInd] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun allWisEccInd(allWisEccInd: JsonField<String>) = apply {
+                this.allWisEccInd = allWisEccInd
+            }
+
+            /**
+             * The designation of this object in the All Wide-field Infrared Survey Explorer
+             * (AllWISE) catalog (AL).
              */
             fun allWiseId(allWiseId: String) = allWiseId(JsonField.of(allWiseId))
 
@@ -3772,147 +7646,117 @@ private constructor(
              */
             fun allWiseId(allWiseId: JsonField<String>) = apply { this.allWiseId = allWiseId }
 
-            /**
-             * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric
-             * W1-band (3.4 microns) magnitude in the Vega system.
-             */
-            fun allWisew1Mag(allWisew1Mag: Double) = allWisew1Mag(JsonField.of(allWisew1Mag))
+            /** Active deblending indicator in AllWISE. */
+            fun allWisEnaInd(allWisEnaInd: Int) = allWisEnaInd(JsonField.of(allWisEnaInd))
 
             /**
-             * Sets [Builder.allWisew1Mag] to an arbitrary JSON value.
+             * Sets [Builder.allWisEnaInd] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.allWisew1Mag] with a well-typed [Double] value
+             * You should usually call [Builder.allWisEnaInd] with a well-typed [Int] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun allWisEnaInd(allWisEnaInd: JsonField<Int>) = apply {
+                this.allWisEnaInd = allWisEnaInd
+            }
+
+            /** Photometric quality indicator in AllWISE. */
+            fun allWisEphQualInd(allWisEphQualInd: String) =
+                allWisEphQualInd(JsonField.of(allWisEphQualInd))
+
+            /**
+             * Sets [Builder.allWisEphQualInd] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.allWisEphQualInd] with a well-typed [String] value
              * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun allWisew1Mag(allWisew1Mag: JsonField<Double>) = apply {
-                this.allWisew1Mag = allWisew1Mag
+            fun allWisEphQualInd(allWisEphQualInd: JsonField<String>) = apply {
+                this.allWisEphQualInd = allWisEphQualInd
             }
 
             /**
-             * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric
-             * W1-band (3.4 microns) magnitude uncertainty in the Vega system.
+             * The American Association of Variable Star Observers (AAVSO) Photometric All-Sky
+             * Survey (APASS) (AP) name of this object.
              */
-            fun allWisew1MagUnc(allWisew1MagUnc: Double) =
-                allWisew1MagUnc(JsonField.of(allWisew1MagUnc))
+            fun apassId(apassId: String) = apassId(JsonField.of(apassId))
 
             /**
-             * Sets [Builder.allWisew1MagUnc] to an arbitrary JSON value.
+             * Sets [Builder.apassId] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.allWisew1MagUnc] with a well-typed [Double] value
+             * You should usually call [Builder.apassId] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun apassId(apassId: JsonField<String>) = apply { this.apassId = apassId }
+
+            /** Astrometric excess noise in the Gaia catalog measured in milliarcseconds. */
+            fun astrometricExcessNoise(astrometricExcessNoise: Double) =
+                astrometricExcessNoise(JsonField.of(astrometricExcessNoise))
+
+            /**
+             * Sets [Builder.astrometricExcessNoise] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.astrometricExcessNoise] with a well-typed [Double]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
+             */
+            fun astrometricExcessNoise(astrometricExcessNoise: JsonField<Double>) = apply {
+                this.astrometricExcessNoise = astrometricExcessNoise
+            }
+
+            /** Astrometric excess noise sigma in Gaia. */
+            fun astrometricExcessNoiseSig(astrometricExcessNoiseSig: Double) =
+                astrometricExcessNoiseSig(JsonField.of(astrometricExcessNoiseSig))
+
+            /**
+             * Sets [Builder.astrometricExcessNoiseSig] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.astrometricExcessNoiseSig] with a well-typed
+             * [Double] value instead. This method is primarily for setting the field to an
+             * undocumented or not yet supported value.
+             */
+            fun astrometricExcessNoiseSig(astrometricExcessNoiseSig: JsonField<Double>) = apply {
+                this.astrometricExcessNoiseSig = astrometricExcessNoiseSig
+            }
+
+            /** Optical Johnson B magnitude measured in magnitudes. */
+            fun bmag(bmag: Double) = bmag(JsonField.of(bmag))
+
+            /**
+             * Sets [Builder.bmag] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.bmag] with a well-typed [Double] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
+             */
+            fun bmag(bmag: JsonField<Double>) = apply { this.bmag = bmag }
+
+            /** Catalog of origin of optical Johnson B magnitude (AP, CR, HI). */
+            fun bmagOrigin(bmagOrigin: String) = bmagOrigin(JsonField.of(bmagOrigin))
+
+            /**
+             * Sets [Builder.bmagOrigin] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.bmagOrigin] with a well-typed [String] value
              * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun allWisew1MagUnc(allWisew1MagUnc: JsonField<Double>) = apply {
-                this.allWisew1MagUnc = allWisew1MagUnc
-            }
+            fun bmagOrigin(bmagOrigin: JsonField<String>) = apply { this.bmagOrigin = bmagOrigin }
+
+            /** Uncertainty of optical Johnson B magnitude measured in magnitudes. */
+            fun bmagUnc(bmagUnc: Double) = bmagUnc(JsonField.of(bmagUnc))
 
             /**
-             * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric
-             * W2-band (4.6 microns) magnitude in the Vega system.
-             */
-            fun allWisew2Mag(allWisew2Mag: Double) = allWisew2Mag(JsonField.of(allWisew2Mag))
-
-            /**
-             * Sets [Builder.allWisew2Mag] to an arbitrary JSON value.
+             * Sets [Builder.bmagUnc] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.allWisew2Mag] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.bmagUnc] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun allWisew2Mag(allWisew2Mag: JsonField<Double>) = apply {
-                this.allWisew2Mag = allWisew2Mag
-            }
+            fun bmagUnc(bmagUnc: JsonField<Double>) = apply { this.bmagUnc = bmagUnc }
 
-            /**
-             * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric
-             * W2-band (4.6 microns) magnitude uncertainty in the Vega system.
-             */
-            fun allWisew2MagUnc(allWisew2MagUnc: Double) =
-                allWisew2MagUnc(JsonField.of(allWisew2MagUnc))
-
-            /**
-             * Sets [Builder.allWisew2MagUnc] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.allWisew2MagUnc] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun allWisew2MagUnc(allWisew2MagUnc: JsonField<Double>) = apply {
-                this.allWisew2MagUnc = allWisew2MagUnc
-            }
-
-            /**
-             * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric
-             * W3-band (12 microns) magnitude in the Vega system.
-             */
-            fun allWisew3Mag(allWisew3Mag: Double) = allWisew3Mag(JsonField.of(allWisew3Mag))
-
-            /**
-             * Sets [Builder.allWisew3Mag] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.allWisew3Mag] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun allWisew3Mag(allWisew3Mag: JsonField<Double>) = apply {
-                this.allWisew3Mag = allWisew3Mag
-            }
-
-            /**
-             * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric
-             * W3-band (12 microns) magnitude uncertainty in the Vega system.
-             */
-            fun allWisew3MagUnc(allWisew3MagUnc: Double) =
-                allWisew3MagUnc(JsonField.of(allWisew3MagUnc))
-
-            /**
-             * Sets [Builder.allWisew3MagUnc] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.allWisew3MagUnc] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun allWisew3MagUnc(allWisew3MagUnc: JsonField<Double>) = apply {
-                this.allWisew3MagUnc = allWisew3MagUnc
-            }
-
-            /**
-             * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric
-             * W4-band (22 microns) magnitude in the Vega system.
-             */
-            fun allWisew4Mag(allWisew4Mag: Double) = allWisew4Mag(JsonField.of(allWisew4Mag))
-
-            /**
-             * Sets [Builder.allWisew4Mag] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.allWisew4Mag] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun allWisew4Mag(allWisew4Mag: JsonField<Double>) = apply {
-                this.allWisew4Mag = allWisew4Mag
-            }
-
-            /**
-             * The All Wide-field Infrared Survey Explorer (AllWISE) mid-infrared photometric
-             * W4-band (22 microns) magnitude uncertainty in the Vega system.
-             */
-            fun allWisew4MagUnc(allWisew4MagUnc: Double) =
-                allWisew4MagUnc(JsonField.of(allWisew4MagUnc))
-
-            /**
-             * Sets [Builder.allWisew4MagUnc] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.allWisew4MagUnc] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun allWisew4MagUnc(allWisew4MagUnc: JsonField<Double>) = apply {
-                this.allWisew4MagUnc = allWisew4MagUnc
-            }
-
-            /** Gaia DR3 optical photometric Bp-band magnitude in the Vega scale. */
+            /** Gaia optical photometric Bp-band in the Vega scale measured in magnitudes. */
             fun bpmag(bpmag: Double) = bpmag(JsonField.of(bpmag))
 
             /**
@@ -3924,7 +7768,7 @@ private constructor(
              */
             fun bpmag(bpmag: JsonField<Double>) = apply { this.bpmag = bpmag }
 
-            /** Gaia DR3 optical Bp-band magnitude uncertainty in the Vega scale. */
+            /** Gaia optical Bp-band uncertainty in the Vega scale measured in magnitudes. */
             fun bpmagUnc(bpmagUnc: Double) = bpmagUnc(JsonField.of(bpmagUnc))
 
             /**
@@ -3935,6 +7779,20 @@ private constructor(
              * supported value.
              */
             fun bpmagUnc(bpmagUnc: JsonField<Double>) = apply { this.bpmagUnc = bpmagUnc }
+
+            /** The Carrasco catalog (CR) identifier of this object. */
+            fun carrascoCatId(carrascoCatId: Int) = carrascoCatId(JsonField.of(carrascoCatId))
+
+            /**
+             * Sets [Builder.carrascoCatId] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.carrascoCatId] with a well-typed [Int] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun carrascoCatId(carrascoCatId: JsonField<Int>) = apply {
+                this.carrascoCatId = carrascoCatId
+            }
 
             /** The version of the catalog associated with this object. */
             fun catVersion(catVersion: String) = catVersion(JsonField.of(catVersion))
@@ -3947,6 +7805,20 @@ private constructor(
              * supported value.
              */
             fun catVersion(catVersion: JsonField<String>) = apply { this.catVersion = catVersion }
+
+            /** The CatWISE2020 (CA) catalog source ID of this object. */
+            fun catWise2020Id(catWise2020Id: String) = catWise2020Id(JsonField.of(catWise2020Id))
+
+            /**
+             * Sets [Builder.catWise2020Id] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.catWise2020Id] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun catWise2020Id(catWise2020Id: JsonField<String>) = apply {
+                this.catWise2020Id = catWise2020Id
+            }
 
             /** Time the row was created in the database, auto-populated by the system. */
             fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
@@ -3991,7 +7863,21 @@ private constructor(
              */
             fun decUnc(decUnc: JsonField<Double>) = apply { this.decUnc = decUnc }
 
-            /** The ID of this object in the Gaia DR3 Catalog. */
+            /** The Ducati catalog (DU) name of this object. */
+            fun ducatiCatId(ducatiCatId: String) = ducatiCatId(JsonField.of(ducatiCatId))
+
+            /**
+             * Sets [Builder.ducatiCatId] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.ducatiCatId] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun ducatiCatId(ducatiCatId: JsonField<String>) = apply {
+                this.ducatiCatId = ducatiCatId
+            }
+
+            /** The source ID of this object in the Gaia DR3 Catalog (GA). */
             fun gaiadr3CatId(gaiadr3CatId: Long) = gaiadr3CatId(JsonField.of(gaiadr3CatId))
 
             /**
@@ -4005,7 +7891,7 @@ private constructor(
                 this.gaiadr3CatId = gaiadr3CatId
             }
 
-            /** Gaia DR3 optical photometric G-band magnitude in the Vega scale. */
+            /** Gaia optical photometric G-band in the Vega scale measured in magnitudes. */
             fun gmag(gmag: Double) = gmag(JsonField.of(gmag))
 
             /**
@@ -4017,7 +7903,9 @@ private constructor(
              */
             fun gmag(gmag: JsonField<Double>) = apply { this.gmag = gmag }
 
-            /** Gaia DR3 optical photometric G-band magnitude uncertainty in the Vega scale. */
+            /**
+             * Gaia optical photometric G-band uncertainty in the Vega scale measured in magnitudes.
+             */
             fun gmagUnc(gmagUnc: Double) = gmagUnc(JsonField.of(gmagUnc))
 
             /**
@@ -4029,7 +7917,10 @@ private constructor(
              */
             fun gmagUnc(gmagUnc: JsonField<Double>) = apply { this.gmagUnc = gmagUnc }
 
-            /** The ID of this object in the Guidance and Navagation Control (GNC) Catalog. */
+            /**
+             * The ID of this object in the Guidance and Navigation Control (GNC) Catalog. If this
+             * field is populated it shall match the csId field.
+             */
             fun gncCatId(gncCatId: Int) = gncCatId(JsonField.of(gncCatId))
 
             /**
@@ -4041,7 +7932,24 @@ private constructor(
              */
             fun gncCatId(gncCatId: JsonField<Int>) = apply { this.gncCatId = gncCatId }
 
-            /** The ID of this object in the Hipparcos Catalog. */
+            /**
+             * The Healpix index. Consumers should contact the provider for details on the indexing
+             * scheme.
+             */
+            fun healpixIndex(healpixIndex: Int) = healpixIndex(JsonField.of(healpixIndex))
+
+            /**
+             * Sets [Builder.healpixIndex] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.healpixIndex] with a well-typed [Int] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun healpixIndex(healpixIndex: JsonField<Int>) = apply {
+                this.healpixIndex = healpixIndex
+            }
+
+            /** The HIP ID of this object in the Hipparcos Catalog (HI). */
             fun hipCatId(hipCatId: Int) = hipCatId(JsonField.of(hipCatId))
 
             /**
@@ -4054,8 +7962,7 @@ private constructor(
             fun hipCatId(hipCatId: JsonField<Int>) = apply { this.hipCatId = hipCatId }
 
             /**
-             * Two Micron All Sky Survey (2MASS) Point Source Catalog (PSC) near-infrared
-             * photometric H-band magnitude in the Vega scale.
+             * Near-infrared photometric H-band magnitude in the Vega scale measured in magnitudes.
              */
             fun hmag(hmag: Double) = hmag(JsonField.of(hmag))
 
@@ -4069,8 +7976,23 @@ private constructor(
             fun hmag(hmag: JsonField<Double>) = apply { this.hmag = hmag }
 
             /**
-             * Two Micron All Sky Survey (2MASS) Point Source Catalog (PSC) near-infrared
-             * photometric H-band magnitude uncertainty in the Vega scale.
+             * Near-infrared photometric H-band catalog of origin in the Vega scale (TP, UC, UL, UP,
+             * VH).
+             */
+            fun hmagOrigin(hmagOrigin: String) = hmagOrigin(JsonField.of(hmagOrigin))
+
+            /**
+             * Sets [Builder.hmagOrigin] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.hmagOrigin] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun hmagOrigin(hmagOrigin: JsonField<String>) = apply { this.hmagOrigin = hmagOrigin }
+
+            /**
+             * Near-infrared photometric H-band magnitude uncertainty in the Vega scale measured in
+             * magnitudes.
              */
             fun hmagUnc(hmagUnc: Double) = hmagUnc(JsonField.of(hmagUnc))
 
@@ -4083,9 +8005,44 @@ private constructor(
              */
             fun hmagUnc(hmagUnc: JsonField<Double>) = apply { this.hmagUnc = hmagUnc }
 
+            /** Optical Johnson I magnitude measured in magnitudes. */
+            fun imag(imag: Double) = imag(JsonField.of(imag))
+
             /**
-             * Two Micron All Sky Survey (2MASS) Point Source Catalog (PSC) near-infrared
-             * photometric J-band magnitude in the Vega scale.
+             * Sets [Builder.imag] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.imag] with a well-typed [Double] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
+             */
+            fun imag(imag: JsonField<Double>) = apply { this.imag = imag }
+
+            /** Catalog of origin of optical Johnson I magnitude (CR, GA, HI). */
+            fun imagOrigin(imagOrigin: String) = imagOrigin(JsonField.of(imagOrigin))
+
+            /**
+             * Sets [Builder.imagOrigin] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.imagOrigin] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun imagOrigin(imagOrigin: JsonField<String>) = apply { this.imagOrigin = imagOrigin }
+
+            /** Uncertainty of optical Johnson I magnitude measured in magnitudes. */
+            fun imagUnc(imagUnc: Double) = imagUnc(JsonField.of(imagUnc))
+
+            /**
+             * Sets [Builder.imagUnc] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.imagUnc] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun imagUnc(imagUnc: JsonField<Double>) = apply { this.imagUnc = imagUnc }
+
+            /**
+             * Near-infrared photometric J-band magnitude in the Vega scale measured in magnitudes.
              */
             fun jmag(jmag: Double) = jmag(JsonField.of(jmag))
 
@@ -4099,8 +8056,23 @@ private constructor(
             fun jmag(jmag: JsonField<Double>) = apply { this.jmag = jmag }
 
             /**
-             * Two Micron All Sky Survey (2MASS) Point Source Catalog (PSC) near-infrared
-             * photometric J-band magnitude uncertainty in the Vega scale.
+             * Near-infrared photometric J-band catalog of origin in the Vega scale (TP, UH, UL, UP,
+             * VH).
+             */
+            fun jmagOrigin(jmagOrigin: String) = jmagOrigin(JsonField.of(jmagOrigin))
+
+            /**
+             * Sets [Builder.jmagOrigin] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.jmagOrigin] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun jmagOrigin(jmagOrigin: JsonField<String>) = apply { this.jmagOrigin = jmagOrigin }
+
+            /**
+             * Near-infrared photometric J-band magnitude uncertainty in the Vega scale measured in
+             * magnitudes.
              */
             fun jmagUnc(jmagUnc: Double) = jmagUnc(JsonField.of(jmagUnc))
 
@@ -4114,8 +8086,7 @@ private constructor(
             fun jmagUnc(jmagUnc: JsonField<Double>) = apply { this.jmagUnc = jmagUnc }
 
             /**
-             * Two Micron All Sky Survey (2MASS) Point Source Catalog (PSC) near-infrared
-             * photometric K-band magnitude in the Vega scale.
+             * Near-infrared photometric K-band magnitude in the Vega scale measured in magnitudes.
              */
             fun kmag(kmag: Double) = kmag(JsonField.of(kmag))
 
@@ -4129,8 +8100,23 @@ private constructor(
             fun kmag(kmag: JsonField<Double>) = apply { this.kmag = kmag }
 
             /**
-             * Two Micron All Sky Survey (2MASS) Point Source Catalog (PSC) near-infrared
-             * photometric K-band magnitude uncertainty in the Vega scale.
+             * Near-infrared photometric K-band catalog of origin in the Vega scale (TP, UC, UH, UL,
+             * UP, VH).
+             */
+            fun kmagOrigin(kmagOrigin: String) = kmagOrigin(JsonField.of(kmagOrigin))
+
+            /**
+             * Sets [Builder.kmagOrigin] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.kmagOrigin] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun kmagOrigin(kmagOrigin: JsonField<String>) = apply { this.kmagOrigin = kmagOrigin }
+
+            /**
+             * Near-infrared photometric K-band magnitude uncertainty in the Vega scale measured in
+             * magnitudes.
              */
             fun kmagUnc(kmagUnc: Double) = kmagUnc(JsonField.of(kmagUnc))
 
@@ -4142,6 +8128,20 @@ private constructor(
              * supported value.
              */
             fun kmagUnc(kmagUnc: JsonField<Double>) = apply { this.kmagUnc = kmagUnc }
+
+            /** Morphology indicator. */
+            fun morphologyInd(morphologyInd: Int) = morphologyInd(JsonField.of(morphologyInd))
+
+            /**
+             * Sets [Builder.morphologyInd] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.morphologyInd] with a well-typed [Int] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun morphologyInd(morphologyInd: JsonField<Int>) = apply {
+                this.morphologyInd = morphologyInd
+            }
 
             /** Flag indicating that this is a multiple object source. */
             fun multFlag(multFlag: Boolean) = multFlag(JsonField.of(multFlag))
@@ -4170,6 +8170,20 @@ private constructor(
              */
             fun multiplicity(multiplicity: JsonField<String>) = apply {
                 this.multiplicity = multiplicity
+            }
+
+            /** Dec of nearest neighbor measured in degrees. */
+            fun neighborDec(neighborDec: Double) = neighborDec(JsonField.of(neighborDec))
+
+            /**
+             * Sets [Builder.neighborDec] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.neighborDec] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun neighborDec(neighborDec: JsonField<Double>) = apply {
+                this.neighborDec = neighborDec
             }
 
             /** Distance between source and nearest neighbor, in arcseconds. */
@@ -4213,6 +8227,18 @@ private constructor(
              */
             fun neighborId(neighborId: JsonField<Int>) = apply { this.neighborId = neighborId }
 
+            /** RA of nearest neighbor measured in degrees. */
+            fun neighborRa(neighborRa: Double) = neighborRa(JsonField.of(neighborRa))
+
+            /**
+             * Sets [Builder.neighborRa] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.neighborRa] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun neighborRa(neighborRa: JsonField<Double>) = apply { this.neighborRa = neighborRa }
+
             /**
              * Identifier indicating the source is a non-single star and additional information is
              * available in non-single star tables. Consumers should contact the provider for
@@ -4229,6 +8255,20 @@ private constructor(
              */
             fun nonSingleStar(nonSingleStar: JsonField<String>) = apply {
                 this.nonSingleStar = nonSingleStar
+            }
+
+            /** Number of neighbors. */
+            fun numNeighbors(numNeighbors: Int) = numNeighbors(JsonField.of(numNeighbors))
+
+            /**
+             * Sets [Builder.numNeighbors] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.numNeighbors] with a well-typed [Int] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun numNeighbors(numNeighbors: JsonField<Int>) = apply {
+                this.numNeighbors = numNeighbors
             }
 
             /**
@@ -4265,6 +8305,20 @@ private constructor(
                 this.origNetwork = origNetwork
             }
 
+            /**
+             * The Panoramic Survey Telescope and Rapid Response System (Pan-STARRS) (PS) object ID.
+             */
+            fun panStarrsId(panStarrsId: Long) = panStarrsId(JsonField.of(panStarrsId))
+
+            /**
+             * Sets [Builder.panStarrsId] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.panStarrsId] with a well-typed [Long] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun panStarrsId(panStarrsId: JsonField<Long>) = apply { this.panStarrsId = panStarrsId }
+
             /** Absolute stellar parallax of the source, in milliarcseconds. */
             fun parallax(parallax: Double) = parallax(JsonField.of(parallax))
 
@@ -4292,8 +8346,8 @@ private constructor(
             }
 
             /**
-             * Proper motion in declination of the source, in milliarcseconds/year, at the reference
-             * epoch.
+             * Proper motion in declination of the source, in milliarcseconds per year, at the
+             * reference epoch.
              */
             fun pmdec(pmdec: Double) = pmdec(JsonField.of(pmdec))
 
@@ -4306,7 +8360,7 @@ private constructor(
              */
             fun pmdec(pmdec: JsonField<Double>) = apply { this.pmdec = pmdec }
 
-            /** Uncertainty of proper motion in declination, in milliarcseconds/year. */
+            /** Uncertainty of proper motion in declination, in milliarcseconds per year. */
             fun pmdecUnc(pmdecUnc: Double) = pmdecUnc(JsonField.of(pmdecUnc))
 
             /**
@@ -4319,7 +8373,7 @@ private constructor(
             fun pmdecUnc(pmdecUnc: JsonField<Double>) = apply { this.pmdecUnc = pmdecUnc }
 
             /**
-             * Proper motion in right ascension of the source, in milliarcseconds/year, at the
+             * Proper motion in right ascension of the source, in milliarcseconds per year, at the
              * reference epoch.
              */
             fun pmra(pmra: Double) = pmra(JsonField.of(pmra))
@@ -4333,7 +8387,7 @@ private constructor(
              */
             fun pmra(pmra: JsonField<Double>) = apply { this.pmra = pmra }
 
-            /** Uncertainty of proper motion in right ascension, in milliarcseconds/year. */
+            /** Uncertainty of proper motion in right ascension, in milliarcseconds per year. */
             fun pmraUnc(pmraUnc: Double) = pmraUnc(JsonField.of(pmraUnc))
 
             /**
@@ -4347,7 +8401,7 @@ private constructor(
 
             /**
              * Flag indicating that the proper motion uncertainty in either ra or dec is greater
-             * than 10 milliarcseconds/year.
+             * than 10 milliarcseconds per year.
              */
             fun pmUncFlag(pmUncFlag: Boolean) = pmUncFlag(JsonField.of(pmUncFlag))
 
@@ -4375,6 +8429,49 @@ private constructor(
              */
             fun posUncFlag(posUncFlag: JsonField<Boolean>) = apply { this.posUncFlag = posUncFlag }
 
+            /** Astrometry correction flag in Pan-STARRS. */
+            fun ps1astrometryCorrectionFlag(ps1astrometryCorrectionFlag: Int) =
+                ps1astrometryCorrectionFlag(JsonField.of(ps1astrometryCorrectionFlag))
+
+            /**
+             * Sets [Builder.ps1astrometryCorrectionFlag] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.ps1astrometryCorrectionFlag] with a well-typed [Int]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
+             */
+            fun ps1astrometryCorrectionFlag(ps1astrometryCorrectionFlag: JsonField<Int>) = apply {
+                this.ps1astrometryCorrectionFlag = ps1astrometryCorrectionFlag
+            }
+
+            /** Object information flag in Pan-STARRS. */
+            fun ps1ObjInfoFlag(ps1ObjInfoFlag: Int) = ps1ObjInfoFlag(JsonField.of(ps1ObjInfoFlag))
+
+            /**
+             * Sets [Builder.ps1ObjInfoFlag] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.ps1ObjInfoFlag] with a well-typed [Int] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun ps1ObjInfoFlag(ps1ObjInfoFlag: JsonField<Int>) = apply {
+                this.ps1ObjInfoFlag = ps1ObjInfoFlag
+            }
+
+            /** Quality flag in Pan-STARRS. */
+            fun ps1QualityFlag(ps1QualityFlag: Int) = ps1QualityFlag(JsonField.of(ps1QualityFlag))
+
+            /**
+             * Sets [Builder.ps1QualityFlag] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.ps1QualityFlag] with a well-typed [Int] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun ps1QualityFlag(ps1QualityFlag: JsonField<Int>) = apply {
+                this.ps1QualityFlag = ps1QualityFlag
+            }
+
             /**
              * Uncertainty of the right ascension of the source, in milliarcseconds, at the
              * reference epoch.
@@ -4390,7 +8487,43 @@ private constructor(
              */
             fun raUnc(raUnc: JsonField<Double>) = apply { this.raUnc = raUnc }
 
-            /** Gaia DR3 optical Rp-band magnitude in the Vega scale. */
+            /** Optical Johnson R magnitude measured in magnitudes. */
+            fun rmag(rmag: Double) = rmag(JsonField.of(rmag))
+
+            /**
+             * Sets [Builder.rmag] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.rmag] with a well-typed [Double] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
+             */
+            fun rmag(rmag: JsonField<Double>) = apply { this.rmag = rmag }
+
+            /** Catalog of origin of the Optical Johnson R magnitude (CR, GA). */
+            fun rmagOrigin(rmagOrigin: String) = rmagOrigin(JsonField.of(rmagOrigin))
+
+            /**
+             * Sets [Builder.rmagOrigin] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.rmagOrigin] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun rmagOrigin(rmagOrigin: JsonField<String>) = apply { this.rmagOrigin = rmagOrigin }
+
+            /** Uncertainty of the Optical Johnson R magnitude measured in magnitudes. */
+            fun rmagUnc(rmagUnc: Double) = rmagUnc(JsonField.of(rmagUnc))
+
+            /**
+             * Sets [Builder.rmagUnc] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.rmagUnc] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun rmagUnc(rmagUnc: JsonField<Double>) = apply { this.rmagUnc = rmagUnc }
+
+            /** Gaia optical Rp-band in the Vega scale measured in magnitudes. */
             fun rpmag(rpmag: Double) = rpmag(JsonField.of(rpmag))
 
             /**
@@ -4402,7 +8535,10 @@ private constructor(
              */
             fun rpmag(rpmag: JsonField<Double>) = apply { this.rpmag = rpmag }
 
-            /** Gaia DR3 optical photometric Rp-band magnitude uncertainty in the Vega scale. */
+            /**
+             * Gaia optical photometric Rp-band uncertainty in the Vega scale measured in
+             * magnitudes.
+             */
             fun rpmagUnc(rpmagUnc: Double) = rpmagUnc(JsonField.of(rpmagUnc))
 
             /**
@@ -4413,6 +8549,60 @@ private constructor(
              * supported value.
              */
             fun rpmagUnc(rpmagUnc: JsonField<Double>) = apply { this.rpmagUnc = rpmagUnc }
+
+            /** RUWE in Gaia. */
+            fun ruwe(ruwe: Double) = ruwe(JsonField.of(ruwe))
+
+            /**
+             * Sets [Builder.ruwe] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.ruwe] with a well-typed [Double] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
+             */
+            fun ruwe(ruwe: JsonField<Double>) = apply { this.ruwe = ruwe }
+
+            /**
+             * The ID of this object in the Space Domain Awareness (SDA) Catalog. If this field is
+             * populated it shall match the csId field.
+             */
+            fun sdaCatId(sdaCatId: Long) = sdaCatId(JsonField.of(sdaCatId))
+
+            /**
+             * Sets [Builder.sdaCatId] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.sdaCatId] with a well-typed [Long] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun sdaCatId(sdaCatId: JsonField<Long>) = apply { this.sdaCatId = sdaCatId }
+
+            /**
+             * Original G magnitude if the source is in Gaia, otherwise the magnitude is converted
+             * from other photometric passbands, when possible, measured in magnitudes.
+             */
+            fun sgmag(sgmag: Double) = sgmag(JsonField.of(sgmag))
+
+            /**
+             * Sets [Builder.sgmag] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.sgmag] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun sgmag(sgmag: JsonField<Double>) = apply { this.sgmag = sgmag }
+
+            /** Uncertainty of sgmag measured in magnitudes. */
+            fun sgmagUnc(sgmagUnc: Double) = sgmagUnc(JsonField.of(sgmagUnc))
+
+            /**
+             * Sets [Builder.sgmagUnc] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.sgmagUnc] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun sgmagUnc(sgmagUnc: JsonField<Double>) = apply { this.sgmagUnc = sgmagUnc }
 
             /** Photocentric shift caused by neighbors, in arcseconds. */
             fun shift(shift: Double) = shift(JsonField.of(shift))
@@ -4468,9 +8658,21 @@ private constructor(
              */
             fun shiftFwhm6(shiftFwhm6: JsonField<Double>) = apply { this.shiftFwhm6 = shiftFwhm6 }
 
+            /** The SkyMapper (SK) catalog object ID. */
+            fun skyMapperId(skyMapperId: Int) = skyMapperId(JsonField.of(skyMapperId))
+
             /**
-             * The ID of this object in the Two Micron All Sky Survey (2MASS) Point Source Catalog
-             * (PSC).
+             * Sets [Builder.skyMapperId] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.skyMapperId] with a well-typed [Int] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun skyMapperId(skyMapperId: JsonField<Int>) = apply { this.skyMapperId = skyMapperId }
+
+            /**
+             * The designation of this object in the Two Micron All Sky Survey (2MASS) Point Source
+             * Catalog (TP).
              */
             fun twoMassId(twoMassId: String) = twoMassId(JsonField.of(twoMassId))
 
@@ -4483,7 +8685,129 @@ private constructor(
              */
             fun twoMassId(twoMassId: JsonField<String>) = apply { this.twoMassId = twoMassId }
 
-            /** Time the row was updated in the database. */
+            /** Photometric (PH) quality indicator in 2MASS PSC. */
+            fun twoMassPhQualInd(twoMassPhQualInd: String) =
+                twoMassPhQualInd(JsonField.of(twoMassPhQualInd))
+
+            /**
+             * Sets [Builder.twoMassPhQualInd] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.twoMassPhQualInd] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun twoMassPhQualInd(twoMassPhQualInd: JsonField<String>) = apply {
+                this.twoMassPhQualInd = twoMassPhQualInd
+            }
+
+            /** Read flag in 2MASS PSC. */
+            fun twoMassReadFlag(twoMassReadFlag: String) =
+                twoMassReadFlag(JsonField.of(twoMassReadFlag))
+
+            /**
+             * Sets [Builder.twoMassReadFlag] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.twoMassReadFlag] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun twoMassReadFlag(twoMassReadFlag: JsonField<String>) = apply {
+                this.twoMassReadFlag = twoMassReadFlag
+            }
+
+            /**
+             * The Two Micron All Sky Survey (2MASS) Extended Source Catalog (XSC) (TX) designation
+             * of this object.
+             */
+            fun twoMassXscId(twoMassXscId: String) = twoMassXscId(JsonField.of(twoMassXscId))
+
+            /**
+             * Sets [Builder.twoMassXscId] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.twoMassXscId] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun twoMassXscId(twoMassXscId: JsonField<String>) = apply {
+                this.twoMassXscId = twoMassXscId
+            }
+
+            /**
+             * The Tycho Double Star Catalog (TD) identifier (specified as Tycho-2 ID) of this
+             * object.
+             */
+            fun tychoDscId(tychoDscId: Long) = tychoDscId(JsonField.of(tychoDscId))
+
+            /**
+             * Sets [Builder.tychoDscId] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.tychoDscId] with a well-typed [Long] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun tychoDscId(tychoDscId: JsonField<Long>) = apply { this.tychoDscId = tychoDscId }
+
+            /**
+             * The United Kingdom Infrared Telescope (UKIRT) Hemispheric Survey (UHS) (UH) source ID
+             * of this object.
+             */
+            fun uhsId(uhsId: Long) = uhsId(JsonField.of(uhsId))
+
+            /**
+             * Sets [Builder.uhsId] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.uhsId] with a well-typed [Long] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
+             */
+            fun uhsId(uhsId: JsonField<Long>) = apply { this.uhsId = uhsId }
+
+            /**
+             * The United Kingdom Infrared Deep Sky Survey (UKIDSS) Galactic Clusters Survey (GCS)
+             * (UC) source ID of this object.
+             */
+            fun ukidssGcsId(ukidssGcsId: Long) = ukidssGcsId(JsonField.of(ukidssGcsId))
+
+            /**
+             * Sets [Builder.ukidssGcsId] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.ukidssGcsId] with a well-typed [Long] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun ukidssGcsId(ukidssGcsId: JsonField<Long>) = apply { this.ukidssGcsId = ukidssGcsId }
+
+            /**
+             * The United Kingdom Infrared Deep Sky Survey (UKIDSS) Galactic Plane Survey (GPS) (UP)
+             * source ID of this object.
+             */
+            fun ukidssGpsId(ukidssGpsId: Long) = ukidssGpsId(JsonField.of(ukidssGpsId))
+
+            /**
+             * Sets [Builder.ukidssGpsId] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.ukidssGpsId] with a well-typed [Long] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun ukidssGpsId(ukidssGpsId: JsonField<Long>) = apply { this.ukidssGpsId = ukidssGpsId }
+
+            /**
+             * The United Kingdom Infrared Deep Sky Survey (UKIDSS) Large Area Survey (LAS) (UL)
+             * source ID of this object.
+             */
+            fun ukidssLasId(ukidssLasId: Long) = ukidssLasId(JsonField.of(ukidssLasId))
+
+            /**
+             * Sets [Builder.ukidssLasId] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.ukidssLasId] with a well-typed [Long] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun ukidssLasId(ukidssLasId: JsonField<Long>) = apply { this.ukidssLasId = ukidssLasId }
+
+            /** Time the row was last updated in the database, auto-populated by the system. */
             fun updatedAt(updatedAt: OffsetDateTime) = updatedAt(JsonField.of(updatedAt))
 
             /**
@@ -4497,7 +8821,9 @@ private constructor(
                 this.updatedAt = updatedAt
             }
 
-            /** Application user who updated the row in the database. */
+            /**
+             * Application user who updated the row in the database, auto-populated by the system.
+             */
             fun updatedBy(updatedBy: String) = updatedBy(JsonField.of(updatedBy))
 
             /**
@@ -4537,6 +8863,317 @@ private constructor(
             fun variability(variability: JsonField<String>) = apply {
                 this.variability = variability
             }
+
+            /**
+             * The Visible and Infrared Survey Telescope for Astronomy (VISTA) Hemisphere Survey
+             * (VHS) (VS) source ID of this object.
+             */
+            fun vhsId(vhsId: Long) = vhsId(JsonField.of(vhsId))
+
+            /**
+             * Sets [Builder.vhsId] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.vhsId] with a well-typed [Long] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
+             */
+            fun vhsId(vhsId: JsonField<Long>) = apply { this.vhsId = vhsId }
+
+            /** Optical Johnson V magnitude measured in magnitudes. */
+            fun vmag(vmag: Double) = vmag(JsonField.of(vmag))
+
+            /**
+             * Sets [Builder.vmag] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.vmag] with a well-typed [Double] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
+             */
+            fun vmag(vmag: JsonField<Double>) = apply { this.vmag = vmag }
+
+            /** Catalog of origin of Optical Johnson V magnitude (AP, CR, DU, GA, HI). */
+            fun vmagOrigin(vmagOrigin: String) = vmagOrigin(JsonField.of(vmagOrigin))
+
+            /**
+             * Sets [Builder.vmagOrigin] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.vmagOrigin] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun vmagOrigin(vmagOrigin: JsonField<String>) = apply { this.vmagOrigin = vmagOrigin }
+
+            /** Uncertainty of the Optical Johnson V magnitude measured in magnitudes. */
+            fun vmagUnc(vmagUnc: Double) = vmagUnc(JsonField.of(vmagUnc))
+
+            /**
+             * Sets [Builder.vmagUnc] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.vmagUnc] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun vmagUnc(vmagUnc: JsonField<Double>) = apply { this.vmagUnc = vmagUnc }
+
+            /**
+             * Mid-infrared photometric W1-band (3.4 microns) magnitude in the Vega system measured
+             * in magnitudes.
+             */
+            fun w1mag(w1mag: Double) = w1mag(JsonField.of(w1mag))
+
+            /**
+             * Sets [Builder.w1mag] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.w1mag] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun w1mag(w1mag: JsonField<Double>) = apply { this.w1mag = w1mag }
+
+            /**
+             * Mid-infrared photometric W1-band (3.4 microns) catalog of origin in the Vega system
+             * (AL, CA).
+             */
+            fun w1magOrigin(w1magOrigin: String) = w1magOrigin(JsonField.of(w1magOrigin))
+
+            /**
+             * Sets [Builder.w1magOrigin] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.w1magOrigin] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun w1magOrigin(w1magOrigin: JsonField<String>) = apply {
+                this.w1magOrigin = w1magOrigin
+            }
+
+            /**
+             * Mid-infrared photometric W1-band (3.4 microns) magnitude uncertainty in the Vega
+             * system measured in magnitudes.
+             */
+            fun w1magUnc(w1magUnc: Double) = w1magUnc(JsonField.of(w1magUnc))
+
+            /**
+             * Sets [Builder.w1magUnc] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.w1magUnc] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun w1magUnc(w1magUnc: JsonField<Double>) = apply { this.w1magUnc = w1magUnc }
+
+            /**
+             * Mid-infrared photometric W1-band (3.4 microns) saturated pixel fraction in the Vega
+             * system measured in magnitudes.
+             */
+            fun w1sat(w1sat: Double) = w1sat(JsonField.of(w1sat))
+
+            /**
+             * Sets [Builder.w1sat] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.w1sat] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun w1sat(w1sat: JsonField<Double>) = apply { this.w1sat = w1sat }
+
+            /**
+             * Mid-infrared photometric W2-band (4.6 microns) magnitude in the Vega system measured
+             * in magnitudes.
+             */
+            fun w2mag(w2mag: Double) = w2mag(JsonField.of(w2mag))
+
+            /**
+             * Sets [Builder.w2mag] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.w2mag] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun w2mag(w2mag: JsonField<Double>) = apply { this.w2mag = w2mag }
+
+            /**
+             * Mid-infrared photometric W2-band (4.6 microns) catalog of origin in the Vega system
+             * (AL, CA).
+             */
+            fun w2magOrigin(w2magOrigin: String) = w2magOrigin(JsonField.of(w2magOrigin))
+
+            /**
+             * Sets [Builder.w2magOrigin] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.w2magOrigin] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun w2magOrigin(w2magOrigin: JsonField<String>) = apply {
+                this.w2magOrigin = w2magOrigin
+            }
+
+            /**
+             * Mid-infrared photometric W2-band (4.6 microns) magnitude uncertainty in the Vega
+             * system measured in magnitudes.
+             */
+            fun w2magUnc(w2magUnc: Double) = w2magUnc(JsonField.of(w2magUnc))
+
+            /**
+             * Sets [Builder.w2magUnc] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.w2magUnc] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun w2magUnc(w2magUnc: JsonField<Double>) = apply { this.w2magUnc = w2magUnc }
+
+            /**
+             * Mid-infrared photometric W2-band (4.6 microns) saturated pixel fraction in the Vega
+             * system.
+             */
+            fun w2sat(w2sat: Double) = w2sat(JsonField.of(w2sat))
+
+            /**
+             * Sets [Builder.w2sat] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.w2sat] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun w2sat(w2sat: JsonField<Double>) = apply { this.w2sat = w2sat }
+
+            /**
+             * Mid-infrared photometric W3-band (12 microns) magnitude in the Vega system measured
+             * in magnitudes.
+             */
+            fun w3mag(w3mag: Double) = w3mag(JsonField.of(w3mag))
+
+            /**
+             * Sets [Builder.w3mag] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.w3mag] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun w3mag(w3mag: JsonField<Double>) = apply { this.w3mag = w3mag }
+
+            /**
+             * Mid-infrared photometric W3-band (12 microns) catalog of origin in the Vega system
+             * (AL).
+             */
+            fun w3magOrigin(w3magOrigin: String) = w3magOrigin(JsonField.of(w3magOrigin))
+
+            /**
+             * Sets [Builder.w3magOrigin] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.w3magOrigin] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun w3magOrigin(w3magOrigin: JsonField<String>) = apply {
+                this.w3magOrigin = w3magOrigin
+            }
+
+            /**
+             * Mid-infrared photometric W3-band (12 microns) magnitude uncertainty in the Vega
+             * system measured in magnitudes.
+             */
+            fun w3magUnc(w3magUnc: Double) = w3magUnc(JsonField.of(w3magUnc))
+
+            /**
+             * Sets [Builder.w3magUnc] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.w3magUnc] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun w3magUnc(w3magUnc: JsonField<Double>) = apply { this.w3magUnc = w3magUnc }
+
+            /**
+             * Mid-infrared photometric W3-band (12 microns) saturated pixel fraction in the Vega
+             * system.
+             */
+            fun w3sat(w3sat: Double) = w3sat(JsonField.of(w3sat))
+
+            /**
+             * Sets [Builder.w3sat] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.w3sat] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun w3sat(w3sat: JsonField<Double>) = apply { this.w3sat = w3sat }
+
+            /**
+             * Mid-infrared photometric W4-band (22 microns) magnitude in the Vega system measured
+             * in magnitudes.
+             */
+            fun w4mag(w4mag: Double) = w4mag(JsonField.of(w4mag))
+
+            /**
+             * Sets [Builder.w4mag] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.w4mag] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun w4mag(w4mag: JsonField<Double>) = apply { this.w4mag = w4mag }
+
+            /**
+             * Mid-infrared photometric W4-band (22 microns) catalog of origin in the Vega system
+             * (AL).
+             */
+            fun w4magOrigin(w4magOrigin: String) = w4magOrigin(JsonField.of(w4magOrigin))
+
+            /**
+             * Sets [Builder.w4magOrigin] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.w4magOrigin] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun w4magOrigin(w4magOrigin: JsonField<String>) = apply {
+                this.w4magOrigin = w4magOrigin
+            }
+
+            /**
+             * Mid-infrared photometric W4-band (22 microns) magnitude uncertainty in the Vega
+             * system measured in magnitudes.
+             */
+            fun w4magUnc(w4magUnc: Double) = w4magUnc(JsonField.of(w4magUnc))
+
+            /**
+             * Sets [Builder.w4magUnc] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.w4magUnc] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun w4magUnc(w4magUnc: JsonField<Double>) = apply { this.w4magUnc = w4magUnc }
+
+            /**
+             * Mid-infrared photometric W4-band (22 microns) saturated pixel fraction in the Vega
+             * system.
+             */
+            fun w4sat(w4sat: Double) = w4sat(JsonField.of(w4sat))
+
+            /**
+             * Sets [Builder.w4sat] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.w4sat] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun w4sat(w4sat: JsonField<Double>) = apply { this.w4sat = w4sat }
+
+            /** The Washington Double Star Catalog (WD) identifier of this object. */
+            fun wdsCatId(wdsCatId: String) = wdsCatId(JsonField.of(wdsCatId))
+
+            /**
+             * Sets [Builder.wdsCatId] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.wdsCatId] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun wdsCatId(wdsCatId: JsonField<String>) = apply { this.wdsCatId = wdsCatId }
 
             fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
                 this.additionalProperties.clear()
@@ -4587,40 +9224,72 @@ private constructor(
                     checkRequired("source", source),
                     checkRequired("starEpoch", starEpoch),
                     id,
+                    aavsoVsxId,
+                    abgmag,
+                    abgmagOrigin,
+                    abgmagUnc,
+                    abimag,
+                    abimagOrigin,
+                    abimagUnc,
+                    abrmag,
+                    abrmagOrigin,
+                    abrmagUnc,
+                    abymag,
+                    abymagOrigin,
+                    abymagUnc,
+                    abzmag,
+                    abzmagOrigin,
+                    abzmagUnc,
+                    allWisEccInd,
                     allWiseId,
-                    allWisew1Mag,
-                    allWisew1MagUnc,
-                    allWisew2Mag,
-                    allWisew2MagUnc,
-                    allWisew3Mag,
-                    allWisew3MagUnc,
-                    allWisew4Mag,
-                    allWisew4MagUnc,
+                    allWisEnaInd,
+                    allWisEphQualInd,
+                    apassId,
+                    astrometricExcessNoise,
+                    astrometricExcessNoiseSig,
+                    bmag,
+                    bmagOrigin,
+                    bmagUnc,
                     bpmag,
                     bpmagUnc,
+                    carrascoCatId,
                     catVersion,
+                    catWise2020Id,
                     createdAt,
                     createdBy,
                     decUnc,
+                    ducatiCatId,
                     gaiadr3CatId,
                     gmag,
                     gmagUnc,
                     gncCatId,
+                    healpixIndex,
                     hipCatId,
                     hmag,
+                    hmagOrigin,
                     hmagUnc,
+                    imag,
+                    imagOrigin,
+                    imagUnc,
                     jmag,
+                    jmagOrigin,
                     jmagUnc,
                     kmag,
+                    kmagOrigin,
                     kmagUnc,
+                    morphologyInd,
                     multFlag,
                     multiplicity,
+                    neighborDec,
                     neighborDistance,
                     neighborFlag,
                     neighborId,
+                    neighborRa,
                     nonSingleStar,
+                    numNeighbors,
                     origin,
                     origNetwork,
+                    panStarrsId,
                     parallax,
                     parallaxUnc,
                     pmdec,
@@ -4629,18 +9298,58 @@ private constructor(
                     pmraUnc,
                     pmUncFlag,
                     posUncFlag,
+                    ps1astrometryCorrectionFlag,
+                    ps1ObjInfoFlag,
+                    ps1QualityFlag,
                     raUnc,
+                    rmag,
+                    rmagOrigin,
+                    rmagUnc,
                     rpmag,
                     rpmagUnc,
+                    ruwe,
+                    sdaCatId,
+                    sgmag,
+                    sgmagUnc,
                     shift,
                     shiftFlag,
                     shiftFwhm1,
                     shiftFwhm6,
+                    skyMapperId,
                     twoMassId,
+                    twoMassPhQualInd,
+                    twoMassReadFlag,
+                    twoMassXscId,
+                    tychoDscId,
+                    uhsId,
+                    ukidssGcsId,
+                    ukidssGpsId,
+                    ukidssLasId,
                     updatedAt,
                     updatedBy,
                     varFlag,
                     variability,
+                    vhsId,
+                    vmag,
+                    vmagOrigin,
+                    vmagUnc,
+                    w1mag,
+                    w1magOrigin,
+                    w1magUnc,
+                    w1sat,
+                    w2mag,
+                    w2magOrigin,
+                    w2magUnc,
+                    w2sat,
+                    w3mag,
+                    w3magOrigin,
+                    w3magUnc,
+                    w3sat,
+                    w4mag,
+                    w4magOrigin,
+                    w4magUnc,
+                    w4sat,
+                    wdsCatId,
                     additionalProperties.toMutableMap(),
                 )
         }
@@ -4652,7 +9361,7 @@ private constructor(
                 return@apply
             }
 
-            astrometryOrigin().validate()
+            astrometryOrigin()
             classificationMarking()
             csId()
             dataMode().validate()
@@ -4661,40 +9370,72 @@ private constructor(
             source()
             starEpoch()
             id()
+            aavsoVsxId()
+            abgmag()
+            abgmagOrigin()
+            abgmagUnc()
+            abimag()
+            abimagOrigin()
+            abimagUnc()
+            abrmag()
+            abrmagOrigin()
+            abrmagUnc()
+            abymag()
+            abymagOrigin()
+            abymagUnc()
+            abzmag()
+            abzmagOrigin()
+            abzmagUnc()
+            allWisEccInd()
             allWiseId()
-            allWisew1Mag()
-            allWisew1MagUnc()
-            allWisew2Mag()
-            allWisew2MagUnc()
-            allWisew3Mag()
-            allWisew3MagUnc()
-            allWisew4Mag()
-            allWisew4MagUnc()
+            allWisEnaInd()
+            allWisEphQualInd()
+            apassId()
+            astrometricExcessNoise()
+            astrometricExcessNoiseSig()
+            bmag()
+            bmagOrigin()
+            bmagUnc()
             bpmag()
             bpmagUnc()
+            carrascoCatId()
             catVersion()
+            catWise2020Id()
             createdAt()
             createdBy()
             decUnc()
+            ducatiCatId()
             gaiadr3CatId()
             gmag()
             gmagUnc()
             gncCatId()
+            healpixIndex()
             hipCatId()
             hmag()
+            hmagOrigin()
             hmagUnc()
+            imag()
+            imagOrigin()
+            imagUnc()
             jmag()
+            jmagOrigin()
             jmagUnc()
             kmag()
+            kmagOrigin()
             kmagUnc()
+            morphologyInd()
             multFlag()
             multiplicity()
+            neighborDec()
             neighborDistance()
             neighborFlag()
             neighborId()
+            neighborRa()
             nonSingleStar()
+            numNeighbors()
             origin()
             origNetwork()
+            panStarrsId()
             parallax()
             parallaxUnc()
             pmdec()
@@ -4703,18 +9444,58 @@ private constructor(
             pmraUnc()
             pmUncFlag()
             posUncFlag()
+            ps1astrometryCorrectionFlag()
+            ps1ObjInfoFlag()
+            ps1QualityFlag()
             raUnc()
+            rmag()
+            rmagOrigin()
+            rmagUnc()
             rpmag()
             rpmagUnc()
+            ruwe()
+            sdaCatId()
+            sgmag()
+            sgmagUnc()
             shift()
             shiftFlag()
             shiftFwhm1()
             shiftFwhm6()
+            skyMapperId()
             twoMassId()
+            twoMassPhQualInd()
+            twoMassReadFlag()
+            twoMassXscId()
+            tychoDscId()
+            uhsId()
+            ukidssGcsId()
+            ukidssGpsId()
+            ukidssLasId()
             updatedAt()
             updatedBy()
             varFlag()
             variability()
+            vhsId()
+            vmag()
+            vmagOrigin()
+            vmagUnc()
+            w1mag()
+            w1magOrigin()
+            w1magUnc()
+            w1sat()
+            w2mag()
+            w2magOrigin()
+            w2magUnc()
+            w2sat()
+            w3mag()
+            w3magOrigin()
+            w3magUnc()
+            w3sat()
+            w4mag()
+            w4magOrigin()
+            w4magUnc()
+            w4sat()
+            wdsCatId()
             validated = true
         }
 
@@ -4734,7 +9515,7 @@ private constructor(
          */
         @JvmSynthetic
         internal fun validity(): Int =
-            (astrometryOrigin.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (astrometryOrigin.asKnown().isPresent) 1 else 0) +
                 (if (classificationMarking.asKnown().isPresent) 1 else 0) +
                 (if (csId.asKnown().isPresent) 1 else 0) +
                 (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
@@ -4743,40 +9524,72 @@ private constructor(
                 (if (source.asKnown().isPresent) 1 else 0) +
                 (if (starEpoch.asKnown().isPresent) 1 else 0) +
                 (if (id.asKnown().isPresent) 1 else 0) +
+                (if (aavsoVsxId.asKnown().isPresent) 1 else 0) +
+                (if (abgmag.asKnown().isPresent) 1 else 0) +
+                (if (abgmagOrigin.asKnown().isPresent) 1 else 0) +
+                (if (abgmagUnc.asKnown().isPresent) 1 else 0) +
+                (if (abimag.asKnown().isPresent) 1 else 0) +
+                (if (abimagOrigin.asKnown().isPresent) 1 else 0) +
+                (if (abimagUnc.asKnown().isPresent) 1 else 0) +
+                (if (abrmag.asKnown().isPresent) 1 else 0) +
+                (if (abrmagOrigin.asKnown().isPresent) 1 else 0) +
+                (if (abrmagUnc.asKnown().isPresent) 1 else 0) +
+                (if (abymag.asKnown().isPresent) 1 else 0) +
+                (if (abymagOrigin.asKnown().isPresent) 1 else 0) +
+                (if (abymagUnc.asKnown().isPresent) 1 else 0) +
+                (if (abzmag.asKnown().isPresent) 1 else 0) +
+                (if (abzmagOrigin.asKnown().isPresent) 1 else 0) +
+                (if (abzmagUnc.asKnown().isPresent) 1 else 0) +
+                (if (allWisEccInd.asKnown().isPresent) 1 else 0) +
                 (if (allWiseId.asKnown().isPresent) 1 else 0) +
-                (if (allWisew1Mag.asKnown().isPresent) 1 else 0) +
-                (if (allWisew1MagUnc.asKnown().isPresent) 1 else 0) +
-                (if (allWisew2Mag.asKnown().isPresent) 1 else 0) +
-                (if (allWisew2MagUnc.asKnown().isPresent) 1 else 0) +
-                (if (allWisew3Mag.asKnown().isPresent) 1 else 0) +
-                (if (allWisew3MagUnc.asKnown().isPresent) 1 else 0) +
-                (if (allWisew4Mag.asKnown().isPresent) 1 else 0) +
-                (if (allWisew4MagUnc.asKnown().isPresent) 1 else 0) +
+                (if (allWisEnaInd.asKnown().isPresent) 1 else 0) +
+                (if (allWisEphQualInd.asKnown().isPresent) 1 else 0) +
+                (if (apassId.asKnown().isPresent) 1 else 0) +
+                (if (astrometricExcessNoise.asKnown().isPresent) 1 else 0) +
+                (if (astrometricExcessNoiseSig.asKnown().isPresent) 1 else 0) +
+                (if (bmag.asKnown().isPresent) 1 else 0) +
+                (if (bmagOrigin.asKnown().isPresent) 1 else 0) +
+                (if (bmagUnc.asKnown().isPresent) 1 else 0) +
                 (if (bpmag.asKnown().isPresent) 1 else 0) +
                 (if (bpmagUnc.asKnown().isPresent) 1 else 0) +
+                (if (carrascoCatId.asKnown().isPresent) 1 else 0) +
                 (if (catVersion.asKnown().isPresent) 1 else 0) +
+                (if (catWise2020Id.asKnown().isPresent) 1 else 0) +
                 (if (createdAt.asKnown().isPresent) 1 else 0) +
                 (if (createdBy.asKnown().isPresent) 1 else 0) +
                 (if (decUnc.asKnown().isPresent) 1 else 0) +
+                (if (ducatiCatId.asKnown().isPresent) 1 else 0) +
                 (if (gaiadr3CatId.asKnown().isPresent) 1 else 0) +
                 (if (gmag.asKnown().isPresent) 1 else 0) +
                 (if (gmagUnc.asKnown().isPresent) 1 else 0) +
                 (if (gncCatId.asKnown().isPresent) 1 else 0) +
+                (if (healpixIndex.asKnown().isPresent) 1 else 0) +
                 (if (hipCatId.asKnown().isPresent) 1 else 0) +
                 (if (hmag.asKnown().isPresent) 1 else 0) +
+                (if (hmagOrigin.asKnown().isPresent) 1 else 0) +
                 (if (hmagUnc.asKnown().isPresent) 1 else 0) +
+                (if (imag.asKnown().isPresent) 1 else 0) +
+                (if (imagOrigin.asKnown().isPresent) 1 else 0) +
+                (if (imagUnc.asKnown().isPresent) 1 else 0) +
                 (if (jmag.asKnown().isPresent) 1 else 0) +
+                (if (jmagOrigin.asKnown().isPresent) 1 else 0) +
                 (if (jmagUnc.asKnown().isPresent) 1 else 0) +
                 (if (kmag.asKnown().isPresent) 1 else 0) +
+                (if (kmagOrigin.asKnown().isPresent) 1 else 0) +
                 (if (kmagUnc.asKnown().isPresent) 1 else 0) +
+                (if (morphologyInd.asKnown().isPresent) 1 else 0) +
                 (if (multFlag.asKnown().isPresent) 1 else 0) +
                 (if (multiplicity.asKnown().isPresent) 1 else 0) +
+                (if (neighborDec.asKnown().isPresent) 1 else 0) +
                 (if (neighborDistance.asKnown().isPresent) 1 else 0) +
                 (if (neighborFlag.asKnown().isPresent) 1 else 0) +
                 (if (neighborId.asKnown().isPresent) 1 else 0) +
+                (if (neighborRa.asKnown().isPresent) 1 else 0) +
                 (if (nonSingleStar.asKnown().isPresent) 1 else 0) +
+                (if (numNeighbors.asKnown().isPresent) 1 else 0) +
                 (if (origin.asKnown().isPresent) 1 else 0) +
                 (if (origNetwork.asKnown().isPresent) 1 else 0) +
+                (if (panStarrsId.asKnown().isPresent) 1 else 0) +
                 (if (parallax.asKnown().isPresent) 1 else 0) +
                 (if (parallaxUnc.asKnown().isPresent) 1 else 0) +
                 (if (pmdec.asKnown().isPresent) 1 else 0) +
@@ -4785,18 +9598,58 @@ private constructor(
                 (if (pmraUnc.asKnown().isPresent) 1 else 0) +
                 (if (pmUncFlag.asKnown().isPresent) 1 else 0) +
                 (if (posUncFlag.asKnown().isPresent) 1 else 0) +
+                (if (ps1astrometryCorrectionFlag.asKnown().isPresent) 1 else 0) +
+                (if (ps1ObjInfoFlag.asKnown().isPresent) 1 else 0) +
+                (if (ps1QualityFlag.asKnown().isPresent) 1 else 0) +
                 (if (raUnc.asKnown().isPresent) 1 else 0) +
+                (if (rmag.asKnown().isPresent) 1 else 0) +
+                (if (rmagOrigin.asKnown().isPresent) 1 else 0) +
+                (if (rmagUnc.asKnown().isPresent) 1 else 0) +
                 (if (rpmag.asKnown().isPresent) 1 else 0) +
                 (if (rpmagUnc.asKnown().isPresent) 1 else 0) +
+                (if (ruwe.asKnown().isPresent) 1 else 0) +
+                (if (sdaCatId.asKnown().isPresent) 1 else 0) +
+                (if (sgmag.asKnown().isPresent) 1 else 0) +
+                (if (sgmagUnc.asKnown().isPresent) 1 else 0) +
                 (if (shift.asKnown().isPresent) 1 else 0) +
                 (if (shiftFlag.asKnown().isPresent) 1 else 0) +
                 (if (shiftFwhm1.asKnown().isPresent) 1 else 0) +
                 (if (shiftFwhm6.asKnown().isPresent) 1 else 0) +
+                (if (skyMapperId.asKnown().isPresent) 1 else 0) +
                 (if (twoMassId.asKnown().isPresent) 1 else 0) +
+                (if (twoMassPhQualInd.asKnown().isPresent) 1 else 0) +
+                (if (twoMassReadFlag.asKnown().isPresent) 1 else 0) +
+                (if (twoMassXscId.asKnown().isPresent) 1 else 0) +
+                (if (tychoDscId.asKnown().isPresent) 1 else 0) +
+                (if (uhsId.asKnown().isPresent) 1 else 0) +
+                (if (ukidssGcsId.asKnown().isPresent) 1 else 0) +
+                (if (ukidssGpsId.asKnown().isPresent) 1 else 0) +
+                (if (ukidssLasId.asKnown().isPresent) 1 else 0) +
                 (if (updatedAt.asKnown().isPresent) 1 else 0) +
                 (if (updatedBy.asKnown().isPresent) 1 else 0) +
                 (if (varFlag.asKnown().isPresent) 1 else 0) +
-                (if (variability.asKnown().isPresent) 1 else 0)
+                (if (variability.asKnown().isPresent) 1 else 0) +
+                (if (vhsId.asKnown().isPresent) 1 else 0) +
+                (if (vmag.asKnown().isPresent) 1 else 0) +
+                (if (vmagOrigin.asKnown().isPresent) 1 else 0) +
+                (if (vmagUnc.asKnown().isPresent) 1 else 0) +
+                (if (w1mag.asKnown().isPresent) 1 else 0) +
+                (if (w1magOrigin.asKnown().isPresent) 1 else 0) +
+                (if (w1magUnc.asKnown().isPresent) 1 else 0) +
+                (if (w1sat.asKnown().isPresent) 1 else 0) +
+                (if (w2mag.asKnown().isPresent) 1 else 0) +
+                (if (w2magOrigin.asKnown().isPresent) 1 else 0) +
+                (if (w2magUnc.asKnown().isPresent) 1 else 0) +
+                (if (w2sat.asKnown().isPresent) 1 else 0) +
+                (if (w3mag.asKnown().isPresent) 1 else 0) +
+                (if (w3magOrigin.asKnown().isPresent) 1 else 0) +
+                (if (w3magUnc.asKnown().isPresent) 1 else 0) +
+                (if (w3sat.asKnown().isPresent) 1 else 0) +
+                (if (w4mag.asKnown().isPresent) 1 else 0) +
+                (if (w4magOrigin.asKnown().isPresent) 1 else 0) +
+                (if (w4magUnc.asKnown().isPresent) 1 else 0) +
+                (if (w4sat.asKnown().isPresent) 1 else 0) +
+                (if (wdsCatId.asKnown().isPresent) 1 else 0)
 
         override fun equals(other: Any?): Boolean {
             if (this === other) {
@@ -4813,40 +9666,72 @@ private constructor(
                 source == other.source &&
                 starEpoch == other.starEpoch &&
                 id == other.id &&
+                aavsoVsxId == other.aavsoVsxId &&
+                abgmag == other.abgmag &&
+                abgmagOrigin == other.abgmagOrigin &&
+                abgmagUnc == other.abgmagUnc &&
+                abimag == other.abimag &&
+                abimagOrigin == other.abimagOrigin &&
+                abimagUnc == other.abimagUnc &&
+                abrmag == other.abrmag &&
+                abrmagOrigin == other.abrmagOrigin &&
+                abrmagUnc == other.abrmagUnc &&
+                abymag == other.abymag &&
+                abymagOrigin == other.abymagOrigin &&
+                abymagUnc == other.abymagUnc &&
+                abzmag == other.abzmag &&
+                abzmagOrigin == other.abzmagOrigin &&
+                abzmagUnc == other.abzmagUnc &&
+                allWisEccInd == other.allWisEccInd &&
                 allWiseId == other.allWiseId &&
-                allWisew1Mag == other.allWisew1Mag &&
-                allWisew1MagUnc == other.allWisew1MagUnc &&
-                allWisew2Mag == other.allWisew2Mag &&
-                allWisew2MagUnc == other.allWisew2MagUnc &&
-                allWisew3Mag == other.allWisew3Mag &&
-                allWisew3MagUnc == other.allWisew3MagUnc &&
-                allWisew4Mag == other.allWisew4Mag &&
-                allWisew4MagUnc == other.allWisew4MagUnc &&
+                allWisEnaInd == other.allWisEnaInd &&
+                allWisEphQualInd == other.allWisEphQualInd &&
+                apassId == other.apassId &&
+                astrometricExcessNoise == other.astrometricExcessNoise &&
+                astrometricExcessNoiseSig == other.astrometricExcessNoiseSig &&
+                bmag == other.bmag &&
+                bmagOrigin == other.bmagOrigin &&
+                bmagUnc == other.bmagUnc &&
                 bpmag == other.bpmag &&
                 bpmagUnc == other.bpmagUnc &&
+                carrascoCatId == other.carrascoCatId &&
                 catVersion == other.catVersion &&
+                catWise2020Id == other.catWise2020Id &&
                 createdAt == other.createdAt &&
                 createdBy == other.createdBy &&
                 decUnc == other.decUnc &&
+                ducatiCatId == other.ducatiCatId &&
                 gaiadr3CatId == other.gaiadr3CatId &&
                 gmag == other.gmag &&
                 gmagUnc == other.gmagUnc &&
                 gncCatId == other.gncCatId &&
+                healpixIndex == other.healpixIndex &&
                 hipCatId == other.hipCatId &&
                 hmag == other.hmag &&
+                hmagOrigin == other.hmagOrigin &&
                 hmagUnc == other.hmagUnc &&
+                imag == other.imag &&
+                imagOrigin == other.imagOrigin &&
+                imagUnc == other.imagUnc &&
                 jmag == other.jmag &&
+                jmagOrigin == other.jmagOrigin &&
                 jmagUnc == other.jmagUnc &&
                 kmag == other.kmag &&
+                kmagOrigin == other.kmagOrigin &&
                 kmagUnc == other.kmagUnc &&
+                morphologyInd == other.morphologyInd &&
                 multFlag == other.multFlag &&
                 multiplicity == other.multiplicity &&
+                neighborDec == other.neighborDec &&
                 neighborDistance == other.neighborDistance &&
                 neighborFlag == other.neighborFlag &&
                 neighborId == other.neighborId &&
+                neighborRa == other.neighborRa &&
                 nonSingleStar == other.nonSingleStar &&
+                numNeighbors == other.numNeighbors &&
                 origin == other.origin &&
                 origNetwork == other.origNetwork &&
+                panStarrsId == other.panStarrsId &&
                 parallax == other.parallax &&
                 parallaxUnc == other.parallaxUnc &&
                 pmdec == other.pmdec &&
@@ -4855,18 +9740,58 @@ private constructor(
                 pmraUnc == other.pmraUnc &&
                 pmUncFlag == other.pmUncFlag &&
                 posUncFlag == other.posUncFlag &&
+                ps1astrometryCorrectionFlag == other.ps1astrometryCorrectionFlag &&
+                ps1ObjInfoFlag == other.ps1ObjInfoFlag &&
+                ps1QualityFlag == other.ps1QualityFlag &&
                 raUnc == other.raUnc &&
+                rmag == other.rmag &&
+                rmagOrigin == other.rmagOrigin &&
+                rmagUnc == other.rmagUnc &&
                 rpmag == other.rpmag &&
                 rpmagUnc == other.rpmagUnc &&
+                ruwe == other.ruwe &&
+                sdaCatId == other.sdaCatId &&
+                sgmag == other.sgmag &&
+                sgmagUnc == other.sgmagUnc &&
                 shift == other.shift &&
                 shiftFlag == other.shiftFlag &&
                 shiftFwhm1 == other.shiftFwhm1 &&
                 shiftFwhm6 == other.shiftFwhm6 &&
+                skyMapperId == other.skyMapperId &&
                 twoMassId == other.twoMassId &&
+                twoMassPhQualInd == other.twoMassPhQualInd &&
+                twoMassReadFlag == other.twoMassReadFlag &&
+                twoMassXscId == other.twoMassXscId &&
+                tychoDscId == other.tychoDscId &&
+                uhsId == other.uhsId &&
+                ukidssGcsId == other.ukidssGcsId &&
+                ukidssGpsId == other.ukidssGpsId &&
+                ukidssLasId == other.ukidssLasId &&
                 updatedAt == other.updatedAt &&
                 updatedBy == other.updatedBy &&
                 varFlag == other.varFlag &&
                 variability == other.variability &&
+                vhsId == other.vhsId &&
+                vmag == other.vmag &&
+                vmagOrigin == other.vmagOrigin &&
+                vmagUnc == other.vmagUnc &&
+                w1mag == other.w1mag &&
+                w1magOrigin == other.w1magOrigin &&
+                w1magUnc == other.w1magUnc &&
+                w1sat == other.w1sat &&
+                w2mag == other.w2mag &&
+                w2magOrigin == other.w2magOrigin &&
+                w2magUnc == other.w2magUnc &&
+                w2sat == other.w2sat &&
+                w3mag == other.w3mag &&
+                w3magOrigin == other.w3magOrigin &&
+                w3magUnc == other.w3magUnc &&
+                w3sat == other.w3sat &&
+                w4mag == other.w4mag &&
+                w4magOrigin == other.w4magOrigin &&
+                w4magUnc == other.w4magUnc &&
+                w4sat == other.w4sat &&
+                wdsCatId == other.wdsCatId &&
                 additionalProperties == other.additionalProperties
         }
 
@@ -4881,40 +9806,72 @@ private constructor(
                 source,
                 starEpoch,
                 id,
+                aavsoVsxId,
+                abgmag,
+                abgmagOrigin,
+                abgmagUnc,
+                abimag,
+                abimagOrigin,
+                abimagUnc,
+                abrmag,
+                abrmagOrigin,
+                abrmagUnc,
+                abymag,
+                abymagOrigin,
+                abymagUnc,
+                abzmag,
+                abzmagOrigin,
+                abzmagUnc,
+                allWisEccInd,
                 allWiseId,
-                allWisew1Mag,
-                allWisew1MagUnc,
-                allWisew2Mag,
-                allWisew2MagUnc,
-                allWisew3Mag,
-                allWisew3MagUnc,
-                allWisew4Mag,
-                allWisew4MagUnc,
+                allWisEnaInd,
+                allWisEphQualInd,
+                apassId,
+                astrometricExcessNoise,
+                astrometricExcessNoiseSig,
+                bmag,
+                bmagOrigin,
+                bmagUnc,
                 bpmag,
                 bpmagUnc,
+                carrascoCatId,
                 catVersion,
+                catWise2020Id,
                 createdAt,
                 createdBy,
                 decUnc,
+                ducatiCatId,
                 gaiadr3CatId,
                 gmag,
                 gmagUnc,
                 gncCatId,
+                healpixIndex,
                 hipCatId,
                 hmag,
+                hmagOrigin,
                 hmagUnc,
+                imag,
+                imagOrigin,
+                imagUnc,
                 jmag,
+                jmagOrigin,
                 jmagUnc,
                 kmag,
+                kmagOrigin,
                 kmagUnc,
+                morphologyInd,
                 multFlag,
                 multiplicity,
+                neighborDec,
                 neighborDistance,
                 neighborFlag,
                 neighborId,
+                neighborRa,
                 nonSingleStar,
+                numNeighbors,
                 origin,
                 origNetwork,
+                panStarrsId,
                 parallax,
                 parallaxUnc,
                 pmdec,
@@ -4923,18 +9880,58 @@ private constructor(
                 pmraUnc,
                 pmUncFlag,
                 posUncFlag,
+                ps1astrometryCorrectionFlag,
+                ps1ObjInfoFlag,
+                ps1QualityFlag,
                 raUnc,
+                rmag,
+                rmagOrigin,
+                rmagUnc,
                 rpmag,
                 rpmagUnc,
+                ruwe,
+                sdaCatId,
+                sgmag,
+                sgmagUnc,
                 shift,
                 shiftFlag,
                 shiftFwhm1,
                 shiftFwhm6,
+                skyMapperId,
                 twoMassId,
+                twoMassPhQualInd,
+                twoMassReadFlag,
+                twoMassXscId,
+                tychoDscId,
+                uhsId,
+                ukidssGcsId,
+                ukidssGpsId,
+                ukidssLasId,
                 updatedAt,
                 updatedBy,
                 varFlag,
                 variability,
+                vhsId,
+                vmag,
+                vmagOrigin,
+                vmagUnc,
+                w1mag,
+                w1magOrigin,
+                w1magUnc,
+                w1sat,
+                w2mag,
+                w2magOrigin,
+                w2magUnc,
+                w2sat,
+                w3mag,
+                w3magOrigin,
+                w3magUnc,
+                w3sat,
+                w4mag,
+                w4magOrigin,
+                w4magUnc,
+                w4sat,
+                wdsCatId,
                 additionalProperties,
             )
         }
@@ -4942,146 +9939,7 @@ private constructor(
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{astrometryOrigin=$astrometryOrigin, classificationMarking=$classificationMarking, csId=$csId, dataMode=$dataMode, dec=$dec, ra=$ra, source=$source, starEpoch=$starEpoch, id=$id, allWiseId=$allWiseId, allWisew1Mag=$allWisew1Mag, allWisew1MagUnc=$allWisew1MagUnc, allWisew2Mag=$allWisew2Mag, allWisew2MagUnc=$allWisew2MagUnc, allWisew3Mag=$allWisew3Mag, allWisew3MagUnc=$allWisew3MagUnc, allWisew4Mag=$allWisew4Mag, allWisew4MagUnc=$allWisew4MagUnc, bpmag=$bpmag, bpmagUnc=$bpmagUnc, catVersion=$catVersion, createdAt=$createdAt, createdBy=$createdBy, decUnc=$decUnc, gaiadr3CatId=$gaiadr3CatId, gmag=$gmag, gmagUnc=$gmagUnc, gncCatId=$gncCatId, hipCatId=$hipCatId, hmag=$hmag, hmagUnc=$hmagUnc, jmag=$jmag, jmagUnc=$jmagUnc, kmag=$kmag, kmagUnc=$kmagUnc, multFlag=$multFlag, multiplicity=$multiplicity, neighborDistance=$neighborDistance, neighborFlag=$neighborFlag, neighborId=$neighborId, nonSingleStar=$nonSingleStar, origin=$origin, origNetwork=$origNetwork, parallax=$parallax, parallaxUnc=$parallaxUnc, pmdec=$pmdec, pmdecUnc=$pmdecUnc, pmra=$pmra, pmraUnc=$pmraUnc, pmUncFlag=$pmUncFlag, posUncFlag=$posUncFlag, raUnc=$raUnc, rpmag=$rpmag, rpmagUnc=$rpmagUnc, shift=$shift, shiftFlag=$shiftFlag, shiftFwhm1=$shiftFwhm1, shiftFwhm6=$shiftFwhm6, twoMassId=$twoMassId, updatedAt=$updatedAt, updatedBy=$updatedBy, varFlag=$varFlag, variability=$variability, additionalProperties=$additionalProperties}"
-    }
-
-    /** Originating astrometric catalog for this object. Enum: [GAIADR3, HIPPARCOS, USNOBSC]. */
-    class AstrometryOrigin @JsonCreator private constructor(private val value: JsonField<String>) :
-        Enum {
-
-        /**
-         * Returns this class instance's raw value.
-         *
-         * This is usually only useful if this instance was deserialized from data that doesn't
-         * match any known member, and you want to know that value. For example, if the SDK is on an
-         * older version than the API, then the API may respond with new members that the SDK is
-         * unaware of.
-         */
-        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
-
-        companion object {
-
-            @JvmField val GAIADR3 = of("GAIADR3")
-
-            @JvmField val HIPPARCOS = of("HIPPARCOS")
-
-            @JvmField val USNOBSC = of("USNOBSC")
-
-            @JvmStatic fun of(value: String) = AstrometryOrigin(JsonField.of(value))
-        }
-
-        /** An enum containing [AstrometryOrigin]'s known values. */
-        enum class Known {
-            GAIADR3,
-            HIPPARCOS,
-            USNOBSC,
-        }
-
-        /**
-         * An enum containing [AstrometryOrigin]'s known values, as well as an [_UNKNOWN] member.
-         *
-         * An instance of [AstrometryOrigin] can contain an unknown value in a couple of cases:
-         * - It was deserialized from data that doesn't match any known member. For example, if the
-         *   SDK is on an older version than the API, then the API may respond with new members that
-         *   the SDK is unaware of.
-         * - It was constructed with an arbitrary value using the [of] method.
-         */
-        enum class Value {
-            GAIADR3,
-            HIPPARCOS,
-            USNOBSC,
-            /**
-             * An enum member indicating that [AstrometryOrigin] was instantiated with an unknown
-             * value.
-             */
-            _UNKNOWN,
-        }
-
-        /**
-         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
-         * if the class was instantiated with an unknown value.
-         *
-         * Use the [known] method instead if you're certain the value is always known or if you want
-         * to throw for the unknown case.
-         */
-        fun value(): Value =
-            when (this) {
-                GAIADR3 -> Value.GAIADR3
-                HIPPARCOS -> Value.HIPPARCOS
-                USNOBSC -> Value.USNOBSC
-                else -> Value._UNKNOWN
-            }
-
-        /**
-         * Returns an enum member corresponding to this class instance's value.
-         *
-         * Use the [value] method instead if you're uncertain the value is always known and don't
-         * want to throw for the unknown case.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
-         *   known member.
-         */
-        fun known(): Known =
-            when (this) {
-                GAIADR3 -> Known.GAIADR3
-                HIPPARCOS -> Known.HIPPARCOS
-                USNOBSC -> Known.USNOBSC
-                else ->
-                    throw UnifieddatalibraryInvalidDataException("Unknown AstrometryOrigin: $value")
-            }
-
-        /**
-         * Returns this class instance's primitive wire representation.
-         *
-         * This differs from the [toString] method because that method is primarily for debugging
-         * and generally doesn't throw.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
-         *   have the expected primitive type.
-         */
-        fun asString(): String =
-            _value().asString().orElseThrow {
-                UnifieddatalibraryInvalidDataException("Value is not a String")
-            }
-
-        private var validated: Boolean = false
-
-        fun validate(): AstrometryOrigin = apply {
-            if (validated) {
-                return@apply
-            }
-
-            known()
-            validated = true
-        }
-
-        fun isValid(): Boolean =
-            try {
-                validate()
-                true
-            } catch (e: UnifieddatalibraryInvalidDataException) {
-                false
-            }
-
-        /**
-         * Returns a score indicating how many valid values are contained in this object
-         * recursively.
-         *
-         * Used for best match union deserialization.
-         */
-        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
-
-        override fun equals(other: Any?): Boolean {
-            if (this === other) {
-                return true
-            }
-
-            return other is AstrometryOrigin && value == other.value
-        }
-
-        override fun hashCode() = value.hashCode()
-
-        override fun toString() = value.toString()
+            "Body{astrometryOrigin=$astrometryOrigin, classificationMarking=$classificationMarking, csId=$csId, dataMode=$dataMode, dec=$dec, ra=$ra, source=$source, starEpoch=$starEpoch, id=$id, aavsoVsxId=$aavsoVsxId, abgmag=$abgmag, abgmagOrigin=$abgmagOrigin, abgmagUnc=$abgmagUnc, abimag=$abimag, abimagOrigin=$abimagOrigin, abimagUnc=$abimagUnc, abrmag=$abrmag, abrmagOrigin=$abrmagOrigin, abrmagUnc=$abrmagUnc, abymag=$abymag, abymagOrigin=$abymagOrigin, abymagUnc=$abymagUnc, abzmag=$abzmag, abzmagOrigin=$abzmagOrigin, abzmagUnc=$abzmagUnc, allWisEccInd=$allWisEccInd, allWiseId=$allWiseId, allWisEnaInd=$allWisEnaInd, allWisEphQualInd=$allWisEphQualInd, apassId=$apassId, astrometricExcessNoise=$astrometricExcessNoise, astrometricExcessNoiseSig=$astrometricExcessNoiseSig, bmag=$bmag, bmagOrigin=$bmagOrigin, bmagUnc=$bmagUnc, bpmag=$bpmag, bpmagUnc=$bpmagUnc, carrascoCatId=$carrascoCatId, catVersion=$catVersion, catWise2020Id=$catWise2020Id, createdAt=$createdAt, createdBy=$createdBy, decUnc=$decUnc, ducatiCatId=$ducatiCatId, gaiadr3CatId=$gaiadr3CatId, gmag=$gmag, gmagUnc=$gmagUnc, gncCatId=$gncCatId, healpixIndex=$healpixIndex, hipCatId=$hipCatId, hmag=$hmag, hmagOrigin=$hmagOrigin, hmagUnc=$hmagUnc, imag=$imag, imagOrigin=$imagOrigin, imagUnc=$imagUnc, jmag=$jmag, jmagOrigin=$jmagOrigin, jmagUnc=$jmagUnc, kmag=$kmag, kmagOrigin=$kmagOrigin, kmagUnc=$kmagUnc, morphologyInd=$morphologyInd, multFlag=$multFlag, multiplicity=$multiplicity, neighborDec=$neighborDec, neighborDistance=$neighborDistance, neighborFlag=$neighborFlag, neighborId=$neighborId, neighborRa=$neighborRa, nonSingleStar=$nonSingleStar, numNeighbors=$numNeighbors, origin=$origin, origNetwork=$origNetwork, panStarrsId=$panStarrsId, parallax=$parallax, parallaxUnc=$parallaxUnc, pmdec=$pmdec, pmdecUnc=$pmdecUnc, pmra=$pmra, pmraUnc=$pmraUnc, pmUncFlag=$pmUncFlag, posUncFlag=$posUncFlag, ps1astrometryCorrectionFlag=$ps1astrometryCorrectionFlag, ps1ObjInfoFlag=$ps1ObjInfoFlag, ps1QualityFlag=$ps1QualityFlag, raUnc=$raUnc, rmag=$rmag, rmagOrigin=$rmagOrigin, rmagUnc=$rmagUnc, rpmag=$rpmag, rpmagUnc=$rpmagUnc, ruwe=$ruwe, sdaCatId=$sdaCatId, sgmag=$sgmag, sgmagUnc=$sgmagUnc, shift=$shift, shiftFlag=$shiftFlag, shiftFwhm1=$shiftFwhm1, shiftFwhm6=$shiftFwhm6, skyMapperId=$skyMapperId, twoMassId=$twoMassId, twoMassPhQualInd=$twoMassPhQualInd, twoMassReadFlag=$twoMassReadFlag, twoMassXscId=$twoMassXscId, tychoDscId=$tychoDscId, uhsId=$uhsId, ukidssGcsId=$ukidssGcsId, ukidssGpsId=$ukidssGpsId, ukidssLasId=$ukidssLasId, updatedAt=$updatedAt, updatedBy=$updatedBy, varFlag=$varFlag, variability=$variability, vhsId=$vhsId, vmag=$vmag, vmagOrigin=$vmagOrigin, vmagUnc=$vmagUnc, w1mag=$w1mag, w1magOrigin=$w1magOrigin, w1magUnc=$w1magUnc, w1sat=$w1sat, w2mag=$w2mag, w2magOrigin=$w2magOrigin, w2magUnc=$w2magUnc, w2sat=$w2sat, w3mag=$w3mag, w3magOrigin=$w3magOrigin, w3magUnc=$w3magUnc, w3sat=$w3sat, w4mag=$w4mag, w4magOrigin=$w4magOrigin, w4magUnc=$w4magUnc, w4sat=$w4sat, wdsCatId=$wdsCatId, additionalProperties=$additionalProperties}"
     }
 
     /**
@@ -5116,9 +9974,9 @@ private constructor(
 
             @JvmField val TEST = of("TEST")
 
-            @JvmField val SIMULATED = of("SIMULATED")
-
             @JvmField val EXERCISE = of("EXERCISE")
+
+            @JvmField val SIMULATED = of("SIMULATED")
 
             @JvmStatic fun of(value: String) = DataMode(JsonField.of(value))
         }
@@ -5127,8 +9985,8 @@ private constructor(
         enum class Known {
             REAL,
             TEST,
-            SIMULATED,
             EXERCISE,
+            SIMULATED,
         }
 
         /**
@@ -5143,8 +10001,8 @@ private constructor(
         enum class Value {
             REAL,
             TEST,
-            SIMULATED,
             EXERCISE,
+            SIMULATED,
             /** An enum member indicating that [DataMode] was instantiated with an unknown value. */
             _UNKNOWN,
         }
@@ -5160,8 +10018,8 @@ private constructor(
             when (this) {
                 REAL -> Value.REAL
                 TEST -> Value.TEST
-                SIMULATED -> Value.SIMULATED
                 EXERCISE -> Value.EXERCISE
+                SIMULATED -> Value.SIMULATED
                 else -> Value._UNKNOWN
             }
 
@@ -5178,8 +10036,8 @@ private constructor(
             when (this) {
                 REAL -> Known.REAL
                 TEST -> Known.TEST
-                SIMULATED -> Known.SIMULATED
                 EXERCISE -> Known.EXERCISE
+                SIMULATED -> Known.SIMULATED
                 else -> throw UnifieddatalibraryInvalidDataException("Unknown DataMode: $value")
             }
 
