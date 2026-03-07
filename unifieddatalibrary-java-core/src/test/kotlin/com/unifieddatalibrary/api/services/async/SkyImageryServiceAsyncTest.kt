@@ -161,7 +161,7 @@ internal class SkyImageryServiceAsyncTest {
 
         val future =
             skyImageryServiceAsync.uploadZip(
-                SkyImageryUploadZipParams.builder().file("some content".byteInputStream()).build()
+                SkyImageryUploadZipParams.builder().file("Example data".byteInputStream()).build()
             )
 
         val response = future.get()

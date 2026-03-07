@@ -11,13 +11,13 @@ internal class GnssRawIfUploadZipParamsTest {
 
     @Test
     fun create() {
-        GnssRawIfUploadZipParams.builder().file("some content".byteInputStream()).build()
+        GnssRawIfUploadZipParams.builder().file("Example data".byteInputStream()).build()
     }
 
     @Test
     fun body() {
         val params =
-            GnssRawIfUploadZipParams.builder().file("some content".byteInputStream()).build()
+            GnssRawIfUploadZipParams.builder().file("Example data".byteInputStream()).build()
 
         val body = params._body()
 
@@ -30,7 +30,7 @@ internal class GnssRawIfUploadZipParamsTest {
                 InputStream::class.java,
             )
             .isEqualTo(
-                mapOf("file" to MultipartField.of("some content".byteInputStream())).mapValues {
+                mapOf("file" to MultipartField.of("Example data".byteInputStream())).mapValues {
                     (_, field) ->
                     field.map { (it as? ByteArray)?.inputStream() ?: it }
                 }

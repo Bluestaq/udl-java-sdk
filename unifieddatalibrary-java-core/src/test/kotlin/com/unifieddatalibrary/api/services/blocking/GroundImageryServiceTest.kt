@@ -229,7 +229,7 @@ internal class GroundImageryServiceTest {
         val groundImageryService = client.groundImagery()
 
         groundImageryService.uploadZip(
-            GroundImageryUploadZipParams.builder().file("some content".byteInputStream()).build()
+            GroundImageryUploadZipParams.builder().file("Example data".byteInputStream()).build()
         )
     }
 }

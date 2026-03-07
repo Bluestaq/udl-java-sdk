@@ -152,7 +152,7 @@ internal class SkyImageryServiceTest {
         val skyImageryService = client.skyImagery()
 
         skyImageryService.uploadZip(
-            SkyImageryUploadZipParams.builder().file("some content".byteInputStream()).build()
+            SkyImageryUploadZipParams.builder().file("Example data".byteInputStream()).build()
         )
     }
 }

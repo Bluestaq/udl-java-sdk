@@ -1148,7 +1148,7 @@ internal class ConjunctionServiceAsyncTest {
                     .filename("filename")
                     .source("source")
                     .tags("tags")
-                    .fileContent("some content")
+                    .fileContent("Example data")
                     .build()
             )
 
