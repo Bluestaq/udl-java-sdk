@@ -225,7 +225,7 @@ internal class SigactServiceTest {
         val sigactService = client.sigact()
 
         sigactService.uploadZip(
-            SigactUploadZipParams.builder().file("some content".byteInputStream()).build()
+            SigactUploadZipParams.builder().file("Example data".byteInputStream()).build()
         )
     }
 }

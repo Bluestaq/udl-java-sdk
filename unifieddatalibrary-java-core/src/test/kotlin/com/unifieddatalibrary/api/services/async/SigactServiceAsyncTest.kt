@@ -235,7 +235,7 @@ internal class SigactServiceAsyncTest {
 
         val future =
             sigactServiceAsync.uploadZip(
-                SigactUploadZipParams.builder().file("some content".byteInputStream()).build()
+                SigactUploadZipParams.builder().file("Example data".byteInputStream()).build()
             )
 
         val response = future.get()

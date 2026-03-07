@@ -149,7 +149,7 @@ internal class ScServiceAsyncTest {
                     .overwrite(true)
                     .sendNotification(true)
                     .tags("tags")
-                    .fileContent("some content")
+                    .fileContent("Example data")
                     .build()
             )
 

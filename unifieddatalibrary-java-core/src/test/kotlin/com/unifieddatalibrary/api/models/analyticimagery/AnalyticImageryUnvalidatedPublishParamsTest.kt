@@ -12,7 +12,7 @@ internal class AnalyticImageryUnvalidatedPublishParamsTest {
     @Test
     fun create() {
         AnalyticImageryUnvalidatedPublishParams.builder()
-            .file("some content".byteInputStream())
+            .file("Example data".byteInputStream())
             .build()
     }
 
@@ -20,7 +20,7 @@ internal class AnalyticImageryUnvalidatedPublishParamsTest {
     fun body() {
         val params =
             AnalyticImageryUnvalidatedPublishParams.builder()
-                .file("some content".byteInputStream())
+                .file("Example data".byteInputStream())
                 .build()
 
         val body = params._body()
@@ -34,7 +34,7 @@ internal class AnalyticImageryUnvalidatedPublishParamsTest {
                 InputStream::class.java,
             )
             .isEqualTo(
-                mapOf("file" to MultipartField.of("some content".byteInputStream())).mapValues {
+                mapOf("file" to MultipartField.of("Example data".byteInputStream())).mapValues {
                     (_, field) ->
                     field.map { (it as? ByteArray)?.inputStream() ?: it }
                 }

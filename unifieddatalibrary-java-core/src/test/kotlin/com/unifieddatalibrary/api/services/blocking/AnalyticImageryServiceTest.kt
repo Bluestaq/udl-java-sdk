@@ -161,7 +161,7 @@ internal class AnalyticImageryServiceTest {
 
         analyticImageryService.unvalidatedPublish(
             AnalyticImageryUnvalidatedPublishParams.builder()
-                .file("some content".byteInputStream())
+                .file("Example data".byteInputStream())
                 .build()
         )
     }

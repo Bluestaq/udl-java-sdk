@@ -1118,7 +1118,7 @@ internal class ConjunctionServiceTest {
                 .filename("filename")
                 .source("source")
                 .tags("tags")
-                .fileContent("some content")
+                .fileContent("Example data")
                 .build()
         )
     }

@@ -16,7 +16,7 @@ internal class CrewpaperUploadPdfParamsTest {
             .classificationMarking("x")
             .paperStatus(CrewpaperUploadPdfParams.PaperStatus.PUBLISHED)
             .papersVersion("x")
-            .fileContent("some content")
+            .fileContent("Example data")
             .build()
     }
 
@@ -28,7 +28,7 @@ internal class CrewpaperUploadPdfParamsTest {
                 .classificationMarking("x")
                 .paperStatus(CrewpaperUploadPdfParams.PaperStatus.PUBLISHED)
                 .papersVersion("x")
-                .fileContent("some content")
+                .fileContent("Example data")
                 .build()
 
         val queryParams = params._queryParams()
@@ -52,11 +52,11 @@ internal class CrewpaperUploadPdfParamsTest {
                 .classificationMarking("x")
                 .paperStatus(CrewpaperUploadPdfParams.PaperStatus.PUBLISHED)
                 .papersVersion("x")
-                .fileContent("some content")
+                .fileContent("Example data")
                 .build()
 
         val body = params._body().getOrNull()
 
-        assertThat(body).isEqualTo("some content")
+        assertThat(body).isEqualTo("Example data")
     }
 }

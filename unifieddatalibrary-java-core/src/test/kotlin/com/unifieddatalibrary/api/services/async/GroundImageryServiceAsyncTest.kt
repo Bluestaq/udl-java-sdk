@@ -245,7 +245,7 @@ internal class GroundImageryServiceAsyncTest {
         val future =
             groundImageryServiceAsync.uploadZip(
                 GroundImageryUploadZipParams.builder()
-                    .file("some content".byteInputStream())
+                    .file("Example data".byteInputStream())
                     .build()
             )
 

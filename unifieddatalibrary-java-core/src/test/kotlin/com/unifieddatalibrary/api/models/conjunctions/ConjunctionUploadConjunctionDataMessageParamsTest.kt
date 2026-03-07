@@ -17,7 +17,7 @@ internal class ConjunctionUploadConjunctionDataMessageParamsTest {
             .filename("filename")
             .source("source")
             .tags("tags")
-            .fileContent("some content")
+            .fileContent("Example data")
             .build()
     }
 
@@ -30,7 +30,7 @@ internal class ConjunctionUploadConjunctionDataMessageParamsTest {
                 .filename("filename")
                 .source("source")
                 .tags("tags")
-                .fileContent("some content")
+                .fileContent("Example data")
                 .build()
 
         val queryParams = params._queryParams()
@@ -55,7 +55,7 @@ internal class ConjunctionUploadConjunctionDataMessageParamsTest {
                 .dataMode(ConjunctionUploadConjunctionDataMessageParams.DataMode.REAL)
                 .filename("filename")
                 .source("source")
-                .fileContent("some content")
+                .fileContent("Example data")
                 .build()
 
         val queryParams = params._queryParams()
@@ -80,12 +80,12 @@ internal class ConjunctionUploadConjunctionDataMessageParamsTest {
                 .filename("filename")
                 .source("source")
                 .tags("tags")
-                .fileContent("some content")
+                .fileContent("Example data")
                 .build()
 
         val body = params._body().getOrNull()
 
-        assertThat(body).isEqualTo("some content")
+        assertThat(body).isEqualTo("Example data")
     }
 
     @Test
@@ -96,11 +96,11 @@ internal class ConjunctionUploadConjunctionDataMessageParamsTest {
                 .dataMode(ConjunctionUploadConjunctionDataMessageParams.DataMode.REAL)
                 .filename("filename")
                 .source("source")
-                .fileContent("some content")
+                .fileContent("Example data")
                 .build()
 
         val body = params._body().getOrNull()
 
-        assertThat(body).isEqualTo("some content")
+        assertThat(body).isEqualTo("Example data")
     }
 }
