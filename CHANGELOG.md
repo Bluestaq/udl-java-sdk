@@ -1,5 +1,51 @@
 # Changelog
 
+## 0.10.0 (2026-03-24)
+
+Full Changelog: [v0.9.0...v0.10.0](https://github.com/Bluestaq/udl-java-sdk/compare/v0.9.0...v0.10.0)
+
+### Features
+
+* **api:** api update ([0af180f](https://github.com/Bluestaq/udl-java-sdk/commit/0af180f257c5a92c12c0729c91f29464d5aabcbc))
+* **client:** add connection pooling option ([7b939f7](https://github.com/Bluestaq/udl-java-sdk/commit/7b939f7d22a5187f719c81fb219372eeda5fedc7))
+* **client:** add more convenience service method overloads ([b0758a6](https://github.com/Bluestaq/udl-java-sdk/commit/b0758a600ff302fc80a0a7cbe9c04175c6a0106d))
+
+
+### Bug Fixes
+
+* **client:** allow updating header/query affecting fields in `toBuilder()` ([d0244f2](https://github.com/Bluestaq/udl-java-sdk/commit/d0244f2664085848cf6a242d90a2c6434eb7d0b0))
+* **client:** incorrect `Retry-After` parsing ([034cce8](https://github.com/Bluestaq/udl-java-sdk/commit/034cce8dcf2f34ea4a08d9aa877bba133fc515af))
+* fix request delays for retrying to be more respectful of high requested delays ([897bba8](https://github.com/Bluestaq/udl-java-sdk/commit/897bba841cba5c7ed73cd4f62df565bdb9da989e))
+* set Accept header in more places ([4d4c745](https://github.com/Bluestaq/udl-java-sdk/commit/4d4c7455ff13aa6f960bd203692e7f759bc208ef))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([a685370](https://github.com/Bluestaq/udl-java-sdk/commit/a685370b94cba0d873c896341d84a505e6e11722))
+* **ci:** skip uploading artifacts on stainless-internal branches ([61bfb45](https://github.com/Bluestaq/udl-java-sdk/commit/61bfb45c688a9abf16dc54129e6992b758c29ca9))
+* **docs:** add missing descriptions ([f4e2dda](https://github.com/Bluestaq/udl-java-sdk/commit/f4e2dda2d37f6c61666e818fdfc092f343a672a4))
+* drop apache dependency ([a0465db](https://github.com/Bluestaq/udl-java-sdk/commit/a0465db781ea9894c82ce77bbbe544bf0fa40d26))
+* **internal:** bump palantir-java-format ([1842d24](https://github.com/Bluestaq/udl-java-sdk/commit/1842d24eb4d342bea2f6fdba60861fbc41b78b1b))
+* **internal:** codegen related update ([6ef30c4](https://github.com/Bluestaq/udl-java-sdk/commit/6ef30c4ce586d94436d7eca12adb567801caa8b1))
+* **internal:** expand imports ([fbfc05c](https://github.com/Bluestaq/udl-java-sdk/commit/fbfc05c9acbcfc92cadc795cd8492e04244a3572))
+* **internal:** make `OkHttp` constructor internal ([e0b317c](https://github.com/Bluestaq/udl-java-sdk/commit/e0b317c3a87f72030d851c83dc6310f72c1212b7))
+* **internal:** tweak CI branches ([0e70da3](https://github.com/Bluestaq/udl-java-sdk/commit/0e70da3e5206b375e9b4fb9f7f69e5ccc50496b6))
+* **internal:** update `TestServerExtension` comment ([9e98814](https://github.com/Bluestaq/udl-java-sdk/commit/9e98814df9bb81665e779b45313afa90ecc0acf5))
+* **internal:** update gitignore ([f68d8f1](https://github.com/Bluestaq/udl-java-sdk/commit/f68d8f15acb23144cb601f92b5e0bd27632aed8a))
+* **internal:** update retry delay tests ([5681216](https://github.com/Bluestaq/udl-java-sdk/commit/5681216d469571b0d8a991d40632519c7b9d5bcb))
+* make `Properties` more resilient to `null` ([41dc6fd](https://github.com/Bluestaq/udl-java-sdk/commit/41dc6fdb1730ed7448ccc195e7d07e83be556750))
+* **test:** do not count install time for mock server timeout ([8617949](https://github.com/Bluestaq/udl-java-sdk/commit/8617949fb602dcbfa4628291a662ba128af2314d))
+* **tests:** bump steady to v0.19.4 ([0ab5c9c](https://github.com/Bluestaq/udl-java-sdk/commit/0ab5c9cbd706eda232b82a4a621a6054f0d2a420))
+* **tests:** bump steady to v0.19.5 ([fe21900](https://github.com/Bluestaq/udl-java-sdk/commit/fe2190080430ccb997f22771d23351851717948c))
+* **tests:** bump steady to v0.19.6 ([cb8abff](https://github.com/Bluestaq/udl-java-sdk/commit/cb8abff6ac915febe7bcfbe7f5b097e0e9d1cdbe))
+* **tests:** bump steady to v0.19.7 ([9d440f0](https://github.com/Bluestaq/udl-java-sdk/commit/9d440f00cab58b88945c0cd1b6f688de00baa51c))
+* update placeholder string ([1f03089](https://github.com/Bluestaq/udl-java-sdk/commit/1f0308903eb073f33d7f503a7faff96bd4243a0f))
+
+
+### Refactors
+
+* **tests:** switch from prism to steady ([8914ccc](https://github.com/Bluestaq/udl-java-sdk/commit/8914cccd28ce04d0d9b54fd7ed944e566ec3038f))
+
 ## 0.9.0 (2026-02-06)
 
 Full Changelog: [v0.8.0...v0.9.0](https://github.com/Bluestaq/udl-java-sdk/compare/v0.8.0...v0.9.0)
