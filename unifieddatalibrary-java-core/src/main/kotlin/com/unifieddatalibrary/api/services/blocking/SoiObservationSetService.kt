@@ -21,6 +21,13 @@ import com.unifieddatalibrary.api.models.soiobservationset.history.SoiObservatio
 import com.unifieddatalibrary.api.services.blocking.soiobservationset.HistoryService
 import java.util.function.Consumer
 
+/**
+ * This collection of services provides operations for querying and manipulation of electro-optical
+ * (EO), radar, radio frequency (RF), Global Navigation Satellite Systems (GNSS), Ionospheric
+ * (IONO), Infrared (SWIR), and Space Environment observation data. The J2000 coordinate frame is
+ * the preferred frame for all observations, as applicable, but in some cases observations may be in
+ * an alternate frame depending on the provider and/or datatype.
+ */
 interface SoiObservationSetService {
 
     /**
@@ -35,6 +42,14 @@ interface SoiObservationSetService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): SoiObservationSetService
 
+    /**
+     * This collection of services provides operations for querying and manipulation of
+     * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+     * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+     * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+     * some cases observations may be in an alternate frame depending on the provider and/or
+     * datatype.
+     */
     fun history(): HistoryService
 
     /**
@@ -95,6 +110,16 @@ interface SoiObservationSetService {
         params: SoiObservationSetCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<SoiObservationSetCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(SoiObservationSetCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<SoiObservationSetCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to get a single SOIObservationSet by its unique ID passed as a path
@@ -184,6 +209,20 @@ interface SoiObservationSetService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<SoiObservationSetUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            SoiObservationSetUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<SoiObservationSetUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [SoiObservationSetService] that provides access to raw HTTP responses for each
      * method.
@@ -199,6 +238,14 @@ interface SoiObservationSetService {
             modifier: Consumer<ClientOptions.Builder>
         ): SoiObservationSetService.WithRawResponse
 
+        /**
+         * This collection of services provides operations for querying and manipulation of
+         * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+         * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+         * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+         * some cases observations may be in an alternate frame depending on the provider and/or
+         * datatype.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**
@@ -260,6 +307,22 @@ interface SoiObservationSetService {
             params: SoiObservationSetCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<SoiObservationSetCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(
+                SoiObservationSetCreateBulkParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<SoiObservationSetCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/soiobservationset/{id}`, but is otherwise the
@@ -364,5 +427,22 @@ interface SoiObservationSetService {
             params: SoiObservationSetUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<SoiObservationSetUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                SoiObservationSetUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<SoiObservationSetUnvalidatedPublishParams.Body>
+        ): HttpResponse = unvalidatedPublish(body, RequestOptions.none())
     }
 }

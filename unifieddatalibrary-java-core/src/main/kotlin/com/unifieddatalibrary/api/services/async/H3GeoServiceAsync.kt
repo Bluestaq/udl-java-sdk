@@ -20,6 +20,11 @@ import com.unifieddatalibrary.api.services.async.h3geo.HistoryServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of Report and Activity
+ * information. This information includes analytic reports, significant events, route statistics,
+ * EMI Reports, and other georeferenced reports and activities.
+ */
 interface H3GeoServiceAsync {
 
     /**
@@ -34,6 +39,11 @@ interface H3GeoServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): H3GeoServiceAsync
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -166,6 +176,11 @@ interface H3GeoServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): H3GeoServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**

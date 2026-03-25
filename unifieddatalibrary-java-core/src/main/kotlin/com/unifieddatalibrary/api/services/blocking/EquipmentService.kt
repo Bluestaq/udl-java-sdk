@@ -21,6 +21,10 @@ import com.unifieddatalibrary.api.models.equipment.EquipmentTupleParams
 import com.unifieddatalibrary.api.models.equipment.EquipmentUpdateParams
 import java.util.function.Consumer
 
+/**
+ * This collection of services provide operations for manipulating and querying of equipment related
+ * data.
+ */
 interface EquipmentService {
 
     /**
@@ -193,6 +197,16 @@ interface EquipmentService {
         params: EquipmentCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<EquipmentCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(EquipmentCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<EquipmentCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -429,6 +443,19 @@ interface EquipmentService {
             params: EquipmentCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<EquipmentCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(EquipmentCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<EquipmentCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/equipment/queryhelp`, but is otherwise the same

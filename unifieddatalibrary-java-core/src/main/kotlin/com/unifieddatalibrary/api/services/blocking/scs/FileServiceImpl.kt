@@ -23,6 +23,11 @@ import com.unifieddatalibrary.api.models.scs.file.FileRetrieveParams
 import com.unifieddatalibrary.api.models.scs.file.FileUpdateParams
 import java.util.function.Consumer
 
+/**
+ * These services provide soon-to-be-deprecated CRUD and Search operations for files and folders in
+ * the Secure Content Store. This documentation is provided only for backwards compatibility, please
+ * refer to SCS V2 for new SCS integrations.
+ */
 class FileServiceImpl internal constructor(private val clientOptions: ClientOptions) : FileService {
 
     private val withRawResponse: FileService.WithRawResponse by lazy {

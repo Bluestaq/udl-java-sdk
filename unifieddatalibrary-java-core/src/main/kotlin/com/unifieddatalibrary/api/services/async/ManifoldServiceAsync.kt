@@ -22,6 +22,10 @@ import com.unifieddatalibrary.api.models.manifold.ManifoldUpdateParams
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit objects of interest,
+ * their components, and various lists and status of those objects.
+ */
 interface ManifoldServiceAsync {
 
     /**
@@ -170,6 +174,17 @@ interface ManifoldServiceAsync {
         params: ManifoldCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<ManifoldCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(ManifoldCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<ManifoldCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to get a single Manifold record by its unique ID passed as a path
@@ -391,6 +406,17 @@ interface ManifoldServiceAsync {
             params: ManifoldCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<ManifoldCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(ManifoldCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(body: List<ManifoldCreateBulkParams.Body>): CompletableFuture<HttpResponse> =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/manifold/{id}`, but is otherwise the same as

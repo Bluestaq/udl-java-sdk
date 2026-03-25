@@ -22,6 +22,10 @@ import com.unifieddatalibrary.api.models.surfaceobstruction.SurfaceObstructionUp
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * This collection of services provide operations for manipulating and querying of various site
+ * related data, including site status, site operations, and site type-specific records.
+ */
 interface SurfaceObstructionServiceAsync {
 
     /**
@@ -255,6 +259,21 @@ interface SurfaceObstructionServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<SurfaceObstructionUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            SurfaceObstructionUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<SurfaceObstructionUnvalidatedPublishParams.Body>
+    ): CompletableFuture<Void?> = unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [SurfaceObstructionServiceAsync] that provides access to raw HTTP responses for
      * each method.
@@ -486,5 +505,20 @@ interface SurfaceObstructionServiceAsync {
             params: SurfaceObstructionUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<SurfaceObstructionUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                SurfaceObstructionUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<SurfaceObstructionUnvalidatedPublishParams.Body>
+        ): CompletableFuture<HttpResponse> = unvalidatedPublish(body, RequestOptions.none())
     }
 }

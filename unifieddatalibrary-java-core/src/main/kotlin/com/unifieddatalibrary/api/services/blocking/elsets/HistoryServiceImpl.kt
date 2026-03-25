@@ -23,6 +23,12 @@ import com.unifieddatalibrary.api.models.elsets.history.HistoryListPage
 import com.unifieddatalibrary.api.models.elsets.history.HistoryListParams
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for querying and manipulation of element set data describing
+ * orbital characteristics of on-orbit objects. An element set is a collection of parameters that
+ * are used, along with an orbit propagator, to predict the motion of a satellite. The element set,
+ * or elset for short, consists of identification data, the classical elements and drag parameters.
+ */
 class HistoryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryService {
 
@@ -123,6 +129,7 @@ class HistoryServiceImpl internal constructor(private val clientOptions: ClientO
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "elset", "history", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

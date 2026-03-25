@@ -34,6 +34,10 @@ import com.unifieddatalibrary.api.models.onorbitevent.OnorbiteventUpdateParams
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit objects of interest,
+ * their components, and various lists and status of those objects.
+ */
 class OnorbiteventServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     OnorbiteventService {
 
@@ -220,6 +224,7 @@ class OnorbiteventServiceImpl internal constructor(private val clientOptions: Cl
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "onorbitevent", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

@@ -21,6 +21,14 @@ import com.unifieddatalibrary.api.services.async.linkstatus.HistoryServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying tactical data links and link
+ * statuses of beams or a satellite constellation. Communication link statuses provide definitions
+ * and status such as, positional endpoints, where each endpoint may be associated with a specific
+ * beam or with a satellite constellation. Data links provide detailed instructions regarding the
+ * operational use of a tactical data link and interface coordination through various message
+ * formats.
+ */
 interface LinkStatusServiceAsync {
 
     /**
@@ -35,8 +43,24 @@ interface LinkStatusServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): LinkStatusServiceAsync
 
+    /**
+     * These services provide operations for manipulation and querying tactical data links and link
+     * statuses of beams or a satellite constellation. Communication link statuses provide
+     * definitions and status such as, positional endpoints, where each endpoint may be associated
+     * with a specific beam or with a satellite constellation. Data links provide detailed
+     * instructions regarding the operational use of a tactical data link and interface coordination
+     * through various message formats.
+     */
     fun datalink(): DatalinkServiceAsync
 
+    /**
+     * These services provide operations for manipulation and querying tactical data links and link
+     * statuses of beams or a satellite constellation. Communication link statuses provide
+     * definitions and status such as, positional endpoints, where each endpoint may be associated
+     * with a specific beam or with a satellite constellation. Data links provide detailed
+     * instructions regarding the operational use of a tactical data link and interface coordination
+     * through various message formats.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -189,8 +213,24 @@ interface LinkStatusServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): LinkStatusServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying tactical data links and
+         * link statuses of beams or a satellite constellation. Communication link statuses provide
+         * definitions and status such as, positional endpoints, where each endpoint may be
+         * associated with a specific beam or with a satellite constellation. Data links provide
+         * detailed instructions regarding the operational use of a tactical data link and interface
+         * coordination through various message formats.
+         */
         fun datalink(): DatalinkServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying tactical data links and
+         * link statuses of beams or a satellite constellation. Communication link statuses provide
+         * definitions and status such as, positional endpoints, where each endpoint may be
+         * associated with a specific beam or with a satellite constellation. Data links provide
+         * detailed instructions regarding the operational use of a tactical data link and interface
+         * coordination through various message formats.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**

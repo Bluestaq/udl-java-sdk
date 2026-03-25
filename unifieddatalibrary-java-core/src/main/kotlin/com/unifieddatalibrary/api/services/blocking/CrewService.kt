@@ -20,6 +20,10 @@ import com.unifieddatalibrary.api.models.crew.CrewUnvalidatedPublishParams
 import com.unifieddatalibrary.api.models.crew.CrewUpdateParams
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for posting and querying crew data. Crew data contains
+ * information about its members and their assignments.
+ */
 interface CrewService {
 
     /**
@@ -187,6 +191,20 @@ interface CrewService {
         params: CrewUnvalidatedPublishParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<CrewUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            CrewUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<CrewUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
 
     /** A view of [CrewService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -380,5 +398,21 @@ interface CrewService {
             params: CrewUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<CrewUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                CrewUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(body: List<CrewUnvalidatedPublishParams.Body>): HttpResponse =
+            unvalidatedPublish(body, RequestOptions.none())
     }
 }

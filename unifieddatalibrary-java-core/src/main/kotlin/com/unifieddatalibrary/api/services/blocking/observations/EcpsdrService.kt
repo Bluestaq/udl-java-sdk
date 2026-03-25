@@ -20,6 +20,13 @@ import com.unifieddatalibrary.api.models.observations.ecpsdr.EcpsdrTupleParams
 import com.unifieddatalibrary.api.models.observations.ecpsdr.EcpsdrUnvalidatedPublishParams
 import java.util.function.Consumer
 
+/**
+ * This collection of services provides operations for querying and manipulation of electro-optical
+ * (EO), radar, radio frequency (RF), Global Navigation Satellite Systems (GNSS), Ionospheric
+ * (IONO), Infrared (SWIR), and Space Environment observation data. The J2000 coordinate frame is
+ * the preferred frame for all observations, as applicable, but in some cases observations may be in
+ * an alternate frame depending on the provider and/or datatype.
+ */
 interface EcpsdrService {
 
     /**
@@ -113,6 +120,16 @@ interface EcpsdrService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<EcpsdrCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(EcpsdrCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<EcpsdrCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
      * particular data type.
@@ -164,6 +181,20 @@ interface EcpsdrService {
         params: EcpsdrUnvalidatedPublishParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<EcpsdrUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            EcpsdrUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<EcpsdrUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
 
     /** A view of [EcpsdrService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -274,6 +305,19 @@ interface EcpsdrService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
 
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<EcpsdrCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(EcpsdrCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<EcpsdrCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `get /udl/ecpsdr/queryhelp`, but is otherwise the same as
          * [EcpsdrService.queryHelp].
@@ -329,5 +373,21 @@ interface EcpsdrService {
             params: EcpsdrUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<EcpsdrUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                EcpsdrUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(body: List<EcpsdrUnvalidatedPublishParams.Body>): HttpResponse =
+            unvalidatedPublish(body, RequestOptions.none())
     }
 }

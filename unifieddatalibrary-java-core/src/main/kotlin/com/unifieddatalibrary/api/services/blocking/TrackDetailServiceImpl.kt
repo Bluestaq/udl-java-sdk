@@ -30,6 +30,10 @@ import com.unifieddatalibrary.api.services.blocking.trackdetails.HistoryService
 import com.unifieddatalibrary.api.services.blocking.trackdetails.HistoryServiceImpl
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for posting and querying of air, space, and ground 'tracks'. A
+ * track is a position and optionally a heading/velocity of an object at a particular timestamp.
+ */
 class TrackDetailServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     TrackDetailService {
 
@@ -44,6 +48,11 @@ class TrackDetailServiceImpl internal constructor(private val clientOptions: Cli
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): TrackDetailService =
         TrackDetailServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for posting and querying of air, space, and ground
+     * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+     * particular timestamp.
+     */
     override fun history(): HistoryService = history
 
     override fun list(
@@ -93,6 +102,11 @@ class TrackDetailServiceImpl internal constructor(private val clientOptions: Cli
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for posting and querying of air, space, and ground
+         * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+         * particular timestamp.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val listHandler: Handler<List<TrackDetailListResponse>> =
@@ -140,6 +154,7 @@ class TrackDetailServiceImpl internal constructor(private val clientOptions: Cli
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "trackdetails", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

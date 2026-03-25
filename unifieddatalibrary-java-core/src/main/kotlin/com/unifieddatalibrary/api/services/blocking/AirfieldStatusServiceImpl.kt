@@ -35,6 +35,10 @@ import com.unifieddatalibrary.api.services.blocking.airfieldstatus.HistoryServic
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This collection of services provide operations for manipulating and querying of various site
+ * related data, including site status, site operations, and site type-specific records.
+ */
 class AirfieldStatusServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     AirfieldStatusService {
 
@@ -49,6 +53,10 @@ class AirfieldStatusServiceImpl internal constructor(private val clientOptions: 
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): AirfieldStatusService =
         AirfieldStatusServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * This collection of services provide operations for manipulating and querying of various site
+     * related data, including site status, site operations, and site type-specific records.
+     */
     override fun history(): HistoryService = history
 
     override fun create(params: AirfieldStatusCreateParams, requestOptions: RequestOptions) {
@@ -115,6 +123,11 @@ class AirfieldStatusServiceImpl internal constructor(private val clientOptions: 
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * This collection of services provide operations for manipulating and querying of various
+         * site related data, including site status, site operations, and site type-specific
+         * records.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -261,6 +274,7 @@ class AirfieldStatusServiceImpl internal constructor(private val clientOptions: 
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "airfieldstatus", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

@@ -33,6 +33,11 @@ import com.unifieddatalibrary.api.models.substatus.SubstatusUpdateParams
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * Service operations for querying and manipulation of miscellaneous supporting data such as
+ * countries (which can represent countries, multi-national consortiums, and international
+ * organizations), data owners, locations, entities, organizations, etc.
+ */
 class SubstatusServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     SubstatusService {
 
@@ -216,6 +221,7 @@ class SubstatusServiceImpl internal constructor(private val clientOptions: Clien
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "substatus", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

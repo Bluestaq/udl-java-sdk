@@ -24,6 +24,11 @@ import com.unifieddatalibrary.api.models.laserdeconflictrequest.history.HistoryL
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * This collection of services provides operations for querying and manipulation of laser related
+ * information to include the laser emitters, the laser deconflict requests, and laser deconflict
+ * responses.
+ */
 class HistoryServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryServiceAsync {
 
@@ -142,6 +147,7 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "laserdeconflictrequest", "history", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

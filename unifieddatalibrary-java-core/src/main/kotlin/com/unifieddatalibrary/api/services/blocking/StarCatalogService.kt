@@ -24,6 +24,13 @@ import com.unifieddatalibrary.api.models.starcatalog.StarCatalogUpdateParams
 import com.unifieddatalibrary.api.services.blocking.starcatalog.HistoryService
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for posting and querying Star Catalog data. The Star Catalog
+ * model is a representation of astronomical data and photometric data for stars. Astronomical data
+ * includes positional information, proper motions, parallaxes and their respective uncertainties.
+ * Photometric data contains optical and near-infrared magnitudes, and their uncertainties across
+ * multiple bandpasses. Note: Multiple source catalogs may contribute to a single record.
+ */
 interface StarCatalogService {
 
     /**
@@ -38,6 +45,14 @@ interface StarCatalogService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): StarCatalogService
 
+    /**
+     * These services provide operations for posting and querying Star Catalog data. The Star
+     * Catalog model is a representation of astronomical data and photometric data for stars.
+     * Astronomical data includes positional information, proper motions, parallaxes and their
+     * respective uncertainties. Photometric data contains optical and near-infrared magnitudes, and
+     * their uncertainties across multiple bandpasses. Note: Multiple source catalogs may contribute
+     * to a single record.
+     */
     fun history(): HistoryService
 
     /**
@@ -166,6 +181,16 @@ interface StarCatalogService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<StarCatalogCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(StarCatalogCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<StarCatalogCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to get a single StarCatalog record by its unique ID passed as a path
      * parameter.
@@ -252,6 +277,20 @@ interface StarCatalogService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<StarCatalogUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            StarCatalogUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<StarCatalogUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [StarCatalogService] that provides access to raw HTTP responses for each method.
      */
@@ -266,6 +305,14 @@ interface StarCatalogService {
             modifier: Consumer<ClientOptions.Builder>
         ): StarCatalogService.WithRawResponse
 
+        /**
+         * These services provide operations for posting and querying Star Catalog data. The Star
+         * Catalog model is a representation of astronomical data and photometric data for stars.
+         * Astronomical data includes positional information, proper motions, parallaxes and their
+         * respective uncertainties. Photometric data contains optical and near-infrared magnitudes,
+         * and their uncertainties across multiple bandpasses. Note: Multiple source catalogs may
+         * contribute to a single record.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**
@@ -414,6 +461,19 @@ interface StarCatalogService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
 
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<StarCatalogCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(StarCatalogCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<StarCatalogCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `get /udl/starcatalog/{id}`, but is otherwise the same as
          * [StarCatalogService.get].
@@ -515,5 +575,21 @@ interface StarCatalogService {
             params: StarCatalogUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<StarCatalogUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                StarCatalogUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(body: List<StarCatalogUnvalidatedPublishParams.Body>): HttpResponse =
+            unvalidatedPublish(body, RequestOptions.none())
     }
 }

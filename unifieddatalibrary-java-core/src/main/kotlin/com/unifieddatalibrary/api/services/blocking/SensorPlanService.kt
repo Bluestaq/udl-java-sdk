@@ -22,6 +22,7 @@ import com.unifieddatalibrary.api.models.sensorplan.SensorPlanUpdateParams
 import com.unifieddatalibrary.api.services.blocking.sensorplan.HistoryService
 import java.util.function.Consumer
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 interface SensorPlanService {
 
     /**
@@ -36,6 +37,7 @@ interface SensorPlanService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): SensorPlanService
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     fun history(): HistoryService
 
     /**
@@ -184,6 +186,20 @@ interface SensorPlanService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<SensorPlanUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            SensorPlanUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<SensorPlanUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /** A view of [SensorPlanService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
@@ -196,6 +212,7 @@ interface SensorPlanService {
             modifier: Consumer<ClientOptions.Builder>
         ): SensorPlanService.WithRawResponse
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         fun history(): HistoryService.WithRawResponse
 
         /**
@@ -372,5 +389,21 @@ interface SensorPlanService {
             params: SensorPlanUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<SensorPlanUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                SensorPlanUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(body: List<SensorPlanUnvalidatedPublishParams.Body>): HttpResponse =
+            unvalidatedPublish(body, RequestOptions.none())
     }
 }

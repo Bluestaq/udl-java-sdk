@@ -21,6 +21,7 @@ import com.unifieddatalibrary.api.services.async.collectrequests.HistoryServiceA
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 interface CollectRequestServiceAsync {
 
     /**
@@ -35,6 +36,7 @@ interface CollectRequestServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): CollectRequestServiceAsync
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     fun history(): HistoryServiceAsync
 
     /**
@@ -134,6 +136,17 @@ interface CollectRequestServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<CollectRequestCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(CollectRequestCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<CollectRequestCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
      * particular data type.
@@ -191,6 +204,21 @@ interface CollectRequestServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<CollectRequestUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            CollectRequestUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<CollectRequestUnvalidatedPublishParams.Body>
+    ): CompletableFuture<Void?> = unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [CollectRequestServiceAsync] that provides access to raw HTTP responses for each
      * method.
@@ -206,6 +234,7 @@ interface CollectRequestServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): CollectRequestServiceAsync.WithRawResponse
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**
@@ -303,6 +332,18 @@ interface CollectRequestServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
 
+        /** @see createBulk */
+        fun createBulk(
+            body: List<CollectRequestCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(CollectRequestCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<CollectRequestCreateBulkParams.Body>
+        ): CompletableFuture<HttpResponse> = createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `get /udl/collectrequest/queryhelp`, but is otherwise the
          * same as [CollectRequestServiceAsync.queryHelp].
@@ -356,5 +397,20 @@ interface CollectRequestServiceAsync {
             params: CollectRequestUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<CollectRequestUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                CollectRequestUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<CollectRequestUnvalidatedPublishParams.Body>
+        ): CompletableFuture<HttpResponse> = unvalidatedPublish(body, RequestOptions.none())
     }
 }

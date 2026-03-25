@@ -21,6 +21,11 @@ import com.unifieddatalibrary.api.models.hazard.HazardTupleResponse
 import com.unifieddatalibrary.api.services.blocking.hazard.HistoryService
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of Report and Activity
+ * information. This information includes analytic reports, significant events, route statistics,
+ * EMI Reports, and other georeferenced reports and activities.
+ */
 interface HazardService {
 
     /**
@@ -35,6 +40,11 @@ interface HazardService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): HazardService
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     fun history(): HistoryService
 
     /**
@@ -89,6 +99,16 @@ interface HazardService {
         params: HazardCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<HazardCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(HazardCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<HazardCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
 
     /** Service operation to get a single Hazard by its unique ID passed as a path parameter. */
     fun get(id: String): HazardGetResponse = get(id, HazardGetParams.none())
@@ -166,6 +186,11 @@ interface HazardService {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): HazardService.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**
@@ -226,6 +251,19 @@ interface HazardService {
             params: HazardCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<HazardCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(HazardCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<HazardCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/hazard/{id}`, but is otherwise the same as

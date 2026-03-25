@@ -38,6 +38,12 @@ import com.unifieddatalibrary.api.services.blocking.rfemitter.StagingServiceImpl
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This collection of services provides operations for querying and manipulation of RF related
+ * information to include RFEmitters which could potentially interfere with
+ * communications/operations of space related entities, and RFBands commonly used by various space
+ * related entities.
+ */
 class RfEmitterServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     RfEmitterService {
 
@@ -54,8 +60,20 @@ class RfEmitterServiceImpl internal constructor(private val clientOptions: Clien
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): RfEmitterService =
         RfEmitterServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * This collection of services provides operations for querying and manipulation of RF related
+     * information to include RFEmitters which could potentially interfere with
+     * communications/operations of space related entities, and RFBands commonly used by various
+     * space related entities.
+     */
     override fun staging(): StagingService = staging
 
+    /**
+     * This collection of services provides operations for querying and manipulation of RF related
+     * information to include RFEmitters which could potentially interfere with
+     * communications/operations of space related entities, and RFBands commonly used by various
+     * space related entities.
+     */
     override fun details(): DetailService = details
 
     override fun create(params: RfEmitterCreateParams, requestOptions: RequestOptions) {
@@ -126,8 +144,20 @@ class RfEmitterServiceImpl internal constructor(private val clientOptions: Clien
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * This collection of services provides operations for querying and manipulation of RF
+         * related information to include RFEmitters which could potentially interfere with
+         * communications/operations of space related entities, and RFBands commonly used by various
+         * space related entities.
+         */
         override fun staging(): StagingService.WithRawResponse = staging
 
+        /**
+         * This collection of services provides operations for querying and manipulation of RF
+         * related information to include RFEmitters which could potentially interfere with
+         * communications/operations of space related entities, and RFBands commonly used by various
+         * space related entities.
+         */
         override fun details(): DetailService.WithRawResponse = details
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -244,6 +274,7 @@ class RfEmitterServiceImpl internal constructor(private val clientOptions: Clien
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "rfemitter", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

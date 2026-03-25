@@ -22,6 +22,11 @@ import com.unifieddatalibrary.api.models.emireport.EmireportUnvalidatedPublishPa
 import com.unifieddatalibrary.api.services.blocking.emireport.HistoryService
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of Report and Activity
+ * information. This information includes analytic reports, significant events, route statistics,
+ * EMI Reports, and other georeferenced reports and activities.
+ */
 interface EmireportService {
 
     /**
@@ -36,6 +41,11 @@ interface EmireportService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): EmireportService
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     fun history(): HistoryService
 
     /**
@@ -93,6 +103,16 @@ interface EmireportService {
         params: EmireportCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<EmireportCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(EmireportCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<EmireportCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to get a single EMIReport record by its unique ID passed as a path
@@ -179,6 +199,20 @@ interface EmireportService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<EmireportUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            EmireportUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<EmireportUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /** A view of [EmireportService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
@@ -189,6 +223,11 @@ interface EmireportService {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): EmireportService.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**
@@ -250,6 +289,19 @@ interface EmireportService {
             params: EmireportCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<EmireportCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(EmireportCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<EmireportCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/emireport/{id}`, but is otherwise the same as
@@ -347,5 +399,21 @@ interface EmireportService {
             params: EmireportUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<EmireportUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                EmireportUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(body: List<EmireportUnvalidatedPublishParams.Body>): HttpResponse =
+            unvalidatedPublish(body, RequestOptions.none())
     }
 }

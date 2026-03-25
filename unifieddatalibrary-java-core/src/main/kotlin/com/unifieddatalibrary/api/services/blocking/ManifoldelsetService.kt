@@ -22,6 +22,10 @@ import com.unifieddatalibrary.api.models.manifoldelset.ManifoldelsetTupleRespons
 import com.unifieddatalibrary.api.models.manifoldelset.ManifoldelsetUpdateParams
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit objects of interest,
+ * their components, and various lists and status of those objects.
+ */
 interface ManifoldelsetService {
 
     /**
@@ -151,6 +155,16 @@ interface ManifoldelsetService {
         params: ManifoldelsetCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<ManifoldelsetCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(ManifoldelsetCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<ManifoldelsetCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to get a single ManifoldElset record by its unique ID passed as a path
@@ -366,6 +380,19 @@ interface ManifoldelsetService {
             params: ManifoldelsetCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<ManifoldelsetCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(ManifoldelsetCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<ManifoldelsetCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/manifoldelset/{id}`, but is otherwise the same

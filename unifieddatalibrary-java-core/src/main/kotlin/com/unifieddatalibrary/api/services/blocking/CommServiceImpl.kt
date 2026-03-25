@@ -33,6 +33,10 @@ import com.unifieddatalibrary.api.models.comm.CommUpdateParams
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit communications
+ * payloads (Comm), including supporting data such as transponders and channels, etc.
+ */
 class CommServiceImpl internal constructor(private val clientOptions: ClientOptions) : CommService {
 
     private val withRawResponse: CommService.WithRawResponse by lazy {
@@ -239,6 +243,7 @@ class CommServiceImpl internal constructor(private val clientOptions: ClientOpti
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "comm", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

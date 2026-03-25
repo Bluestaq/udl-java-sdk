@@ -38,6 +38,12 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for manipulation and querying of mission assignment objects.
+ * MissionAssignment is used by C2 JUs and, optionally, non-C2 JUs to assign missions, designate
+ * targets, and provide target information to non-C2 JU platforms. Provision is made for the non-C2
+ * JU platforms to acknowledge the message through receipt/compliance action.
+ */
 class MissionAssignmentServiceAsyncImpl
 internal constructor(private val clientOptions: ClientOptions) : MissionAssignmentServiceAsync {
 
@@ -54,6 +60,12 @@ internal constructor(private val clientOptions: ClientOptions) : MissionAssignme
     ): MissionAssignmentServiceAsync =
         MissionAssignmentServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for manipulation and querying of mission assignment
+     * objects. MissionAssignment is used by C2 JUs and, optionally, non-C2 JUs to assign missions,
+     * designate targets, and provide target information to non-C2 JU platforms. Provision is made
+     * for the non-C2 JU platforms to acknowledge the message through receipt/compliance action.
+     */
     override fun history(): HistoryServiceAsync = history
 
     override fun create(
@@ -136,6 +148,13 @@ internal constructor(private val clientOptions: ClientOptions) : MissionAssignme
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for manipulation and querying of mission assignment
+         * objects. MissionAssignment is used by C2 JUs and, optionally, non-C2 JUs to assign
+         * missions, designate targets, and provide target information to non-C2 JU platforms.
+         * Provision is made for the non-C2 JU platforms to acknowledge the message through
+         * receipt/compliance action.
+         */
         override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -265,6 +284,7 @@ internal constructor(private val clientOptions: ClientOptions) : MissionAssignme
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "missionassignment", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

@@ -19,6 +19,10 @@ import com.unifieddatalibrary.api.services.async.track.HistoryServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for posting and querying of air, space, and ground 'tracks'. A
+ * track is a position and optionally a heading/velocity of an object at a particular timestamp.
+ */
 interface TrackServiceAsync {
 
     /**
@@ -33,6 +37,11 @@ interface TrackServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): TrackServiceAsync
 
+    /**
+     * These services provide operations for posting and querying of air, space, and ground
+     * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+     * particular timestamp.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -80,6 +89,17 @@ interface TrackServiceAsync {
         params: TrackCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<TrackCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(TrackCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<TrackCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -135,6 +155,21 @@ interface TrackServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<TrackUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            TrackUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<TrackUnvalidatedPublishParams.Body>
+    ): CompletableFuture<Void?> = unvalidatedPublish(body, RequestOptions.none())
+
     /** A view of [TrackServiceAsync] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
@@ -147,6 +182,11 @@ interface TrackServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): TrackServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for posting and querying of air, space, and ground
+         * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+         * particular timestamp.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**
@@ -187,6 +227,17 @@ interface TrackServiceAsync {
             params: TrackCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<TrackCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(TrackCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(body: List<TrackCreateBulkParams.Body>): CompletableFuture<HttpResponse> =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/track/queryhelp`, but is otherwise the same as
@@ -239,5 +290,20 @@ interface TrackServiceAsync {
             params: TrackUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<TrackUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                TrackUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<TrackUnvalidatedPublishParams.Body>
+        ): CompletableFuture<HttpResponse> = unvalidatedPublish(body, RequestOptions.none())
     }
 }

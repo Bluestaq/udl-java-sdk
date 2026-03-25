@@ -21,6 +21,15 @@ import com.unifieddatalibrary.api.models.weatherdata.history.WeatherDataFull
 import com.unifieddatalibrary.api.services.blocking.weatherdata.HistoryService
 import java.util.function.Consumer
 
+/**
+ * These services provide for posting and querying terrestrial weather conditions over a target area
+ * or region and raw sensor data used to produce condition reports. Weather Reports describe current
+ * weather conditions over a target point or region to include general temperatures, pressures, and
+ * moisture accumulation, as well as navigational considerations such as altimeter settings,
+ * visibility, wind speeds, and cloud heights etc. Weather Data contains algorithmic parameters and
+ * dynamic, raw measurements collected by individual sensors such as signal power, noise level,
+ * etc., which are generally processed across multiple sensors to produce weather reports.
+ */
 interface WeatherDataService {
 
     /**
@@ -35,6 +44,16 @@ interface WeatherDataService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): WeatherDataService
 
+    /**
+     * These services provide for posting and querying terrestrial weather conditions over a target
+     * area or region and raw sensor data used to produce condition reports. Weather Reports
+     * describe current weather conditions over a target point or region to include general
+     * temperatures, pressures, and moisture accumulation, as well as navigational considerations
+     * such as altimeter settings, visibility, wind speeds, and cloud heights etc. Weather Data
+     * contains algorithmic parameters and dynamic, raw measurements collected by individual sensors
+     * such as signal power, noise level, etc., which are generally processed across multiple
+     * sensors to produce weather reports.
+     */
     fun history(): HistoryService
 
     /**
@@ -91,6 +110,16 @@ interface WeatherDataService {
         params: WeatherDataCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<WeatherDataCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(WeatherDataCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<WeatherDataCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to get a single WeatherData by its unique ID passed as a path parameter.
@@ -176,6 +205,20 @@ interface WeatherDataService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<WeatherDataUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            WeatherDataUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<WeatherDataUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [WeatherDataService] that provides access to raw HTTP responses for each method.
      */
@@ -190,6 +233,16 @@ interface WeatherDataService {
             modifier: Consumer<ClientOptions.Builder>
         ): WeatherDataService.WithRawResponse
 
+        /**
+         * These services provide for posting and querying terrestrial weather conditions over a
+         * target area or region and raw sensor data used to produce condition reports. Weather
+         * Reports describe current weather conditions over a target point or region to include
+         * general temperatures, pressures, and moisture accumulation, as well as navigational
+         * considerations such as altimeter settings, visibility, wind speeds, and cloud heights
+         * etc. Weather Data contains algorithmic parameters and dynamic, raw measurements collected
+         * by individual sensors such as signal power, noise level, etc., which are generally
+         * processed across multiple sensors to produce weather reports.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**
@@ -251,6 +304,19 @@ interface WeatherDataService {
             params: WeatherDataCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<WeatherDataCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(WeatherDataCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<WeatherDataCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/weatherdata/{id}`, but is otherwise the same as
@@ -348,5 +414,21 @@ interface WeatherDataService {
             params: WeatherDataUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<WeatherDataUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                WeatherDataUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(body: List<WeatherDataUnvalidatedPublishParams.Body>): HttpResponse =
+            unvalidatedPublish(body, RequestOptions.none())
     }
 }

@@ -19,6 +19,11 @@ import com.unifieddatalibrary.api.models.laseremitter.staging.StagingRetrieveRes
 import com.unifieddatalibrary.api.models.laseremitter.staging.StagingUpdateParams
 import java.util.function.Consumer
 
+/**
+ * This collection of services provides operations for querying and manipulation of laser related
+ * information to include the laser emitters, the laser deconflict requests, and laser deconflict
+ * responses.
+ */
 interface StagingService {
 
     /**
@@ -163,6 +168,16 @@ interface StagingService {
         params: StagingCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<StagingCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(StagingCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<StagingCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -358,6 +373,19 @@ interface StagingService {
             params: StagingCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<StagingCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(StagingCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<StagingCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/laseremitterstaging/queryhelp`, but is

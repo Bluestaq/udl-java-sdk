@@ -19,6 +19,14 @@ import com.unifieddatalibrary.api.models.linkstatus.datalink.DatalinkUnvalidated
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying tactical data links and link
+ * statuses of beams or a satellite constellation. Communication link statuses provide definitions
+ * and status such as, positional endpoints, where each endpoint may be associated with a specific
+ * beam or with a satellite constellation. Data links provide detailed instructions regarding the
+ * operational use of a tactical data link and interface coordination through various message
+ * formats.
+ */
 interface DatalinkServiceAsync {
 
     /**
@@ -145,6 +153,20 @@ interface DatalinkServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<DatalinkIngest>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            DatalinkUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<DatalinkIngest>): CompletableFuture<Void?> =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [DatalinkServiceAsync] that provides access to raw HTTP responses for each method.
      */
@@ -267,5 +289,19 @@ interface DatalinkServiceAsync {
             params: DatalinkUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<DatalinkIngest>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                DatalinkUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(body: List<DatalinkIngest>): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(body, RequestOptions.none())
     }
 }

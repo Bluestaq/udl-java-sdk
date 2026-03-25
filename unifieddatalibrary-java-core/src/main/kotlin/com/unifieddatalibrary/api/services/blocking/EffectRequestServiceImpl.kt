@@ -36,6 +36,7 @@ import com.unifieddatalibrary.api.services.blocking.effectrequests.HistoryServic
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/** These services provide operations for manipulation and querying of Mission Ops information. */
 class EffectRequestServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     EffectRequestService {
 
@@ -50,6 +51,9 @@ class EffectRequestServiceImpl internal constructor(private val clientOptions: C
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): EffectRequestService =
         EffectRequestServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     override fun history(): HistoryService = history
 
     override fun create(params: EffectRequestCreateParams, requestOptions: RequestOptions) {
@@ -119,6 +123,10 @@ class EffectRequestServiceImpl internal constructor(private val clientOptions: C
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -217,6 +225,7 @@ class EffectRequestServiceImpl internal constructor(private val clientOptions: C
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "effectrequest", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

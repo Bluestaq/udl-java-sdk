@@ -35,6 +35,11 @@ import com.unifieddatalibrary.api.services.blocking.eventevolution.HistoryServic
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for manipulation and querying of Report and Activity
+ * information. This information includes analytic reports, significant events, route statistics,
+ * EMI Reports, and other georeferenced reports and activities.
+ */
 class EventEvolutionServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     EventEvolutionService {
 
@@ -49,6 +54,11 @@ class EventEvolutionServiceImpl internal constructor(private val clientOptions: 
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): EventEvolutionService =
         EventEvolutionServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     override fun history(): HistoryService = history
 
     override fun create(params: EventEvolutionCreateParams, requestOptions: RequestOptions) {
@@ -121,6 +131,11 @@ class EventEvolutionServiceImpl internal constructor(private val clientOptions: 
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -219,6 +234,7 @@ class EventEvolutionServiceImpl internal constructor(private val clientOptions: 
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "eventevolution", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

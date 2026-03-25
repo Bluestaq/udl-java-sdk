@@ -22,6 +22,13 @@ import com.unifieddatalibrary.api.models.aircraftstatuses.history.HistoryListPar
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * This service provides operations for manipulation and querying of Aircraft and Aircraft Status
+ * data. Aircraft contains the static data of the specific aircraft: tail number, cruise speed, max
+ * speed, minimum required runway length, etc. The Aircraft Status contains the dynamic data
+ * associated with the specific aircraft: remaining fuel, mission readiness, and inventory for
+ * example.
+ */
 class HistoryServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryServiceAsync {
 
@@ -110,6 +117,7 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "aircraftstatus", "history", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

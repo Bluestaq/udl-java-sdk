@@ -21,6 +21,10 @@ import com.unifieddatalibrary.api.models.airfieldstatus.AirfieldStatusUpdatePara
 import com.unifieddatalibrary.api.services.blocking.airfieldstatus.HistoryService
 import java.util.function.Consumer
 
+/**
+ * This collection of services provide operations for manipulating and querying of various site
+ * related data, including site status, site operations, and site type-specific records.
+ */
 interface AirfieldStatusService {
 
     /**
@@ -35,6 +39,10 @@ interface AirfieldStatusService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): AirfieldStatusService
 
+    /**
+     * This collection of services provide operations for manipulating and querying of various site
+     * related data, including site status, site operations, and site type-specific records.
+     */
     fun history(): HistoryService
 
     /**
@@ -237,6 +245,11 @@ interface AirfieldStatusService {
             modifier: Consumer<ClientOptions.Builder>
         ): AirfieldStatusService.WithRawResponse
 
+        /**
+         * This collection of services provide operations for manipulating and querying of various
+         * site related data, including site status, site operations, and site type-specific
+         * records.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**

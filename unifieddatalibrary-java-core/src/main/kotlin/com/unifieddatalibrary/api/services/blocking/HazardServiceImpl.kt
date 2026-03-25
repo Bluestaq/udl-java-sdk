@@ -35,6 +35,11 @@ import com.unifieddatalibrary.api.services.blocking.hazard.HistoryServiceImpl
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for manipulation and querying of Report and Activity
+ * information. This information includes analytic reports, significant events, route statistics,
+ * EMI Reports, and other georeferenced reports and activities.
+ */
 class HazardServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     HazardService {
 
@@ -49,6 +54,11 @@ class HazardServiceImpl internal constructor(private val clientOptions: ClientOp
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): HazardService =
         HazardServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     override fun history(): HistoryService = history
 
     override fun create(params: HazardCreateParams, requestOptions: RequestOptions) {
@@ -104,6 +114,11 @@ class HazardServiceImpl internal constructor(private val clientOptions: ClientOp
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -172,6 +187,7 @@ class HazardServiceImpl internal constructor(private val clientOptions: ClientOp
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "hazard", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

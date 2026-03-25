@@ -28,6 +28,13 @@ import com.unifieddatalibrary.api.services.async.tdoafdoa.diffofarrival.HistoryS
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for querying and manipulation of Signal time and frequency
+ * difference of arrival (TDOA/FDOA) information obtained by using passive RF based sensor
+ * phenomenologies and sensor triangulation. The J2000 coordinate frame is the preferred frame for
+ * all observations, but in some cases observations may be in another frame depending on the
+ * provider.
+ */
 class DiffofarrivalServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     DiffofarrivalServiceAsync {
 
@@ -42,6 +49,13 @@ class DiffofarrivalServiceAsyncImpl internal constructor(private val clientOptio
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): DiffofarrivalServiceAsync =
         DiffofarrivalServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for querying and manipulation of Signal time and frequency
+     * difference of arrival (TDOA/FDOA) information obtained by using passive RF based sensor
+     * phenomenologies and sensor triangulation. The J2000 coordinate frame is the preferred frame
+     * for all observations, but in some cases observations may be in another frame depending on the
+     * provider.
+     */
     override fun history(): HistoryServiceAsync = history
 
     override fun create(
@@ -89,6 +103,13 @@ class DiffofarrivalServiceAsyncImpl internal constructor(private val clientOptio
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for querying and manipulation of Signal time and
+         * frequency difference of arrival (TDOA/FDOA) information obtained by using passive RF
+         * based sensor phenomenologies and sensor triangulation. The J2000 coordinate frame is the
+         * preferred frame for all observations, but in some cases observations may be in another
+         * frame depending on the provider.
+         */
         override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -164,6 +185,7 @@ class DiffofarrivalServiceAsyncImpl internal constructor(private val clientOptio
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "diffofarrival", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

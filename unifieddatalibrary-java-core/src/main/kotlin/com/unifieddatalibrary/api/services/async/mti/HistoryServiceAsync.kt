@@ -13,6 +13,11 @@ import com.unifieddatalibrary.api.models.mti.history.HistoryListParams
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for posting and querying Moving Target Indicator (MTI) STANAG
+ * 4607 data. Detailed MTI data supports activities such as targeting or less detailed data for
+ * applications such as situational awareness used/derived by exploitation systems.
+ */
 interface HistoryServiceAsync {
 
     /**

@@ -16,6 +16,33 @@ import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftS
 import com.unifieddatalibrary.api.services.blocking.airoperations.aircraftsorties.HistoryService
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+ * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+ * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking Order,
+ * Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and Aviation Risk
+ * Management data. Aircraft Sortie information contains static and dynamic aircraft assignments,
+ * departure and arrival times, and remarks. Aircraft Mission information contains static data for
+ * mission planning to include assigned aircraft and crews, cargo pickup and dropoff locations,
+ * unique identifiers, and prioritization. Item Tracking information contains data for tracking an
+ * item from its origin to destination and how it may be configured during transport. Flight Plan
+ * information contains schedule and route details. Air Event provides information concerning
+ * various aerial events such as fuel transfer and air drops, as well as the associated aircraft
+ * involved. Sortie PPR information contains details on operational access to a runway, taxiway, or
+ * airport service. Diplomatic Clearance information contains details on the issuance and
+ * coordination of aircraft clearance requests. Diplomatic Clearance Country provides information
+ * such as entry/exit points, requirements, and points of contact for countries diplomatic
+ * clearances are being created for. Airspace Control Order provides information concerning the
+ * allocation, restriction, and deconfliction of airspace. Air Tasking Order information contains
+ * details on the coordination of air missions and their tasks, resources, and timelines.
+ * Navigational Obstruction provides the locations, characteristics, and boundaries of obstacles and
+ * structures that can restrict or interfere with navigation. Logistics Support contains information
+ * regarding the transport and maintenance of resources and equipment to sustain air operations.
+ * Track Route information defines specific flight paths used by aircraft during the transport of
+ * fuel and other resources. Air Load Plan information provides mission actuals concerning the
+ * loading and air transport of cargo and passengers. Aviation Risk Management information help aid
+ * in mission planning by accounting for factors such as mission complexity and crew fatigue.
+ */
 interface AircraftSortyService {
 
     /**
@@ -30,6 +57,34 @@ interface AircraftSortyService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): AircraftSortyService
 
+    /**
+     * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+     * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+     * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+     * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and Aviation
+     * Risk Management data. Aircraft Sortie information contains static and dynamic aircraft
+     * assignments, departure and arrival times, and remarks. Aircraft Mission information contains
+     * static data for mission planning to include assigned aircraft and crews, cargo pickup and
+     * dropoff locations, unique identifiers, and prioritization. Item Tracking information contains
+     * data for tracking an item from its origin to destination and how it may be configured during
+     * transport. Flight Plan information contains schedule and route details. Air Event provides
+     * information concerning various aerial events such as fuel transfer and air drops, as well as
+     * the associated aircraft involved. Sortie PPR information contains details on operational
+     * access to a runway, taxiway, or airport service. Diplomatic Clearance information contains
+     * details on the issuance and coordination of aircraft clearance requests. Diplomatic Clearance
+     * Country provides information such as entry/exit points, requirements, and points of contact
+     * for countries diplomatic clearances are being created for. Airspace Control Order provides
+     * information concerning the allocation, restriction, and deconfliction of airspace. Air
+     * Tasking Order information contains details on the coordination of air missions and their
+     * tasks, resources, and timelines. Navigational Obstruction provides the locations,
+     * characteristics, and boundaries of obstacles and structures that can restrict or interfere
+     * with navigation. Logistics Support contains information regarding the transport and
+     * maintenance of resources and equipment to sustain air operations. Track Route information
+     * defines specific flight paths used by aircraft during the transport of fuel and other
+     * resources. Air Load Plan information provides mission actuals concerning the loading and air
+     * transport of cargo and passengers. Aviation Risk Management information help aid in mission
+     * planning by accounting for factors such as mission complexity and crew fatigue.
+     */
     fun history(): HistoryService
 
     /**
@@ -90,6 +145,16 @@ interface AircraftSortyService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<AircraftSortyCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(AircraftSortyCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<AircraftSortyCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to take one or many aircraft sortie records as a POST body and ingest into
      * the database. This operation is intended to be used for automated feeds into UDL. A specific
@@ -105,6 +170,20 @@ interface AircraftSortyService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<AircraftSortyUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            AircraftSortyUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<AircraftSortyUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [AircraftSortyService] that provides access to raw HTTP responses for each method.
      */
@@ -119,6 +198,36 @@ interface AircraftSortyService {
             modifier: Consumer<ClientOptions.Builder>
         ): AircraftSortyService.WithRawResponse
 
+        /**
+         * These services provide operations for manipulating and querying Aircraft Sortie, Aircraft
+         * Mission, Item Tracking, Flight Plan, Air Event, Sortie Prior Permission Required (PPR),
+         * Diplomatic Clearance, Diplomatic Clearance Country, Airspace Control Order, Air Tasking
+         * Order, Navigational Obstruction, Logistics Support, Track Route, Air Load Plan, and
+         * Aviation Risk Management data. Aircraft Sortie information contains static and dynamic
+         * aircraft assignments, departure and arrival times, and remarks. Aircraft Mission
+         * information contains static data for mission planning to include assigned aircraft and
+         * crews, cargo pickup and dropoff locations, unique identifiers, and prioritization. Item
+         * Tracking information contains data for tracking an item from its origin to destination
+         * and how it may be configured during transport. Flight Plan information contains schedule
+         * and route details. Air Event provides information concerning various aerial events such
+         * as fuel transfer and air drops, as well as the associated aircraft involved. Sortie PPR
+         * information contains details on operational access to a runway, taxiway, or airport
+         * service. Diplomatic Clearance information contains details on the issuance and
+         * coordination of aircraft clearance requests. Diplomatic Clearance Country provides
+         * information such as entry/exit points, requirements, and points of contact for countries
+         * diplomatic clearances are being created for. Airspace Control Order provides information
+         * concerning the allocation, restriction, and deconfliction of airspace. Air Tasking Order
+         * information contains details on the coordination of air missions and their tasks,
+         * resources, and timelines. Navigational Obstruction provides the locations,
+         * characteristics, and boundaries of obstacles and structures that can restrict or
+         * interfere with navigation. Logistics Support contains information regarding the transport
+         * and maintenance of resources and equipment to sustain air operations. Track Route
+         * information defines specific flight paths used by aircraft during the transport of fuel
+         * and other resources. Air Load Plan information provides mission actuals concerning the
+         * loading and air transport of cargo and passengers. Aviation Risk Management information
+         * help aid in mission planning by accounting for factors such as mission complexity and
+         * crew fatigue.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**
@@ -181,6 +290,19 @@ interface AircraftSortyService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
 
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<AircraftSortyCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(AircraftSortyCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<AircraftSortyCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `post /filedrop/udl-aircraftsortie`, but is otherwise the
          * same as [AircraftSortyService.unvalidatedPublish].
@@ -195,5 +317,22 @@ interface AircraftSortyService {
             params: AircraftSortyUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<AircraftSortyUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                AircraftSortyUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<AircraftSortyUnvalidatedPublishParams.Body>
+        ): HttpResponse = unvalidatedPublish(body, RequestOptions.none())
     }
 }

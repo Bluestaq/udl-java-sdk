@@ -24,6 +24,13 @@ import com.unifieddatalibrary.api.models.gnssrawif.history.HistoryListResponse
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * This collection of services provides operations for querying and manipulation of electro-optical
+ * (EO), radar, radio frequency (RF), Global Navigation Satellite Systems (GNSS), Ionospheric
+ * (IONO), Infrared (SWIR), and Space Environment observation data. The J2000 coordinate frame is
+ * the preferred frame for all observations, as applicable, but in some cases observations may be in
+ * an alternate frame depending on the provider and/or datatype.
+ */
 class HistoryServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryServiceAsync {
 
@@ -142,6 +149,7 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "gnssrawif", "history", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

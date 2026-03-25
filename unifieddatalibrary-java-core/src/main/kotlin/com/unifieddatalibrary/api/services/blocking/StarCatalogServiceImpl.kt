@@ -38,6 +38,13 @@ import com.unifieddatalibrary.api.services.blocking.starcatalog.HistoryServiceIm
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for posting and querying Star Catalog data. The Star Catalog
+ * model is a representation of astronomical data and photometric data for stars. Astronomical data
+ * includes positional information, proper motions, parallaxes and their respective uncertainties.
+ * Photometric data contains optical and near-infrared magnitudes, and their uncertainties across
+ * multiple bandpasses. Note: Multiple source catalogs may contribute to a single record.
+ */
 class StarCatalogServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     StarCatalogService {
 
@@ -52,6 +59,14 @@ class StarCatalogServiceImpl internal constructor(private val clientOptions: Cli
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): StarCatalogService =
         StarCatalogServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for posting and querying Star Catalog data. The Star
+     * Catalog model is a representation of astronomical data and photometric data for stars.
+     * Astronomical data includes positional information, proper motions, parallaxes and their
+     * respective uncertainties. Photometric data contains optical and near-infrared magnitudes, and
+     * their uncertainties across multiple bandpasses. Note: Multiple source catalogs may contribute
+     * to a single record.
+     */
     override fun history(): HistoryService = history
 
     override fun create(params: StarCatalogCreateParams, requestOptions: RequestOptions) {
@@ -131,6 +146,14 @@ class StarCatalogServiceImpl internal constructor(private val clientOptions: Cli
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for posting and querying Star Catalog data. The Star
+         * Catalog model is a representation of astronomical data and photometric data for stars.
+         * Astronomical data includes positional information, proper motions, parallaxes and their
+         * respective uncertainties. Photometric data contains optical and near-infrared magnitudes,
+         * and their uncertainties across multiple bandpasses. Note: Multiple source catalogs may
+         * contribute to a single record.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -247,6 +270,7 @@ class StarCatalogServiceImpl internal constructor(private val clientOptions: Cli
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "starcatalog", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

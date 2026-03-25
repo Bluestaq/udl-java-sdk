@@ -20,7 +20,7 @@ internal class ScFileUploadParamsTest {
             .overwrite(true)
             .sendNotification(true)
             .tags("tags")
-            .fileContent("some content")
+            .fileContent("Example data")
             .build()
     }
 
@@ -36,7 +36,7 @@ internal class ScFileUploadParamsTest {
                 .overwrite(true)
                 .sendNotification(true)
                 .tags("tags")
-                .fileContent("some content")
+                .fileContent("Example data")
                 .build()
 
         val queryParams = params._queryParams()
@@ -63,7 +63,7 @@ internal class ScFileUploadParamsTest {
                 .classificationMarking("classificationMarking")
                 .fileName("fileName")
                 .path("path")
-                .fileContent("some content")
+                .fileContent("Example data")
                 .build()
 
         val queryParams = params._queryParams()
@@ -90,12 +90,12 @@ internal class ScFileUploadParamsTest {
                 .overwrite(true)
                 .sendNotification(true)
                 .tags("tags")
-                .fileContent("some content")
+                .fileContent("Example data")
                 .build()
 
         val body = params._body().getOrNull()
 
-        assertThat(body).isEqualTo("some content")
+        assertThat(body).isEqualTo("Example data")
     }
 
     @Test
@@ -105,11 +105,11 @@ internal class ScFileUploadParamsTest {
                 .classificationMarking("classificationMarking")
                 .fileName("fileName")
                 .path("path")
-                .fileContent("some content")
+                .fileContent("Example data")
                 .build()
 
         val body = params._body().getOrNull()
 
-        assertThat(body).isEqualTo("some content")
+        assertThat(body).isEqualTo("Example data")
     }
 }

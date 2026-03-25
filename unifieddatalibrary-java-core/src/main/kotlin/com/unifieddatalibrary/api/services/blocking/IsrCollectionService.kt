@@ -19,6 +19,7 @@ import com.unifieddatalibrary.api.models.isrcollections.IsrCollectionUnvalidated
 import com.unifieddatalibrary.api.services.blocking.isrcollections.HistoryService
 import java.util.function.Consumer
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 interface IsrCollectionService {
 
     /**
@@ -33,6 +34,7 @@ interface IsrCollectionService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): IsrCollectionService
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     fun history(): HistoryService
 
     /**
@@ -79,6 +81,16 @@ interface IsrCollectionService {
         params: IsrCollectionCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<IsrCollectionCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(IsrCollectionCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<IsrCollectionCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -133,6 +145,20 @@ interface IsrCollectionService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<IsrCollectionUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            IsrCollectionUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<IsrCollectionUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [IsrCollectionService] that provides access to raw HTTP responses for each method.
      */
@@ -147,6 +173,7 @@ interface IsrCollectionService {
             modifier: Consumer<ClientOptions.Builder>
         ): IsrCollectionService.WithRawResponse
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         fun history(): HistoryService.WithRawResponse
 
         /**
@@ -193,6 +220,19 @@ interface IsrCollectionService {
             params: IsrCollectionCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<IsrCollectionCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(IsrCollectionCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<IsrCollectionCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/isrcollection/queryhelp`, but is otherwise the
@@ -253,5 +293,22 @@ interface IsrCollectionService {
             params: IsrCollectionUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<IsrCollectionUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                IsrCollectionUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<IsrCollectionUnvalidatedPublishParams.Body>
+        ): HttpResponse = unvalidatedPublish(body, RequestOptions.none())
     }
 }

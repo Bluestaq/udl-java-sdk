@@ -17,6 +17,13 @@ import com.unifieddatalibrary.api.core.prepare
 import com.unifieddatalibrary.api.models.diffofarrival.history.HistoryCountParams
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for querying and manipulation of Signal time and frequency
+ * difference of arrival (TDOA/FDOA) information obtained by using passive RF based sensor
+ * phenomenologies and sensor triangulation. The J2000 coordinate frame is the preferred frame for
+ * all observations, but in some cases observations may be in another frame depending on the
+ * provider.
+ */
 class HistoryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryService {
 
@@ -57,6 +64,7 @@ class HistoryServiceImpl internal constructor(private val clientOptions: ClientO
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "diffofarrival", "history", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

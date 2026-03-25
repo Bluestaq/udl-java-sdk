@@ -19,6 +19,11 @@ import com.unifieddatalibrary.api.services.async.sigact.HistoryServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of Report and Activity
+ * information. This information includes analytic reports, significant events, route statistics,
+ * EMI Reports, and other georeferenced reports and activities.
+ */
 interface SigactServiceAsync {
 
     /**
@@ -33,6 +38,11 @@ interface SigactServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): SigactServiceAsync
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -80,6 +90,17 @@ interface SigactServiceAsync {
         params: SigactCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<SigactCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(SigactCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<SigactCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -162,6 +183,11 @@ interface SigactServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): SigactServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**
@@ -204,6 +230,17 @@ interface SigactServiceAsync {
             params: SigactCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<SigactCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(SigactCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(body: List<SigactCreateBulkParams.Body>): CompletableFuture<HttpResponse> =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/sigact/queryhelp`, but is otherwise the same as

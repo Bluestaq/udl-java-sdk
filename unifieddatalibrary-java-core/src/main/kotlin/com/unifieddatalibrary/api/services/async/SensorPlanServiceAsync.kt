@@ -22,6 +22,7 @@ import com.unifieddatalibrary.api.services.async.sensorplan.HistoryServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 interface SensorPlanServiceAsync {
 
     /**
@@ -36,6 +37,7 @@ interface SensorPlanServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): SensorPlanServiceAsync
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     fun history(): HistoryServiceAsync
 
     /**
@@ -192,6 +194,21 @@ interface SensorPlanServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<SensorPlanUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            SensorPlanUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<SensorPlanUnvalidatedPublishParams.Body>
+    ): CompletableFuture<Void?> = unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [SensorPlanServiceAsync] that provides access to raw HTTP responses for each
      * method.
@@ -207,6 +224,7 @@ interface SensorPlanServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): SensorPlanServiceAsync.WithRawResponse
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**
@@ -371,5 +389,20 @@ interface SensorPlanServiceAsync {
             params: SensorPlanUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<SensorPlanUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                SensorPlanUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<SensorPlanUnvalidatedPublishParams.Body>
+        ): CompletableFuture<HttpResponse> = unvalidatedPublish(body, RequestOptions.none())
     }
 }

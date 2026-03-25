@@ -36,6 +36,13 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This collection of services provides operations for querying and manipulation of electro-optical
+ * (EO), radar, radio frequency (RF), Global Navigation Satellite Systems (GNSS), Ionospheric
+ * (IONO), Infrared (SWIR), and Space Environment observation data. The J2000 coordinate frame is
+ * the preferred frame for all observations, as applicable, but in some cases observations may be in
+ * an alternate frame depending on the provider and/or datatype.
+ */
 class SoiObservationSetServiceAsyncImpl
 internal constructor(private val clientOptions: ClientOptions) : SoiObservationSetServiceAsync {
 
@@ -52,6 +59,14 @@ internal constructor(private val clientOptions: ClientOptions) : SoiObservationS
     ): SoiObservationSetServiceAsync =
         SoiObservationSetServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * This collection of services provides operations for querying and manipulation of
+     * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+     * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+     * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+     * some cases observations may be in an alternate frame depending on the provider and/or
+     * datatype.
+     */
     override fun history(): HistoryServiceAsync = history
 
     override fun create(
@@ -127,6 +142,14 @@ internal constructor(private val clientOptions: ClientOptions) : SoiObservationS
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * This collection of services provides operations for querying and manipulation of
+         * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+         * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+         * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+         * some cases observations may be in an alternate frame depending on the provider and/or
+         * datatype.
+         */
         override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -202,6 +225,7 @@ internal constructor(private val clientOptions: ClientOptions) : SoiObservationS
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "soiobservationset", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

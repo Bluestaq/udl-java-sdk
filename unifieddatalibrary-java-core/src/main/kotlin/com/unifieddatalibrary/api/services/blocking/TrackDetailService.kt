@@ -18,6 +18,10 @@ import com.unifieddatalibrary.api.models.trackdetails.history.TrackDetailsFull
 import com.unifieddatalibrary.api.services.blocking.trackdetails.HistoryService
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for posting and querying of air, space, and ground 'tracks'. A
+ * track is a position and optionally a heading/velocity of an object at a particular timestamp.
+ */
 interface TrackDetailService {
 
     /**
@@ -32,6 +36,11 @@ interface TrackDetailService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): TrackDetailService
 
+    /**
+     * These services provide operations for posting and querying of air, space, and ground
+     * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+     * particular timestamp.
+     */
     fun history(): HistoryService
 
     /**
@@ -77,6 +86,16 @@ interface TrackDetailService {
         params: TrackDetailCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<TrackDetailCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(TrackDetailCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<TrackDetailCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -131,6 +150,11 @@ interface TrackDetailService {
             modifier: Consumer<ClientOptions.Builder>
         ): TrackDetailService.WithRawResponse
 
+        /**
+         * These services provide operations for posting and querying of air, space, and ground
+         * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+         * particular timestamp.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**
@@ -177,6 +201,19 @@ interface TrackDetailService {
             params: TrackDetailCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<TrackDetailCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(TrackDetailCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<TrackDetailCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/trackdetails/queryhelp`, but is otherwise the

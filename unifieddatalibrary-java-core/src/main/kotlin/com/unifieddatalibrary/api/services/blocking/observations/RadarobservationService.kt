@@ -22,6 +22,13 @@ import com.unifieddatalibrary.api.models.observations.radarobservation.Radarobse
 import com.unifieddatalibrary.api.services.blocking.observations.radarobservation.HistoryService
 import java.util.function.Consumer
 
+/**
+ * This collection of services provides operations for querying and manipulation of electro-optical
+ * (EO), radar, radio frequency (RF), Global Navigation Satellite Systems (GNSS), Ionospheric
+ * (IONO), Infrared (SWIR), and Space Environment observation data. The J2000 coordinate frame is
+ * the preferred frame for all observations, as applicable, but in some cases observations may be in
+ * an alternate frame depending on the provider and/or datatype.
+ */
 interface RadarobservationService {
 
     /**
@@ -36,6 +43,14 @@ interface RadarobservationService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): RadarobservationService
 
+    /**
+     * This collection of services provides operations for querying and manipulation of
+     * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+     * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+     * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+     * some cases observations may be in an alternate frame depending on the provider and/or
+     * datatype.
+     */
     fun history(): HistoryService
 
     /**
@@ -96,6 +111,16 @@ interface RadarobservationService {
         params: RadarobservationCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<RadarobservationCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(RadarobservationCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<RadarobservationCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to get a single radar observations by its unique ID passed as a path
@@ -184,6 +209,20 @@ interface RadarobservationService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<RadarobservationUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            RadarobservationUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<RadarobservationUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [RadarobservationService] that provides access to raw HTTP responses for each
      * method.
@@ -199,6 +238,14 @@ interface RadarobservationService {
             modifier: Consumer<ClientOptions.Builder>
         ): RadarobservationService.WithRawResponse
 
+        /**
+         * This collection of services provides operations for querying and manipulation of
+         * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+         * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+         * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+         * some cases observations may be in an alternate frame depending on the provider and/or
+         * datatype.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**
@@ -260,6 +307,22 @@ interface RadarobservationService {
             params: RadarobservationCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<RadarobservationCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(
+                RadarobservationCreateBulkParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<RadarobservationCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/radarobservation/{id}`, but is otherwise the
@@ -365,5 +428,22 @@ interface RadarobservationService {
             params: RadarobservationUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<RadarobservationUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                RadarobservationUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<RadarobservationUnvalidatedPublishParams.Body>
+        ): HttpResponse = unvalidatedPublish(body, RequestOptions.none())
     }
 }

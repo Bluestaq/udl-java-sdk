@@ -20,6 +20,10 @@ import com.unifieddatalibrary.api.models.airfieldslotconsumptions.AirfieldSlotCo
 import com.unifieddatalibrary.api.models.airfieldslotconsumptions.AirfieldSlotConsumptionUpdateParams
 import java.util.function.Consumer
 
+/**
+ * This collection of services provide operations for manipulating and querying of various site
+ * related data, including site status, site operations, and site type-specific records.
+ */
 interface AirfieldSlotConsumptionService {
 
     /**

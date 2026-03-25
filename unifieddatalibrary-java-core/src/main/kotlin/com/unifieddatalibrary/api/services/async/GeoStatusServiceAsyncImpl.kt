@@ -35,6 +35,10 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit objects of interest,
+ * their components, and various lists and status of those objects.
+ */
 class GeoStatusServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     GeoStatusServiceAsync {
 
@@ -49,6 +53,10 @@ class GeoStatusServiceAsyncImpl internal constructor(private val clientOptions: 
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): GeoStatusServiceAsync =
         GeoStatusServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun history(): HistoryServiceAsync = history
 
     override fun create(
@@ -117,6 +125,10 @@ class GeoStatusServiceAsyncImpl internal constructor(private val clientOptions: 
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -192,6 +204,7 @@ class GeoStatusServiceAsyncImpl internal constructor(private val clientOptions: 
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "geostatus", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

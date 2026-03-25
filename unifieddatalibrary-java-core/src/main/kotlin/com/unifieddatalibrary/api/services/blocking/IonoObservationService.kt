@@ -19,6 +19,13 @@ import com.unifieddatalibrary.api.models.ionoobservations.IonoObservationUnvalid
 import com.unifieddatalibrary.api.services.blocking.ionoobservations.HistoryService
 import java.util.function.Consumer
 
+/**
+ * This collection of services provides operations for querying and manipulation of electro-optical
+ * (EO), radar, radio frequency (RF), Global Navigation Satellite Systems (GNSS), Ionospheric
+ * (IONO), Infrared (SWIR), and Space Environment observation data. The J2000 coordinate frame is
+ * the preferred frame for all observations, as applicable, but in some cases observations may be in
+ * an alternate frame depending on the provider and/or datatype.
+ */
 interface IonoObservationService {
 
     /**
@@ -33,6 +40,14 @@ interface IonoObservationService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): IonoObservationService
 
+    /**
+     * This collection of services provides operations for querying and manipulation of
+     * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+     * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+     * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+     * some cases observations may be in an alternate frame depending on the provider and/or
+     * datatype.
+     */
     fun history(): HistoryService
 
     /**
@@ -79,6 +94,16 @@ interface IonoObservationService {
         params: IonoObservationCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<IonoObservationCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(IonoObservationCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<IonoObservationCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -135,6 +160,20 @@ interface IonoObservationService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<IonoObservationUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            IonoObservationUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<IonoObservationUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [IonoObservationService] that provides access to raw HTTP responses for each
      * method.
@@ -150,6 +189,14 @@ interface IonoObservationService {
             modifier: Consumer<ClientOptions.Builder>
         ): IonoObservationService.WithRawResponse
 
+        /**
+         * This collection of services provides operations for querying and manipulation of
+         * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+         * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+         * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+         * some cases observations may be in an alternate frame depending on the provider and/or
+         * datatype.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**
@@ -196,6 +243,19 @@ interface IonoObservationService {
             params: IonoObservationCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<IonoObservationCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(IonoObservationCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<IonoObservationCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/ionoobservation/queryhelp`, but is otherwise
@@ -257,5 +317,22 @@ interface IonoObservationService {
             params: IonoObservationUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<IonoObservationUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                IonoObservationUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<IonoObservationUnvalidatedPublishParams.Body>
+        ): HttpResponse = unvalidatedPublish(body, RequestOptions.none())
     }
 }

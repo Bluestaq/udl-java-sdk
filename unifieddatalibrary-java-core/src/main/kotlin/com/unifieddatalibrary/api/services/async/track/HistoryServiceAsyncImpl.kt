@@ -24,6 +24,10 @@ import com.unifieddatalibrary.api.models.track.history.TrackFull
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for posting and querying of air, space, and ground 'tracks'. A
+ * track is a position and optionally a heading/velocity of an object at a particular timestamp.
+ */
 class HistoryServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryServiceAsync {
 
@@ -142,6 +146,7 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "track", "history", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

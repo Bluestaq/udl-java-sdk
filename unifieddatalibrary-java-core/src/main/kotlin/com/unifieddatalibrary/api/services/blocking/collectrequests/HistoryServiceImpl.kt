@@ -23,6 +23,7 @@ import com.unifieddatalibrary.api.models.collectrequests.history.HistoryListPage
 import com.unifieddatalibrary.api.models.collectrequests.history.HistoryListParams
 import java.util.function.Consumer
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 class HistoryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryService {
 
@@ -123,6 +124,7 @@ class HistoryServiceImpl internal constructor(private val clientOptions: ClientO
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "collectrequest", "history", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

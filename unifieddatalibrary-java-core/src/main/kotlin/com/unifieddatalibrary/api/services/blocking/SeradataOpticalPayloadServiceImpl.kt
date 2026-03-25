@@ -34,6 +34,15 @@ import com.unifieddatalibrary.api.models.seradataopticalpayload.SeradataOpticalP
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This service provides operations for querying and manipulation of sensor data. Sensors are
+ * terrestrial or on-orbit equipment capable of taking measurements or 'observations' of on-orbit
+ * objects via several phenomenologies such as Electro-Optical (EO), Radar, and Radio Frequency
+ * (RF). This collection of operations includes 'SensorMaintenance' schedules which define
+ * known/planned future maintenance and associated operational impact of sensors as well as
+ * 'SensorCalibration' records which contains data about a sensor's overall accuracy and is used to
+ * adjust sensor settings.
+ */
 class SeradataOpticalPayloadServiceImpl
 internal constructor(private val clientOptions: ClientOptions) : SeradataOpticalPayloadService {
 
@@ -234,6 +243,7 @@ internal constructor(private val clientOptions: ClientOptions) : SeradataOptical
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "seradataopticalpayload", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

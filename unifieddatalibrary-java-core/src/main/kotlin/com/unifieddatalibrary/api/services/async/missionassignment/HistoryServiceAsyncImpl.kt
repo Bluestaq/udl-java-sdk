@@ -24,6 +24,12 @@ import com.unifieddatalibrary.api.models.missionassignment.history.HistoryListRe
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of mission assignment objects.
+ * MissionAssignment is used by C2 JUs and, optionally, non-C2 JUs to assign missions, designate
+ * targets, and provide target information to non-C2 JU platforms. Provision is made for the non-C2
+ * JU platforms to acknowledge the message through receipt/compliance action.
+ */
 class HistoryServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryServiceAsync {
 
@@ -142,6 +148,7 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "missionassignment", "history", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

@@ -19,6 +19,12 @@ import com.unifieddatalibrary.api.models.rfemitter.staging.StagingUpdateParams
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * This collection of services provides operations for querying and manipulation of RF related
+ * information to include RFEmitters which could potentially interfere with
+ * communications/operations of space related entities, and RFBands commonly used by various space
+ * related entities.
+ */
 interface StagingServiceAsync {
 
     /**
@@ -184,6 +190,17 @@ interface StagingServiceAsync {
         params: StagingCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<StagingCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(StagingCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<StagingCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -372,6 +389,17 @@ interface StagingServiceAsync {
             params: StagingCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<StagingCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(StagingCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(body: List<StagingCreateBulkParams.Body>): CompletableFuture<HttpResponse> =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/rfemitterstaging/queryhelp`, but is otherwise

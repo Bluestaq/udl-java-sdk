@@ -24,6 +24,11 @@ import com.unifieddatalibrary.api.models.mti.history.MtiFull
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for posting and querying Moving Target Indicator (MTI) STANAG
+ * 4607 data. Detailed MTI data supports activities such as targeting or less detailed data for
+ * applications such as situational awareness used/derived by exploitation systems.
+ */
 class HistoryServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryServiceAsync {
 
@@ -142,6 +147,7 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "mti", "history", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

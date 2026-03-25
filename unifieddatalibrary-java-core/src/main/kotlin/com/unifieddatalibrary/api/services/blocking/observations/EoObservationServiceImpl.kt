@@ -35,6 +35,13 @@ import com.unifieddatalibrary.api.services.blocking.observations.eoobservations.
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This collection of services provides operations for querying and manipulation of electro-optical
+ * (EO), radar, radio frequency (RF), Global Navigation Satellite Systems (GNSS), Ionospheric
+ * (IONO), Infrared (SWIR), and Space Environment observation data. The J2000 coordinate frame is
+ * the preferred frame for all observations, as applicable, but in some cases observations may be in
+ * an alternate frame depending on the provider and/or datatype.
+ */
 class EoObservationServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     EoObservationService {
 
@@ -49,6 +56,14 @@ class EoObservationServiceImpl internal constructor(private val clientOptions: C
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): EoObservationService =
         EoObservationServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * This collection of services provides operations for querying and manipulation of
+     * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+     * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+     * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+     * some cases observations may be in an alternate frame depending on the provider and/or
+     * datatype.
+     */
     override fun history(): HistoryService = history
 
     override fun create(params: EoObservationCreateParams, requestOptions: RequestOptions) {
@@ -118,6 +133,14 @@ class EoObservationServiceImpl internal constructor(private val clientOptions: C
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * This collection of services provides operations for querying and manipulation of
+         * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+         * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+         * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+         * some cases observations may be in an alternate frame depending on the provider and/or
+         * datatype.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -216,6 +239,7 @@ class EoObservationServiceImpl internal constructor(private val clientOptions: C
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "eoobservation", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

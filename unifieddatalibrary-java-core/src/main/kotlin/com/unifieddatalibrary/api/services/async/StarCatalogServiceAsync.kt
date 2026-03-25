@@ -24,6 +24,13 @@ import com.unifieddatalibrary.api.services.async.starcatalog.HistoryServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for posting and querying Star Catalog data. The Star Catalog
+ * model is a representation of astronomical data and photometric data for stars. Astronomical data
+ * includes positional information, proper motions, parallaxes and their respective uncertainties.
+ * Photometric data contains optical and near-infrared magnitudes, and their uncertainties across
+ * multiple bandpasses. Note: Multiple source catalogs may contribute to a single record.
+ */
 interface StarCatalogServiceAsync {
 
     /**
@@ -38,6 +45,14 @@ interface StarCatalogServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): StarCatalogServiceAsync
 
+    /**
+     * These services provide operations for posting and querying Star Catalog data. The Star
+     * Catalog model is a representation of astronomical data and photometric data for stars.
+     * Astronomical data includes positional information, proper motions, parallaxes and their
+     * respective uncertainties. Photometric data contains optical and near-infrared magnitudes, and
+     * their uncertainties across multiple bandpasses. Note: Multiple source catalogs may contribute
+     * to a single record.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -174,6 +189,17 @@ interface StarCatalogServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<StarCatalogCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(StarCatalogCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<StarCatalogCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to get a single StarCatalog record by its unique ID passed as a path
      * parameter.
@@ -263,6 +289,21 @@ interface StarCatalogServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<StarCatalogUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            StarCatalogUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<StarCatalogUnvalidatedPublishParams.Body>
+    ): CompletableFuture<Void?> = unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [StarCatalogServiceAsync] that provides access to raw HTTP responses for each
      * method.
@@ -278,6 +319,14 @@ interface StarCatalogServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): StarCatalogServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for posting and querying Star Catalog data. The Star
+         * Catalog model is a representation of astronomical data and photometric data for stars.
+         * Astronomical data includes positional information, proper motions, parallaxes and their
+         * respective uncertainties. Photometric data contains optical and near-infrared magnitudes,
+         * and their uncertainties across multiple bandpasses. Note: Multiple source catalogs may
+         * contribute to a single record.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**
@@ -415,6 +464,18 @@ interface StarCatalogServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
 
+        /** @see createBulk */
+        fun createBulk(
+            body: List<StarCatalogCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(StarCatalogCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<StarCatalogCreateBulkParams.Body>
+        ): CompletableFuture<HttpResponse> = createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `get /udl/starcatalog/{id}`, but is otherwise the same as
          * [StarCatalogServiceAsync.get].
@@ -509,5 +570,20 @@ interface StarCatalogServiceAsync {
             params: StarCatalogUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<StarCatalogUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                StarCatalogUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<StarCatalogUnvalidatedPublishParams.Body>
+        ): CompletableFuture<HttpResponse> = unvalidatedPublish(body, RequestOptions.none())
     }
 }

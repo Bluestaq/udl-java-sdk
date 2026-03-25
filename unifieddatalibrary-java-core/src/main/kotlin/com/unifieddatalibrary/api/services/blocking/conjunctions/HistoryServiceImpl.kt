@@ -19,6 +19,7 @@ import com.unifieddatalibrary.api.models.conjunctions.history.HistoryAodrParams
 import com.unifieddatalibrary.api.models.conjunctions.history.HistoryCountParams
 import java.util.function.Consumer
 
+/** These services provide operations for manipulation and querying of conjunctions. */
 class HistoryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryService {
 
@@ -81,6 +82,7 @@ class HistoryServiceImpl internal constructor(private val clientOptions: ClientO
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "conjunction", "history", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

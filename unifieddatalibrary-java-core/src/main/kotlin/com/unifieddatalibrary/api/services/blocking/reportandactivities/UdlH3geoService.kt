@@ -9,6 +9,11 @@ import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.models.reportandactivities.udlh3geo.UdlH3geoUnvalidatedPublishParams
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of Report and Activity
+ * information. This information includes analytic reports, significant events, route statistics,
+ * EMI Reports, and other georeferenced reports and activities.
+ */
 interface UdlH3geoService {
 
     /**

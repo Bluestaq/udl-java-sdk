@@ -19,6 +19,15 @@ import com.unifieddatalibrary.api.models.sensorstating.SensorStatingUpdateParams
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * This service provides operations for querying and manipulation of sensor data. Sensors are
+ * terrestrial or on-orbit equipment capable of taking measurements or 'observations' of on-orbit
+ * objects via several phenomenologies such as Electro-Optical (EO), Radar, and Radio Frequency
+ * (RF). This collection of operations includes 'SensorMaintenance' schedules which define
+ * known/planned future maintenance and associated operational impact of sensors as well as
+ * 'SensorCalibration' records which contains data about a sensor's overall accuracy and is used to
+ * adjust sensor settings.
+ */
 interface SensorStatingServiceAsync {
 
     /**
@@ -146,6 +155,17 @@ interface SensorStatingServiceAsync {
         params: SensorStatingCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<SensorStatingCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(SensorStatingCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<SensorStatingCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to get a single SensorStaging record by its unique ID passed as a path
@@ -336,6 +356,18 @@ interface SensorStatingServiceAsync {
             params: SensorStatingCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<SensorStatingCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(SensorStatingCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<SensorStatingCreateBulkParams.Body>
+        ): CompletableFuture<HttpResponse> = createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/sensorstaging/{id}`, but is otherwise the same

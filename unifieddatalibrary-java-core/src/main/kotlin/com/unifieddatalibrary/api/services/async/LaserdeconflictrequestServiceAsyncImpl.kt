@@ -36,6 +36,11 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This collection of services provides operations for querying and manipulation of laser related
+ * information to include the laser emitters, the laser deconflict requests, and laser deconflict
+ * responses.
+ */
 class LaserdeconflictrequestServiceAsyncImpl
 internal constructor(private val clientOptions: ClientOptions) :
     LaserdeconflictrequestServiceAsync {
@@ -56,6 +61,11 @@ internal constructor(private val clientOptions: ClientOptions) :
             clientOptions.toBuilder().apply(modifier::accept).build()
         )
 
+    /**
+     * This collection of services provides operations for querying and manipulation of laser
+     * related information to include the laser emitters, the laser deconflict requests, and laser
+     * deconflict responses.
+     */
     override fun history(): HistoryServiceAsync = history
 
     override fun create(
@@ -124,6 +134,11 @@ internal constructor(private val clientOptions: ClientOptions) :
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * This collection of services provides operations for querying and manipulation of laser
+         * related information to include the laser emitters, the laser deconflict requests, and
+         * laser deconflict responses.
+         */
         override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -199,6 +214,7 @@ internal constructor(private val clientOptions: ClientOptions) :
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "laserdeconflictrequest", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

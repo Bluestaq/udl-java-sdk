@@ -22,6 +22,11 @@ import com.unifieddatalibrary.api.services.async.launchevent.HistoryServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of LaunchEvent data. Launch Event
+ * data are known space launches, either future or historic records containing items such as the
+ * launch site, launch epoch, and object.
+ */
 interface LaunchEventServiceAsync {
 
     /**
@@ -36,6 +41,11 @@ interface LaunchEventServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): LaunchEventServiceAsync
 
+    /**
+     * These services provide operations for manipulation and querying of LaunchEvent data. Launch
+     * Event data are known space launches, either future or historic records containing items such
+     * as the launch site, launch epoch, and object.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -97,6 +107,17 @@ interface LaunchEventServiceAsync {
         params: LaunchEventCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<LaunchEventCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(LaunchEventCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<LaunchEventCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to get a single LaunchEvent record by its unique ID passed as a path
@@ -187,6 +208,21 @@ interface LaunchEventServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<LaunchEventUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            LaunchEventUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<LaunchEventUnvalidatedPublishParams.Body>
+    ): CompletableFuture<Void?> = unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [LaunchEventServiceAsync] that provides access to raw HTTP responses for each
      * method.
@@ -202,6 +238,11 @@ interface LaunchEventServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): LaunchEventServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of LaunchEvent data.
+         * Launch Event data are known space launches, either future or historic records containing
+         * items such as the launch site, launch epoch, and object.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**
@@ -257,6 +298,18 @@ interface LaunchEventServiceAsync {
             params: LaunchEventCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<LaunchEventCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(LaunchEventCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<LaunchEventCreateBulkParams.Body>
+        ): CompletableFuture<HttpResponse> = createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/launchevent/{id}`, but is otherwise the same as
@@ -352,5 +405,20 @@ interface LaunchEventServiceAsync {
             params: LaunchEventUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<LaunchEventUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                LaunchEventUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<LaunchEventUnvalidatedPublishParams.Body>
+        ): CompletableFuture<HttpResponse> = unvalidatedPublish(body, RequestOptions.none())
     }
 }

@@ -24,6 +24,14 @@ import com.unifieddatalibrary.api.models.statevector.history.HistoryListParams
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * This service provides operations for querying and manipulation of state vectors for On-orbit
+ * objects. State vectors are cartesian vectors of position (r) and velocity (v) that together with
+ * their time (epoch) (t) uniquely determine the trajectory of the orbiting body in space. J2000 is
+ * the preferred coordinate frame for all state vector positions/velocities in UDL, but in some
+ * cases data may be in another frame depending on the provider and/or datatype. Please see the
+ * 'Discover' tab in the storefront to confirm coordinate frames by data provider.
+ */
 class HistoryServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryServiceAsync {
 
@@ -142,6 +150,7 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "statevector", "history", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

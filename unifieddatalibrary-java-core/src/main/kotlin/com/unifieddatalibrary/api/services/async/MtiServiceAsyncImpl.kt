@@ -32,6 +32,11 @@ import com.unifieddatalibrary.api.services.async.mti.HistoryServiceAsyncImpl
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for posting and querying Moving Target Indicator (MTI) STANAG
+ * 4607 data. Detailed MTI data supports activities such as targeting or less detailed data for
+ * applications such as situational awareness used/derived by exploitation systems.
+ */
 class MtiServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     MtiServiceAsync {
 
@@ -46,6 +51,11 @@ class MtiServiceAsyncImpl internal constructor(private val clientOptions: Client
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): MtiServiceAsync =
         MtiServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for posting and querying Moving Target Indicator (MTI)
+     * STANAG 4607 data. Detailed MTI data supports activities such as targeting or less detailed
+     * data for applications such as situational awareness used/derived by exploitation systems.
+     */
     override fun history(): HistoryServiceAsync = history
 
     override fun list(
@@ -107,6 +117,12 @@ class MtiServiceAsyncImpl internal constructor(private val clientOptions: Client
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for posting and querying Moving Target Indicator (MTI)
+         * STANAG 4607 data. Detailed MTI data supports activities such as targeting or less
+         * detailed data for applications such as situational awareness used/derived by exploitation
+         * systems.
+         */
         override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val listHandler: Handler<List<MtiListResponse>> =
@@ -158,6 +174,7 @@ class MtiServiceAsyncImpl internal constructor(private val clientOptions: Client
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "mti", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

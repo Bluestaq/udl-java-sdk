@@ -22,6 +22,11 @@ import com.unifieddatalibrary.api.services.async.orbitdetermination.HistoryServi
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulating and querying Orbit Determination (OD) data.
+ * Orbit Determination data contains algorithm results that describe General Perturbations or
+ * Special Perturbations orbital updates.
+ */
 interface OrbitdeterminationServiceAsync {
 
     /**
@@ -36,6 +41,11 @@ interface OrbitdeterminationServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): OrbitdeterminationServiceAsync
 
+    /**
+     * These services provide operations for manipulating and querying Orbit Determination (OD)
+     * data. Orbit Determination data contains algorithm results that describe General Perturbations
+     * or Special Perturbations orbital updates.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -114,6 +124,17 @@ interface OrbitdeterminationServiceAsync {
         params: OrbitdeterminationCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<OrbitdeterminationCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(OrbitdeterminationCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<OrbitdeterminationCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to get a single OrbitDetermination record by its unique ID passed as a path
@@ -214,6 +235,21 @@ interface OrbitdeterminationServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<OrbitdeterminationUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            OrbitdeterminationUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<OrbitdeterminationUnvalidatedPublishParams.Body>
+    ): CompletableFuture<Void?> = unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [OrbitdeterminationServiceAsync] that provides access to raw HTTP responses for
      * each method.
@@ -229,6 +265,11 @@ interface OrbitdeterminationServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): OrbitdeterminationServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for manipulating and querying Orbit Determination (OD)
+         * data. Orbit Determination data contains algorithm results that describe General
+         * Perturbations or Special Perturbations orbital updates.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**
@@ -304,6 +345,21 @@ interface OrbitdeterminationServiceAsync {
             params: OrbitdeterminationCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<OrbitdeterminationCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(
+                OrbitdeterminationCreateBulkParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<OrbitdeterminationCreateBulkParams.Body>
+        ): CompletableFuture<HttpResponse> = createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/orbitdetermination/{id}`, but is otherwise the
@@ -399,5 +455,20 @@ interface OrbitdeterminationServiceAsync {
             params: OrbitdeterminationUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<OrbitdeterminationUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                OrbitdeterminationUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<OrbitdeterminationUnvalidatedPublishParams.Body>
+        ): CompletableFuture<HttpResponse> = unvalidatedPublish(body, RequestOptions.none())
     }
 }

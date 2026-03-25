@@ -41,6 +41,12 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for querying and manipulation of element set data describing
+ * orbital characteristics of on-orbit objects. An element set is a collection of parameters that
+ * are used, along with an orbit propagator, to predict the motion of a satellite. The element set,
+ * or elset for short, consists of identification data, the classical elements and drag parameters.
+ */
 class ElsetServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     ElsetServiceAsync {
 
@@ -57,8 +63,22 @@ class ElsetServiceAsyncImpl internal constructor(private val clientOptions: Clie
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): ElsetServiceAsync =
         ElsetServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for querying and manipulation of element set data
+     * describing orbital characteristics of on-orbit objects. An element set is a collection of
+     * parameters that are used, along with an orbit propagator, to predict the motion of a
+     * satellite. The element set, or elset for short, consists of identification data, the
+     * classical elements and drag parameters.
+     */
     override fun current(): CurrentServiceAsync = current
 
+    /**
+     * These services provide operations for querying and manipulation of element set data
+     * describing orbital characteristics of on-orbit objects. An element set is a collection of
+     * parameters that are used, along with an orbit propagator, to predict the motion of a
+     * satellite. The element set, or elset for short, consists of identification data, the
+     * classical elements and drag parameters.
+     */
     override fun history(): HistoryServiceAsync = history
 
     override fun create(
@@ -152,8 +172,22 @@ class ElsetServiceAsyncImpl internal constructor(private val clientOptions: Clie
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for querying and manipulation of element set data
+         * describing orbital characteristics of on-orbit objects. An element set is a collection of
+         * parameters that are used, along with an orbit propagator, to predict the motion of a
+         * satellite. The element set, or elset for short, consists of identification data, the
+         * classical elements and drag parameters.
+         */
         override fun current(): CurrentServiceAsync.WithRawResponse = current
 
+        /**
+         * These services provide operations for querying and manipulation of element set data
+         * describing orbital characteristics of on-orbit objects. An element set is a collection of
+         * parameters that are used, along with an orbit propagator, to predict the motion of a
+         * satellite. The element set, or elset for short, consists of identification data, the
+         * classical elements and drag parameters.
+         */
         override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -261,6 +295,7 @@ class ElsetServiceAsyncImpl internal constructor(private val clientOptions: Clie
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "elset", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

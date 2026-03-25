@@ -20,6 +20,11 @@ interface PoiService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): PoiService
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     fun history(): HistoryService
 
     /** A view of [PoiService] that provides access to raw HTTP responses for each method. */
@@ -32,6 +37,11 @@ interface PoiService {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): PoiService.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         fun history(): HistoryService.WithRawResponse
     }
 }

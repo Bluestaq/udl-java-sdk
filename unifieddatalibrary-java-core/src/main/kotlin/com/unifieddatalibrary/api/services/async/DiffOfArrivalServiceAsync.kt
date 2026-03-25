@@ -16,6 +16,13 @@ import com.unifieddatalibrary.api.services.async.diffofarrival.HistoryServiceAsy
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for querying and manipulation of Signal time and frequency
+ * difference of arrival (TDOA/FDOA) information obtained by using passive RF based sensor
+ * phenomenologies and sensor triangulation. The J2000 coordinate frame is the preferred frame for
+ * all observations, but in some cases observations may be in another frame depending on the
+ * provider.
+ */
 interface DiffOfArrivalServiceAsync {
 
     /**
@@ -30,6 +37,13 @@ interface DiffOfArrivalServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): DiffOfArrivalServiceAsync
 
+    /**
+     * These services provide operations for querying and manipulation of Signal time and frequency
+     * difference of arrival (TDOA/FDOA) information obtained by using passive RF based sensor
+     * phenomenologies and sensor triangulation. The J2000 coordinate frame is the preferred frame
+     * for all observations, but in some cases observations may be in another frame depending on the
+     * provider.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -124,6 +138,21 @@ interface DiffOfArrivalServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<DiffOfArrivalUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            DiffOfArrivalUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<DiffOfArrivalUnvalidatedPublishParams.Body>
+    ): CompletableFuture<Void?> = unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [DiffOfArrivalServiceAsync] that provides access to raw HTTP responses for each
      * method.
@@ -139,6 +168,13 @@ interface DiffOfArrivalServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): DiffOfArrivalServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for querying and manipulation of Signal time and
+         * frequency difference of arrival (TDOA/FDOA) information obtained by using passive RF
+         * based sensor phenomenologies and sensor triangulation. The J2000 coordinate frame is the
+         * preferred frame for all observations, but in some cases observations may be in another
+         * frame depending on the provider.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**
@@ -235,5 +271,20 @@ interface DiffOfArrivalServiceAsync {
             params: DiffOfArrivalUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<DiffOfArrivalUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                DiffOfArrivalUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<DiffOfArrivalUnvalidatedPublishParams.Body>
+        ): CompletableFuture<HttpResponse> = unvalidatedPublish(body, RequestOptions.none())
     }
 }

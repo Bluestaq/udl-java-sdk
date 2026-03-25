@@ -23,6 +23,14 @@ import com.unifieddatalibrary.api.services.async.statevector.HistoryServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * This service provides operations for querying and manipulation of state vectors for On-orbit
+ * objects. State vectors are cartesian vectors of position (r) and velocity (v) that together with
+ * their time (epoch) (t) uniquely determine the trajectory of the orbiting body in space. J2000 is
+ * the preferred coordinate frame for all state vector positions/velocities in UDL, but in some
+ * cases data may be in another frame depending on the provider and/or datatype. Please see the
+ * 'Discover' tab in the storefront to confirm coordinate frames by data provider.
+ */
 interface StateVectorServiceAsync {
 
     /**
@@ -37,8 +45,24 @@ interface StateVectorServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): StateVectorServiceAsync
 
+    /**
+     * This service provides operations for querying and manipulation of state vectors for On-orbit
+     * objects. State vectors are cartesian vectors of position (r) and velocity (v) that together
+     * with their time (epoch) (t) uniquely determine the trajectory of the orbiting body in space.
+     * J2000 is the preferred coordinate frame for all state vector positions/velocities in UDL, but
+     * in some cases data may be in another frame depending on the provider and/or datatype. Please
+     * see the 'Discover' tab in the storefront to confirm coordinate frames by data provider.
+     */
     fun current(): CurrentServiceAsync
 
+    /**
+     * This service provides operations for querying and manipulation of state vectors for On-orbit
+     * objects. State vectors are cartesian vectors of position (r) and velocity (v) that together
+     * with their time (epoch) (t) uniquely determine the trajectory of the orbiting body in space.
+     * J2000 is the preferred coordinate frame for all state vector positions/velocities in UDL, but
+     * in some cases data may be in another frame depending on the provider and/or datatype. Please
+     * see the 'Discover' tab in the storefront to confirm coordinate frames by data provider.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -115,6 +139,17 @@ interface StateVectorServiceAsync {
         params: StateVectorCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<StateVectorIngest>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(StateVectorCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<StateVectorIngest>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to get a single state vector by its unique ID passed as a path parameter.
@@ -202,6 +237,20 @@ interface StateVectorServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<StateVectorIngest>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            StateVectorUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<StateVectorIngest>): CompletableFuture<Void?> =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [StateVectorServiceAsync] that provides access to raw HTTP responses for each
      * method.
@@ -217,8 +266,26 @@ interface StateVectorServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): StateVectorServiceAsync.WithRawResponse
 
+        /**
+         * This service provides operations for querying and manipulation of state vectors for
+         * On-orbit objects. State vectors are cartesian vectors of position (r) and velocity (v)
+         * that together with their time (epoch) (t) uniquely determine the trajectory of the
+         * orbiting body in space. J2000 is the preferred coordinate frame for all state vector
+         * positions/velocities in UDL, but in some cases data may be in another frame depending on
+         * the provider and/or datatype. Please see the 'Discover' tab in the storefront to confirm
+         * coordinate frames by data provider.
+         */
         fun current(): CurrentServiceAsync.WithRawResponse
 
+        /**
+         * This service provides operations for querying and manipulation of state vectors for
+         * On-orbit objects. State vectors are cartesian vectors of position (r) and velocity (v)
+         * that together with their time (epoch) (t) uniquely determine the trajectory of the
+         * orbiting body in space. J2000 is the preferred coordinate frame for all state vector
+         * positions/velocities in UDL, but in some cases data may be in another frame depending on
+         * the provider and/or datatype. Please see the 'Discover' tab in the storefront to confirm
+         * coordinate frames by data provider.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**
@@ -288,6 +355,17 @@ interface StateVectorServiceAsync {
             params: StateVectorCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<StateVectorIngest>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(StateVectorCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(body: List<StateVectorIngest>): CompletableFuture<HttpResponse> =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/statevector/{id}`, but is otherwise the same as
@@ -381,5 +459,19 @@ interface StateVectorServiceAsync {
             params: StateVectorUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<StateVectorIngest>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                StateVectorUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(body: List<StateVectorIngest>): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(body, RequestOptions.none())
     }
 }

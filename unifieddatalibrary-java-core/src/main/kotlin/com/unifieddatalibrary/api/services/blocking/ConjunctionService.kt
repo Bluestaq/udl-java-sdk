@@ -23,6 +23,7 @@ import com.unifieddatalibrary.api.models.conjunctions.ConjunctionUploadConjuncti
 import com.unifieddatalibrary.api.services.blocking.conjunctions.HistoryService
 import java.util.function.Consumer
 
+/** These services provide operations for manipulation and querying of conjunctions. */
 interface ConjunctionService {
 
     /**
@@ -37,6 +38,7 @@ interface ConjunctionService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): ConjunctionService
 
+    /** These services provide operations for manipulation and querying of conjunctions. */
     fun history(): HistoryService
 
     /**
@@ -130,6 +132,16 @@ interface ConjunctionService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<ConjunctionCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(ConjunctionCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<ConjunctionCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to dynamically query historical data by a variety of query parameters not
      * specified in this API documentation. See the queryhelp operation
@@ -200,6 +212,20 @@ interface ConjunctionService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<ConjunctionUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            ConjunctionUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<ConjunctionUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * Service to accept multiple CDMs in as zip file or a single CDM as payload. The service
      * converts key-value pair formatted CDMs to UDL formats and stores them. The CDM format is as
@@ -249,6 +275,7 @@ interface ConjunctionService {
             modifier: Consumer<ClientOptions.Builder>
         ): ConjunctionService.WithRawResponse
 
+        /** These services provide operations for manipulation and querying of conjunctions. */
         fun history(): HistoryService.WithRawResponse
 
         /**
@@ -352,6 +379,19 @@ interface ConjunctionService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
 
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<ConjunctionCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(ConjunctionCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<ConjunctionCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `get /udl/conjunction/history`, but is otherwise the same
          * as [ConjunctionService.getHistory].
@@ -425,6 +465,22 @@ interface ConjunctionService {
             params: ConjunctionUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<ConjunctionUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                ConjunctionUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(body: List<ConjunctionUnvalidatedPublishParams.Body>): HttpResponse =
+            unvalidatedPublish(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `post /filedrop/cdms`, but is otherwise the same as

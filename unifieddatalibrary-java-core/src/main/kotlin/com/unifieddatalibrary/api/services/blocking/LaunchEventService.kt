@@ -22,6 +22,11 @@ import com.unifieddatalibrary.api.models.launchevent.LaunchEventUnvalidatedPubli
 import com.unifieddatalibrary.api.services.blocking.launchevent.HistoryService
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of LaunchEvent data. Launch Event
+ * data are known space launches, either future or historic records containing items such as the
+ * launch site, launch epoch, and object.
+ */
 interface LaunchEventService {
 
     /**
@@ -36,6 +41,11 @@ interface LaunchEventService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): LaunchEventService
 
+    /**
+     * These services provide operations for manipulation and querying of LaunchEvent data. Launch
+     * Event data are known space launches, either future or historic records containing items such
+     * as the launch site, launch epoch, and object.
+     */
     fun history(): HistoryService
 
     /**
@@ -94,6 +104,16 @@ interface LaunchEventService {
         params: LaunchEventCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<LaunchEventCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(LaunchEventCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<LaunchEventCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to get a single LaunchEvent record by its unique ID passed as a path
@@ -181,6 +201,20 @@ interface LaunchEventService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<LaunchEventUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            LaunchEventUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<LaunchEventUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [LaunchEventService] that provides access to raw HTTP responses for each method.
      */
@@ -195,6 +229,11 @@ interface LaunchEventService {
             modifier: Consumer<ClientOptions.Builder>
         ): LaunchEventService.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of LaunchEvent data.
+         * Launch Event data are known space launches, either future or historic records containing
+         * items such as the launch site, launch epoch, and object.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**
@@ -256,6 +295,19 @@ interface LaunchEventService {
             params: LaunchEventCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<LaunchEventCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(LaunchEventCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<LaunchEventCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/launchevent/{id}`, but is otherwise the same as
@@ -358,5 +410,21 @@ interface LaunchEventService {
             params: LaunchEventUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<LaunchEventUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                LaunchEventUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(body: List<LaunchEventUnvalidatedPublishParams.Body>): HttpResponse =
+            unvalidatedPublish(body, RequestOptions.none())
     }
 }

@@ -24,6 +24,12 @@ import com.unifieddatalibrary.api.models.globalatmosphericmodel.history.HistoryL
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * Models and Simulations is a collection of services that allow consumers to interact with data
+ * products representing independent models of various phenomenon, artificial intelligence models
+ * and predictions, or of mathematical parameters meant to feed mod and sim tools to produce
+ * estimates of environmental entities such as atmospheric models and heat maps.
+ */
 class HistoryServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryServiceAsync {
 
@@ -142,6 +148,7 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "globalatmosphericmodel", "history", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

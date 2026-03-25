@@ -33,6 +33,13 @@ import com.unifieddatalibrary.api.models.aircraftstatusremarks.Aircraftstatusrem
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This service provides operations for manipulation and querying of Aircraft and Aircraft Status
+ * data. Aircraft contains the static data of the specific aircraft: tail number, cruise speed, max
+ * speed, minimum required runway length, etc. The Aircraft Status contains the dynamic data
+ * associated with the specific aircraft: remaining fuel, mission readiness, and inventory for
+ * example.
+ */
 class AircraftStatusRemarkServiceImpl
 internal constructor(private val clientOptions: ClientOptions) : AircraftStatusRemarkService {
 
@@ -254,6 +261,7 @@ internal constructor(private val clientOptions: ClientOptions) : AircraftStatusR
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "aircraftstatusremark", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

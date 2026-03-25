@@ -1245,6 +1245,8 @@ private constructor(
         private val chanType: JsonField<String>,
         private val chanUnit: JsonField<String>,
         private val msgNumber: JsonField<Int>,
+        private val obQuality: JsonField<String>,
+        private val obQualityIndicator: JsonField<String>,
         private val obValue: JsonField<Double>,
         private val species: JsonField<String>,
         private val additionalProperties: MutableMap<String, JsonValue>,
@@ -1268,6 +1270,12 @@ private constructor(
             @ExcludeMissing
             chanUnit: JsonField<String> = JsonMissing.of(),
             @JsonProperty("msgNumber") @ExcludeMissing msgNumber: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("obQuality")
+            @ExcludeMissing
+            obQuality: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("obQualityIndicator")
+            @ExcludeMissing
+            obQualityIndicator: JsonField<String> = JsonMissing.of(),
             @JsonProperty("obValue") @ExcludeMissing obValue: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("species") @ExcludeMissing species: JsonField<String> = JsonMissing.of(),
         ) : this(
@@ -1279,6 +1287,8 @@ private constructor(
             chanType,
             chanUnit,
             msgNumber,
+            obQuality,
+            obQualityIndicator,
             obValue,
             species,
             mutableMapOf(),
@@ -1350,6 +1360,28 @@ private constructor(
          *   (e.g. if the server responded with an unexpected value).
          */
         fun msgNumber(): Optional<Int> = msgNumber.getOptional("msgNumber")
+
+        /**
+         * The quality of this individual observation. The observation quality indicator value may
+         * vary among providers and may be a generalized statement (BAD, GOOD, UNCERTAIN, UNKNOWN)
+         * or a numeric value. Users should consult the data provider to verify the usage of the
+         * observation.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun obQuality(): Optional<String> = obQuality.getOptional("obQuality")
+
+        /**
+         * The quality indicator of this individual observation. The observation quality indicator
+         * value is a descriptive value indicating the reason for the quality designation of the
+         * data.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun obQualityIndicator(): Optional<String> =
+            obQualityIndicator.getOptional("obQualityIndicator")
 
         /**
          * A single observation value expressed in the specified unit of measure (obUoM).
@@ -1430,6 +1462,23 @@ private constructor(
         @JsonProperty("msgNumber") @ExcludeMissing fun _msgNumber(): JsonField<Int> = msgNumber
 
         /**
+         * Returns the raw JSON value of [obQuality].
+         *
+         * Unlike [obQuality], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("obQuality") @ExcludeMissing fun _obQuality(): JsonField<String> = obQuality
+
+        /**
+         * Returns the raw JSON value of [obQualityIndicator].
+         *
+         * Unlike [obQualityIndicator], this method doesn't throw if the JSON field has an
+         * unexpected type.
+         */
+        @JsonProperty("obQualityIndicator")
+        @ExcludeMissing
+        fun _obQualityIndicator(): JsonField<String> = obQualityIndicator
+
+        /**
          * Returns the raw JSON value of [obValue].
          *
          * Unlike [obValue], this method doesn't throw if the JSON field has an unexpected type.
@@ -1480,6 +1529,8 @@ private constructor(
             private var chanType: JsonField<String> = JsonMissing.of()
             private var chanUnit: JsonField<String> = JsonMissing.of()
             private var msgNumber: JsonField<Int> = JsonMissing.of()
+            private var obQuality: JsonField<String> = JsonMissing.of()
+            private var obQualityIndicator: JsonField<String> = JsonMissing.of()
             private var obValue: JsonField<Double> = JsonMissing.of()
             private var species: JsonField<String> = JsonMissing.of()
             private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
@@ -1494,6 +1545,8 @@ private constructor(
                 chanType = ecpedrMeasurement.chanType
                 chanUnit = ecpedrMeasurement.chanUnit
                 msgNumber = ecpedrMeasurement.msgNumber
+                obQuality = ecpedrMeasurement.obQuality
+                obQualityIndicator = ecpedrMeasurement.obQualityIndicator
                 obValue = ecpedrMeasurement.obValue
                 species = ecpedrMeasurement.species
                 additionalProperties = ecpedrMeasurement.additionalProperties.toMutableMap()
@@ -1605,6 +1658,42 @@ private constructor(
              */
             fun msgNumber(msgNumber: JsonField<Int>) = apply { this.msgNumber = msgNumber }
 
+            /**
+             * The quality of this individual observation. The observation quality indicator value
+             * may vary among providers and may be a generalized statement (BAD, GOOD, UNCERTAIN,
+             * UNKNOWN) or a numeric value. Users should consult the data provider to verify the
+             * usage of the observation.
+             */
+            fun obQuality(obQuality: String) = obQuality(JsonField.of(obQuality))
+
+            /**
+             * Sets [Builder.obQuality] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.obQuality] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun obQuality(obQuality: JsonField<String>) = apply { this.obQuality = obQuality }
+
+            /**
+             * The quality indicator of this individual observation. The observation quality
+             * indicator value is a descriptive value indicating the reason for the quality
+             * designation of the data.
+             */
+            fun obQualityIndicator(obQualityIndicator: String) =
+                obQualityIndicator(JsonField.of(obQualityIndicator))
+
+            /**
+             * Sets [Builder.obQualityIndicator] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.obQualityIndicator] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun obQualityIndicator(obQualityIndicator: JsonField<String>) = apply {
+                this.obQualityIndicator = obQualityIndicator
+            }
+
             /** A single observation value expressed in the specified unit of measure (obUoM). */
             fun obValue(obValue: Double) = obValue(JsonField.of(obValue))
 
@@ -1673,6 +1762,8 @@ private constructor(
                     chanType,
                     chanUnit,
                     msgNumber,
+                    obQuality,
+                    obQualityIndicator,
                     obValue,
                     species,
                     additionalProperties.toMutableMap(),
@@ -1694,6 +1785,8 @@ private constructor(
             chanType()
             chanUnit()
             msgNumber()
+            obQuality()
+            obQualityIndicator()
             obValue()
             species()
             validated = true
@@ -1723,6 +1816,8 @@ private constructor(
                 (if (chanType.asKnown().isPresent) 1 else 0) +
                 (if (chanUnit.asKnown().isPresent) 1 else 0) +
                 (if (msgNumber.asKnown().isPresent) 1 else 0) +
+                (if (obQuality.asKnown().isPresent) 1 else 0) +
+                (if (obQualityIndicator.asKnown().isPresent) 1 else 0) +
                 (if (obValue.asKnown().isPresent) 1 else 0) +
                 (if (species.asKnown().isPresent) 1 else 0)
 
@@ -1740,6 +1835,8 @@ private constructor(
                 chanType == other.chanType &&
                 chanUnit == other.chanUnit &&
                 msgNumber == other.msgNumber &&
+                obQuality == other.obQuality &&
+                obQualityIndicator == other.obQualityIndicator &&
                 obValue == other.obValue &&
                 species == other.species &&
                 additionalProperties == other.additionalProperties
@@ -1755,6 +1852,8 @@ private constructor(
                 chanType,
                 chanUnit,
                 msgNumber,
+                obQuality,
+                obQualityIndicator,
                 obValue,
                 species,
                 additionalProperties,
@@ -1764,7 +1863,7 @@ private constructor(
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "EcpedrMeasurement{obType=$obType, obUoM=$obUoM, chanEnergyHigh=$chanEnergyHigh, chanEnergyLow=$chanEnergyLow, chanId=$chanId, chanType=$chanType, chanUnit=$chanUnit, msgNumber=$msgNumber, obValue=$obValue, species=$species, additionalProperties=$additionalProperties}"
+            "EcpedrMeasurement{obType=$obType, obUoM=$obUoM, chanEnergyHigh=$chanEnergyHigh, chanEnergyLow=$chanEnergyLow, chanId=$chanId, chanType=$chanType, chanUnit=$chanUnit, msgNumber=$msgNumber, obQuality=$obQuality, obQualityIndicator=$obQualityIndicator, obValue=$obValue, species=$species, additionalProperties=$additionalProperties}"
     }
 
     /**

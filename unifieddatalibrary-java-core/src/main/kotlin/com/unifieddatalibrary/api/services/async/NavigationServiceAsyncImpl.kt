@@ -35,6 +35,7 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/** These services provide operations for manipulation and querying of on-orbit payloads. */
 class NavigationServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     NavigationServiceAsync {
 
@@ -243,6 +244,7 @@ class NavigationServiceAsyncImpl internal constructor(private val clientOptions:
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "navigation", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

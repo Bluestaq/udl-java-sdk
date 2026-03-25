@@ -24,6 +24,15 @@ import com.unifieddatalibrary.api.models.weatherreport.history.WeatherReportFull
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide for posting and querying terrestrial weather conditions over a target area
+ * or region and raw sensor data used to produce condition reports. Weather Reports describe current
+ * weather conditions over a target point or region to include general temperatures, pressures, and
+ * moisture accumulation, as well as navigational considerations such as altimeter settings,
+ * visibility, wind speeds, and cloud heights etc. Weather Data contains algorithmic parameters and
+ * dynamic, raw measurements collected by individual sensors such as signal power, noise level,
+ * etc., which are generally processed across multiple sensors to produce weather reports.
+ */
 class HistoryServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryServiceAsync {
 
@@ -142,6 +151,7 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "weatherreport", "history", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

@@ -16,6 +16,13 @@ import com.unifieddatalibrary.api.models.tdoafdoa.diffofarrival.DiffofarrivalFul
 import com.unifieddatalibrary.api.services.blocking.diffofarrival.HistoryService
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for querying and manipulation of Signal time and frequency
+ * difference of arrival (TDOA/FDOA) information obtained by using passive RF based sensor
+ * phenomenologies and sensor triangulation. The J2000 coordinate frame is the preferred frame for
+ * all observations, but in some cases observations may be in another frame depending on the
+ * provider.
+ */
 interface DiffOfArrivalService {
 
     /**
@@ -30,6 +37,13 @@ interface DiffOfArrivalService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): DiffOfArrivalService
 
+    /**
+     * These services provide operations for querying and manipulation of Signal time and frequency
+     * difference of arrival (TDOA/FDOA) information obtained by using passive RF based sensor
+     * phenomenologies and sensor triangulation. The J2000 coordinate frame is the preferred frame
+     * for all observations, but in some cases observations may be in another frame depending on the
+     * provider.
+     */
     fun history(): HistoryService
 
     /**
@@ -118,6 +132,20 @@ interface DiffOfArrivalService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<DiffOfArrivalUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            DiffOfArrivalUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<DiffOfArrivalUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [DiffOfArrivalService] that provides access to raw HTTP responses for each method.
      */
@@ -132,6 +160,13 @@ interface DiffOfArrivalService {
             modifier: Consumer<ClientOptions.Builder>
         ): DiffOfArrivalService.WithRawResponse
 
+        /**
+         * These services provide operations for querying and manipulation of Signal time and
+         * frequency difference of arrival (TDOA/FDOA) information obtained by using passive RF
+         * based sensor phenomenologies and sensor triangulation. The J2000 coordinate frame is the
+         * preferred frame for all observations, but in some cases observations may be in another
+         * frame depending on the provider.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**
@@ -236,5 +271,22 @@ interface DiffOfArrivalService {
             params: DiffOfArrivalUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<DiffOfArrivalUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                DiffOfArrivalUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<DiffOfArrivalUnvalidatedPublishParams.Body>
+        ): HttpResponse = unvalidatedPublish(body, RequestOptions.none())
     }
 }

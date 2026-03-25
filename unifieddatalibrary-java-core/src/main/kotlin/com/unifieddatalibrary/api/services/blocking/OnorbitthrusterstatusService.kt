@@ -21,6 +21,10 @@ import com.unifieddatalibrary.api.models.onorbitthrusterstatus.Onorbitthrusterst
 import com.unifieddatalibrary.api.services.blocking.onorbitthrusterstatus.HistoryService
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit objects of interest,
+ * their components, and various lists and status of those objects.
+ */
 interface OnorbitthrusterstatusService {
 
     /**
@@ -35,6 +39,10 @@ interface OnorbitthrusterstatusService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): OnorbitthrusterstatusService
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     fun history(): HistoryService
 
     /**
@@ -145,6 +153,20 @@ interface OnorbitthrusterstatusService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<OnorbitthrusterstatusCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        createBulk(
+            OnorbitthrusterstatusCreateBulkParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see createBulk */
+    fun createBulk(body: List<OnorbitthrusterstatusCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to get a single OnorbitThrusterStatus record by its unique ID passed as a
      * path parameter. OnorbitThrusterStatus records are information for OnorbitThruster objects.
@@ -233,6 +255,10 @@ interface OnorbitthrusterstatusService {
             modifier: Consumer<ClientOptions.Builder>
         ): OnorbitthrusterstatusService.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**
@@ -354,6 +380,22 @@ interface OnorbitthrusterstatusService {
             params: OnorbitthrusterstatusCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<OnorbitthrusterstatusCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(
+                OnorbitthrusterstatusCreateBulkParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<OnorbitthrusterstatusCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/onorbitthrusterstatus/{id}`, but is otherwise

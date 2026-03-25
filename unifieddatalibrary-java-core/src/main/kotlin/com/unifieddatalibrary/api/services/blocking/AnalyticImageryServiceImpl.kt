@@ -34,6 +34,11 @@ import com.unifieddatalibrary.api.services.blocking.analyticimagery.HistoryServi
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for manipulation and querying of Report and Activity
+ * information. This information includes analytic reports, significant events, route statistics,
+ * EMI Reports, and other georeferenced reports and activities.
+ */
 class AnalyticImageryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     AnalyticImageryService {
 
@@ -48,6 +53,11 @@ class AnalyticImageryServiceImpl internal constructor(private val clientOptions:
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): AnalyticImageryService =
         AnalyticImageryServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     override fun history(): HistoryService = history
 
     override fun retrieve(
@@ -114,6 +124,11 @@ class AnalyticImageryServiceImpl internal constructor(private val clientOptions:
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val retrieveHandler: Handler<AnalyticImageryFull> =
@@ -191,6 +206,7 @@ class AnalyticImageryServiceImpl internal constructor(private val clientOptions:
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "analyticimagery", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
@@ -212,6 +228,7 @@ class AnalyticImageryServiceImpl internal constructor(private val clientOptions:
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "analyticimagery", "getFile", params._pathParam(0))
+                    .putHeader("Accept", "application/octet-stream")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

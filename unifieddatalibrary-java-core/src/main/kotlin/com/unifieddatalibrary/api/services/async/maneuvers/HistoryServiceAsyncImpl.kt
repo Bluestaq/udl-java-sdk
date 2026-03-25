@@ -24,6 +24,12 @@ import com.unifieddatalibrary.api.models.maneuvers.history.HistoryListResponse
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * This service provides operations for querying and manipulation of detected/possible/confirmed
+ * on-orbit maneuvers. The J2000 coordinate frame is the preferred frame for all maneuver data, but
+ * in some cases data may be in another frame depending on the provider. Check the Storefront 'Data
+ * Products' section under the 'Discover' tab for maneuver data provider information.
+ */
 class HistoryServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryServiceAsync {
 
@@ -142,6 +148,7 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "maneuver", "history", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

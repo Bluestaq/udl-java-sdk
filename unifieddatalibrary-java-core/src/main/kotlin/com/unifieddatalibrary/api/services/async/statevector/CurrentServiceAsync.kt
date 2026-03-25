@@ -12,6 +12,14 @@ import com.unifieddatalibrary.api.models.statevector.current.CurrentTupleParams
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * This service provides operations for querying and manipulation of state vectors for On-orbit
+ * objects. State vectors are cartesian vectors of position (r) and velocity (v) that together with
+ * their time (epoch) (t) uniquely determine the trajectory of the orbiting body in space. J2000 is
+ * the preferred coordinate frame for all state vector positions/velocities in UDL, but in some
+ * cases data may be in another frame depending on the provider and/or datatype. Please see the
+ * 'Discover' tab in the storefront to confirm coordinate frames by data provider.
+ */
 interface CurrentServiceAsync {
 
     /**

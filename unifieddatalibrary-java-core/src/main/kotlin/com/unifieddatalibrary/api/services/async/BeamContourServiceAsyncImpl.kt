@@ -35,6 +35,16 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This collection of services provides operations for querying and manipulation of satellite
+ * antenna beams, and querying of beam contours and service areas. Beam contours are the geographic
+ * representation of the relative gain levels of beam power off of the maximum gain boresight
+ * points. Similarly, service areas are the geographic footprints of the areas served by a
+ * particular beam, and may be made up of multiple service regions. Well-Known Text (WKT) and
+ * GeoJSON formats are used for GIS representation and query support (see
+ * https://www.opengeospatial.org/standards/wkt-crs and https://geojson.org/ for more information on
+ * these formats).
+ */
 class BeamContourServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     BeamContourServiceAsync {
 
@@ -283,6 +293,7 @@ class BeamContourServiceAsyncImpl internal constructor(private val clientOptions
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "beamcontour", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

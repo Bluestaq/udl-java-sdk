@@ -32,6 +32,11 @@ import com.unifieddatalibrary.api.services.blocking.sigact.HistoryService
 import com.unifieddatalibrary.api.services.blocking.sigact.HistoryServiceImpl
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of Report and Activity
+ * information. This information includes analytic reports, significant events, route statistics,
+ * EMI Reports, and other georeferenced reports and activities.
+ */
 class SigactServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     SigactService {
 
@@ -46,6 +51,11 @@ class SigactServiceImpl internal constructor(private val clientOptions: ClientOp
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): SigactService =
         SigactServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     override fun history(): HistoryService = history
 
     override fun list(params: SigactListParams, requestOptions: RequestOptions): SigactListPage =
@@ -97,6 +107,11 @@ class SigactServiceImpl internal constructor(private val clientOptions: ClientOp
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val listHandler: Handler<List<SigactListResponse>> =
@@ -144,6 +159,7 @@ class SigactServiceImpl internal constructor(private val clientOptions: ClientOp
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "sigact", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

@@ -26,6 +26,10 @@ import com.unifieddatalibrary.api.models.sgi.SgiUpdateParams
 import com.unifieddatalibrary.api.services.blocking.sgi.HistoryService
 import java.util.function.Consumer
 
+/**
+ * This service provides operations for manipulation and querying of space weather/solar,
+ * geomagnetic, and radiation belt index data.
+ */
 interface SgiService {
 
     /**
@@ -40,6 +44,10 @@ interface SgiService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): SgiService
 
+    /**
+     * This service provides operations for manipulation and querying of space weather/solar,
+     * geomagnetic, and radiation belt index data.
+     */
     fun history(): HistoryService
 
     /**
@@ -157,6 +165,15 @@ interface SgiService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<SgiCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(SgiCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<SgiCreateBulkParams.Body>) = createBulk(body, RequestOptions.none())
+
     /** Service operation to get a single SGI record by its unique ID passed as a path parameter. */
     fun get(id: String): SgiGetResponse = get(id, SgiGetParams.none())
 
@@ -257,6 +274,16 @@ interface SgiService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<SgiUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = unvalidatedPublish(SgiUnvalidatedPublishParams.builder().body(body).build(), requestOptions)
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<SgiUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /** A view of [SgiService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
@@ -267,6 +294,10 @@ interface SgiService {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): SgiService.WithRawResponse
 
+        /**
+         * This service provides operations for manipulation and querying of space weather/solar,
+         * geomagnetic, and radiation belt index data.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**
@@ -406,6 +437,19 @@ interface SgiService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
 
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<SgiCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(SgiCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<SgiCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `get /udl/sgi/{id}`, but is otherwise the same as
          * [SgiService.get].
@@ -530,5 +574,21 @@ interface SgiService {
             params: SgiUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<SgiUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                SgiUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(body: List<SgiUnvalidatedPublishParams.Body>): HttpResponse =
+            unvalidatedPublish(body, RequestOptions.none())
     }
 }

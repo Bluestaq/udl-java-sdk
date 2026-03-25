@@ -33,6 +33,10 @@ import com.unifieddatalibrary.api.models.crew.CrewUpdateParams
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for posting and querying crew data. Crew data contains
+ * information about its members and their assignments.
+ */
 class CrewServiceImpl internal constructor(private val clientOptions: ClientOptions) : CrewService {
 
     private val withRawResponse: CrewService.WithRawResponse by lazy {
@@ -218,6 +222,7 @@ class CrewServiceImpl internal constructor(private val clientOptions: ClientOpti
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "crew", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

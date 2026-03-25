@@ -35,6 +35,10 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This collection of services provide operations for manipulating and querying of equipment related
+ * data.
+ */
 class EquipmentServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     EquipmentServiceAsync {
 
@@ -283,6 +287,7 @@ class EquipmentServiceAsyncImpl internal constructor(private val clientOptions: 
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "equipment", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

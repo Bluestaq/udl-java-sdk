@@ -21,6 +21,11 @@ import com.unifieddatalibrary.api.services.async.hazard.HistoryServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of Report and Activity
+ * information. This information includes analytic reports, significant events, route statistics,
+ * EMI Reports, and other georeferenced reports and activities.
+ */
 interface HazardServiceAsync {
 
     /**
@@ -35,6 +40,11 @@ interface HazardServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): HazardServiceAsync
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -96,6 +106,17 @@ interface HazardServiceAsync {
         params: HazardCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<HazardCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(HazardCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<HazardCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
 
     /** Service operation to get a single Hazard by its unique ID passed as a path parameter. */
     fun get(id: String): CompletableFuture<HazardGetResponse> = get(id, HazardGetParams.none())
@@ -181,6 +202,11 @@ interface HazardServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): HazardServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**
@@ -236,6 +262,17 @@ interface HazardServiceAsync {
             params: HazardCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<HazardCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(HazardCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(body: List<HazardCreateBulkParams.Body>): CompletableFuture<HttpResponse> =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/hazard/{id}`, but is otherwise the same as

@@ -19,6 +19,11 @@ import com.unifieddatalibrary.api.models.operatingunitremark.Operatingunitremark
 import com.unifieddatalibrary.api.models.operatingunitremark.OperatingunitremarkTupleParams
 import java.util.function.Consumer
 
+/**
+ * Service operations for querying and manipulation of miscellaneous supporting data such as
+ * countries (which can represent countries, multi-national consortiums, and international
+ * organizations), data owners, locations, entities, organizations, etc.
+ */
 interface OperatingunitremarkService {
 
     /**
@@ -107,6 +112,16 @@ interface OperatingunitremarkService {
         params: OperatingunitremarkCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<OperatingunitremarkCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(OperatingunitremarkCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<OperatingunitremarkCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to get a single operatingunitremark record by its unique ID passed as a
@@ -276,6 +291,22 @@ interface OperatingunitremarkService {
             params: OperatingunitremarkCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<OperatingunitremarkCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(
+                OperatingunitremarkCreateBulkParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<OperatingunitremarkCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/operatingunitremark/{id}`, but is otherwise the

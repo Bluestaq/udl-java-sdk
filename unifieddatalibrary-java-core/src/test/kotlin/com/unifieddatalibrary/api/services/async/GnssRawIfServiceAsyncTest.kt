@@ -161,7 +161,7 @@ internal class GnssRawIfServiceAsyncTest {
 
         val future =
             gnssRawIfServiceAsync.uploadZip(
-                GnssRawIfUploadZipParams.builder().file("some content".byteInputStream()).build()
+                GnssRawIfUploadZipParams.builder().file("Example data".byteInputStream()).build()
             )
 
         val response = future.get()

@@ -34,6 +34,10 @@ import com.unifieddatalibrary.api.models.equipment.EquipmentUpdateParams
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This collection of services provide operations for manipulating and querying of equipment related
+ * data.
+ */
 class EquipmentServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     EquipmentService {
 
@@ -255,6 +259,7 @@ class EquipmentServiceImpl internal constructor(private val clientOptions: Clien
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "equipment", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

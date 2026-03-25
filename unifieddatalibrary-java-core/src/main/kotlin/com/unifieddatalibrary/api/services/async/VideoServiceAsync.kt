@@ -25,6 +25,7 @@ import com.unifieddatalibrary.api.services.async.video.HistoryServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/** This collection of services provides operations for video streaming. */
 interface VideoServiceAsync {
 
     /**
@@ -39,6 +40,7 @@ interface VideoServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): VideoServiceAsync
 
+    /** This collection of services provides operations for video streaming. */
     fun history(): HistoryServiceAsync
 
     /**
@@ -223,6 +225,7 @@ interface VideoServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): VideoServiceAsync.WithRawResponse
 
+        /** This collection of services provides operations for video streaming. */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**

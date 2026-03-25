@@ -37,6 +37,15 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This service provides operations for querying and manipulation of sensor data. Sensors are
+ * terrestrial or on-orbit equipment capable of taking measurements or 'observations' of on-orbit
+ * objects via several phenomenologies such as Electro-Optical (EO), Radar, and Radio Frequency
+ * (RF). This collection of operations includes 'SensorMaintenance' schedules which define
+ * known/planned future maintenance and associated operational impact of sensors as well as
+ * 'SensorCalibration' records which contains data about a sensor's overall accuracy and is used to
+ * adjust sensor settings.
+ */
 class CalibrationServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     CalibrationServiceAsync {
 
@@ -51,6 +60,15 @@ class CalibrationServiceAsyncImpl internal constructor(private val clientOptions
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): CalibrationServiceAsync =
         CalibrationServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * This service provides operations for querying and manipulation of sensor data. Sensors are
+     * terrestrial or on-orbit equipment capable of taking measurements or 'observations' of
+     * on-orbit objects via several phenomenologies such as Electro-Optical (EO), Radar, and Radio
+     * Frequency (RF). This collection of operations includes 'SensorMaintenance' schedules which
+     * define known/planned future maintenance and associated operational impact of sensors as well
+     * as 'SensorCalibration' records which contains data about a sensor's overall accuracy and is
+     * used to adjust sensor settings.
+     */
     override fun history(): HistoryServiceAsync = history
 
     override fun create(
@@ -126,6 +144,15 @@ class CalibrationServiceAsyncImpl internal constructor(private val clientOptions
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * This service provides operations for querying and manipulation of sensor data. Sensors
+         * are terrestrial or on-orbit equipment capable of taking measurements or 'observations' of
+         * on-orbit objects via several phenomenologies such as Electro-Optical (EO), Radar, and
+         * Radio Frequency (RF). This collection of operations includes 'SensorMaintenance'
+         * schedules which define known/planned future maintenance and associated operational impact
+         * of sensors as well as 'SensorCalibration' records which contains data about a sensor's
+         * overall accuracy and is used to adjust sensor settings.
+         */
         override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -234,6 +261,7 @@ class CalibrationServiceAsyncImpl internal constructor(private val clientOptions
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "sensorcalibration", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

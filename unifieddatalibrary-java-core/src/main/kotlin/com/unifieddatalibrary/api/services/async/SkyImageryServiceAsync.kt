@@ -21,6 +21,12 @@ import com.unifieddatalibrary.api.services.async.skyimagery.HistoryServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * This collection of services provides operations for querying and manipulation of sky imagery
+ * data. Sky imagery is ground or space based telescope imagery of RSO's and includes metadata on
+ * the image (time, source, etc) as well as binary image content (e.g. FITS, EOSSA, EOCHIP, MP4).
+ * Binary content must be downloaded individually by ID using the 'getFile' operation.
+ */
 interface SkyImageryServiceAsync {
 
     /**
@@ -35,6 +41,12 @@ interface SkyImageryServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): SkyImageryServiceAsync
 
+    /**
+     * This collection of services provides operations for querying and manipulation of sky imagery
+     * data. Sky imagery is ground or space based telescope imagery of RSO's and includes metadata
+     * on the image (time, source, etc) as well as binary image content (e.g. FITS, EOSSA, EOCHIP,
+     * MP4). Binary content must be downloaded individually by ID using the 'getFile' operation.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -218,6 +230,13 @@ interface SkyImageryServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): SkyImageryServiceAsync.WithRawResponse
 
+        /**
+         * This collection of services provides operations for querying and manipulation of sky
+         * imagery data. Sky imagery is ground or space based telescope imagery of RSO's and
+         * includes metadata on the image (time, source, etc) as well as binary image content (e.g.
+         * FITS, EOSSA, EOCHIP, MP4). Binary content must be downloaded individually by ID using the
+         * 'getFile' operation.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**

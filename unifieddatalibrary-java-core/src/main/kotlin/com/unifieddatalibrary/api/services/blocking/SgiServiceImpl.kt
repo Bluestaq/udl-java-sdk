@@ -40,6 +40,10 @@ import com.unifieddatalibrary.api.services.blocking.sgi.HistoryServiceImpl
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This service provides operations for manipulation and querying of space weather/solar,
+ * geomagnetic, and radiation belt index data.
+ */
 class SgiServiceImpl internal constructor(private val clientOptions: ClientOptions) : SgiService {
 
     private val withRawResponse: SgiService.WithRawResponse by lazy {
@@ -53,6 +57,10 @@ class SgiServiceImpl internal constructor(private val clientOptions: ClientOptio
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): SgiService =
         SgiServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * This service provides operations for manipulation and querying of space weather/solar,
+     * geomagnetic, and radiation belt index data.
+     */
     override fun history(): HistoryService = history
 
     override fun create(params: SgiCreateParams, requestOptions: RequestOptions) {
@@ -133,6 +141,10 @@ class SgiServiceImpl internal constructor(private val clientOptions: ClientOptio
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * This service provides operations for manipulation and querying of space weather/solar,
+         * geomagnetic, and radiation belt index data.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -240,6 +252,7 @@ class SgiServiceImpl internal constructor(private val clientOptions: ClientOptio
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "sgi", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

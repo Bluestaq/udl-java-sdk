@@ -34,6 +34,12 @@ import com.unifieddatalibrary.api.services.blocking.notification.HistoryServiceI
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * A Notification Service allowing the broadcast of generic messages to the community. Users can
+ * send free-form messages, publish lists, and notify the community about events or alerts across
+ * various domains. Notifications and alerts are categorized by a 'msgType' field and are accessible
+ * via the UDL Secure Messaging API and REST API services.
+ */
 class NotificationServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     NotificationService {
 
@@ -48,6 +54,12 @@ class NotificationServiceImpl internal constructor(private val clientOptions: Cl
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): NotificationService =
         NotificationServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * A Notification Service allowing the broadcast of generic messages to the community. Users can
+     * send free-form messages, publish lists, and notify the community about events or alerts
+     * across various domains. Notifications and alerts are categorized by a 'msgType' field and are
+     * accessible via the UDL Secure Messaging API and REST API services.
+     */
     override fun history(): HistoryService = history
 
     override fun create(params: NotificationCreateParams, requestOptions: RequestOptions) {
@@ -109,6 +121,12 @@ class NotificationServiceImpl internal constructor(private val clientOptions: Cl
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * A Notification Service allowing the broadcast of generic messages to the community. Users
+         * can send free-form messages, publish lists, and notify the community about events or
+         * alerts across various domains. Notifications and alerts are categorized by a 'msgType'
+         * field and are accessible via the UDL Secure Messaging API and REST API services.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -177,6 +195,7 @@ class NotificationServiceImpl internal constructor(private val clientOptions: Cl
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "notification", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

@@ -21,6 +21,11 @@ import com.unifieddatalibrary.api.services.async.analyticimagery.HistoryServiceA
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of Report and Activity
+ * information. This information includes analytic reports, significant events, route statistics,
+ * EMI Reports, and other georeferenced reports and activities.
+ */
 interface AnalyticImageryServiceAsync {
 
     /**
@@ -35,6 +40,11 @@ interface AnalyticImageryServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): AnalyticImageryServiceAsync
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -226,6 +236,11 @@ interface AnalyticImageryServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): AnalyticImageryServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**

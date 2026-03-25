@@ -20,6 +20,11 @@ import com.unifieddatalibrary.api.models.reportandactivities.udlsigact.UdlSigact
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for manipulation and querying of Report and Activity
+ * information. This information includes analytic reports, significant events, route statistics,
+ * EMI Reports, and other georeferenced reports and activities.
+ */
 class UdlSigactServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     UdlSigactService {
 
@@ -72,6 +77,7 @@ class UdlSigactServiceImpl internal constructor(private val clientOptions: Clien
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "sigact", "getFile", params._pathParam(0))
+                    .putHeader("Accept", "application/octet-stream")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

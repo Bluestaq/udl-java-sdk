@@ -37,6 +37,11 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for manipulation and querying of LaunchEvent data. Launch Event
+ * data are known space launches, either future or historic records containing items such as the
+ * launch site, launch epoch, and object.
+ */
 class LaunchEventServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     LaunchEventServiceAsync {
 
@@ -51,6 +56,11 @@ class LaunchEventServiceAsyncImpl internal constructor(private val clientOptions
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): LaunchEventServiceAsync =
         LaunchEventServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for manipulation and querying of LaunchEvent data. Launch
+     * Event data are known space launches, either future or historic records containing items such
+     * as the launch site, launch epoch, and object.
+     */
     override fun history(): HistoryServiceAsync = history
 
     override fun create(
@@ -126,6 +136,11 @@ class LaunchEventServiceAsyncImpl internal constructor(private val clientOptions
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for manipulation and querying of LaunchEvent data.
+         * Launch Event data are known space launches, either future or historic records containing
+         * items such as the launch site, launch epoch, and object.
+         */
         override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -201,6 +216,7 @@ class LaunchEventServiceAsyncImpl internal constructor(private val clientOptions
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "launchevent", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

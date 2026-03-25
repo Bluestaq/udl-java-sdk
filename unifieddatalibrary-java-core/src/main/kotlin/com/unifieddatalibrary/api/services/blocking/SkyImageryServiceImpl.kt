@@ -35,6 +35,12 @@ import com.unifieddatalibrary.api.services.blocking.skyimagery.HistoryServiceImp
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This collection of services provides operations for querying and manipulation of sky imagery
+ * data. Sky imagery is ground or space based telescope imagery of RSO's and includes metadata on
+ * the image (time, source, etc) as well as binary image content (e.g. FITS, EOSSA, EOCHIP, MP4).
+ * Binary content must be downloaded individually by ID using the 'getFile' operation.
+ */
 class SkyImageryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     SkyImageryService {
 
@@ -49,6 +55,12 @@ class SkyImageryServiceImpl internal constructor(private val clientOptions: Clie
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): SkyImageryService =
         SkyImageryServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * This collection of services provides operations for querying and manipulation of sky imagery
+     * data. Sky imagery is ground or space based telescope imagery of RSO's and includes metadata
+     * on the image (time, source, etc) as well as binary image content (e.g. FITS, EOSSA, EOCHIP,
+     * MP4). Binary content must be downloaded individually by ID using the 'getFile' operation.
+     */
     override fun history(): HistoryService = history
 
     override fun list(
@@ -112,6 +124,13 @@ class SkyImageryServiceImpl internal constructor(private val clientOptions: Clie
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * This collection of services provides operations for querying and manipulation of sky
+         * imagery data. Sky imagery is ground or space based telescope imagery of RSO's and
+         * includes metadata on the image (time, source, etc) as well as binary image content (e.g.
+         * FITS, EOSSA, EOCHIP, MP4). Binary content must be downloaded individually by ID using the
+         * 'getFile' operation.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val listHandler: Handler<List<SkyImageryListResponse>> =
@@ -159,6 +178,7 @@ class SkyImageryServiceImpl internal constructor(private val clientOptions: Clie
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "skyimagery", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
@@ -180,6 +200,7 @@ class SkyImageryServiceImpl internal constructor(private val clientOptions: Clie
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "skyimagery", "getFile", params._pathParam(0))
+                    .putHeader("Accept", "application/octet-stream")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

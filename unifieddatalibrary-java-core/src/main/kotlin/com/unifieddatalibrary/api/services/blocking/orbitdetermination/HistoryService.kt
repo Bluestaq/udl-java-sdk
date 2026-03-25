@@ -13,6 +13,11 @@ import com.unifieddatalibrary.api.models.orbitdetermination.history.HistoryListP
 import com.unifieddatalibrary.api.models.orbitdetermination.history.HistoryListParams
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulating and querying Orbit Determination (OD) data.
+ * Orbit Determination data contains algorithm results that describe General Perturbations or
+ * Special Perturbations orbital updates.
+ */
 interface HistoryService {
 
     /**

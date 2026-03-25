@@ -23,6 +23,12 @@ import com.unifieddatalibrary.api.models.notification.history.HistoryListPage
 import com.unifieddatalibrary.api.models.notification.history.HistoryListParams
 import java.util.function.Consumer
 
+/**
+ * A Notification Service allowing the broadcast of generic messages to the community. Users can
+ * send free-form messages, publish lists, and notify the community about events or alerts across
+ * various domains. Notifications and alerts are categorized by a 'msgType' field and are accessible
+ * via the UDL Secure Messaging API and REST API services.
+ */
 class HistoryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryService {
 
@@ -123,6 +129,7 @@ class HistoryServiceImpl internal constructor(private val clientOptions: ClientO
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "notification", "history", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

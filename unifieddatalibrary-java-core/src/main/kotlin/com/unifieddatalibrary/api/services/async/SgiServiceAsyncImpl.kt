@@ -41,6 +41,10 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This service provides operations for manipulation and querying of space weather/solar,
+ * geomagnetic, and radiation belt index data.
+ */
 class SgiServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     SgiServiceAsync {
 
@@ -55,6 +59,10 @@ class SgiServiceAsyncImpl internal constructor(private val clientOptions: Client
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): SgiServiceAsync =
         SgiServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * This service provides operations for manipulation and querying of space weather/solar,
+     * geomagnetic, and radiation belt index data.
+     */
     override fun history(): HistoryServiceAsync = history
 
     override fun create(
@@ -153,6 +161,10 @@ class SgiServiceAsyncImpl internal constructor(private val clientOptions: Client
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * This service provides operations for manipulation and querying of space weather/solar,
+         * geomagnetic, and radiation belt index data.
+         */
         override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -282,6 +294,7 @@ class SgiServiceAsyncImpl internal constructor(private val clientOptions: Client
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "sgi", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

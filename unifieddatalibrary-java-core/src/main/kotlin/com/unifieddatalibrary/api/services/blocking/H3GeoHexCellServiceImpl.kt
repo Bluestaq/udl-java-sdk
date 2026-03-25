@@ -25,6 +25,11 @@ import com.unifieddatalibrary.api.models.h3geohexcell.H3GeoHexCellTupleParams
 import com.unifieddatalibrary.api.models.h3geohexcell.H3GeoHexCellTupleResponse
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of Report and Activity
+ * information. This information includes analytic reports, significant events, route statistics,
+ * EMI Reports, and other georeferenced reports and activities.
+ */
 class H3GeoHexCellServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     H3GeoHexCellService {
 
@@ -120,6 +125,7 @@ class H3GeoHexCellServiceImpl internal constructor(private val clientOptions: Cl
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "h3geohexcell", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

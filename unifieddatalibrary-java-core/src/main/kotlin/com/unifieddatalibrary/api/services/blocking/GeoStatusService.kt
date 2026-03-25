@@ -20,6 +20,10 @@ import com.unifieddatalibrary.api.models.geostatus.history.GeoStatusFull
 import com.unifieddatalibrary.api.services.blocking.geostatus.HistoryService
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit objects of interest,
+ * their components, and various lists and status of those objects.
+ */
 interface GeoStatusService {
 
     /**
@@ -34,6 +38,10 @@ interface GeoStatusService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): GeoStatusService
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     fun history(): HistoryService
 
     /**
@@ -92,6 +100,16 @@ interface GeoStatusService {
         params: GeoStatusCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<GeoStatusCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(GeoStatusCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<GeoStatusCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to get a single GEOStatus record by its unique ID passed as a path
@@ -172,6 +190,10 @@ interface GeoStatusService {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): GeoStatusService.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**
@@ -233,6 +255,19 @@ interface GeoStatusService {
             params: GeoStatusCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<GeoStatusCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(GeoStatusCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<GeoStatusCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/geostatus/{id}`, but is otherwise the same as

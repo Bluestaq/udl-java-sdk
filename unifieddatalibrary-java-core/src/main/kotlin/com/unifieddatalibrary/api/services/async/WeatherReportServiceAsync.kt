@@ -20,6 +20,15 @@ import com.unifieddatalibrary.api.services.async.weatherreport.HistoryServiceAsy
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide for posting and querying terrestrial weather conditions over a target area
+ * or region and raw sensor data used to produce condition reports. Weather Reports describe current
+ * weather conditions over a target point or region to include general temperatures, pressures, and
+ * moisture accumulation, as well as navigational considerations such as altimeter settings,
+ * visibility, wind speeds, and cloud heights etc. Weather Data contains algorithmic parameters and
+ * dynamic, raw measurements collected by individual sensors such as signal power, noise level,
+ * etc., which are generally processed across multiple sensors to produce weather reports.
+ */
 interface WeatherReportServiceAsync {
 
     /**
@@ -34,6 +43,16 @@ interface WeatherReportServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): WeatherReportServiceAsync
 
+    /**
+     * These services provide for posting and querying terrestrial weather conditions over a target
+     * area or region and raw sensor data used to produce condition reports. Weather Reports
+     * describe current weather conditions over a target point or region to include general
+     * temperatures, pressures, and moisture accumulation, as well as navigational considerations
+     * such as altimeter settings, visibility, wind speeds, and cloud heights etc. Weather Data
+     * contains algorithmic parameters and dynamic, raw measurements collected by individual sensors
+     * such as signal power, noise level, etc., which are generally processed across multiple
+     * sensors to produce weather reports.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -170,6 +189,21 @@ interface WeatherReportServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<WeatherReportUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            WeatherReportUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<WeatherReportUnvalidatedPublishParams.Body>
+    ): CompletableFuture<Void?> = unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [WeatherReportServiceAsync] that provides access to raw HTTP responses for each
      * method.
@@ -185,6 +219,16 @@ interface WeatherReportServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): WeatherReportServiceAsync.WithRawResponse
 
+        /**
+         * These services provide for posting and querying terrestrial weather conditions over a
+         * target area or region and raw sensor data used to produce condition reports. Weather
+         * Reports describe current weather conditions over a target point or region to include
+         * general temperatures, pressures, and moisture accumulation, as well as navigational
+         * considerations such as altimeter settings, visibility, wind speeds, and cloud heights
+         * etc. Weather Data contains algorithmic parameters and dynamic, raw measurements collected
+         * by individual sensors such as signal power, noise level, etc., which are generally
+         * processed across multiple sensors to produce weather reports.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**
@@ -322,5 +366,20 @@ interface WeatherReportServiceAsync {
             params: WeatherReportUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<WeatherReportUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                WeatherReportUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<WeatherReportUnvalidatedPublishParams.Body>
+        ): CompletableFuture<HttpResponse> = unvalidatedPublish(body, RequestOptions.none())
     }
 }

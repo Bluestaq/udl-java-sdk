@@ -23,6 +23,15 @@ import com.unifieddatalibrary.api.services.async.groundimagery.HistoryServiceAsy
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * This collection of services provides operations for querying and manipulation of ground imagery
+ * of terrestrial regions from on-orbit, air, and other sensors. Includes metadata on the image
+ * (time, region, source, etc) as well as binary content (typically GeoTIFF). Binary content must be
+ * downloaded individually by ID using the 'getFile' operation. Well-Known Text (WKT) and GeoJSON
+ * formats are used for GIS representation and query support (see
+ * https://www.opengeospatial.org/standards/wkt-crs and https://geojson.org/ for more information on
+ * these formats).
+ */
 interface GroundImageryServiceAsync {
 
     /**
@@ -37,6 +46,15 @@ interface GroundImageryServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): GroundImageryServiceAsync
 
+    /**
+     * This collection of services provides operations for querying and manipulation of ground
+     * imagery of terrestrial regions from on-orbit, air, and other sensors. Includes metadata on
+     * the image (time, region, source, etc) as well as binary content (typically GeoTIFF). Binary
+     * content must be downloaded individually by ID using the 'getFile' operation. Well-Known Text
+     * (WKT) and GeoJSON formats are used for GIS representation and query support (see
+     * https://www.opengeospatial.org/standards/wkt-crs and https://geojson.org/ for more
+     * information on these formats).
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -255,6 +273,15 @@ interface GroundImageryServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): GroundImageryServiceAsync.WithRawResponse
 
+        /**
+         * This collection of services provides operations for querying and manipulation of ground
+         * imagery of terrestrial regions from on-orbit, air, and other sensors. Includes metadata
+         * on the image (time, region, source, etc) as well as binary content (typically GeoTIFF).
+         * Binary content must be downloaded individually by ID using the 'getFile' operation.
+         * Well-Known Text (WKT) and GeoJSON formats are used for GIS representation and query
+         * support (see https://www.opengeospatial.org/standards/wkt-crs and https://geojson.org/
+         * for more information on these formats).
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**

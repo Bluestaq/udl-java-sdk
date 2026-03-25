@@ -35,6 +35,11 @@ import com.unifieddatalibrary.api.services.blocking.laserdeconflictrequest.Histo
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This collection of services provides operations for querying and manipulation of laser related
+ * information to include the laser emitters, the laser deconflict requests, and laser deconflict
+ * responses.
+ */
 class LaserdeconflictrequestServiceImpl
 internal constructor(private val clientOptions: ClientOptions) : LaserdeconflictrequestService {
 
@@ -51,6 +56,11 @@ internal constructor(private val clientOptions: ClientOptions) : Laserdeconflict
     ): LaserdeconflictrequestService =
         LaserdeconflictrequestServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * This collection of services provides operations for querying and manipulation of laser
+     * related information to include the laser emitters, the laser deconflict requests, and laser
+     * deconflict responses.
+     */
     override fun history(): HistoryService = history
 
     override fun create(
@@ -121,6 +131,11 @@ internal constructor(private val clientOptions: ClientOptions) : Laserdeconflict
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * This collection of services provides operations for querying and manipulation of laser
+         * related information to include the laser emitters, the laser deconflict requests, and
+         * laser deconflict responses.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -189,6 +204,7 @@ internal constructor(private val clientOptions: ClientOptions) : Laserdeconflict
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "laserdeconflictrequest", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

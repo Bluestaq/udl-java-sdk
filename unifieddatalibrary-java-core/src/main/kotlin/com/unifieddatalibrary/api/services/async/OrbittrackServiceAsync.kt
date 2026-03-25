@@ -19,6 +19,10 @@ import com.unifieddatalibrary.api.services.async.orbittrack.HistoryServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for posting and querying of air, space, and ground 'tracks'. A
+ * track is a position and optionally a heading/velocity of an object at a particular timestamp.
+ */
 interface OrbittrackServiceAsync {
 
     /**
@@ -33,6 +37,11 @@ interface OrbittrackServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): OrbittrackServiceAsync
 
+    /**
+     * These services provide operations for posting and querying of air, space, and ground
+     * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+     * particular timestamp.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -80,6 +89,17 @@ interface OrbittrackServiceAsync {
         params: OrbittrackCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<OrbittrackCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(OrbittrackCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<OrbittrackCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -135,6 +155,21 @@ interface OrbittrackServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<OrbittrackUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            OrbittrackUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<OrbittrackUnvalidatedPublishParams.Body>
+    ): CompletableFuture<Void?> = unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [OrbittrackServiceAsync] that provides access to raw HTTP responses for each
      * method.
@@ -150,6 +185,11 @@ interface OrbittrackServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): OrbittrackServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for posting and querying of air, space, and ground
+         * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+         * particular timestamp.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**
@@ -192,6 +232,18 @@ interface OrbittrackServiceAsync {
             params: OrbittrackCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<OrbittrackCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(OrbittrackCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<OrbittrackCreateBulkParams.Body>
+        ): CompletableFuture<HttpResponse> = createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/orbittrack/queryhelp`, but is otherwise the
@@ -246,5 +298,20 @@ interface OrbittrackServiceAsync {
             params: OrbittrackUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<OrbittrackUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                OrbittrackUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<OrbittrackUnvalidatedPublishParams.Body>
+        ): CompletableFuture<HttpResponse> = unvalidatedPublish(body, RequestOptions.none())
     }
 }

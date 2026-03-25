@@ -36,6 +36,11 @@ import com.unifieddatalibrary.api.services.blocking.closelyspacedobjects.History
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This collection of services provides operations for manipulating and querying of closely spaced
+ * objects (on orbit) operations including docking, rendezvous, proximity and reporting of payload
+ * zone engagements observed and characterized over a period of time.
+ */
 class CloselyspacedobjectServiceImpl
 internal constructor(private val clientOptions: ClientOptions) : CloselyspacedobjectService {
 
@@ -52,6 +57,11 @@ internal constructor(private val clientOptions: ClientOptions) : Closelyspacedob
     ): CloselyspacedobjectService =
         CloselyspacedobjectServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * This collection of services provides operations for manipulating and querying of closely
+     * spaced objects (on orbit) operations including docking, rendezvous, proximity and reporting
+     * of payload zone engagements observed and characterized over a period of time.
+     */
     override fun history(): HistoryService = history
 
     override fun create(params: CloselyspacedobjectCreateParams, requestOptions: RequestOptions) {
@@ -127,6 +137,11 @@ internal constructor(private val clientOptions: ClientOptions) : Closelyspacedob
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * This collection of services provides operations for manipulating and querying of closely
+         * spaced objects (on orbit) operations including docking, rendezvous, proximity and
+         * reporting of payload zone engagements observed and characterized over a period of time.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -225,6 +240,7 @@ internal constructor(private val clientOptions: ClientOptions) : Closelyspacedob
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "closelyspacedobjects", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

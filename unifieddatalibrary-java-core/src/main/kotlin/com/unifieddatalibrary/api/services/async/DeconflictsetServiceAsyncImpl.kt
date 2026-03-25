@@ -36,6 +36,7 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/** These services provide operations for manipulation and querying of Mission Ops information. */
 class DeconflictsetServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     DeconflictsetServiceAsync {
 
@@ -50,6 +51,9 @@ class DeconflictsetServiceAsyncImpl internal constructor(private val clientOptio
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): DeconflictsetServiceAsync =
         DeconflictsetServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     override fun history(): HistoryServiceAsync = history
 
     override fun create(
@@ -118,6 +122,10 @@ class DeconflictsetServiceAsyncImpl internal constructor(private val clientOptio
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -193,6 +201,7 @@ class DeconflictsetServiceAsyncImpl internal constructor(private val clientOptio
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "deconflictset", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

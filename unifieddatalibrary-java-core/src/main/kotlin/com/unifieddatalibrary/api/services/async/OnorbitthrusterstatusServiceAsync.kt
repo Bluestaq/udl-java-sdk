@@ -21,6 +21,10 @@ import com.unifieddatalibrary.api.services.async.onorbitthrusterstatus.HistorySe
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit objects of interest,
+ * their components, and various lists and status of those objects.
+ */
 interface OnorbitthrusterstatusServiceAsync {
 
     /**
@@ -35,6 +39,10 @@ interface OnorbitthrusterstatusServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): OnorbitthrusterstatusServiceAsync
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -151,6 +159,21 @@ interface OnorbitthrusterstatusServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<OnorbitthrusterstatusCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(
+            OnorbitthrusterstatusCreateBulkParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<OnorbitthrusterstatusCreateBulkParams.Body>
+    ): CompletableFuture<Void?> = createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to get a single OnorbitThrusterStatus record by its unique ID passed as a
      * path parameter. OnorbitThrusterStatus records are information for OnorbitThruster objects.
@@ -248,6 +271,10 @@ interface OnorbitthrusterstatusServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): OnorbitthrusterstatusServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**
@@ -358,6 +385,21 @@ interface OnorbitthrusterstatusServiceAsync {
             params: OnorbitthrusterstatusCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<OnorbitthrusterstatusCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(
+                OnorbitthrusterstatusCreateBulkParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<OnorbitthrusterstatusCreateBulkParams.Body>
+        ): CompletableFuture<HttpResponse> = createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/onorbitthrusterstatus/{id}`, but is otherwise

@@ -89,7 +89,25 @@ private constructor(
     fun id(): Optional<String> = body.id()
 
     /**
-     * Bandwidth of the signal in Hz.
+     * Line of sight azimuth angle for sensor 1, in degrees and topocentric frame. Azimuth ranges
+     * from 0 to 360 degrees.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun azimuth1(): Optional<Double> = body.azimuth1()
+
+    /**
+     * Line of sight azimuth angle for sensor 2, in degrees and topocentric frame. Azimuth ranges
+     * from 0 to 360 degrees.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun azimuth2(): Optional<Double> = body.azimuth2()
+
+    /**
+     * Bandwidth of the signal, in hertz.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -97,7 +115,8 @@ private constructor(
     fun bandwidth(): Optional<Double> = body.bandwidth()
 
     /**
-     * Collection mode (e.g. SURVEY, SPOT_SEARCH, NEIGHBORHOOD_WATCH, DIRECTED_SEARCH, MANUAL, etc).
+     * Collection mode (e.g., DIRECTED_SEARCH, MANUAL, NEIGHBORHOOD_WATCH, SPOT_SEARCH, SURVEY,
+     * etc.).
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -121,7 +140,7 @@ private constructor(
     fun createdBy(): Optional<String> = body.createdBy()
 
     /**
-     * Delta range, in km. Delta range calculation convention is (sensor2 - sensor1).
+     * Delta range, in kilometers. Delta range calculation convention is (sensor2 - sensor1).
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -129,7 +148,8 @@ private constructor(
     fun deltaRange(): Optional<Double> = body.deltaRange()
 
     /**
-     * Delta range rate, in km/sec. Delta range rate calculation convention is (sensor2 - sensor1).
+     * Delta range rate, in kilometers per second. Delta range rate calculation convention is
+     * (sensor2 - sensor1).
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -137,7 +157,7 @@ private constructor(
     fun deltaRangeRate(): Optional<Double> = body.deltaRangeRate()
 
     /**
-     * One sigma uncertainty in the delta range rate, in km/sec.
+     * One sigma uncertainty in the delta range rate, in kilometers per second.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -145,7 +165,7 @@ private constructor(
     fun deltaRangeRateUnc(): Optional<Double> = body.deltaRangeRateUnc()
 
     /**
-     * One sigma uncertainty in delta range, in km.
+     * One sigma uncertainty in delta range, in kilometers.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -161,7 +181,25 @@ private constructor(
     fun descriptor(): Optional<String> = body.descriptor()
 
     /**
-     * Frequency difference of arrival of the center frequency signal, in Hz. FDOA calculation
+     * Line of sight elevation angle for sensor 1, in degrees and topocentric frame. Elevation
+     * ranges from -90 to 90 degrees.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun elevation1(): Optional<Double> = body.elevation1()
+
+    /**
+     * Line of sight elevation angle for sensor 2, in degrees and topocentric frame. Elevation
+     * ranges from -90 to 90 degrees.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun elevation2(): Optional<Double> = body.elevation2()
+
+    /**
+     * Frequency difference of arrival of the center frequency signal, in hertz. FDOA calculation
      * convention is (sensor2 - sensor1).
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
@@ -171,7 +209,7 @@ private constructor(
 
     /**
      * One sigma uncertainty in frequency difference of arrival of the center frequency signal, in
-     * Hz.
+     * hertz.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -179,7 +217,7 @@ private constructor(
     fun fdoaUnc(): Optional<Double> = body.fdoaUnc()
 
     /**
-     * Center frequency of the collect in Hz.
+     * Center frequency of the collect, in hertz.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -260,9 +298,20 @@ private constructor(
     fun origSensorId2(): Optional<String> = body.origSensorId2()
 
     /**
+     * Transponder polarization e.g. H - (Horizontally Polarized) Perpendicular to Earth's surface,
+     * V - (Vertically Polarized) Parallel to Earth's surface, L - (Left Hand Circularly Polarized)
+     * Rotating left relative to the earth's surface, R - (Right Hand Circularly Polarized) Rotating
+     * right relative to the earth's surface.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun polarityType(): Optional<String> = body.polarityType()
+
+    /**
      * Optional URI location in the document repository of the raw file parsed by the system to
      * produce this record. To download the raw file, prepend https://udl-hostname/scs/download?id=
-     * to this value.
+     * to this value. This field should not be used unless coordinated with the UDL onboarding team.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -278,8 +327,8 @@ private constructor(
     fun satNo(): Optional<Int> = body.satNo()
 
     /**
-     * Sensor 2 altitude at obTime (if mobile/onorbit) in km. If null, can be obtained from sensor
-     * info.
+     * Sensor 2 altitude at obTime (if mobile/onorbit), in kilometers. If null, can be obtained from
+     * sensor info.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -287,8 +336,8 @@ private constructor(
     fun sen2alt(): Optional<Double> = body.sen2alt()
 
     /**
-     * Sensor 2 WGS84 latitude at obTime (if mobile/onorbit) in degrees. If null, can be obtained
-     * from sensor info.
+     * Sensor 2 WGS84 latitude at obTime (if mobile/onorbit), in degrees. If null, can be obtained
+     * from sensor info. -90 to 90 degrees (negative values south of equator).
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -296,8 +345,8 @@ private constructor(
     fun sen2lat(): Optional<Double> = body.sen2lat()
 
     /**
-     * Sensor 2 WGS84 longitude at obTime (if mobile/onorbit) in degrees. If null, can be obtained
-     * from sensor info.
+     * Sensor 2 WGS84 longitude at obTime (if mobile/onorbit), in degrees. If null, can be obtained
+     * from sensor info. -180 to 180 degrees (negative values west of Prime Meridian).
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -305,8 +354,8 @@ private constructor(
     fun sen2lon(): Optional<Double> = body.sen2lon()
 
     /**
-     * Sensor altitude at obTime (if mobile/onorbit) in km. If null, can be obtained from sensor
-     * info.
+     * Sensor altitude at obTime (if mobile/onorbit), in kilometers. If null, can be obtained from
+     * sensor info.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -314,8 +363,8 @@ private constructor(
     fun senalt(): Optional<Double> = body.senalt()
 
     /**
-     * Sensor WGS84 latitude at obTime (if mobile/onorbit) in degrees. If null, can be obtained from
-     * sensor info. -90 to 90 degrees (negative values south of equator).
+     * Sensor WGS84 latitude at obTime (if mobile/onorbit), in degrees. If null, can be obtained
+     * from sensor info. -90 to 90 degrees (negative values south of equator).
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -323,7 +372,7 @@ private constructor(
     fun senlat(): Optional<Double> = body.senlat()
 
     /**
-     * Sensor WGS84 longitude at obTime (if mobile/onorbit) in degrees. If null, can be obtained
+     * Sensor WGS84 longitude at obTime (if mobile/onorbit), in degrees. If null, can be obtained
      * from sensor info. -180 to 180 degrees (negative values west of Prime Meridian).
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
@@ -332,7 +381,7 @@ private constructor(
     fun senlon(): Optional<Double> = body.senlon()
 
     /**
-     * The signal arrival delay relative to sensor 1 in seconds.
+     * The signal arrival delay relative to sensor 1, in seconds.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -340,7 +389,7 @@ private constructor(
     fun sensor1Delay(): Optional<Double> = body.sensor1Delay()
 
     /**
-     * The signal arrival delay relative to sensor 2 in seconds.
+     * The signal arrival delay relative to sensor 2, in seconds.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -348,7 +397,7 @@ private constructor(
     fun sensor2Delay(): Optional<Double> = body.sensor2Delay()
 
     /**
-     * Signal to noise ratio, in dB.
+     * Signal to noise ratio, in decibels.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -392,6 +441,16 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun tdoa(): Optional<Double> = body.tdoa()
+
+    /**
+     * The number of full signal cycles the time difference of arrival measurement could be shifted
+     * due to repeating patterns in the signal (0 = no ambiguity, +1 = one positive cycle ambiguity,
+     * -1 = one negative cycle ambiguity).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun tdoaAmb(): Optional<Int> = body.tdoaAmb()
 
     /**
      * One sigma uncertainty in time difference of arrival of the center frequency signal, in
@@ -459,6 +518,20 @@ private constructor(
     fun _id(): JsonField<String> = body._id()
 
     /**
+     * Returns the raw JSON value of [azimuth1].
+     *
+     * Unlike [azimuth1], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _azimuth1(): JsonField<Double> = body._azimuth1()
+
+    /**
+     * Returns the raw JSON value of [azimuth2].
+     *
+     * Unlike [azimuth2], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _azimuth2(): JsonField<Double> = body._azimuth2()
+
+    /**
      * Returns the raw JSON value of [bandwidth].
      *
      * Unlike [bandwidth], this method doesn't throw if the JSON field has an unexpected type.
@@ -521,6 +594,20 @@ private constructor(
      * Unlike [descriptor], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _descriptor(): JsonField<String> = body._descriptor()
+
+    /**
+     * Returns the raw JSON value of [elevation1].
+     *
+     * Unlike [elevation1], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _elevation1(): JsonField<Double> = body._elevation1()
+
+    /**
+     * Returns the raw JSON value of [elevation2].
+     *
+     * Unlike [elevation2], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _elevation2(): JsonField<Double> = body._elevation2()
 
     /**
      * Returns the raw JSON value of [fdoa].
@@ -598,6 +685,13 @@ private constructor(
      * Unlike [origSensorId2], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _origSensorId2(): JsonField<String> = body._origSensorId2()
+
+    /**
+     * Returns the raw JSON value of [polarityType].
+     *
+     * Unlike [polarityType], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _polarityType(): JsonField<String> = body._polarityType()
 
     /**
      * Returns the raw JSON value of [rawFileUri].
@@ -703,6 +797,13 @@ private constructor(
      * Unlike [tdoa], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _tdoa(): JsonField<Double> = body._tdoa()
+
+    /**
+     * Returns the raw JSON value of [tdoaAmb].
+     *
+     * Unlike [tdoaAmb], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _tdoaAmb(): JsonField<Int> = body._tdoaAmb()
 
     /**
      * Returns the raw JSON value of [tdoaUnc].
@@ -854,7 +955,35 @@ private constructor(
          */
         fun id(id: JsonField<String>) = apply { body.id(id) }
 
-        /** Bandwidth of the signal in Hz. */
+        /**
+         * Line of sight azimuth angle for sensor 1, in degrees and topocentric frame. Azimuth
+         * ranges from 0 to 360 degrees.
+         */
+        fun azimuth1(azimuth1: Double) = apply { body.azimuth1(azimuth1) }
+
+        /**
+         * Sets [Builder.azimuth1] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.azimuth1] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun azimuth1(azimuth1: JsonField<Double>) = apply { body.azimuth1(azimuth1) }
+
+        /**
+         * Line of sight azimuth angle for sensor 2, in degrees and topocentric frame. Azimuth
+         * ranges from 0 to 360 degrees.
+         */
+        fun azimuth2(azimuth2: Double) = apply { body.azimuth2(azimuth2) }
+
+        /**
+         * Sets [Builder.azimuth2] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.azimuth2] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun azimuth2(azimuth2: JsonField<Double>) = apply { body.azimuth2(azimuth2) }
+
+        /** Bandwidth of the signal, in hertz. */
         fun bandwidth(bandwidth: Double) = apply { body.bandwidth(bandwidth) }
 
         /**
@@ -867,8 +996,8 @@ private constructor(
         fun bandwidth(bandwidth: JsonField<Double>) = apply { body.bandwidth(bandwidth) }
 
         /**
-         * Collection mode (e.g. SURVEY, SPOT_SEARCH, NEIGHBORHOOD_WATCH, DIRECTED_SEARCH, MANUAL,
-         * etc).
+         * Collection mode (e.g., DIRECTED_SEARCH, MANUAL, NEIGHBORHOOD_WATCH, SPOT_SEARCH, SURVEY,
+         * etc.).
          */
         fun collectionMode(collectionMode: String) = apply { body.collectionMode(collectionMode) }
 
@@ -907,7 +1036,9 @@ private constructor(
          */
         fun createdBy(createdBy: JsonField<String>) = apply { body.createdBy(createdBy) }
 
-        /** Delta range, in km. Delta range calculation convention is (sensor2 - sensor1). */
+        /**
+         * Delta range, in kilometers. Delta range calculation convention is (sensor2 - sensor1).
+         */
         fun deltaRange(deltaRange: Double) = apply { body.deltaRange(deltaRange) }
 
         /**
@@ -920,8 +1051,8 @@ private constructor(
         fun deltaRange(deltaRange: JsonField<Double>) = apply { body.deltaRange(deltaRange) }
 
         /**
-         * Delta range rate, in km/sec. Delta range rate calculation convention is (sensor2 -
-         * sensor1).
+         * Delta range rate, in kilometers per second. Delta range rate calculation convention is
+         * (sensor2 - sensor1).
          */
         fun deltaRangeRate(deltaRangeRate: Double) = apply { body.deltaRangeRate(deltaRangeRate) }
 
@@ -936,7 +1067,7 @@ private constructor(
             body.deltaRangeRate(deltaRangeRate)
         }
 
-        /** One sigma uncertainty in the delta range rate, in km/sec. */
+        /** One sigma uncertainty in the delta range rate, in kilometers per second. */
         fun deltaRangeRateUnc(deltaRangeRateUnc: Double) = apply {
             body.deltaRangeRateUnc(deltaRangeRateUnc)
         }
@@ -952,7 +1083,7 @@ private constructor(
             body.deltaRangeRateUnc(deltaRangeRateUnc)
         }
 
-        /** One sigma uncertainty in delta range, in km. */
+        /** One sigma uncertainty in delta range, in kilometers. */
         fun deltaRangeUnc(deltaRangeUnc: Double) = apply { body.deltaRangeUnc(deltaRangeUnc) }
 
         /**
@@ -979,8 +1110,38 @@ private constructor(
         fun descriptor(descriptor: JsonField<String>) = apply { body.descriptor(descriptor) }
 
         /**
-         * Frequency difference of arrival of the center frequency signal, in Hz. FDOA calculation
-         * convention is (sensor2 - sensor1).
+         * Line of sight elevation angle for sensor 1, in degrees and topocentric frame. Elevation
+         * ranges from -90 to 90 degrees.
+         */
+        fun elevation1(elevation1: Double) = apply { body.elevation1(elevation1) }
+
+        /**
+         * Sets [Builder.elevation1] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.elevation1] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun elevation1(elevation1: JsonField<Double>) = apply { body.elevation1(elevation1) }
+
+        /**
+         * Line of sight elevation angle for sensor 2, in degrees and topocentric frame. Elevation
+         * ranges from -90 to 90 degrees.
+         */
+        fun elevation2(elevation2: Double) = apply { body.elevation2(elevation2) }
+
+        /**
+         * Sets [Builder.elevation2] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.elevation2] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun elevation2(elevation2: JsonField<Double>) = apply { body.elevation2(elevation2) }
+
+        /**
+         * Frequency difference of arrival of the center frequency signal, in hertz. FDOA
+         * calculation convention is (sensor2 - sensor1).
          */
         fun fdoa(fdoa: Double) = apply { body.fdoa(fdoa) }
 
@@ -994,7 +1155,7 @@ private constructor(
 
         /**
          * One sigma uncertainty in frequency difference of arrival of the center frequency signal,
-         * in Hz.
+         * in hertz.
          */
         fun fdoaUnc(fdoaUnc: Double) = apply { body.fdoaUnc(fdoaUnc) }
 
@@ -1006,7 +1167,7 @@ private constructor(
          */
         fun fdoaUnc(fdoaUnc: JsonField<Double>) = apply { body.fdoaUnc(fdoaUnc) }
 
-        /** Center frequency of the collect in Hz. */
+        /** Center frequency of the collect, in hertz. */
         fun frequency(frequency: Double) = apply { body.frequency(frequency) }
 
         /**
@@ -1140,9 +1301,29 @@ private constructor(
         }
 
         /**
+         * Transponder polarization e.g. H - (Horizontally Polarized) Perpendicular to Earth's
+         * surface, V - (Vertically Polarized) Parallel to Earth's surface, L - (Left Hand
+         * Circularly Polarized) Rotating left relative to the earth's surface, R - (Right Hand
+         * Circularly Polarized) Rotating right relative to the earth's surface.
+         */
+        fun polarityType(polarityType: String) = apply { body.polarityType(polarityType) }
+
+        /**
+         * Sets [Builder.polarityType] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.polarityType] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun polarityType(polarityType: JsonField<String>) = apply {
+            body.polarityType(polarityType)
+        }
+
+        /**
          * Optional URI location in the document repository of the raw file parsed by the system to
          * produce this record. To download the raw file, prepend
-         * https://udl-hostname/scs/download?id= to this value.
+         * https://udl-hostname/scs/download?id= to this value. This field should not be used unless
+         * coordinated with the UDL onboarding team.
          */
         fun rawFileUri(rawFileUri: String) = apply { body.rawFileUri(rawFileUri) }
 
@@ -1167,8 +1348,8 @@ private constructor(
         fun satNo(satNo: JsonField<Int>) = apply { body.satNo(satNo) }
 
         /**
-         * Sensor 2 altitude at obTime (if mobile/onorbit) in km. If null, can be obtained from
-         * sensor info.
+         * Sensor 2 altitude at obTime (if mobile/onorbit), in kilometers. If null, can be obtained
+         * from sensor info.
          */
         fun sen2alt(sen2alt: Double) = apply { body.sen2alt(sen2alt) }
 
@@ -1181,8 +1362,8 @@ private constructor(
         fun sen2alt(sen2alt: JsonField<Double>) = apply { body.sen2alt(sen2alt) }
 
         /**
-         * Sensor 2 WGS84 latitude at obTime (if mobile/onorbit) in degrees. If null, can be
-         * obtained from sensor info.
+         * Sensor 2 WGS84 latitude at obTime (if mobile/onorbit), in degrees. If null, can be
+         * obtained from sensor info. -90 to 90 degrees (negative values south of equator).
          */
         fun sen2lat(sen2lat: Double) = apply { body.sen2lat(sen2lat) }
 
@@ -1195,8 +1376,8 @@ private constructor(
         fun sen2lat(sen2lat: JsonField<Double>) = apply { body.sen2lat(sen2lat) }
 
         /**
-         * Sensor 2 WGS84 longitude at obTime (if mobile/onorbit) in degrees. If null, can be
-         * obtained from sensor info.
+         * Sensor 2 WGS84 longitude at obTime (if mobile/onorbit), in degrees. If null, can be
+         * obtained from sensor info. -180 to 180 degrees (negative values west of Prime Meridian).
          */
         fun sen2lon(sen2lon: Double) = apply { body.sen2lon(sen2lon) }
 
@@ -1209,8 +1390,8 @@ private constructor(
         fun sen2lon(sen2lon: JsonField<Double>) = apply { body.sen2lon(sen2lon) }
 
         /**
-         * Sensor altitude at obTime (if mobile/onorbit) in km. If null, can be obtained from sensor
-         * info.
+         * Sensor altitude at obTime (if mobile/onorbit), in kilometers. If null, can be obtained
+         * from sensor info.
          */
         fun senalt(senalt: Double) = apply { body.senalt(senalt) }
 
@@ -1223,7 +1404,7 @@ private constructor(
         fun senalt(senalt: JsonField<Double>) = apply { body.senalt(senalt) }
 
         /**
-         * Sensor WGS84 latitude at obTime (if mobile/onorbit) in degrees. If null, can be obtained
+         * Sensor WGS84 latitude at obTime (if mobile/onorbit), in degrees. If null, can be obtained
          * from sensor info. -90 to 90 degrees (negative values south of equator).
          */
         fun senlat(senlat: Double) = apply { body.senlat(senlat) }
@@ -1237,8 +1418,8 @@ private constructor(
         fun senlat(senlat: JsonField<Double>) = apply { body.senlat(senlat) }
 
         /**
-         * Sensor WGS84 longitude at obTime (if mobile/onorbit) in degrees. If null, can be obtained
-         * from sensor info. -180 to 180 degrees (negative values west of Prime Meridian).
+         * Sensor WGS84 longitude at obTime (if mobile/onorbit), in degrees. If null, can be
+         * obtained from sensor info. -180 to 180 degrees (negative values west of Prime Meridian).
          */
         fun senlon(senlon: Double) = apply { body.senlon(senlon) }
 
@@ -1250,7 +1431,7 @@ private constructor(
          */
         fun senlon(senlon: JsonField<Double>) = apply { body.senlon(senlon) }
 
-        /** The signal arrival delay relative to sensor 1 in seconds. */
+        /** The signal arrival delay relative to sensor 1, in seconds. */
         fun sensor1Delay(sensor1Delay: Double) = apply { body.sensor1Delay(sensor1Delay) }
 
         /**
@@ -1264,7 +1445,7 @@ private constructor(
             body.sensor1Delay(sensor1Delay)
         }
 
-        /** The signal arrival delay relative to sensor 2 in seconds. */
+        /** The signal arrival delay relative to sensor 2, in seconds. */
         fun sensor2Delay(sensor2Delay: Double) = apply { body.sensor2Delay(sensor2Delay) }
 
         /**
@@ -1278,7 +1459,7 @@ private constructor(
             body.sensor2Delay(sensor2Delay)
         }
 
-        /** Signal to noise ratio, in dB. */
+        /** Signal to noise ratio, in decibels. */
         fun snr(snr: Double) = apply { body.snr(snr) }
 
         /**
@@ -1352,6 +1533,21 @@ private constructor(
          * method is primarily for setting the field to an undocumented or not yet supported value.
          */
         fun tdoa(tdoa: JsonField<Double>) = apply { body.tdoa(tdoa) }
+
+        /**
+         * The number of full signal cycles the time difference of arrival measurement could be
+         * shifted due to repeating patterns in the signal (0 = no ambiguity, +1 = one positive
+         * cycle ambiguity, -1 = one negative cycle ambiguity).
+         */
+        fun tdoaAmb(tdoaAmb: Int) = apply { body.tdoaAmb(tdoaAmb) }
+
+        /**
+         * Sets [Builder.tdoaAmb] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.tdoaAmb] with a well-typed [Int] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun tdoaAmb(tdoaAmb: JsonField<Int>) = apply { body.tdoaAmb(tdoaAmb) }
 
         /**
          * One sigma uncertainty in time difference of arrival of the center frequency signal, in
@@ -1560,6 +1756,8 @@ private constructor(
         private val obTime: JsonField<OffsetDateTime>,
         private val source: JsonField<String>,
         private val id: JsonField<String>,
+        private val azimuth1: JsonField<Double>,
+        private val azimuth2: JsonField<Double>,
         private val bandwidth: JsonField<Double>,
         private val collectionMode: JsonField<String>,
         private val createdAt: JsonField<OffsetDateTime>,
@@ -1569,6 +1767,8 @@ private constructor(
         private val deltaRangeRateUnc: JsonField<Double>,
         private val deltaRangeUnc: JsonField<Double>,
         private val descriptor: JsonField<String>,
+        private val elevation1: JsonField<Double>,
+        private val elevation2: JsonField<Double>,
         private val fdoa: JsonField<Double>,
         private val fdoaUnc: JsonField<Double>,
         private val frequency: JsonField<Double>,
@@ -1580,6 +1780,7 @@ private constructor(
         private val origObjectId: JsonField<String>,
         private val origSensorId1: JsonField<String>,
         private val origSensorId2: JsonField<String>,
+        private val polarityType: JsonField<String>,
         private val rawFileUri: JsonField<String>,
         private val satNo: JsonField<Int>,
         private val sen2alt: JsonField<Double>,
@@ -1595,6 +1796,7 @@ private constructor(
         private val tags: JsonField<List<String>>,
         private val taskId: JsonField<String>,
         private val tdoa: JsonField<Double>,
+        private val tdoaAmb: JsonField<Int>,
         private val tdoaUnc: JsonField<Double>,
         private val transactionId: JsonField<String>,
         private val uct: JsonField<Boolean>,
@@ -1614,6 +1816,12 @@ private constructor(
             obTime: JsonField<OffsetDateTime> = JsonMissing.of(),
             @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
             @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("azimuth1")
+            @ExcludeMissing
+            azimuth1: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("azimuth2")
+            @ExcludeMissing
+            azimuth2: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("bandwidth")
             @ExcludeMissing
             bandwidth: JsonField<Double> = JsonMissing.of(),
@@ -1641,6 +1849,12 @@ private constructor(
             @JsonProperty("descriptor")
             @ExcludeMissing
             descriptor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("elevation1")
+            @ExcludeMissing
+            elevation1: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("elevation2")
+            @ExcludeMissing
+            elevation2: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("fdoa") @ExcludeMissing fdoa: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("fdoaUnc") @ExcludeMissing fdoaUnc: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("frequency")
@@ -1668,6 +1882,9 @@ private constructor(
             @JsonProperty("origSensorId2")
             @ExcludeMissing
             origSensorId2: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("polarityType")
+            @ExcludeMissing
+            polarityType: JsonField<String> = JsonMissing.of(),
             @JsonProperty("rawFileURI")
             @ExcludeMissing
             rawFileUri: JsonField<String> = JsonMissing.of(),
@@ -1691,6 +1908,7 @@ private constructor(
             @JsonProperty("tags") @ExcludeMissing tags: JsonField<List<String>> = JsonMissing.of(),
             @JsonProperty("taskId") @ExcludeMissing taskId: JsonField<String> = JsonMissing.of(),
             @JsonProperty("tdoa") @ExcludeMissing tdoa: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("tdoaAmb") @ExcludeMissing tdoaAmb: JsonField<Int> = JsonMissing.of(),
             @JsonProperty("tdoaUnc") @ExcludeMissing tdoaUnc: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("transactionId")
             @ExcludeMissing
@@ -1702,6 +1920,8 @@ private constructor(
             obTime,
             source,
             id,
+            azimuth1,
+            azimuth2,
             bandwidth,
             collectionMode,
             createdAt,
@@ -1711,6 +1931,8 @@ private constructor(
             deltaRangeRateUnc,
             deltaRangeUnc,
             descriptor,
+            elevation1,
+            elevation2,
             fdoa,
             fdoaUnc,
             frequency,
@@ -1722,6 +1944,7 @@ private constructor(
             origObjectId,
             origSensorId1,
             origSensorId2,
+            polarityType,
             rawFileUri,
             satNo,
             sen2alt,
@@ -1737,6 +1960,7 @@ private constructor(
             tags,
             taskId,
             tdoa,
+            tdoaAmb,
             tdoaUnc,
             transactionId,
             uct,
@@ -1800,7 +2024,25 @@ private constructor(
         fun id(): Optional<String> = id.getOptional("id")
 
         /**
-         * Bandwidth of the signal in Hz.
+         * Line of sight azimuth angle for sensor 1, in degrees and topocentric frame. Azimuth
+         * ranges from 0 to 360 degrees.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun azimuth1(): Optional<Double> = azimuth1.getOptional("azimuth1")
+
+        /**
+         * Line of sight azimuth angle for sensor 2, in degrees and topocentric frame. Azimuth
+         * ranges from 0 to 360 degrees.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun azimuth2(): Optional<Double> = azimuth2.getOptional("azimuth2")
+
+        /**
+         * Bandwidth of the signal, in hertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1808,8 +2050,8 @@ private constructor(
         fun bandwidth(): Optional<Double> = bandwidth.getOptional("bandwidth")
 
         /**
-         * Collection mode (e.g. SURVEY, SPOT_SEARCH, NEIGHBORHOOD_WATCH, DIRECTED_SEARCH, MANUAL,
-         * etc).
+         * Collection mode (e.g., DIRECTED_SEARCH, MANUAL, NEIGHBORHOOD_WATCH, SPOT_SEARCH, SURVEY,
+         * etc.).
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1833,7 +2075,7 @@ private constructor(
         fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
 
         /**
-         * Delta range, in km. Delta range calculation convention is (sensor2 - sensor1).
+         * Delta range, in kilometers. Delta range calculation convention is (sensor2 - sensor1).
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1841,8 +2083,8 @@ private constructor(
         fun deltaRange(): Optional<Double> = deltaRange.getOptional("deltaRange")
 
         /**
-         * Delta range rate, in km/sec. Delta range rate calculation convention is (sensor2 -
-         * sensor1).
+         * Delta range rate, in kilometers per second. Delta range rate calculation convention is
+         * (sensor2 - sensor1).
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1850,7 +2092,7 @@ private constructor(
         fun deltaRangeRate(): Optional<Double> = deltaRangeRate.getOptional("deltaRangeRate")
 
         /**
-         * One sigma uncertainty in the delta range rate, in km/sec.
+         * One sigma uncertainty in the delta range rate, in kilometers per second.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1859,7 +2101,7 @@ private constructor(
             deltaRangeRateUnc.getOptional("deltaRangeRateUnc")
 
         /**
-         * One sigma uncertainty in delta range, in km.
+         * One sigma uncertainty in delta range, in kilometers.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1875,8 +2117,26 @@ private constructor(
         fun descriptor(): Optional<String> = descriptor.getOptional("descriptor")
 
         /**
-         * Frequency difference of arrival of the center frequency signal, in Hz. FDOA calculation
-         * convention is (sensor2 - sensor1).
+         * Line of sight elevation angle for sensor 1, in degrees and topocentric frame. Elevation
+         * ranges from -90 to 90 degrees.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun elevation1(): Optional<Double> = elevation1.getOptional("elevation1")
+
+        /**
+         * Line of sight elevation angle for sensor 2, in degrees and topocentric frame. Elevation
+         * ranges from -90 to 90 degrees.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun elevation2(): Optional<Double> = elevation2.getOptional("elevation2")
+
+        /**
+         * Frequency difference of arrival of the center frequency signal, in hertz. FDOA
+         * calculation convention is (sensor2 - sensor1).
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1885,7 +2145,7 @@ private constructor(
 
         /**
          * One sigma uncertainty in frequency difference of arrival of the center frequency signal,
-         * in Hz.
+         * in hertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1893,7 +2153,7 @@ private constructor(
         fun fdoaUnc(): Optional<Double> = fdoaUnc.getOptional("fdoaUnc")
 
         /**
-         * Center frequency of the collect in Hz.
+         * Center frequency of the collect, in hertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1975,9 +2235,21 @@ private constructor(
         fun origSensorId2(): Optional<String> = origSensorId2.getOptional("origSensorId2")
 
         /**
+         * Transponder polarization e.g. H - (Horizontally Polarized) Perpendicular to Earth's
+         * surface, V - (Vertically Polarized) Parallel to Earth's surface, L - (Left Hand
+         * Circularly Polarized) Rotating left relative to the earth's surface, R - (Right Hand
+         * Circularly Polarized) Rotating right relative to the earth's surface.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun polarityType(): Optional<String> = polarityType.getOptional("polarityType")
+
+        /**
          * Optional URI location in the document repository of the raw file parsed by the system to
          * produce this record. To download the raw file, prepend
-         * https://udl-hostname/scs/download?id= to this value.
+         * https://udl-hostname/scs/download?id= to this value. This field should not be used unless
+         * coordinated with the UDL onboarding team.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1993,8 +2265,8 @@ private constructor(
         fun satNo(): Optional<Int> = satNo.getOptional("satNo")
 
         /**
-         * Sensor 2 altitude at obTime (if mobile/onorbit) in km. If null, can be obtained from
-         * sensor info.
+         * Sensor 2 altitude at obTime (if mobile/onorbit), in kilometers. If null, can be obtained
+         * from sensor info.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2002,8 +2274,8 @@ private constructor(
         fun sen2alt(): Optional<Double> = sen2alt.getOptional("sen2alt")
 
         /**
-         * Sensor 2 WGS84 latitude at obTime (if mobile/onorbit) in degrees. If null, can be
-         * obtained from sensor info.
+         * Sensor 2 WGS84 latitude at obTime (if mobile/onorbit), in degrees. If null, can be
+         * obtained from sensor info. -90 to 90 degrees (negative values south of equator).
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2011,8 +2283,8 @@ private constructor(
         fun sen2lat(): Optional<Double> = sen2lat.getOptional("sen2lat")
 
         /**
-         * Sensor 2 WGS84 longitude at obTime (if mobile/onorbit) in degrees. If null, can be
-         * obtained from sensor info.
+         * Sensor 2 WGS84 longitude at obTime (if mobile/onorbit), in degrees. If null, can be
+         * obtained from sensor info. -180 to 180 degrees (negative values west of Prime Meridian).
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2020,8 +2292,8 @@ private constructor(
         fun sen2lon(): Optional<Double> = sen2lon.getOptional("sen2lon")
 
         /**
-         * Sensor altitude at obTime (if mobile/onorbit) in km. If null, can be obtained from sensor
-         * info.
+         * Sensor altitude at obTime (if mobile/onorbit), in kilometers. If null, can be obtained
+         * from sensor info.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2029,7 +2301,7 @@ private constructor(
         fun senalt(): Optional<Double> = senalt.getOptional("senalt")
 
         /**
-         * Sensor WGS84 latitude at obTime (if mobile/onorbit) in degrees. If null, can be obtained
+         * Sensor WGS84 latitude at obTime (if mobile/onorbit), in degrees. If null, can be obtained
          * from sensor info. -90 to 90 degrees (negative values south of equator).
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
@@ -2038,8 +2310,8 @@ private constructor(
         fun senlat(): Optional<Double> = senlat.getOptional("senlat")
 
         /**
-         * Sensor WGS84 longitude at obTime (if mobile/onorbit) in degrees. If null, can be obtained
-         * from sensor info. -180 to 180 degrees (negative values west of Prime Meridian).
+         * Sensor WGS84 longitude at obTime (if mobile/onorbit), in degrees. If null, can be
+         * obtained from sensor info. -180 to 180 degrees (negative values west of Prime Meridian).
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2047,7 +2319,7 @@ private constructor(
         fun senlon(): Optional<Double> = senlon.getOptional("senlon")
 
         /**
-         * The signal arrival delay relative to sensor 1 in seconds.
+         * The signal arrival delay relative to sensor 1, in seconds.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2055,7 +2327,7 @@ private constructor(
         fun sensor1Delay(): Optional<Double> = sensor1Delay.getOptional("sensor1Delay")
 
         /**
-         * The signal arrival delay relative to sensor 2 in seconds.
+         * The signal arrival delay relative to sensor 2, in seconds.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2063,7 +2335,7 @@ private constructor(
         fun sensor2Delay(): Optional<Double> = sensor2Delay.getOptional("sensor2Delay")
 
         /**
-         * Signal to noise ratio, in dB.
+         * Signal to noise ratio, in decibels.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -2107,6 +2379,16 @@ private constructor(
          *   (e.g. if the server responded with an unexpected value).
          */
         fun tdoa(): Optional<Double> = tdoa.getOptional("tdoa")
+
+        /**
+         * The number of full signal cycles the time difference of arrival measurement could be
+         * shifted due to repeating patterns in the signal (0 = no ambiguity, +1 = one positive
+         * cycle ambiguity, -1 = one negative cycle ambiguity).
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun tdoaAmb(): Optional<Int> = tdoaAmb.getOptional("tdoaAmb")
 
         /**
          * One sigma uncertainty in time difference of arrival of the center frequency signal, in
@@ -2175,6 +2457,20 @@ private constructor(
          * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
+
+        /**
+         * Returns the raw JSON value of [azimuth1].
+         *
+         * Unlike [azimuth1], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("azimuth1") @ExcludeMissing fun _azimuth1(): JsonField<Double> = azimuth1
+
+        /**
+         * Returns the raw JSON value of [azimuth2].
+         *
+         * Unlike [azimuth2], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("azimuth2") @ExcludeMissing fun _azimuth2(): JsonField<Double> = azimuth2
 
         /**
          * Returns the raw JSON value of [bandwidth].
@@ -2256,6 +2552,24 @@ private constructor(
         @JsonProperty("descriptor")
         @ExcludeMissing
         fun _descriptor(): JsonField<String> = descriptor
+
+        /**
+         * Returns the raw JSON value of [elevation1].
+         *
+         * Unlike [elevation1], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("elevation1")
+        @ExcludeMissing
+        fun _elevation1(): JsonField<Double> = elevation1
+
+        /**
+         * Returns the raw JSON value of [elevation2].
+         *
+         * Unlike [elevation2], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("elevation2")
+        @ExcludeMissing
+        fun _elevation2(): JsonField<Double> = elevation2
 
         /**
          * Returns the raw JSON value of [fdoa].
@@ -2344,6 +2658,16 @@ private constructor(
         @JsonProperty("origSensorId2")
         @ExcludeMissing
         fun _origSensorId2(): JsonField<String> = origSensorId2
+
+        /**
+         * Returns the raw JSON value of [polarityType].
+         *
+         * Unlike [polarityType], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("polarityType")
+        @ExcludeMissing
+        fun _polarityType(): JsonField<String> = polarityType
 
         /**
          * Returns the raw JSON value of [rawFileUri].
@@ -2459,6 +2783,13 @@ private constructor(
         @JsonProperty("tdoa") @ExcludeMissing fun _tdoa(): JsonField<Double> = tdoa
 
         /**
+         * Returns the raw JSON value of [tdoaAmb].
+         *
+         * Unlike [tdoaAmb], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("tdoaAmb") @ExcludeMissing fun _tdoaAmb(): JsonField<Int> = tdoaAmb
+
+        /**
          * Returns the raw JSON value of [tdoaUnc].
          *
          * Unlike [tdoaUnc], this method doesn't throw if the JSON field has an unexpected type.
@@ -2518,6 +2849,8 @@ private constructor(
             private var obTime: JsonField<OffsetDateTime>? = null
             private var source: JsonField<String>? = null
             private var id: JsonField<String> = JsonMissing.of()
+            private var azimuth1: JsonField<Double> = JsonMissing.of()
+            private var azimuth2: JsonField<Double> = JsonMissing.of()
             private var bandwidth: JsonField<Double> = JsonMissing.of()
             private var collectionMode: JsonField<String> = JsonMissing.of()
             private var createdAt: JsonField<OffsetDateTime> = JsonMissing.of()
@@ -2527,6 +2860,8 @@ private constructor(
             private var deltaRangeRateUnc: JsonField<Double> = JsonMissing.of()
             private var deltaRangeUnc: JsonField<Double> = JsonMissing.of()
             private var descriptor: JsonField<String> = JsonMissing.of()
+            private var elevation1: JsonField<Double> = JsonMissing.of()
+            private var elevation2: JsonField<Double> = JsonMissing.of()
             private var fdoa: JsonField<Double> = JsonMissing.of()
             private var fdoaUnc: JsonField<Double> = JsonMissing.of()
             private var frequency: JsonField<Double> = JsonMissing.of()
@@ -2538,6 +2873,7 @@ private constructor(
             private var origObjectId: JsonField<String> = JsonMissing.of()
             private var origSensorId1: JsonField<String> = JsonMissing.of()
             private var origSensorId2: JsonField<String> = JsonMissing.of()
+            private var polarityType: JsonField<String> = JsonMissing.of()
             private var rawFileUri: JsonField<String> = JsonMissing.of()
             private var satNo: JsonField<Int> = JsonMissing.of()
             private var sen2alt: JsonField<Double> = JsonMissing.of()
@@ -2553,6 +2889,7 @@ private constructor(
             private var tags: JsonField<MutableList<String>>? = null
             private var taskId: JsonField<String> = JsonMissing.of()
             private var tdoa: JsonField<Double> = JsonMissing.of()
+            private var tdoaAmb: JsonField<Int> = JsonMissing.of()
             private var tdoaUnc: JsonField<Double> = JsonMissing.of()
             private var transactionId: JsonField<String> = JsonMissing.of()
             private var uct: JsonField<Boolean> = JsonMissing.of()
@@ -2565,6 +2902,8 @@ private constructor(
                 obTime = body.obTime
                 source = body.source
                 id = body.id
+                azimuth1 = body.azimuth1
+                azimuth2 = body.azimuth2
                 bandwidth = body.bandwidth
                 collectionMode = body.collectionMode
                 createdAt = body.createdAt
@@ -2574,6 +2913,8 @@ private constructor(
                 deltaRangeRateUnc = body.deltaRangeRateUnc
                 deltaRangeUnc = body.deltaRangeUnc
                 descriptor = body.descriptor
+                elevation1 = body.elevation1
+                elevation2 = body.elevation2
                 fdoa = body.fdoa
                 fdoaUnc = body.fdoaUnc
                 frequency = body.frequency
@@ -2585,6 +2926,7 @@ private constructor(
                 origObjectId = body.origObjectId
                 origSensorId1 = body.origSensorId1
                 origSensorId2 = body.origSensorId2
+                polarityType = body.polarityType
                 rawFileUri = body.rawFileUri
                 satNo = body.satNo
                 sen2alt = body.sen2alt
@@ -2600,6 +2942,7 @@ private constructor(
                 tags = body.tags.map { it.toMutableList() }
                 taskId = body.taskId
                 tdoa = body.tdoa
+                tdoaAmb = body.tdoaAmb
                 tdoaUnc = body.tdoaUnc
                 transactionId = body.transactionId
                 uct = body.uct
@@ -2683,7 +3026,37 @@ private constructor(
              */
             fun id(id: JsonField<String>) = apply { this.id = id }
 
-            /** Bandwidth of the signal in Hz. */
+            /**
+             * Line of sight azimuth angle for sensor 1, in degrees and topocentric frame. Azimuth
+             * ranges from 0 to 360 degrees.
+             */
+            fun azimuth1(azimuth1: Double) = azimuth1(JsonField.of(azimuth1))
+
+            /**
+             * Sets [Builder.azimuth1] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.azimuth1] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun azimuth1(azimuth1: JsonField<Double>) = apply { this.azimuth1 = azimuth1 }
+
+            /**
+             * Line of sight azimuth angle for sensor 2, in degrees and topocentric frame. Azimuth
+             * ranges from 0 to 360 degrees.
+             */
+            fun azimuth2(azimuth2: Double) = azimuth2(JsonField.of(azimuth2))
+
+            /**
+             * Sets [Builder.azimuth2] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.azimuth2] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun azimuth2(azimuth2: JsonField<Double>) = apply { this.azimuth2 = azimuth2 }
+
+            /** Bandwidth of the signal, in hertz. */
             fun bandwidth(bandwidth: Double) = bandwidth(JsonField.of(bandwidth))
 
             /**
@@ -2696,8 +3069,8 @@ private constructor(
             fun bandwidth(bandwidth: JsonField<Double>) = apply { this.bandwidth = bandwidth }
 
             /**
-             * Collection mode (e.g. SURVEY, SPOT_SEARCH, NEIGHBORHOOD_WATCH, DIRECTED_SEARCH,
-             * MANUAL, etc).
+             * Collection mode (e.g., DIRECTED_SEARCH, MANUAL, NEIGHBORHOOD_WATCH, SPOT_SEARCH,
+             * SURVEY, etc.).
              */
             fun collectionMode(collectionMode: String) =
                 collectionMode(JsonField.of(collectionMode))
@@ -2741,7 +3114,10 @@ private constructor(
              */
             fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
 
-            /** Delta range, in km. Delta range calculation convention is (sensor2 - sensor1). */
+            /**
+             * Delta range, in kilometers. Delta range calculation convention is (sensor2 -
+             * sensor1).
+             */
             fun deltaRange(deltaRange: Double) = deltaRange(JsonField.of(deltaRange))
 
             /**
@@ -2754,8 +3130,8 @@ private constructor(
             fun deltaRange(deltaRange: JsonField<Double>) = apply { this.deltaRange = deltaRange }
 
             /**
-             * Delta range rate, in km/sec. Delta range rate calculation convention is (sensor2 -
-             * sensor1).
+             * Delta range rate, in kilometers per second. Delta range rate calculation convention
+             * is (sensor2 - sensor1).
              */
             fun deltaRangeRate(deltaRangeRate: Double) =
                 deltaRangeRate(JsonField.of(deltaRangeRate))
@@ -2771,7 +3147,7 @@ private constructor(
                 this.deltaRangeRate = deltaRangeRate
             }
 
-            /** One sigma uncertainty in the delta range rate, in km/sec. */
+            /** One sigma uncertainty in the delta range rate, in kilometers per second. */
             fun deltaRangeRateUnc(deltaRangeRateUnc: Double) =
                 deltaRangeRateUnc(JsonField.of(deltaRangeRateUnc))
 
@@ -2786,7 +3162,7 @@ private constructor(
                 this.deltaRangeRateUnc = deltaRangeRateUnc
             }
 
-            /** One sigma uncertainty in delta range, in km. */
+            /** One sigma uncertainty in delta range, in kilometers. */
             fun deltaRangeUnc(deltaRangeUnc: Double) = deltaRangeUnc(JsonField.of(deltaRangeUnc))
 
             /**
@@ -2813,7 +3189,37 @@ private constructor(
             fun descriptor(descriptor: JsonField<String>) = apply { this.descriptor = descriptor }
 
             /**
-             * Frequency difference of arrival of the center frequency signal, in Hz. FDOA
+             * Line of sight elevation angle for sensor 1, in degrees and topocentric frame.
+             * Elevation ranges from -90 to 90 degrees.
+             */
+            fun elevation1(elevation1: Double) = elevation1(JsonField.of(elevation1))
+
+            /**
+             * Sets [Builder.elevation1] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.elevation1] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun elevation1(elevation1: JsonField<Double>) = apply { this.elevation1 = elevation1 }
+
+            /**
+             * Line of sight elevation angle for sensor 2, in degrees and topocentric frame.
+             * Elevation ranges from -90 to 90 degrees.
+             */
+            fun elevation2(elevation2: Double) = elevation2(JsonField.of(elevation2))
+
+            /**
+             * Sets [Builder.elevation2] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.elevation2] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun elevation2(elevation2: JsonField<Double>) = apply { this.elevation2 = elevation2 }
+
+            /**
+             * Frequency difference of arrival of the center frequency signal, in hertz. FDOA
              * calculation convention is (sensor2 - sensor1).
              */
             fun fdoa(fdoa: Double) = fdoa(JsonField.of(fdoa))
@@ -2829,7 +3235,7 @@ private constructor(
 
             /**
              * One sigma uncertainty in frequency difference of arrival of the center frequency
-             * signal, in Hz.
+             * signal, in hertz.
              */
             fun fdoaUnc(fdoaUnc: Double) = fdoaUnc(JsonField.of(fdoaUnc))
 
@@ -2842,7 +3248,7 @@ private constructor(
              */
             fun fdoaUnc(fdoaUnc: JsonField<Double>) = apply { this.fdoaUnc = fdoaUnc }
 
-            /** Center frequency of the collect in Hz. */
+            /** Center frequency of the collect, in hertz. */
             fun frequency(frequency: Double) = frequency(JsonField.of(frequency))
 
             /**
@@ -2979,9 +3385,29 @@ private constructor(
             }
 
             /**
+             * Transponder polarization e.g. H - (Horizontally Polarized) Perpendicular to Earth's
+             * surface, V - (Vertically Polarized) Parallel to Earth's surface, L - (Left Hand
+             * Circularly Polarized) Rotating left relative to the earth's surface, R - (Right Hand
+             * Circularly Polarized) Rotating right relative to the earth's surface.
+             */
+            fun polarityType(polarityType: String) = polarityType(JsonField.of(polarityType))
+
+            /**
+             * Sets [Builder.polarityType] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.polarityType] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun polarityType(polarityType: JsonField<String>) = apply {
+                this.polarityType = polarityType
+            }
+
+            /**
              * Optional URI location in the document repository of the raw file parsed by the system
              * to produce this record. To download the raw file, prepend
-             * https://udl-hostname/scs/download?id= to this value.
+             * https://udl-hostname/scs/download?id= to this value. This field should not be used
+             * unless coordinated with the UDL onboarding team.
              */
             fun rawFileUri(rawFileUri: String) = rawFileUri(JsonField.of(rawFileUri))
 
@@ -3007,8 +3433,8 @@ private constructor(
             fun satNo(satNo: JsonField<Int>) = apply { this.satNo = satNo }
 
             /**
-             * Sensor 2 altitude at obTime (if mobile/onorbit) in km. If null, can be obtained from
-             * sensor info.
+             * Sensor 2 altitude at obTime (if mobile/onorbit), in kilometers. If null, can be
+             * obtained from sensor info.
              */
             fun sen2alt(sen2alt: Double) = sen2alt(JsonField.of(sen2alt))
 
@@ -3022,8 +3448,8 @@ private constructor(
             fun sen2alt(sen2alt: JsonField<Double>) = apply { this.sen2alt = sen2alt }
 
             /**
-             * Sensor 2 WGS84 latitude at obTime (if mobile/onorbit) in degrees. If null, can be
-             * obtained from sensor info.
+             * Sensor 2 WGS84 latitude at obTime (if mobile/onorbit), in degrees. If null, can be
+             * obtained from sensor info. -90 to 90 degrees (negative values south of equator).
              */
             fun sen2lat(sen2lat: Double) = sen2lat(JsonField.of(sen2lat))
 
@@ -3037,8 +3463,9 @@ private constructor(
             fun sen2lat(sen2lat: JsonField<Double>) = apply { this.sen2lat = sen2lat }
 
             /**
-             * Sensor 2 WGS84 longitude at obTime (if mobile/onorbit) in degrees. If null, can be
-             * obtained from sensor info.
+             * Sensor 2 WGS84 longitude at obTime (if mobile/onorbit), in degrees. If null, can be
+             * obtained from sensor info. -180 to 180 degrees (negative values west of Prime
+             * Meridian).
              */
             fun sen2lon(sen2lon: Double) = sen2lon(JsonField.of(sen2lon))
 
@@ -3052,8 +3479,8 @@ private constructor(
             fun sen2lon(sen2lon: JsonField<Double>) = apply { this.sen2lon = sen2lon }
 
             /**
-             * Sensor altitude at obTime (if mobile/onorbit) in km. If null, can be obtained from
-             * sensor info.
+             * Sensor altitude at obTime (if mobile/onorbit), in kilometers. If null, can be
+             * obtained from sensor info.
              */
             fun senalt(senalt: Double) = senalt(JsonField.of(senalt))
 
@@ -3067,7 +3494,7 @@ private constructor(
             fun senalt(senalt: JsonField<Double>) = apply { this.senalt = senalt }
 
             /**
-             * Sensor WGS84 latitude at obTime (if mobile/onorbit) in degrees. If null, can be
+             * Sensor WGS84 latitude at obTime (if mobile/onorbit), in degrees. If null, can be
              * obtained from sensor info. -90 to 90 degrees (negative values south of equator).
              */
             fun senlat(senlat: Double) = senlat(JsonField.of(senlat))
@@ -3082,7 +3509,7 @@ private constructor(
             fun senlat(senlat: JsonField<Double>) = apply { this.senlat = senlat }
 
             /**
-             * Sensor WGS84 longitude at obTime (if mobile/onorbit) in degrees. If null, can be
+             * Sensor WGS84 longitude at obTime (if mobile/onorbit), in degrees. If null, can be
              * obtained from sensor info. -180 to 180 degrees (negative values west of Prime
              * Meridian).
              */
@@ -3097,7 +3524,7 @@ private constructor(
              */
             fun senlon(senlon: JsonField<Double>) = apply { this.senlon = senlon }
 
-            /** The signal arrival delay relative to sensor 1 in seconds. */
+            /** The signal arrival delay relative to sensor 1, in seconds. */
             fun sensor1Delay(sensor1Delay: Double) = sensor1Delay(JsonField.of(sensor1Delay))
 
             /**
@@ -3111,7 +3538,7 @@ private constructor(
                 this.sensor1Delay = sensor1Delay
             }
 
-            /** The signal arrival delay relative to sensor 2 in seconds. */
+            /** The signal arrival delay relative to sensor 2, in seconds. */
             fun sensor2Delay(sensor2Delay: Double) = sensor2Delay(JsonField.of(sensor2Delay))
 
             /**
@@ -3125,7 +3552,7 @@ private constructor(
                 this.sensor2Delay = sensor2Delay
             }
 
-            /** Signal to noise ratio, in dB. */
+            /** Signal to noise ratio, in decibels. */
             fun snr(snr: Double) = snr(JsonField.of(snr))
 
             /**
@@ -3210,6 +3637,22 @@ private constructor(
              * value.
              */
             fun tdoa(tdoa: JsonField<Double>) = apply { this.tdoa = tdoa }
+
+            /**
+             * The number of full signal cycles the time difference of arrival measurement could be
+             * shifted due to repeating patterns in the signal (0 = no ambiguity, +1 = one positive
+             * cycle ambiguity, -1 = one negative cycle ambiguity).
+             */
+            fun tdoaAmb(tdoaAmb: Int) = tdoaAmb(JsonField.of(tdoaAmb))
+
+            /**
+             * Sets [Builder.tdoaAmb] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.tdoaAmb] with a well-typed [Int] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
+             */
+            fun tdoaAmb(tdoaAmb: JsonField<Int>) = apply { this.tdoaAmb = tdoaAmb }
 
             /**
              * One sigma uncertainty in time difference of arrival of the center frequency signal,
@@ -3302,6 +3745,8 @@ private constructor(
                     checkRequired("obTime", obTime),
                     checkRequired("source", source),
                     id,
+                    azimuth1,
+                    azimuth2,
                     bandwidth,
                     collectionMode,
                     createdAt,
@@ -3311,6 +3756,8 @@ private constructor(
                     deltaRangeRateUnc,
                     deltaRangeUnc,
                     descriptor,
+                    elevation1,
+                    elevation2,
                     fdoa,
                     fdoaUnc,
                     frequency,
@@ -3322,6 +3769,7 @@ private constructor(
                     origObjectId,
                     origSensorId1,
                     origSensorId2,
+                    polarityType,
                     rawFileUri,
                     satNo,
                     sen2alt,
@@ -3337,6 +3785,7 @@ private constructor(
                     (tags ?: JsonMissing.of()).map { it.toImmutable() },
                     taskId,
                     tdoa,
+                    tdoaAmb,
                     tdoaUnc,
                     transactionId,
                     uct,
@@ -3356,6 +3805,8 @@ private constructor(
             obTime()
             source()
             id()
+            azimuth1()
+            azimuth2()
             bandwidth()
             collectionMode()
             createdAt()
@@ -3365,6 +3816,8 @@ private constructor(
             deltaRangeRateUnc()
             deltaRangeUnc()
             descriptor()
+            elevation1()
+            elevation2()
             fdoa()
             fdoaUnc()
             frequency()
@@ -3376,6 +3829,7 @@ private constructor(
             origObjectId()
             origSensorId1()
             origSensorId2()
+            polarityType()
             rawFileUri()
             satNo()
             sen2alt()
@@ -3391,6 +3845,7 @@ private constructor(
             tags()
             taskId()
             tdoa()
+            tdoaAmb()
             tdoaUnc()
             transactionId()
             uct()
@@ -3418,6 +3873,8 @@ private constructor(
                 (if (obTime.asKnown().isPresent) 1 else 0) +
                 (if (source.asKnown().isPresent) 1 else 0) +
                 (if (id.asKnown().isPresent) 1 else 0) +
+                (if (azimuth1.asKnown().isPresent) 1 else 0) +
+                (if (azimuth2.asKnown().isPresent) 1 else 0) +
                 (if (bandwidth.asKnown().isPresent) 1 else 0) +
                 (if (collectionMode.asKnown().isPresent) 1 else 0) +
                 (if (createdAt.asKnown().isPresent) 1 else 0) +
@@ -3427,6 +3884,8 @@ private constructor(
                 (if (deltaRangeRateUnc.asKnown().isPresent) 1 else 0) +
                 (if (deltaRangeUnc.asKnown().isPresent) 1 else 0) +
                 (if (descriptor.asKnown().isPresent) 1 else 0) +
+                (if (elevation1.asKnown().isPresent) 1 else 0) +
+                (if (elevation2.asKnown().isPresent) 1 else 0) +
                 (if (fdoa.asKnown().isPresent) 1 else 0) +
                 (if (fdoaUnc.asKnown().isPresent) 1 else 0) +
                 (if (frequency.asKnown().isPresent) 1 else 0) +
@@ -3438,6 +3897,7 @@ private constructor(
                 (if (origObjectId.asKnown().isPresent) 1 else 0) +
                 (if (origSensorId1.asKnown().isPresent) 1 else 0) +
                 (if (origSensorId2.asKnown().isPresent) 1 else 0) +
+                (if (polarityType.asKnown().isPresent) 1 else 0) +
                 (if (rawFileUri.asKnown().isPresent) 1 else 0) +
                 (if (satNo.asKnown().isPresent) 1 else 0) +
                 (if (sen2alt.asKnown().isPresent) 1 else 0) +
@@ -3453,6 +3913,7 @@ private constructor(
                 (tags.asKnown().getOrNull()?.size ?: 0) +
                 (if (taskId.asKnown().isPresent) 1 else 0) +
                 (if (tdoa.asKnown().isPresent) 1 else 0) +
+                (if (tdoaAmb.asKnown().isPresent) 1 else 0) +
                 (if (tdoaUnc.asKnown().isPresent) 1 else 0) +
                 (if (transactionId.asKnown().isPresent) 1 else 0) +
                 (if (uct.asKnown().isPresent) 1 else 0)
@@ -3468,6 +3929,8 @@ private constructor(
                 obTime == other.obTime &&
                 source == other.source &&
                 id == other.id &&
+                azimuth1 == other.azimuth1 &&
+                azimuth2 == other.azimuth2 &&
                 bandwidth == other.bandwidth &&
                 collectionMode == other.collectionMode &&
                 createdAt == other.createdAt &&
@@ -3477,6 +3940,8 @@ private constructor(
                 deltaRangeRateUnc == other.deltaRangeRateUnc &&
                 deltaRangeUnc == other.deltaRangeUnc &&
                 descriptor == other.descriptor &&
+                elevation1 == other.elevation1 &&
+                elevation2 == other.elevation2 &&
                 fdoa == other.fdoa &&
                 fdoaUnc == other.fdoaUnc &&
                 frequency == other.frequency &&
@@ -3488,6 +3953,7 @@ private constructor(
                 origObjectId == other.origObjectId &&
                 origSensorId1 == other.origSensorId1 &&
                 origSensorId2 == other.origSensorId2 &&
+                polarityType == other.polarityType &&
                 rawFileUri == other.rawFileUri &&
                 satNo == other.satNo &&
                 sen2alt == other.sen2alt &&
@@ -3503,6 +3969,7 @@ private constructor(
                 tags == other.tags &&
                 taskId == other.taskId &&
                 tdoa == other.tdoa &&
+                tdoaAmb == other.tdoaAmb &&
                 tdoaUnc == other.tdoaUnc &&
                 transactionId == other.transactionId &&
                 uct == other.uct &&
@@ -3516,6 +3983,8 @@ private constructor(
                 obTime,
                 source,
                 id,
+                azimuth1,
+                azimuth2,
                 bandwidth,
                 collectionMode,
                 createdAt,
@@ -3525,6 +3994,8 @@ private constructor(
                 deltaRangeRateUnc,
                 deltaRangeUnc,
                 descriptor,
+                elevation1,
+                elevation2,
                 fdoa,
                 fdoaUnc,
                 frequency,
@@ -3536,6 +4007,7 @@ private constructor(
                 origObjectId,
                 origSensorId1,
                 origSensorId2,
+                polarityType,
                 rawFileUri,
                 satNo,
                 sen2alt,
@@ -3551,6 +4023,7 @@ private constructor(
                 tags,
                 taskId,
                 tdoa,
+                tdoaAmb,
                 tdoaUnc,
                 transactionId,
                 uct,
@@ -3561,7 +4034,7 @@ private constructor(
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, obTime=$obTime, source=$source, id=$id, bandwidth=$bandwidth, collectionMode=$collectionMode, createdAt=$createdAt, createdBy=$createdBy, deltaRange=$deltaRange, deltaRangeRate=$deltaRangeRate, deltaRangeRateUnc=$deltaRangeRateUnc, deltaRangeUnc=$deltaRangeUnc, descriptor=$descriptor, fdoa=$fdoa, fdoaUnc=$fdoaUnc, frequency=$frequency, idOnOrbit=$idOnOrbit, idSensor1=$idSensor1, idSensor2=$idSensor2, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId1=$origSensorId1, origSensorId2=$origSensorId2, rawFileUri=$rawFileUri, satNo=$satNo, sen2alt=$sen2alt, sen2lat=$sen2lat, sen2lon=$sen2lon, senalt=$senalt, senlat=$senlat, senlon=$senlon, sensor1Delay=$sensor1Delay, sensor2Delay=$sensor2Delay, snr=$snr, sourceDl=$sourceDl, tags=$tags, taskId=$taskId, tdoa=$tdoa, tdoaUnc=$tdoaUnc, transactionId=$transactionId, uct=$uct, additionalProperties=$additionalProperties}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, obTime=$obTime, source=$source, id=$id, azimuth1=$azimuth1, azimuth2=$azimuth2, bandwidth=$bandwidth, collectionMode=$collectionMode, createdAt=$createdAt, createdBy=$createdBy, deltaRange=$deltaRange, deltaRangeRate=$deltaRangeRate, deltaRangeRateUnc=$deltaRangeRateUnc, deltaRangeUnc=$deltaRangeUnc, descriptor=$descriptor, elevation1=$elevation1, elevation2=$elevation2, fdoa=$fdoa, fdoaUnc=$fdoaUnc, frequency=$frequency, idOnOrbit=$idOnOrbit, idSensor1=$idSensor1, idSensor2=$idSensor2, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId1=$origSensorId1, origSensorId2=$origSensorId2, polarityType=$polarityType, rawFileUri=$rawFileUri, satNo=$satNo, sen2alt=$sen2alt, sen2lat=$sen2lat, sen2lon=$sen2lon, senalt=$senalt, senlat=$senlat, senlon=$senlon, sensor1Delay=$sensor1Delay, sensor2Delay=$sensor2Delay, snr=$snr, sourceDl=$sourceDl, tags=$tags, taskId=$taskId, tdoa=$tdoa, tdoaAmb=$tdoaAmb, tdoaUnc=$tdoaUnc, transactionId=$transactionId, uct=$uct, additionalProperties=$additionalProperties}"
     }
 
     /**

@@ -11,6 +11,7 @@ import com.unifieddatalibrary.api.models.evac.history.HistoryListPage
 import com.unifieddatalibrary.api.models.evac.history.HistoryListParams
 import java.util.function.Consumer
 
+/** These services provide operations for manipulation and querying of Mission Ops information. */
 interface HistoryService {
 
     /**

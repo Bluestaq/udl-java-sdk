@@ -15,6 +15,13 @@ import com.unifieddatalibrary.api.services.async.tdoafdoa.diffofarrival.HistoryS
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for querying and manipulation of Signal time and frequency
+ * difference of arrival (TDOA/FDOA) information obtained by using passive RF based sensor
+ * phenomenologies and sensor triangulation. The J2000 coordinate frame is the preferred frame for
+ * all observations, but in some cases observations may be in another frame depending on the
+ * provider.
+ */
 interface DiffofarrivalServiceAsync {
 
     /**
@@ -29,6 +36,13 @@ interface DiffofarrivalServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): DiffofarrivalServiceAsync
 
+    /**
+     * These services provide operations for querying and manipulation of Signal time and frequency
+     * difference of arrival (TDOA/FDOA) information obtained by using passive RF based sensor
+     * phenomenologies and sensor triangulation. The J2000 coordinate frame is the preferred frame
+     * for all observations, but in some cases observations may be in another frame depending on the
+     * provider.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -92,6 +106,17 @@ interface DiffofarrivalServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<DiffofarrivalCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(DiffofarrivalCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<DiffofarrivalCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
+
     /**
      * A view of [DiffofarrivalServiceAsync] that provides access to raw HTTP responses for each
      * method.
@@ -107,6 +132,13 @@ interface DiffofarrivalServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): DiffofarrivalServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for querying and manipulation of Signal time and
+         * frequency difference of arrival (TDOA/FDOA) information obtained by using passive RF
+         * based sensor phenomenologies and sensor triangulation. The J2000 coordinate frame is the
+         * preferred frame for all observations, but in some cases observations may be in another
+         * frame depending on the provider.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**
@@ -162,5 +194,17 @@ interface DiffofarrivalServiceAsync {
             params: DiffofarrivalCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<DiffofarrivalCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(DiffofarrivalCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<DiffofarrivalCreateBulkParams.Body>
+        ): CompletableFuture<HttpResponse> = createBulk(body, RequestOptions.none())
     }
 }

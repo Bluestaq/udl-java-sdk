@@ -29,8 +29,18 @@ internal constructor(private val clientOptions: ClientOptions) : SupportingDataS
     ): SupportingDataServiceAsync =
         SupportingDataServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * Service operations for querying and manipulation of miscellaneous supporting data such as
+     * countries (which can represent countries, multi-national consortiums, and international
+     * organizations), data owners, locations, entities, organizations, etc.
+     */
     override fun dataTypes(): DataTypeServiceAsync = dataTypes
 
+    /**
+     * Service operations for querying and manipulation of miscellaneous supporting data such as
+     * countries (which can represent countries, multi-national consortiums, and international
+     * organizations), data owners, locations, entities, organizations, etc.
+     */
     override fun dataowner(): DataownerServiceAsync = dataowner
 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
@@ -51,8 +61,18 @@ internal constructor(private val clientOptions: ClientOptions) : SupportingDataS
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * Service operations for querying and manipulation of miscellaneous supporting data such as
+         * countries (which can represent countries, multi-national consortiums, and international
+         * organizations), data owners, locations, entities, organizations, etc.
+         */
         override fun dataTypes(): DataTypeServiceAsync.WithRawResponse = dataTypes
 
+        /**
+         * Service operations for querying and manipulation of miscellaneous supporting data such as
+         * countries (which can represent countries, multi-national consortiums, and international
+         * organizations), data owners, locations, entities, organizations, etc.
+         */
         override fun dataowner(): DataownerServiceAsync.WithRawResponse = dataowner
     }
 }

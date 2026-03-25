@@ -25,8 +25,18 @@ class SupportingDataServiceImpl internal constructor(private val clientOptions: 
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): SupportingDataService =
         SupportingDataServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * Service operations for querying and manipulation of miscellaneous supporting data such as
+     * countries (which can represent countries, multi-national consortiums, and international
+     * organizations), data owners, locations, entities, organizations, etc.
+     */
     override fun dataTypes(): DataTypeService = dataTypes
 
+    /**
+     * Service operations for querying and manipulation of miscellaneous supporting data such as
+     * countries (which can represent countries, multi-national consortiums, and international
+     * organizations), data owners, locations, entities, organizations, etc.
+     */
     override fun dataowner(): DataownerService = dataowner
 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
@@ -47,8 +57,18 @@ class SupportingDataServiceImpl internal constructor(private val clientOptions: 
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * Service operations for querying and manipulation of miscellaneous supporting data such as
+         * countries (which can represent countries, multi-national consortiums, and international
+         * organizations), data owners, locations, entities, organizations, etc.
+         */
         override fun dataTypes(): DataTypeService.WithRawResponse = dataTypes
 
+        /**
+         * Service operations for querying and manipulation of miscellaneous supporting data such as
+         * countries (which can represent countries, multi-national consortiums, and international
+         * organizations), data owners, locations, entities, organizations, etc.
+         */
         override fun dataowner(): DataownerService.WithRawResponse = dataowner
     }
 }

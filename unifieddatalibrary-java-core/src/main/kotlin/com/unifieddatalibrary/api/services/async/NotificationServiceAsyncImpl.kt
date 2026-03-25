@@ -35,6 +35,12 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * A Notification Service allowing the broadcast of generic messages to the community. Users can
+ * send free-form messages, publish lists, and notify the community about events or alerts across
+ * various domains. Notifications and alerts are categorized by a 'msgType' field and are accessible
+ * via the UDL Secure Messaging API and REST API services.
+ */
 class NotificationServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     NotificationServiceAsync {
 
@@ -49,6 +55,12 @@ class NotificationServiceAsyncImpl internal constructor(private val clientOption
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): NotificationServiceAsync =
         NotificationServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * A Notification Service allowing the broadcast of generic messages to the community. Users can
+     * send free-form messages, publish lists, and notify the community about events or alerts
+     * across various domains. Notifications and alerts are categorized by a 'msgType' field and are
+     * accessible via the UDL Secure Messaging API and REST API services.
+     */
     override fun history(): HistoryServiceAsync = history
 
     override fun create(
@@ -117,6 +129,12 @@ class NotificationServiceAsyncImpl internal constructor(private val clientOption
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * A Notification Service allowing the broadcast of generic messages to the community. Users
+         * can send free-form messages, publish lists, and notify the community about events or
+         * alerts across various domains. Notifications and alerts are categorized by a 'msgType'
+         * field and are accessible via the UDL Secure Messaging API and REST API services.
+         */
         override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -192,6 +210,7 @@ class NotificationServiceAsyncImpl internal constructor(private val clientOption
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "notification", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

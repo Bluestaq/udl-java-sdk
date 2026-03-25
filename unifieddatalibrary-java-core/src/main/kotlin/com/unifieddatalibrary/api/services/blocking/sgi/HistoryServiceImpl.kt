@@ -23,6 +23,10 @@ import com.unifieddatalibrary.api.models.sgi.history.HistoryListParams
 import com.unifieddatalibrary.api.models.sgi.history.HistoryListResponse
 import java.util.function.Consumer
 
+/**
+ * This service provides operations for manipulation and querying of space weather/solar,
+ * geomagnetic, and radiation belt index data.
+ */
 class HistoryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryService {
 
@@ -123,6 +127,7 @@ class HistoryServiceImpl internal constructor(private val clientOptions: ClientO
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "sgi", "history", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

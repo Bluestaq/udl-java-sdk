@@ -21,6 +21,7 @@ import com.unifieddatalibrary.api.models.video.history.HistoryListParams
 import com.unifieddatalibrary.api.models.video.history.VideoStreamsFull
 import java.util.function.Consumer
 
+/** This collection of services provides operations for video streaming. */
 class HistoryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryService {
 
@@ -99,6 +100,7 @@ class HistoryServiceImpl internal constructor(private val clientOptions: ClientO
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "video", "history", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

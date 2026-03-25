@@ -24,6 +24,11 @@ import com.unifieddatalibrary.api.models.supportingdata.dataowner.DataownerRetri
 import com.unifieddatalibrary.api.models.supportingdata.dataowner.DataownerRetrieveProviderMetadataParams
 import java.util.function.Consumer
 
+/**
+ * Service operations for querying and manipulation of miscellaneous supporting data such as
+ * countries (which can represent countries, multi-national consortiums, and international
+ * organizations), data owners, locations, entities, organizations, etc.
+ */
 class DataownerServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     DataownerService {
 
@@ -119,6 +124,7 @@ class DataownerServiceImpl internal constructor(private val clientOptions: Clien
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "dataowner", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

@@ -152,7 +152,7 @@ internal class GnssRawIfServiceTest {
         val gnssRawIfService = client.gnssRawIf()
 
         gnssRawIfService.uploadZip(
-            GnssRawIfUploadZipParams.builder().file("some content".byteInputStream()).build()
+            GnssRawIfUploadZipParams.builder().file("Example data".byteInputStream()).build()
         )
     }
 }

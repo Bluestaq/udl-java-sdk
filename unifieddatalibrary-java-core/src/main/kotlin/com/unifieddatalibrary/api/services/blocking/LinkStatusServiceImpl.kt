@@ -36,6 +36,14 @@ import com.unifieddatalibrary.api.services.blocking.linkstatus.HistoryServiceImp
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for manipulation and querying tactical data links and link
+ * statuses of beams or a satellite constellation. Communication link statuses provide definitions
+ * and status such as, positional endpoints, where each endpoint may be associated with a specific
+ * beam or with a satellite constellation. Data links provide detailed instructions regarding the
+ * operational use of a tactical data link and interface coordination through various message
+ * formats.
+ */
 class LinkStatusServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     LinkStatusService {
 
@@ -52,8 +60,24 @@ class LinkStatusServiceImpl internal constructor(private val clientOptions: Clie
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): LinkStatusService =
         LinkStatusServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for manipulation and querying tactical data links and link
+     * statuses of beams or a satellite constellation. Communication link statuses provide
+     * definitions and status such as, positional endpoints, where each endpoint may be associated
+     * with a specific beam or with a satellite constellation. Data links provide detailed
+     * instructions regarding the operational use of a tactical data link and interface coordination
+     * through various message formats.
+     */
     override fun datalink(): DatalinkService = datalink
 
+    /**
+     * These services provide operations for manipulation and querying tactical data links and link
+     * statuses of beams or a satellite constellation. Communication link statuses provide
+     * definitions and status such as, positional endpoints, where each endpoint may be associated
+     * with a specific beam or with a satellite constellation. Data links provide detailed
+     * instructions regarding the operational use of a tactical data link and interface coordination
+     * through various message formats.
+     */
     override fun history(): HistoryService = history
 
     override fun create(params: LinkStatusCreateParams, requestOptions: RequestOptions) {
@@ -114,8 +138,24 @@ class LinkStatusServiceImpl internal constructor(private val clientOptions: Clie
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for manipulation and querying tactical data links and
+         * link statuses of beams or a satellite constellation. Communication link statuses provide
+         * definitions and status such as, positional endpoints, where each endpoint may be
+         * associated with a specific beam or with a satellite constellation. Data links provide
+         * detailed instructions regarding the operational use of a tactical data link and interface
+         * coordination through various message formats.
+         */
         override fun datalink(): DatalinkService.WithRawResponse = datalink
 
+        /**
+         * These services provide operations for manipulation and querying tactical data links and
+         * link statuses of beams or a satellite constellation. Communication link statuses provide
+         * definitions and status such as, positional endpoints, where each endpoint may be
+         * associated with a specific beam or with a satellite constellation. Data links provide
+         * detailed instructions regarding the operational use of a tactical data link and interface
+         * coordination through various message formats.
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -184,6 +224,7 @@ class LinkStatusServiceImpl internal constructor(private val clientOptions: Clie
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "linkstatus", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

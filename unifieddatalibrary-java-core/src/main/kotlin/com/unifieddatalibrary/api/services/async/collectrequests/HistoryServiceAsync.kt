@@ -13,6 +13,7 @@ import com.unifieddatalibrary.api.models.collectrequests.history.HistoryListPara
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 interface HistoryServiceAsync {
 
     /**

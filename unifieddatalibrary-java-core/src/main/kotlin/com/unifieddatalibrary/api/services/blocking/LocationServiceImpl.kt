@@ -33,6 +33,11 @@ import com.unifieddatalibrary.api.models.location.LocationUpdateParams
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * Service operations for querying and manipulation of miscellaneous supporting data such as
+ * countries (which can represent countries, multi-national consortiums, and international
+ * organizations), data owners, locations, entities, organizations, etc.
+ */
 class LocationServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     LocationService {
 
@@ -216,6 +221,7 @@ class LocationServiceImpl internal constructor(private val clientOptions: Client
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "location", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

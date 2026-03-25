@@ -22,6 +22,12 @@ import com.unifieddatalibrary.api.models.maneuvers.ManeuverUnvalidatedPublishPar
 import com.unifieddatalibrary.api.services.blocking.maneuvers.HistoryService
 import java.util.function.Consumer
 
+/**
+ * This service provides operations for querying and manipulation of detected/possible/confirmed
+ * on-orbit maneuvers. The J2000 coordinate frame is the preferred frame for all maneuver data, but
+ * in some cases data may be in another frame depending on the provider. Check the Storefront 'Data
+ * Products' section under the 'Discover' tab for maneuver data provider information.
+ */
 interface ManeuverService {
 
     /**
@@ -36,6 +42,13 @@ interface ManeuverService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): ManeuverService
 
+    /**
+     * This service provides operations for querying and manipulation of detected/possible/confirmed
+     * on-orbit maneuvers. The J2000 coordinate frame is the preferred frame for all maneuver data,
+     * but in some cases data may be in another frame depending on the provider. Check the
+     * Storefront 'Data Products' section under the 'Discover' tab for maneuver data provider
+     * information.
+     */
     fun history(): HistoryService
 
     /**
@@ -91,6 +104,16 @@ interface ManeuverService {
         params: ManeuverCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<ManeuverCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(ManeuverCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<ManeuverCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
 
     /** Service operation to get a single maneuver by its unique ID passed as a path parameter. */
     fun get(id: String): ManeuverGetResponse = get(id, ManeuverGetParams.none())
@@ -172,6 +195,20 @@ interface ManeuverService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<ManeuverUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            ManeuverUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<ManeuverUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /** A view of [ManeuverService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
@@ -182,6 +219,13 @@ interface ManeuverService {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): ManeuverService.WithRawResponse
 
+        /**
+         * This service provides operations for querying and manipulation of
+         * detected/possible/confirmed on-orbit maneuvers. The J2000 coordinate frame is the
+         * preferred frame for all maneuver data, but in some cases data may be in another frame
+         * depending on the provider. Check the Storefront 'Data Products' section under the
+         * 'Discover' tab for maneuver data provider information.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**
@@ -243,6 +287,19 @@ interface ManeuverService {
             params: ManeuverCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<ManeuverCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(ManeuverCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<ManeuverCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/maneuver/{id}`, but is otherwise the same as
@@ -340,5 +397,21 @@ interface ManeuverService {
             params: ManeuverUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<ManeuverUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                ManeuverUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(body: List<ManeuverUnvalidatedPublishParams.Body>): HttpResponse =
+            unvalidatedPublish(body, RequestOptions.none())
     }
 }

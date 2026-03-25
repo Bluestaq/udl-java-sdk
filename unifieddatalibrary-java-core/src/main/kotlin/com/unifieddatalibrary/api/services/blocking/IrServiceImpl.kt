@@ -34,6 +34,7 @@ import com.unifieddatalibrary.api.models.ir.IrUpdateParams
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/** These services provide operations for manipulation and querying of on-orbit payloads. */
 class IrServiceImpl internal constructor(private val clientOptions: ClientOptions) : IrService {
 
     private val withRawResponse: IrService.WithRawResponse by lazy {
@@ -204,6 +205,7 @@ class IrServiceImpl internal constructor(private val clientOptions: ClientOption
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "ir", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

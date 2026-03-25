@@ -11,6 +11,7 @@ import com.unifieddatalibrary.api.models.video.history.HistoryListPage
 import com.unifieddatalibrary.api.models.video.history.HistoryListParams
 import java.util.function.Consumer
 
+/** This collection of services provides operations for video streaming. */
 interface HistoryService {
 
     /**

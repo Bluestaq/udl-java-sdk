@@ -34,6 +34,12 @@ import com.unifieddatalibrary.api.models.launchvehicle.LaunchVehicleUpdateParams
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * Collection of launch related services which provide operations for querying and manipulation of
+ * launch site data and detailed information on launch vehicles including engines, stages, and
+ * manufacturers. Sites, engines, and stages can each have multiple 'detail' records which may be
+ * compiled by different sources.
+ */
 class LaunchVehicleServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     LaunchVehicleService {
 
@@ -220,6 +226,7 @@ class LaunchVehicleServiceImpl internal constructor(private val clientOptions: C
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "launchvehicle", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

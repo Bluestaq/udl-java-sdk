@@ -21,6 +21,11 @@ import com.unifieddatalibrary.api.models.poi.PoiTupleResponse
 import com.unifieddatalibrary.api.models.poi.PoiUnvalidatedPublishParams
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of Report and Activity
+ * information. This information includes analytic reports, significant events, route statistics,
+ * EMI Reports, and other georeferenced reports and activities.
+ */
 interface PoiService {
 
     /**
@@ -86,6 +91,15 @@ interface PoiService {
         params: PoiCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<PoiCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(PoiCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<PoiCreateBulkParams.Body>) = createBulk(body, RequestOptions.none())
 
     /** Service operation to get a single POI by its unique ID passed as a path parameter. */
     fun get(id: String): PoiGetResponse = get(id, PoiGetParams.none())
@@ -165,6 +179,16 @@ interface PoiService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<PoiUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = unvalidatedPublish(PoiUnvalidatedPublishParams.builder().body(body).build(), requestOptions)
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<PoiUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /** A view of [PoiService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
@@ -233,6 +257,19 @@ interface PoiService {
             params: PoiCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<PoiCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(PoiCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<PoiCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/poi/{id}`, but is otherwise the same as
@@ -328,5 +365,21 @@ interface PoiService {
             params: PoiUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<PoiUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                PoiUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(body: List<PoiUnvalidatedPublishParams.Body>): HttpResponse =
+            unvalidatedPublish(body, RequestOptions.none())
     }
 }

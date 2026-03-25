@@ -19,6 +19,12 @@ import com.unifieddatalibrary.api.models.rfemitter.staging.StagingRetrieveRespon
 import com.unifieddatalibrary.api.models.rfemitter.staging.StagingUpdateParams
 import java.util.function.Consumer
 
+/**
+ * This collection of services provides operations for querying and manipulation of RF related
+ * information to include RFEmitters which could potentially interfere with
+ * communications/operations of space related entities, and RFBands commonly used by various space
+ * related entities.
+ */
 interface StagingService {
 
     /**
@@ -163,6 +169,16 @@ interface StagingService {
         params: StagingCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<StagingCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(StagingCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<StagingCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -358,6 +374,19 @@ interface StagingService {
             params: StagingCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<StagingCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(StagingCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<StagingCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/rfemitterstaging/queryhelp`, but is otherwise

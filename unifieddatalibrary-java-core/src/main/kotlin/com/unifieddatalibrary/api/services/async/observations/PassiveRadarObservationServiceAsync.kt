@@ -22,6 +22,13 @@ import com.unifieddatalibrary.api.services.async.observations.passiveradarobserv
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * This collection of services provides operations for querying and manipulation of electro-optical
+ * (EO), radar, radio frequency (RF), Global Navigation Satellite Systems (GNSS), Ionospheric
+ * (IONO), Infrared (SWIR), and Space Environment observation data. The J2000 coordinate frame is
+ * the preferred frame for all observations, as applicable, but in some cases observations may be in
+ * an alternate frame depending on the provider and/or datatype.
+ */
 interface PassiveRadarObservationServiceAsync {
 
     /**
@@ -36,6 +43,14 @@ interface PassiveRadarObservationServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): PassiveRadarObservationServiceAsync
 
+    /**
+     * This collection of services provides operations for querying and manipulation of
+     * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+     * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+     * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+     * some cases observations may be in an alternate frame depending on the provider and/or
+     * datatype.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -99,6 +114,21 @@ interface PassiveRadarObservationServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<PassiveRadarObservationCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(
+            PassiveRadarObservationCreateBulkParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<PassiveRadarObservationCreateBulkParams.Body>
+    ): CompletableFuture<Void?> = createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to take multiple PassiveRadarObservation records as a POST body and ingest
      * into the database. This operation is intended to be used for automated feeds into UDL. A
@@ -113,6 +143,21 @@ interface PassiveRadarObservationServiceAsync {
         params: PassiveRadarObservationFileCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see fileCreate */
+    fun fileCreate(
+        body: List<PassiveRadarObservationFileCreateParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        fileCreate(
+            PassiveRadarObservationFileCreateParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see fileCreate */
+    fun fileCreate(
+        body: List<PassiveRadarObservationFileCreateParams.Body>
+    ): CompletableFuture<Void?> = fileCreate(body, RequestOptions.none())
 
     /**
      * Service operation to get a single PassiveRadarObservation record by its unique ID passed as a
@@ -216,6 +261,14 @@ interface PassiveRadarObservationServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): PassiveRadarObservationServiceAsync.WithRawResponse
 
+        /**
+         * This collection of services provides operations for querying and manipulation of
+         * electro-optical (EO), radar, radio frequency (RF), Global Navigation Satellite Systems
+         * (GNSS), Ionospheric (IONO), Infrared (SWIR), and Space Environment observation data. The
+         * J2000 coordinate frame is the preferred frame for all observations, as applicable, but in
+         * some cases observations may be in an alternate frame depending on the provider and/or
+         * datatype.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**
@@ -274,6 +327,21 @@ interface PassiveRadarObservationServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
 
+        /** @see createBulk */
+        fun createBulk(
+            body: List<PassiveRadarObservationCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(
+                PassiveRadarObservationCreateBulkParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<PassiveRadarObservationCreateBulkParams.Body>
+        ): CompletableFuture<HttpResponse> = createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `post /filedrop/udl-passiveradar`, but is otherwise the
          * same as [PassiveRadarObservationServiceAsync.fileCreate].
@@ -287,6 +355,21 @@ interface PassiveRadarObservationServiceAsync {
             params: PassiveRadarObservationFileCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see fileCreate */
+        fun fileCreate(
+            body: List<PassiveRadarObservationFileCreateParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            fileCreate(
+                PassiveRadarObservationFileCreateParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see fileCreate */
+        fun fileCreate(
+            body: List<PassiveRadarObservationFileCreateParams.Body>
+        ): CompletableFuture<HttpResponse> = fileCreate(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/passiveradarobservation/{id}`, but is otherwise

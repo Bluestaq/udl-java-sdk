@@ -21,6 +21,16 @@ import com.unifieddatalibrary.api.models.beamcontours.BeamContourTupleParams
 import com.unifieddatalibrary.api.models.beamcontours.BeamContourUpdateParams
 import java.util.function.Consumer
 
+/**
+ * This collection of services provides operations for querying and manipulation of satellite
+ * antenna beams, and querying of beam contours and service areas. Beam contours are the geographic
+ * representation of the relative gain levels of beam power off of the maximum gain boresight
+ * points. Similarly, service areas are the geographic footprints of the areas served by a
+ * particular beam, and may be made up of multiple service regions. Well-Known Text (WKT) and
+ * GeoJSON formats are used for GIS representation and query support (see
+ * https://www.opengeospatial.org/standards/wkt-crs and https://geojson.org/ for more information on
+ * these formats).
+ */
 interface BeamContourService {
 
     /**
@@ -176,6 +186,16 @@ interface BeamContourService {
         params: BeamContourCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<BeamContourCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(BeamContourCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<BeamContourCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -397,6 +417,19 @@ interface BeamContourService {
             params: BeamContourCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<BeamContourCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(BeamContourCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<BeamContourCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/beamcontour/queryhelp`, but is otherwise the

@@ -28,6 +28,10 @@ import com.unifieddatalibrary.api.models.onorbitsolararray.OnorbitsolararrayUpda
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit objects of interest,
+ * their components, and various lists and status of those objects.
+ */
 class OnorbitsolararrayServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     OnorbitsolararrayService {
 

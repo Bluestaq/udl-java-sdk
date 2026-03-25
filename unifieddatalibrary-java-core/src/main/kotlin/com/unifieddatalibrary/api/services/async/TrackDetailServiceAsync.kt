@@ -18,6 +18,10 @@ import com.unifieddatalibrary.api.services.async.trackdetails.HistoryServiceAsyn
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for posting and querying of air, space, and ground 'tracks'. A
+ * track is a position and optionally a heading/velocity of an object at a particular timestamp.
+ */
 interface TrackDetailServiceAsync {
 
     /**
@@ -32,6 +36,11 @@ interface TrackDetailServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): TrackDetailServiceAsync
 
+    /**
+     * These services provide operations for posting and querying of air, space, and ground
+     * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+     * particular timestamp.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -79,6 +88,17 @@ interface TrackDetailServiceAsync {
         params: TrackDetailCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<TrackDetailCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(TrackDetailCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<TrackDetailCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -135,6 +155,11 @@ interface TrackDetailServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): TrackDetailServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for posting and querying of air, space, and ground
+         * 'tracks'. A track is a position and optionally a heading/velocity of an object at a
+         * particular timestamp.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**
@@ -177,6 +202,18 @@ interface TrackDetailServiceAsync {
             params: TrackDetailCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<TrackDetailCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(TrackDetailCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<TrackDetailCreateBulkParams.Body>
+        ): CompletableFuture<HttpResponse> = createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/trackdetails/queryhelp`, but is otherwise the

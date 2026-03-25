@@ -38,6 +38,15 @@ import com.unifieddatalibrary.api.services.blocking.groundimagery.HistoryService
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This collection of services provides operations for querying and manipulation of ground imagery
+ * of terrestrial regions from on-orbit, air, and other sensors. Includes metadata on the image
+ * (time, region, source, etc) as well as binary content (typically GeoTIFF). Binary content must be
+ * downloaded individually by ID using the 'getFile' operation. Well-Known Text (WKT) and GeoJSON
+ * formats are used for GIS representation and query support (see
+ * https://www.opengeospatial.org/standards/wkt-crs and https://geojson.org/ for more information on
+ * these formats).
+ */
 class GroundImageryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     GroundImageryService {
 
@@ -52,6 +61,15 @@ class GroundImageryServiceImpl internal constructor(private val clientOptions: C
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): GroundImageryService =
         GroundImageryServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * This collection of services provides operations for querying and manipulation of ground
+     * imagery of terrestrial regions from on-orbit, air, and other sensors. Includes metadata on
+     * the image (time, region, source, etc) as well as binary content (typically GeoTIFF). Binary
+     * content must be downloaded individually by ID using the 'getFile' operation. Well-Known Text
+     * (WKT) and GeoJSON formats are used for GIS representation and query support (see
+     * https://www.opengeospatial.org/standards/wkt-crs and https://geojson.org/ for more
+     * information on these formats).
+     */
     override fun history(): HistoryService = history
 
     override fun create(params: GroundImageryCreateParams, requestOptions: RequestOptions) {
@@ -125,6 +143,15 @@ class GroundImageryServiceImpl internal constructor(private val clientOptions: C
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * This collection of services provides operations for querying and manipulation of ground
+         * imagery of terrestrial regions from on-orbit, air, and other sensors. Includes metadata
+         * on the image (time, region, source, etc) as well as binary content (typically GeoTIFF).
+         * Binary content must be downloaded individually by ID using the 'getFile' operation.
+         * Well-Known Text (WKT) and GeoJSON formats are used for GIS representation and query
+         * support (see https://www.opengeospatial.org/standards/wkt-crs and https://geojson.org/
+         * for more information on these formats).
+         */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -213,6 +240,7 @@ class GroundImageryServiceImpl internal constructor(private val clientOptions: C
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "groundimagery", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
@@ -264,6 +292,7 @@ class GroundImageryServiceImpl internal constructor(private val clientOptions: C
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "groundimagery", "getFile", params._pathParam(0))
+                    .putHeader("Accept", "application/octet-stream")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

@@ -37,6 +37,11 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for manipulation and querying of Report and Activity
+ * information. This information includes analytic reports, significant events, route statistics,
+ * EMI Reports, and other georeferenced reports and activities.
+ */
 class OnorbitassessmentServiceAsyncImpl
 internal constructor(private val clientOptions: ClientOptions) : OnorbitassessmentServiceAsync {
 
@@ -53,6 +58,11 @@ internal constructor(private val clientOptions: ClientOptions) : Onorbitassessme
     ): OnorbitassessmentServiceAsync =
         OnorbitassessmentServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     override fun history(): HistoryServiceAsync = history
 
     override fun create(
@@ -128,6 +138,11 @@ internal constructor(private val clientOptions: ClientOptions) : Onorbitassessme
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -203,6 +218,7 @@ internal constructor(private val clientOptions: ClientOptions) : Onorbitassessme
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "onorbitassessment", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

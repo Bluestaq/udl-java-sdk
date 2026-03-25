@@ -34,6 +34,7 @@ import com.unifieddatalibrary.api.models.navigation.NavigationUpdateParams
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/** These services provide operations for manipulation and querying of on-orbit payloads. */
 class NavigationServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     NavigationService {
 
@@ -220,6 +221,7 @@ class NavigationServiceImpl internal constructor(private val clientOptions: Clie
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "navigation", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

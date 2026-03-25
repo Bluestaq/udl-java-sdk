@@ -25,6 +25,15 @@ import com.unifieddatalibrary.api.services.async.sensormaintenance.HistoryServic
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * This service provides operations for querying and manipulation of sensor data. Sensors are
+ * terrestrial or on-orbit equipment capable of taking measurements or 'observations' of on-orbit
+ * objects via several phenomenologies such as Electro-Optical (EO), Radar, and Radio Frequency
+ * (RF). This collection of operations includes 'SensorMaintenance' schedules which define
+ * known/planned future maintenance and associated operational impact of sensors as well as
+ * 'SensorCalibration' records which contains data about a sensor's overall accuracy and is used to
+ * adjust sensor settings.
+ */
 interface SensorMaintenanceServiceAsync {
 
     /**
@@ -39,6 +48,15 @@ interface SensorMaintenanceServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): SensorMaintenanceServiceAsync
 
+    /**
+     * This service provides operations for querying and manipulation of sensor data. Sensors are
+     * terrestrial or on-orbit equipment capable of taking measurements or 'observations' of
+     * on-orbit objects via several phenomenologies such as Electro-Optical (EO), Radar, and Radio
+     * Frequency (RF). This collection of operations includes 'SensorMaintenance' schedules which
+     * define known/planned future maintenance and associated operational impact of sensors as well
+     * as 'SensorCalibration' records which contains data about a sensor's overall accuracy and is
+     * used to adjust sensor settings.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -175,6 +193,17 @@ interface SensorMaintenanceServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<SensorMaintenanceCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(SensorMaintenanceCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<SensorMaintenanceCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to get a single SensorMaintenance record by its unique ID passed as a path
      * parameter.
@@ -298,6 +327,15 @@ interface SensorMaintenanceServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): SensorMaintenanceServiceAsync.WithRawResponse
 
+        /**
+         * This service provides operations for querying and manipulation of sensor data. Sensors
+         * are terrestrial or on-orbit equipment capable of taking measurements or 'observations' of
+         * on-orbit objects via several phenomenologies such as Electro-Optical (EO), Radar, and
+         * Radio Frequency (RF). This collection of operations includes 'SensorMaintenance'
+         * schedules which define known/planned future maintenance and associated operational impact
+         * of sensors as well as 'SensorCalibration' records which contains data about a sensor's
+         * overall accuracy and is used to adjust sensor settings.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**
@@ -434,6 +472,21 @@ interface SensorMaintenanceServiceAsync {
             params: SensorMaintenanceCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<SensorMaintenanceCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(
+                SensorMaintenanceCreateBulkParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<SensorMaintenanceCreateBulkParams.Body>
+        ): CompletableFuture<HttpResponse> = createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/sensormaintenance/{id}`, but is otherwise the

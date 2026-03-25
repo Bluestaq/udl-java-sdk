@@ -39,6 +39,7 @@ import com.unifieddatalibrary.api.services.blocking.video.HistoryServiceImpl
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/** This collection of services provides operations for video streaming. */
 class VideoServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     VideoService {
 
@@ -53,6 +54,7 @@ class VideoServiceImpl internal constructor(private val clientOptions: ClientOpt
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): VideoService =
         VideoServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /** This collection of services provides operations for video streaming. */
     override fun history(): HistoryService = history
 
     override fun create(params: VideoCreateParams, requestOptions: RequestOptions) {
@@ -124,6 +126,7 @@ class VideoServiceImpl internal constructor(private val clientOptions: ClientOpt
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /** This collection of services provides operations for video streaming. */
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -192,6 +195,7 @@ class VideoServiceImpl internal constructor(private val clientOptions: ClientOpt
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "video", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

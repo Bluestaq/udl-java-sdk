@@ -33,6 +33,13 @@ import com.unifieddatalibrary.api.models.observations.ecpsdr.EcpsdrUnvalidatedPu
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This collection of services provides operations for querying and manipulation of electro-optical
+ * (EO), radar, radio frequency (RF), Global Navigation Satellite Systems (GNSS), Ionospheric
+ * (IONO), Infrared (SWIR), and Space Environment observation data. The J2000 coordinate frame is
+ * the preferred frame for all observations, as applicable, but in some cases observations may be in
+ * an alternate frame depending on the provider and/or datatype.
+ */
 class EcpsdrServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     EcpsdrService {
 
@@ -194,6 +201,7 @@ class EcpsdrServiceImpl internal constructor(private val clientOptions: ClientOp
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "ecpsdr", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

@@ -35,6 +35,11 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * This service provides operations for manipulation and querying of maritime Vessel and Vessel
+ * Status data. Vessel contains the static data of the specific vessel: mmsi, cruise speed, max
+ * speed, etc.
+ */
 class VesselServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     VesselServiceAsync {
 
@@ -216,6 +221,7 @@ class VesselServiceAsyncImpl internal constructor(private val clientOptions: Cli
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "vessel", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

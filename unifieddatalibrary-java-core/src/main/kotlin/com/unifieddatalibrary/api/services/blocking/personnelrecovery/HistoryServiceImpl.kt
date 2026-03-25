@@ -21,6 +21,7 @@ import com.unifieddatalibrary.api.models.personnelrecovery.history.HistoryListPa
 import com.unifieddatalibrary.api.models.personnelrecovery.history.HistoryListParams
 import java.util.function.Consumer
 
+/** These services provide operations for manipulation and querying of Mission Ops information. */
 class HistoryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryService {
 
@@ -99,6 +100,7 @@ class HistoryServiceImpl internal constructor(private val clientOptions: ClientO
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "personnelrecovery", "history", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

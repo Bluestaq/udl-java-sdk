@@ -70,16 +70,45 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): ScService =
         ScServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /**
+     * These endpoints provide the ability to subscribe to SCS Event Notifications for file
+     * upload/update and folder creation events within a specific folder in the Secure Content
+     * Store. A user must be authorized to view the file/folder for which a notification was created
+     * in order to retrieve that notification.
+     */
     override fun notifications(): NotificationService = notifications
 
+    /**
+     * These services provide soon-to-be-deprecated CRUD and Search operations for files and folders
+     * in the Secure Content Store. This documentation is provided only for backwards compatibility,
+     * please refer to SCS V2 for new SCS integrations.
+     */
     override fun file(): FileService = file
 
+    /**
+     * These services provide soon-to-be-deprecated CRUD and Search operations for files and folders
+     * in the Secure Content Store. This documentation is provided only for backwards compatibility,
+     * please refer to SCS V2 for new SCS integrations.
+     */
     override fun folders(): FolderService = folders
 
+    /**
+     * These services provide soon-to-be-deprecated CRUD and Search operations for files and folders
+     * in the Secure Content Store. This documentation is provided only for backwards compatibility,
+     * please refer to SCS V2 for new SCS integrations.
+     */
     override fun paths(): PathService = paths
 
+    /**
+     * These services provide CRUD and search operations for files and folders in the Secure Content
+     * Store.
+     */
     override fun view(): ViewService = view
 
+    /**
+     * These services provide CRUD and search operations for files and folders in the Secure Content
+     * Store.
+     */
     override fun v2(): V2Service = v2
 
     @Deprecated("deprecated")
@@ -183,16 +212,45 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These endpoints provide the ability to subscribe to SCS Event Notifications for file
+         * upload/update and folder creation events within a specific folder in the Secure Content
+         * Store. A user must be authorized to view the file/folder for which a notification was
+         * created in order to retrieve that notification.
+         */
         override fun notifications(): NotificationService.WithRawResponse = notifications
 
+        /**
+         * These services provide soon-to-be-deprecated CRUD and Search operations for files and
+         * folders in the Secure Content Store. This documentation is provided only for backwards
+         * compatibility, please refer to SCS V2 for new SCS integrations.
+         */
         override fun file(): FileService.WithRawResponse = file
 
+        /**
+         * These services provide soon-to-be-deprecated CRUD and Search operations for files and
+         * folders in the Secure Content Store. This documentation is provided only for backwards
+         * compatibility, please refer to SCS V2 for new SCS integrations.
+         */
         override fun folders(): FolderService.WithRawResponse = folders
 
+        /**
+         * These services provide soon-to-be-deprecated CRUD and Search operations for files and
+         * folders in the Secure Content Store. This documentation is provided only for backwards
+         * compatibility, please refer to SCS V2 for new SCS integrations.
+         */
         override fun paths(): PathService.WithRawResponse = paths
 
+        /**
+         * These services provide CRUD and search operations for files and folders in the Secure
+         * Content Store.
+         */
         override fun view(): ViewService.WithRawResponse = view
 
+        /**
+         * These services provide CRUD and search operations for files and folders in the Secure
+         * Content Store.
+         */
         override fun v2(): V2Service.WithRawResponse = v2
 
         private val deleteHandler: Handler<Void?> = emptyHandler()
@@ -287,6 +345,7 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
                     .method(HttpMethod.POST)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("scs", "download")
+                    .putHeader("Accept", "application/octet-stream")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
                     .prepare(clientOptions, params)
@@ -304,6 +363,7 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("scs", "download")
+                    .putHeader("Accept", "application/octet-stream")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
@@ -348,6 +408,7 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("scs", "userHasWriteAccess")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

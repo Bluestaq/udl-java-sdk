@@ -41,7 +41,7 @@ internal class CrewpaperServiceTest {
                 .classificationMarking("x")
                 .paperStatus(CrewpaperUploadPdfParams.PaperStatus.PUBLISHED)
                 .papersVersion("x")
-                .fileContent("some content")
+                .fileContent("Example data")
                 .build()
         )
     }

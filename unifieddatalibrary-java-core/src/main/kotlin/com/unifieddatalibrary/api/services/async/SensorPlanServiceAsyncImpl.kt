@@ -37,6 +37,7 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 class SensorPlanServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     SensorPlanServiceAsync {
 
@@ -51,6 +52,7 @@ class SensorPlanServiceAsyncImpl internal constructor(private val clientOptions:
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): SensorPlanServiceAsync =
         SensorPlanServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     override fun history(): HistoryServiceAsync = history
 
     override fun create(
@@ -126,6 +128,7 @@ class SensorPlanServiceAsyncImpl internal constructor(private val clientOptions:
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -228,6 +231,7 @@ class SensorPlanServiceAsyncImpl internal constructor(private val clientOptions:
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "sensorplan", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

@@ -21,6 +21,11 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide soon-to-be-deprecated CRUD and Search operations for files and folders in
+ * the Secure Content Store. This documentation is provided only for backwards compatibility, please
+ * refer to SCS V2 for new SCS integrations.
+ */
 class PathServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     PathServiceAsync {
 

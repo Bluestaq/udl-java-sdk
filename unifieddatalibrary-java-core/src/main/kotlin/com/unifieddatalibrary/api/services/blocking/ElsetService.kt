@@ -26,6 +26,12 @@ import com.unifieddatalibrary.api.services.blocking.elsets.CurrentService
 import com.unifieddatalibrary.api.services.blocking.elsets.HistoryService
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for querying and manipulation of element set data describing
+ * orbital characteristics of on-orbit objects. An element set is a collection of parameters that
+ * are used, along with an orbit propagator, to predict the motion of a satellite. The element set,
+ * or elset for short, consists of identification data, the classical elements and drag parameters.
+ */
 interface ElsetService {
 
     /**
@@ -40,8 +46,22 @@ interface ElsetService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): ElsetService
 
+    /**
+     * These services provide operations for querying and manipulation of element set data
+     * describing orbital characteristics of on-orbit objects. An element set is a collection of
+     * parameters that are used, along with an orbit propagator, to predict the motion of a
+     * satellite. The element set, or elset for short, consists of identification data, the
+     * classical elements and drag parameters.
+     */
     fun current(): CurrentService
 
+    /**
+     * These services provide operations for querying and manipulation of element set data
+     * describing orbital characteristics of on-orbit objects. An element set is a collection of
+     * parameters that are used, along with an orbit propagator, to predict the motion of a
+     * satellite. The element set, or elset for short, consists of identification data, the
+     * classical elements and drag parameters.
+     */
     fun history(): HistoryService
 
     /**
@@ -132,6 +152,15 @@ interface ElsetService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<ElsetIngest>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(ElsetCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<ElsetIngest>) = createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to take a multiple TLEs as a POST body and ingest into the database. This
      * operation is not intended to be used for automated feeds into UDL. Data providers should
@@ -221,6 +250,20 @@ interface ElsetService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<ElsetIngest>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            ElsetUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<ElsetIngest>) =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /** A view of [ElsetService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
@@ -231,8 +274,22 @@ interface ElsetService {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): ElsetService.WithRawResponse
 
+        /**
+         * These services provide operations for querying and manipulation of element set data
+         * describing orbital characteristics of on-orbit objects. An element set is a collection of
+         * parameters that are used, along with an orbit propagator, to predict the motion of a
+         * satellite. The element set, or elset for short, consists of identification data, the
+         * classical elements and drag parameters.
+         */
         fun current(): CurrentService.WithRawResponse
 
+        /**
+         * These services provide operations for querying and manipulation of element set data
+         * describing orbital characteristics of on-orbit objects. An element set is a collection of
+         * parameters that are used, along with an orbit propagator, to predict the motion of a
+         * satellite. The element set, or elset for short, consists of identification data, the
+         * classical elements and drag parameters.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**
@@ -346,6 +403,19 @@ interface ElsetService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
 
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<ElsetIngest>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(ElsetCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<ElsetIngest>): HttpResponse =
+            createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `post /udl/elset/createBulkFromTLE`, but is otherwise the
          * same as [ElsetService.createBulkFromTle].
@@ -445,5 +515,21 @@ interface ElsetService {
             params: ElsetUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<ElsetIngest>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                ElsetUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(body: List<ElsetIngest>): HttpResponse =
+            unvalidatedPublish(body, RequestOptions.none())
     }
 }

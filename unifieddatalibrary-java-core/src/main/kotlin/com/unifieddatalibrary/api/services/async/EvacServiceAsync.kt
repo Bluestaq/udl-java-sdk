@@ -21,6 +21,7 @@ import com.unifieddatalibrary.api.services.async.evac.TupleServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/** These services provide operations for manipulation and querying of Mission Ops information. */
 interface EvacServiceAsync {
 
     /**
@@ -35,8 +36,14 @@ interface EvacServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): EvacServiceAsync
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     fun history(): HistoryServiceAsync
 
+    /**
+     * These services provide operations for manipulation and querying of Mission Ops information.
+     */
     fun tuple(): TupleServiceAsync
 
     /**
@@ -129,6 +136,17 @@ interface EvacServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<EvacCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(EvacCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<EvacCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
      * particular data type.
@@ -165,6 +183,21 @@ interface EvacServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<EvacUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            EvacUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<EvacUnvalidatedPublishParams.Body>
+    ): CompletableFuture<Void?> = unvalidatedPublish(body, RequestOptions.none())
+
     /** A view of [EvacServiceAsync] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
@@ -175,8 +208,16 @@ interface EvacServiceAsync {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): EvacServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of Mission Ops
+         * information.
+         */
         fun tuple(): TupleServiceAsync.WithRawResponse
 
         /**
@@ -270,6 +311,17 @@ interface EvacServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
 
+        /** @see createBulk */
+        fun createBulk(
+            body: List<EvacCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(EvacCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(body: List<EvacCreateBulkParams.Body>): CompletableFuture<HttpResponse> =
+            createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `get /udl/evac/queryhelp`, but is otherwise the same as
          * [EvacServiceAsync.queryHelp].
@@ -308,5 +360,20 @@ interface EvacServiceAsync {
             params: EvacUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<EvacUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                EvacUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<EvacUnvalidatedPublishParams.Body>
+        ): CompletableFuture<HttpResponse> = unvalidatedPublish(body, RequestOptions.none())
     }
 }

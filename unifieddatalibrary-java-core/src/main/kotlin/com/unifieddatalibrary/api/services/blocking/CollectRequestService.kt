@@ -21,6 +21,7 @@ import com.unifieddatalibrary.api.models.collectrequests.CollectRequestUnvalidat
 import com.unifieddatalibrary.api.services.blocking.collectrequests.HistoryService
 import java.util.function.Consumer
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 interface CollectRequestService {
 
     /**
@@ -35,6 +36,7 @@ interface CollectRequestService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): CollectRequestService
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     fun history(): HistoryService
 
     /**
@@ -127,6 +129,16 @@ interface CollectRequestService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<CollectRequestCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(CollectRequestCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<CollectRequestCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
      * particular data type.
@@ -181,6 +193,20 @@ interface CollectRequestService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<CollectRequestUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            CollectRequestUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<CollectRequestUnvalidatedPublishParams.Body>) =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [CollectRequestService] that provides access to raw HTTP responses for each method.
      */
@@ -195,6 +221,7 @@ interface CollectRequestService {
             modifier: Consumer<ClientOptions.Builder>
         ): CollectRequestService.WithRawResponse
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         fun history(): HistoryService.WithRawResponse
 
         /**
@@ -301,6 +328,19 @@ interface CollectRequestService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
 
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<CollectRequestCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(CollectRequestCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<CollectRequestCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `get /udl/collectrequest/queryhelp`, but is otherwise the
          * same as [CollectRequestService.queryHelp].
@@ -359,5 +399,22 @@ interface CollectRequestService {
             params: CollectRequestUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<CollectRequestUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                CollectRequestUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            body: List<CollectRequestUnvalidatedPublishParams.Body>
+        ): HttpResponse = unvalidatedPublish(body, RequestOptions.none())
     }
 }

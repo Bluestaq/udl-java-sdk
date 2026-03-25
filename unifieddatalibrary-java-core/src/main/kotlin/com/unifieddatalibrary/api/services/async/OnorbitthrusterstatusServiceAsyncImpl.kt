@@ -36,6 +36,10 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit objects of interest,
+ * their components, and various lists and status of those objects.
+ */
 class OnorbitthrusterstatusServiceAsyncImpl
 internal constructor(private val clientOptions: ClientOptions) : OnorbitthrusterstatusServiceAsync {
 
@@ -55,6 +59,10 @@ internal constructor(private val clientOptions: ClientOptions) : Onorbitthruster
             clientOptions.toBuilder().apply(modifier::accept).build()
         )
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     override fun history(): HistoryServiceAsync = history
 
     override fun create(
@@ -130,6 +138,10 @@ internal constructor(private val clientOptions: ClientOptions) : Onorbitthruster
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
@@ -232,6 +244,7 @@ internal constructor(private val clientOptions: ClientOptions) : Onorbitthruster
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "onorbitthrusterstatus", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

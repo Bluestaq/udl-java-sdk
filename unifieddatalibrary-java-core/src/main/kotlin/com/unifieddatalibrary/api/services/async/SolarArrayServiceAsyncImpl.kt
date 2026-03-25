@@ -34,6 +34,10 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit objects of interest,
+ * their components, and various lists and status of those objects.
+ */
 class SolarArrayServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     SolarArrayServiceAsync {
 
@@ -242,6 +246,7 @@ class SolarArrayServiceAsyncImpl internal constructor(private val clientOptions:
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "solararray", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

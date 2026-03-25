@@ -11,6 +11,12 @@ import com.unifieddatalibrary.api.services.async.scs.notifications.OffsetService
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These endpoints provide the ability to subscribe to SCS Event Notifications for file
+ * upload/update and folder creation events within a specific folder in the Secure Content Store. A
+ * user must be authorized to view the file/folder for which a notification was created in order to
+ * retrieve that notification.
+ */
 interface NotificationServiceAsync {
 
     /**
@@ -25,6 +31,12 @@ interface NotificationServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): NotificationServiceAsync
 
+    /**
+     * These endpoints provide the ability to subscribe to SCS Event Notifications for file
+     * upload/update and folder creation events within a specific folder in the Secure Content
+     * Store. A user must be authorized to view the file/folder for which a notification was created
+     * in order to retrieve that notification.
+     */
     fun offset(): OffsetServiceAsync
 
     /** Returns a list of notifications for items in a specific folder. */
@@ -77,6 +89,12 @@ interface NotificationServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): NotificationServiceAsync.WithRawResponse
 
+        /**
+         * These endpoints provide the ability to subscribe to SCS Event Notifications for file
+         * upload/update and folder creation events within a specific folder in the Secure Content
+         * Store. A user must be authorized to view the file/folder for which a notification was
+         * created in order to retrieve that notification.
+         */
         fun offset(): OffsetServiceAsync.WithRawResponse
 
         /**

@@ -21,6 +21,11 @@ import com.unifieddatalibrary.api.models.vessel.VesselTupleResponse
 import com.unifieddatalibrary.api.models.vessel.VesselUpdateParams
 import java.util.function.Consumer
 
+/**
+ * This service provides operations for manipulation and querying of maritime Vessel and Vessel
+ * Status data. Vessel contains the static data of the specific vessel: mmsi, cruise speed, max
+ * speed, etc.
+ */
 interface VesselService {
 
     /**
@@ -123,6 +128,16 @@ interface VesselService {
         params: VesselCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<VesselCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(VesselCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<VesselCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to get a single vessel record by its unique ID passed as a path parameter.
@@ -304,6 +319,19 @@ interface VesselService {
             params: VesselCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<VesselCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(VesselCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<VesselCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/vessel/{id}`, but is otherwise the same as

@@ -23,6 +23,7 @@ import com.unifieddatalibrary.api.services.async.conjunctions.HistoryServiceAsyn
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/** These services provide operations for manipulation and querying of conjunctions. */
 interface ConjunctionServiceAsync {
 
     /**
@@ -37,6 +38,7 @@ interface ConjunctionServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): ConjunctionServiceAsync
 
+    /** These services provide operations for manipulation and querying of conjunctions. */
     fun history(): HistoryServiceAsync
 
     /**
@@ -135,6 +137,17 @@ interface ConjunctionServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<ConjunctionCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(ConjunctionCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<ConjunctionCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to dynamically query historical data by a variety of query parameters not
      * specified in this API documentation. See the queryhelp operation
@@ -206,6 +219,21 @@ interface ConjunctionServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<ConjunctionUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            ConjunctionUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<ConjunctionUnvalidatedPublishParams.Body>
+    ): CompletableFuture<Void?> = unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * Service to accept multiple CDMs in as zip file or a single CDM as payload. The service
      * converts key-value pair formatted CDMs to UDL formats and stores them. The CDM format is as
@@ -258,6 +286,7 @@ interface ConjunctionServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): ConjunctionServiceAsync.WithRawResponse
 
+        /** These services provide operations for manipulation and querying of conjunctions. */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**
@@ -355,6 +384,18 @@ interface ConjunctionServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
 
+        /** @see createBulk */
+        fun createBulk(
+            body: List<ConjunctionCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(ConjunctionCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<ConjunctionCreateBulkParams.Body>
+        ): CompletableFuture<HttpResponse> = createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `get /udl/conjunction/history`, but is otherwise the same
          * as [ConjunctionServiceAsync.getHistory].
@@ -423,6 +464,21 @@ interface ConjunctionServiceAsync {
             params: ConjunctionUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<ConjunctionUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                ConjunctionUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<ConjunctionUnvalidatedPublishParams.Body>
+        ): CompletableFuture<HttpResponse> = unvalidatedPublish(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `post /filedrop/cdms`, but is otherwise the same as

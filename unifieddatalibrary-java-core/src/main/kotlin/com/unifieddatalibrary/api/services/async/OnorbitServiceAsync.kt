@@ -24,6 +24,10 @@ import com.unifieddatalibrary.api.services.async.onorbit.AntennaDetailServiceAsy
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying of on-orbit objects of interest,
+ * their components, and various lists and status of those objects.
+ */
 interface OnorbitServiceAsync {
 
     /**
@@ -38,6 +42,10 @@ interface OnorbitServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): OnorbitServiceAsync
 
+    /**
+     * These services provide operations for manipulation and querying of on-orbit objects of
+     * interest, their components, and various lists and status of those objects.
+     */
     fun antennaDetails(): AntennaDetailServiceAsync
 
     /**
@@ -265,6 +273,10 @@ interface OnorbitServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): OnorbitServiceAsync.WithRawResponse
 
+        /**
+         * These services provide operations for manipulation and querying of on-orbit objects of
+         * interest, their components, and various lists and status of those objects.
+         */
         fun antennaDetails(): AntennaDetailServiceAsync.WithRawResponse
 
         /**

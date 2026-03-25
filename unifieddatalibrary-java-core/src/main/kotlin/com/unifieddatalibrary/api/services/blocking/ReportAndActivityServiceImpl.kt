@@ -31,8 +31,18 @@ class ReportAndActivityServiceImpl internal constructor(private val clientOption
 
     override fun poi(): PoiService = poi
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     override fun udlH3geo(): UdlH3geoService = udlH3geo
 
+    /**
+     * These services provide operations for manipulation and querying of Report and Activity
+     * information. This information includes analytic reports, significant events, route
+     * statistics, EMI Reports, and other georeferenced reports and activities.
+     */
     override fun udlSigact(): UdlSigactService = udlSigact
 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
@@ -59,8 +69,18 @@ class ReportAndActivityServiceImpl internal constructor(private val clientOption
 
         override fun poi(): PoiService.WithRawResponse = poi
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         override fun udlH3geo(): UdlH3geoService.WithRawResponse = udlH3geo
 
+        /**
+         * These services provide operations for manipulation and querying of Report and Activity
+         * information. This information includes analytic reports, significant events, route
+         * statistics, EMI Reports, and other georeferenced reports and activities.
+         */
         override fun udlSigact(): UdlSigactService.WithRawResponse = udlSigact
     }
 }

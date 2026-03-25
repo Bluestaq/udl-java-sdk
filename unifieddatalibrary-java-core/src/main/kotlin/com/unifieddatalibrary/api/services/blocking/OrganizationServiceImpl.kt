@@ -35,6 +35,11 @@ import com.unifieddatalibrary.api.models.organization.OrganizationUpdateParams
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
+/**
+ * Service operations for querying and manipulation of miscellaneous supporting data such as
+ * countries (which can represent countries, multi-national consortiums, and international
+ * organizations), data owners, locations, entities, organizations, etc.
+ */
 class OrganizationServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     OrganizationService {
 
@@ -235,6 +240,7 @@ class OrganizationServiceImpl internal constructor(private val clientOptions: Cl
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "organization", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

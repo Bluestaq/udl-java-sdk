@@ -18,6 +18,11 @@ import com.unifieddatalibrary.api.models.supportingdata.datatypes.DataTypeListPa
 import com.unifieddatalibrary.api.models.supportingdata.datatypes.DataTypeListParams
 import java.util.function.Consumer
 
+/**
+ * Service operations for querying and manipulation of miscellaneous supporting data such as
+ * countries (which can represent countries, multi-national consortiums, and international
+ * organizations), data owners, locations, entities, organizations, etc.
+ */
 class DataTypeServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     DataTypeService {
 

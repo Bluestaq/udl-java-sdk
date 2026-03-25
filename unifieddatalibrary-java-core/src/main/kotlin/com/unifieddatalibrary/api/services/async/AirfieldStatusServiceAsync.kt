@@ -21,6 +21,10 @@ import com.unifieddatalibrary.api.services.async.airfieldstatus.HistoryServiceAs
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * This collection of services provide operations for manipulating and querying of various site
+ * related data, including site status, site operations, and site type-specific records.
+ */
 interface AirfieldStatusServiceAsync {
 
     /**
@@ -35,6 +39,10 @@ interface AirfieldStatusServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): AirfieldStatusServiceAsync
 
+    /**
+     * This collection of services provide operations for manipulating and querying of various site
+     * related data, including site status, site operations, and site type-specific records.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -252,6 +260,11 @@ interface AirfieldStatusServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): AirfieldStatusServiceAsync.WithRawResponse
 
+        /**
+         * This collection of services provide operations for manipulating and querying of various
+         * site related data, including site status, site operations, and site type-specific
+         * records.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**

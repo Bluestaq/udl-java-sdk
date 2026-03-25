@@ -23,6 +23,14 @@ import com.unifieddatalibrary.api.models.linkstatus.history.HistoryListParams
 import com.unifieddatalibrary.api.models.linkstatus.history.HistoryListResponse
 import java.util.function.Consumer
 
+/**
+ * These services provide operations for manipulation and querying tactical data links and link
+ * statuses of beams or a satellite constellation. Communication link statuses provide definitions
+ * and status such as, positional endpoints, where each endpoint may be associated with a specific
+ * beam or with a satellite constellation. Data links provide detailed instructions regarding the
+ * operational use of a tactical data link and interface coordination through various message
+ * formats.
+ */
 class HistoryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     HistoryService {
 
@@ -123,6 +131,7 @@ class HistoryServiceImpl internal constructor(private val clientOptions: ClientO
                     .method(HttpMethod.GET)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("udl", "linkstatus", "history", "count")
+                    .putHeader("Accept", "text/plain")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

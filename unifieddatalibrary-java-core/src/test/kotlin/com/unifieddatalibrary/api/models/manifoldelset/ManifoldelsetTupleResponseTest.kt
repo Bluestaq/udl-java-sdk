@@ -41,7 +41,7 @@ internal class ManifoldelsetTupleResponseTest {
                 .raan(10.23)
                 .revNo(123)
                 .semiMajorAxis(10.23)
-                .updatedAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                .updatedAt(OffsetDateTime.parse("2022-03-10T16:00:00.123Z"))
                 .updatedBy("some.user")
                 .build()
 
@@ -76,7 +76,7 @@ internal class ManifoldelsetTupleResponseTest {
         assertThat(manifoldelsetTupleResponse.revNo()).contains(123)
         assertThat(manifoldelsetTupleResponse.semiMajorAxis()).contains(10.23)
         assertThat(manifoldelsetTupleResponse.updatedAt())
-            .contains(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+            .contains(OffsetDateTime.parse("2022-03-10T16:00:00.123Z"))
         assertThat(manifoldelsetTupleResponse.updatedBy()).contains("some.user")
     }
 
@@ -112,7 +112,7 @@ internal class ManifoldelsetTupleResponseTest {
                 .raan(10.23)
                 .revNo(123)
                 .semiMajorAxis(10.23)
-                .updatedAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                .updatedAt(OffsetDateTime.parse("2022-03-10T16:00:00.123Z"))
                 .updatedBy("some.user")
                 .build()
 

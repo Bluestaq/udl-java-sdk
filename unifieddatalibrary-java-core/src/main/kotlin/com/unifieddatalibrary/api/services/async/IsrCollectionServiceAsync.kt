@@ -19,6 +19,7 @@ import com.unifieddatalibrary.api.services.async.isrcollections.HistoryServiceAs
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/** These services provide operations for posting and querying Sensor Tasking data. */
 interface IsrCollectionServiceAsync {
 
     /**
@@ -33,6 +34,7 @@ interface IsrCollectionServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): IsrCollectionServiceAsync
 
+    /** These services provide operations for posting and querying Sensor Tasking data. */
     fun history(): HistoryServiceAsync
 
     /**
@@ -80,6 +82,17 @@ interface IsrCollectionServiceAsync {
         params: IsrCollectionCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see createBulk */
+    fun createBulk(
+        body: List<IsrCollectionCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(IsrCollectionCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<IsrCollectionCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -139,6 +152,21 @@ interface IsrCollectionServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<IsrCollectionUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            IsrCollectionUnvalidatedPublishParams.builder().body(body).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<IsrCollectionUnvalidatedPublishParams.Body>
+    ): CompletableFuture<Void?> = unvalidatedPublish(body, RequestOptions.none())
+
     /**
      * A view of [IsrCollectionServiceAsync] that provides access to raw HTTP responses for each
      * method.
@@ -154,6 +182,7 @@ interface IsrCollectionServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): IsrCollectionServiceAsync.WithRawResponse
 
+        /** These services provide operations for posting and querying Sensor Tasking data. */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**
@@ -196,6 +225,18 @@ interface IsrCollectionServiceAsync {
             params: IsrCollectionCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<IsrCollectionCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(IsrCollectionCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(
+            body: List<IsrCollectionCreateBulkParams.Body>
+        ): CompletableFuture<HttpResponse> = createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/isrcollection/queryhelp`, but is otherwise the
@@ -250,5 +291,20 @@ interface IsrCollectionServiceAsync {
             params: IsrCollectionUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<IsrCollectionUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                IsrCollectionUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<IsrCollectionUnvalidatedPublishParams.Body>
+        ): CompletableFuture<HttpResponse> = unvalidatedPublish(body, RequestOptions.none())
     }
 }

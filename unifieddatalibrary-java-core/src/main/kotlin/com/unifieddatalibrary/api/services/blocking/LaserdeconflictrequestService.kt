@@ -21,6 +21,11 @@ import com.unifieddatalibrary.api.models.laserdeconflictrequest.Laserdeconflictr
 import com.unifieddatalibrary.api.services.blocking.laserdeconflictrequest.HistoryService
 import java.util.function.Consumer
 
+/**
+ * This collection of services provides operations for querying and manipulation of laser related
+ * information to include the laser emitters, the laser deconflict requests, and laser deconflict
+ * responses.
+ */
 interface LaserdeconflictrequestService {
 
     /**
@@ -35,6 +40,11 @@ interface LaserdeconflictrequestService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): LaserdeconflictrequestService
 
+    /**
+     * This collection of services provides operations for querying and manipulation of laser
+     * related information to include the laser emitters, the laser deconflict requests, and laser
+     * deconflict responses.
+     */
     fun history(): HistoryService
 
     /**
@@ -188,6 +198,11 @@ interface LaserdeconflictrequestService {
             modifier: Consumer<ClientOptions.Builder>
         ): LaserdeconflictrequestService.WithRawResponse
 
+        /**
+         * This collection of services provides operations for querying and manipulation of laser
+         * related information to include the laser emitters, the laser deconflict requests, and
+         * laser deconflict responses.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**

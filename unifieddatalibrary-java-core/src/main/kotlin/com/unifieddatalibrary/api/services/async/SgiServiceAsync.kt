@@ -26,6 +26,10 @@ import com.unifieddatalibrary.api.services.async.sgi.HistoryServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+/**
+ * This service provides operations for manipulation and querying of space weather/solar,
+ * geomagnetic, and radiation belt index data.
+ */
 interface SgiServiceAsync {
 
     /**
@@ -40,6 +44,10 @@ interface SgiServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): SgiServiceAsync
 
+    /**
+     * This service provides operations for manipulation and querying of space weather/solar,
+     * geomagnetic, and radiation belt index data.
+     */
     fun history(): HistoryServiceAsync
 
     /**
@@ -173,6 +181,17 @@ interface SgiServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<SgiCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        createBulk(SgiCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<SgiCreateBulkParams.Body>): CompletableFuture<Void?> =
+        createBulk(body, RequestOptions.none())
+
     /** Service operation to get a single SGI record by its unique ID passed as a path parameter. */
     fun get(id: String): CompletableFuture<SgiGetResponse> = get(id, SgiGetParams.none())
 
@@ -278,6 +297,17 @@ interface SgiServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        body: List<SgiUnvalidatedPublishParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(SgiUnvalidatedPublishParams.builder().body(body).build(), requestOptions)
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(body: List<SgiUnvalidatedPublishParams.Body>): CompletableFuture<Void?> =
+        unvalidatedPublish(body, RequestOptions.none())
+
     /** A view of [SgiServiceAsync] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
@@ -288,6 +318,10 @@ interface SgiServiceAsync {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): SgiServiceAsync.WithRawResponse
 
+        /**
+         * This service provides operations for manipulation and querying of space weather/solar,
+         * geomagnetic, and radiation belt index data.
+         */
         fun history(): HistoryServiceAsync.WithRawResponse
 
         /**
@@ -421,6 +455,17 @@ interface SgiServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
 
+        /** @see createBulk */
+        fun createBulk(
+            body: List<SgiCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            createBulk(SgiCreateBulkParams.builder().body(body).build(), requestOptions)
+
+        /** @see createBulk */
+        fun createBulk(body: List<SgiCreateBulkParams.Body>): CompletableFuture<HttpResponse> =
+            createBulk(body, RequestOptions.none())
+
         /**
          * Returns a raw HTTP response for `get /udl/sgi/{id}`, but is otherwise the same as
          * [SgiServiceAsync.get].
@@ -540,5 +585,20 @@ interface SgiServiceAsync {
             params: SgiUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<SgiUnvalidatedPublishParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                SgiUnvalidatedPublishParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            body: List<SgiUnvalidatedPublishParams.Body>
+        ): CompletableFuture<HttpResponse> = unvalidatedPublish(body, RequestOptions.none())
     }
 }

@@ -25,6 +25,15 @@ import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceUpda
 import com.unifieddatalibrary.api.services.blocking.sensormaintenance.HistoryService
 import java.util.function.Consumer
 
+/**
+ * This service provides operations for querying and manipulation of sensor data. Sensors are
+ * terrestrial or on-orbit equipment capable of taking measurements or 'observations' of on-orbit
+ * objects via several phenomenologies such as Electro-Optical (EO), Radar, and Radio Frequency
+ * (RF). This collection of operations includes 'SensorMaintenance' schedules which define
+ * known/planned future maintenance and associated operational impact of sensors as well as
+ * 'SensorCalibration' records which contains data about a sensor's overall accuracy and is used to
+ * adjust sensor settings.
+ */
 interface SensorMaintenanceService {
 
     /**
@@ -39,6 +48,15 @@ interface SensorMaintenanceService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): SensorMaintenanceService
 
+    /**
+     * This service provides operations for querying and manipulation of sensor data. Sensors are
+     * terrestrial or on-orbit equipment capable of taking measurements or 'observations' of
+     * on-orbit objects via several phenomenologies such as Electro-Optical (EO), Radar, and Radio
+     * Frequency (RF). This collection of operations includes 'SensorMaintenance' schedules which
+     * define known/planned future maintenance and associated operational impact of sensors as well
+     * as 'SensorCalibration' records which contains data about a sensor's overall accuracy and is
+     * used to adjust sensor settings.
+     */
     fun history(): HistoryService
 
     /**
@@ -169,6 +187,16 @@ interface SensorMaintenanceService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see createBulk */
+    fun createBulk(
+        body: List<SensorMaintenanceCreateBulkParams.Body>,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = createBulk(SensorMaintenanceCreateBulkParams.builder().body(body).build(), requestOptions)
+
+    /** @see createBulk */
+    fun createBulk(body: List<SensorMaintenanceCreateBulkParams.Body>) =
+        createBulk(body, RequestOptions.none())
+
     /**
      * Service operation to get a single SensorMaintenance record by its unique ID passed as a path
      * parameter.
@@ -279,6 +307,15 @@ interface SensorMaintenanceService {
             modifier: Consumer<ClientOptions.Builder>
         ): SensorMaintenanceService.WithRawResponse
 
+        /**
+         * This service provides operations for querying and manipulation of sensor data. Sensors
+         * are terrestrial or on-orbit equipment capable of taking measurements or 'observations' of
+         * on-orbit objects via several phenomenologies such as Electro-Optical (EO), Radar, and
+         * Radio Frequency (RF). This collection of operations includes 'SensorMaintenance'
+         * schedules which define known/planned future maintenance and associated operational impact
+         * of sensors as well as 'SensorCalibration' records which contains data about a sensor's
+         * overall accuracy and is used to adjust sensor settings.
+         */
         fun history(): HistoryService.WithRawResponse
 
         /**
@@ -428,6 +465,22 @@ interface SensorMaintenanceService {
             params: SensorMaintenanceCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(
+            body: List<SensorMaintenanceCreateBulkParams.Body>,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            createBulk(
+                SensorMaintenanceCreateBulkParams.builder().body(body).build(),
+                requestOptions,
+            )
+
+        /** @see createBulk */
+        @MustBeClosed
+        fun createBulk(body: List<SensorMaintenanceCreateBulkParams.Body>): HttpResponse =
+            createBulk(body, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/sensormaintenance/{id}`, but is otherwise the
