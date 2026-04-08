@@ -14,7 +14,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /**
  * Service operation to dynamically query data by a variety of query parameters not specified in
- * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more
+ * this API documentation. See the queryhelp operation (`/udl/<datatype>/queryhelp`) for more
  * details on valid/required query parameter information.
  */
 class PassiveRadarObservationListParams

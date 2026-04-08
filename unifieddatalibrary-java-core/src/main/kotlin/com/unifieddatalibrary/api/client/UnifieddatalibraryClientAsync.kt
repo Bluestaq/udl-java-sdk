@@ -1755,7 +1755,6 @@ interface UnifieddatalibraryClientAsync {
      */
     fun vessel(): VesselServiceAsync
 
-    /** This collection of services provides operations for video streaming. */
     fun video(): VideoServiceAsync
 
     /**
@@ -3420,7 +3419,6 @@ interface UnifieddatalibraryClientAsync {
          */
         fun vessel(): VesselServiceAsync.WithRawResponse
 
-        /** This collection of services provides operations for video streaming. */
         fun video(): VideoServiceAsync.WithRawResponse
 
         /**
