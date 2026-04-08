@@ -38,8 +38,8 @@ interface CurrentService {
      * active, latest elset for an on-orbit object. Current elsets are tracked by source and a
      * source should be provided as a query parameter to this service operation to view the
      * 'current' catalog for a particular provider. If source is not provided, it will be defaulted
-     * to '18th SPCS'. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more
-     * details on additional query parameter information.
+     * to '18th SPCS'. See the queryhelp operation (`/udl/<datatype>/queryhelp`) for more details on
+     * additional query parameter information.
      */
     fun list(): CurrentListPage = list(CurrentListParams.none())
 
@@ -63,8 +63,8 @@ interface CurrentService {
      * active, latest elset for an on-orbit object. Current elsets are tracked by source and a
      * source should be provided as a query parameter to this service operation to view the
      * 'current' catalog for a particular provider. If source is not provided, it will be defaulted
-     * to '18th SPCS'. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more
-     * details on additional query parameter information.
+     * to '18th SPCS'. See the queryhelp operation (`/udl/<datatype>/queryhelp`) for more details on
+     * additional query parameter information.
      */
     fun tuple(params: CurrentTupleParams): List<Elset> = tuple(params, RequestOptions.none())
 

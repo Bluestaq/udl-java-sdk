@@ -2555,7 +2555,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
      */
     override fun vessel(): VesselServiceAsync = vessel
 
-    /** This collection of services provides operations for video streaming. */
     override fun video(): VideoServiceAsync = video
 
     /**
@@ -4933,7 +4932,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
          */
         override fun vessel(): VesselServiceAsync.WithRawResponse = vessel
 
-        /** This collection of services provides operations for video streaming. */
         override fun video(): VideoServiceAsync.WithRawResponse = video
 
         /**

@@ -11,8 +11,8 @@ import kotlin.jvm.optionals.getOrNull
 
 /**
  * Service operation to dynamically query historical data by a variety of query parameters not
- * specified in this API documentation. See the queryhelp operation
- * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information.
+ * specified in this API documentation. See the queryhelp operation (`/udl/<datatype>/queryhelp`)
+ * for more details on valid/required query parameter information.
  */
 class HistoryListParams
 private constructor(
@@ -25,8 +25,8 @@ private constructor(
 
     /**
      * optional, fields for retrieval. When omitted, ALL fields are assumed. See the queryhelp
-     * operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid query fields that can
-     * be selected.
+     * operation (`/udl/<datatype>/queryhelp`) for more details on valid query fields that can be
+     * selected.
      */
     fun columns(): Optional<String> = Optional.ofNullable(columns)
 
@@ -70,8 +70,8 @@ private constructor(
 
         /**
          * optional, fields for retrieval. When omitted, ALL fields are assumed. See the queryhelp
-         * operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid query fields that
-         * can be selected.
+         * operation (`/udl/<datatype>/queryhelp`) for more details on valid query fields that can
+         * be selected.
          */
         fun columns(columns: String?) = apply { this.columns = columns }
 

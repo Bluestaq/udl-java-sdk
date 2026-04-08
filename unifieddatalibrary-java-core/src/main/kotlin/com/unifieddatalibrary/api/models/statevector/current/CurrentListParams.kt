@@ -16,7 +16,7 @@ import kotlin.jvm.optionals.getOrNull
  * source and a source should be provided as a query parameter to this service operation to view the
  * 'current' catalog for a particular provider. Default current state vector sources may vary by UDL
  * environment. Please contact the UDL help desk for more information, or explicitly specify the
- * desired source. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on
+ * desired source. See the queryhelp operation (`/udl/<datatype>/queryhelp`) for more details on
  * valid/required query parameter information.
  */
 class CurrentListParams

@@ -22,7 +22,7 @@ private constructor(
 
     /**
      * An entity is a generic representation of any object within a space/SSA system such as
-     * sensors, on-orbit objects, RF Emitters, space craft buses, etc. An entity can have an
+     * sensors, on-orbit objects, RF Emitters, spacecraft buses, etc. An entity can have an
      * operating unit, a location (if terrestrial), and statuses.
      */
     fun entityIngest(): EntityIngest = entityIngest
@@ -66,7 +66,7 @@ private constructor(
 
         /**
          * An entity is a generic representation of any object within a space/SSA system such as
-         * sensors, on-orbit objects, RF Emitters, space craft buses, etc. An entity can have an
+         * sensors, on-orbit objects, RF Emitters, spacecraft buses, etc. An entity can have an
          * operating unit, a location (if terrestrial), and statuses.
          */
         fun entityIngest(entityIngest: EntityIngest) = apply { this.entityIngest = entityIngest }

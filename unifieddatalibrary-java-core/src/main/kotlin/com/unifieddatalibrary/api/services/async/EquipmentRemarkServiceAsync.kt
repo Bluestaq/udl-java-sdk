@@ -91,8 +91,8 @@ interface EquipmentRemarkServiceAsync {
 
     /**
      * Service operation to dynamically query data by a variety of query parameters not specified in
-     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
-     * more details on valid/required query parameter information.
+     * this API documentation. See the queryhelp operation (`/udl/<datatype>/queryhelp`) for more
+     * details on valid/required query parameter information.
      */
     fun list(): CompletableFuture<EquipmentRemarkListPageAsync> =
         list(EquipmentRemarkListParams.none())
@@ -116,8 +116,7 @@ interface EquipmentRemarkServiceAsync {
      * Service operation to return the count of records satisfying the specified query parameters.
      * This operation is useful to determine how many records pass a particular query criteria
      * without retrieving large amounts of data. See the queryhelp operation
-     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
-     * information.
+     * (`/udl/<datatype>/queryhelp`) for more details on valid/required query parameter information.
      */
     fun count(): CompletableFuture<String> = count(EquipmentRemarkCountParams.none())
 
@@ -192,7 +191,7 @@ interface EquipmentRemarkServiceAsync {
      * Service operation to dynamically query data and only return specified columns/fields.
      * Requested columns are specified by the 'columns' query parameter and should be a comma
      * separated list of valid fields for the specified data type. classificationMarking is always
-     * returned. See the queryhelp operation (/udl/<datatype>/queryhelp) for more details on
+     * returned. See the queryhelp operation (`/udl/<datatype>/queryhelp`) for more details on
      * valid/required query parameter information. An example URI:
      * /udl/elset/tuple?columns=satNo,period&epoch=>now-5 hours would return the satNo and period of
      * elsets with an epoch greater than 5 hours ago.

@@ -55,8 +55,7 @@ interface HistoryService {
     /**
      * Service operation to dynamically query historical data by a variety of query parameters not
      * specified in this API documentation. See the queryhelp operation
-     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
-     * information.
+     * (`/udl/<datatype>/queryhelp`) for more details on valid/required query parameter information.
      */
     fun list(params: HistoryListParams): HistoryListPage = list(params, RequestOptions.none())
 
@@ -70,8 +69,7 @@ interface HistoryService {
      * Service operation to return the count of records satisfying the specified query parameters.
      * This operation is useful to determine how many records pass a particular query criteria
      * without retrieving large amounts of data. See the queryhelp operation
-     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
-     * information.
+     * (`/udl/<datatype>/queryhelp`) for more details on valid/required query parameter information.
      */
     fun count(params: HistoryCountParams): String = count(params, RequestOptions.none())
 

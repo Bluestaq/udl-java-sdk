@@ -15,7 +15,7 @@ import kotlin.jvm.optionals.getOrNull
 /**
  * Service operation to dynamically query data by a variety of query parameters. The query will
  * return the SOI Observation Sets and not the associated SOI Observations. See the queryhelp
- * operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
+ * operation (`/udl/<datatype>/queryhelp`) for more details on valid/required query parameter
  * information.
  */
 class SoiObservationSetListParams

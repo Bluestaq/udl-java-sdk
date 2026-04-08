@@ -2506,7 +2506,6 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
      */
     override fun vessel(): VesselService = vessel
 
-    /** This collection of services provides operations for video streaming. */
     override fun video(): VideoService = video
 
     /**
@@ -4864,7 +4863,6 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
          */
         override fun vessel(): VesselService.WithRawResponse = vessel
 
-        /** This collection of services provides operations for video streaming. */
         override fun video(): VideoService.WithRawResponse = video
 
         /**
