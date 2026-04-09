@@ -332,8 +332,6 @@ import com.unifieddatalibrary.api.services.blocking.UserService
 import com.unifieddatalibrary.api.services.blocking.UserServiceImpl
 import com.unifieddatalibrary.api.services.blocking.VesselService
 import com.unifieddatalibrary.api.services.blocking.VesselServiceImpl
-import com.unifieddatalibrary.api.services.blocking.VideoService
-import com.unifieddatalibrary.api.services.blocking.VideoServiceImpl
 import com.unifieddatalibrary.api.services.blocking.WeatherDataService
 import com.unifieddatalibrary.api.services.blocking.WeatherDataServiceImpl
 import com.unifieddatalibrary.api.services.blocking.WeatherReportService
@@ -939,8 +937,6 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
     private val user: UserService by lazy { UserServiceImpl(clientOptionsWithUserAgent) }
 
     private val vessel: VesselService by lazy { VesselServiceImpl(clientOptionsWithUserAgent) }
-
-    private val video: VideoService by lazy { VideoServiceImpl(clientOptionsWithUserAgent) }
 
     private val weatherData: WeatherDataService by lazy {
         WeatherDataServiceImpl(clientOptionsWithUserAgent)
@@ -2506,9 +2502,6 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
      */
     override fun vessel(): VesselService = vessel
 
-    /** This collection of services provides operations for video streaming. */
-    override fun video(): VideoService = video
-
     /**
      * These services provide for posting and querying terrestrial weather conditions over a target
      * area or region and raw sensor data used to produce condition reports. Weather Reports
@@ -3195,10 +3188,6 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
 
         private val vessel: VesselService.WithRawResponse by lazy {
             VesselServiceImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val video: VideoService.WithRawResponse by lazy {
-            VideoServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val weatherData: WeatherDataService.WithRawResponse by lazy {
@@ -4863,9 +4852,6 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
          * speed, max speed, etc.
          */
         override fun vessel(): VesselService.WithRawResponse = vessel
-
-        /** This collection of services provides operations for video streaming. */
-        override fun video(): VideoService.WithRawResponse = video
 
         /**
          * These services provide for posting and querying terrestrial weather conditions over a

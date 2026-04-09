@@ -167,7 +167,6 @@ import com.unifieddatalibrary.api.services.blocking.TrackService
 import com.unifieddatalibrary.api.services.blocking.TransponderService
 import com.unifieddatalibrary.api.services.blocking.UserService
 import com.unifieddatalibrary.api.services.blocking.VesselService
-import com.unifieddatalibrary.api.services.blocking.VideoService
 import com.unifieddatalibrary.api.services.blocking.WeatherDataService
 import com.unifieddatalibrary.api.services.blocking.WeatherReportService
 import java.util.function.Consumer
@@ -1754,9 +1753,6 @@ interface UnifieddatalibraryClient {
      * speed, etc.
      */
     fun vessel(): VesselService
-
-    /** This collection of services provides operations for video streaming. */
-    fun video(): VideoService
 
     /**
      * These services provide for posting and querying terrestrial weather conditions over a target
@@ -3419,9 +3415,6 @@ interface UnifieddatalibraryClient {
          * speed, max speed, etc.
          */
         fun vessel(): VesselService.WithRawResponse
-
-        /** This collection of services provides operations for video streaming. */
-        fun video(): VideoService.WithRawResponse
 
         /**
          * These services provide for posting and querying terrestrial weather conditions over a

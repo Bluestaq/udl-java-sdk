@@ -42,8 +42,7 @@ interface CurrentService {
      * operation to view the 'current' catalog for a particular provider. Default current state
      * vector sources may vary by UDL environment. Please contact the UDL help desk for more
      * information, or explicitly specify the desired source. See the queryhelp operation
-     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
-     * information.
+     * (`/udl/<datatype>/queryhelp`) for more details on valid/required query parameter information.
      */
     fun list(): CurrentListPage = list(CurrentListParams.none())
 
@@ -69,8 +68,7 @@ interface CurrentService {
      * operation to view the 'current' catalog for a particular provider. Default current state
      * vector sources may vary by UDL environment. Please contact the UDL help desk for more
      * information, or explicitly specify the desired source. See the queryhelp operation
-     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
-     * information.
+     * (`/udl/<datatype>/queryhelp`) for more details on valid/required query parameter information.
      */
     fun tuple(params: CurrentTupleParams): List<StateVectorFull> =
         tuple(params, RequestOptions.none())

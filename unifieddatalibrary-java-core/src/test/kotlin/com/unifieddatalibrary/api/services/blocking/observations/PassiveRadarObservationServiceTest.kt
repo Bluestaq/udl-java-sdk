@@ -82,6 +82,10 @@ internal class PassiveRadarObservationServiceTest {
                 .rcs(100.23)
                 .rcsUnc(1.23)
                 .satNo(40699)
+                .senReferenceFrame(PassiveRadarObservationCreateParams.SenReferenceFrame.J2000)
+                .senx(-4527.793)
+                .seny(3793.586)
+                .senz(3553.495)
                 .snr(17.292053)
                 .sourceDl("AXE")
                 .addTag("TAG1")
@@ -206,6 +210,12 @@ internal class PassiveRadarObservationServiceTest {
                     .rcs(100.23)
                     .rcsUnc(1.23)
                     .satNo(40699)
+                    .senReferenceFrame(
+                        PassiveRadarObservationCreateBulkParams.Body.SenReferenceFrame.J2000
+                    )
+                    .senx(-4527.793)
+                    .seny(3793.586)
+                    .senz(3553.495)
                     .snr(17.292053)
                     .sourceDl("AXE")
                     .addTag("TAG1")
@@ -292,6 +302,12 @@ internal class PassiveRadarObservationServiceTest {
                     .rcs(100.23)
                     .rcsUnc(1.23)
                     .satNo(40699)
+                    .senReferenceFrame(
+                        PassiveRadarObservationFileCreateParams.Body.SenReferenceFrame.J2000
+                    )
+                    .senx(-4527.793)
+                    .seny(3793.586)
+                    .senz(3553.495)
                     .snr(17.292053)
                     .sourceDl("AXE")
                     .addTag("TAG1")

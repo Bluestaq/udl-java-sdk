@@ -34,8 +34,7 @@ interface HistoryServiceAsync {
     /**
      * Service operation to dynamically query historical data by a variety of query parameters not
      * specified in this API documentation. See the queryhelp operation
-     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
-     * information.
+     * (`/udl/<datatype>/queryhelp`) for more details on valid/required query parameter information.
      */
     fun list(): CompletableFuture<HistoryListPageAsync> = list(HistoryListParams.none())
 
@@ -57,7 +56,7 @@ interface HistoryServiceAsync {
     /**
      * Service operation to dynamically query historical data by a variety of query parameters not
      * specified in this API documentation, then write that data to the Secure Content Store. See
-     * the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required
+     * the queryhelp operation (`/udl/<datatype>/queryhelp`) for more details on valid/required
      * query parameter information.
      */
     fun aodr(): CompletableFuture<Void?> = aodr(HistoryAodrParams.none())
@@ -80,8 +79,7 @@ interface HistoryServiceAsync {
      * Service operation to return the count of records satisfying the specified query parameters.
      * This operation is useful to determine how many records pass a particular query criteria
      * without retrieving large amounts of data. See the queryhelp operation
-     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
-     * information.
+     * (`/udl/<datatype>/queryhelp`) for more details on valid/required query parameter information.
      */
     fun count(): CompletableFuture<String> = count(HistoryCountParams.none())
 

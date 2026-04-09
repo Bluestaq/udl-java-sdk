@@ -15,7 +15,7 @@ import kotlin.jvm.optionals.getOrNull
  * Service operation to dynamically query data and only return specified columns/fields. Requested
  * columns are specified by the 'columns' query parameter and should be a comma separated list of
  * valid fields for the specified data type. classificationMarking is always returned. See the
- * queryhelp operation (/udl/<datatype>/queryhelp) for more details on valid/required query
+ * queryhelp operation (`/udl/<datatype>/queryhelp`) for more details on valid/required query
  * parameter information. An example URI: /udl/elset/tuple?columns=satNo,period&epoch=>now-5 hours
  * would return the satNo and period of elsets with an epoch greater than 5 hours ago.
  */
