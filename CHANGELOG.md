@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.11.0 (2026-04-09)
+
+Full Changelog: [v0.10.0...v0.11.0](https://github.com/Bluestaq/udl-java-sdk/compare/v0.10.0...v0.11.0)
+
+### Features
+
+* **api:** api update ([819d69e](https://github.com/Bluestaq/udl-java-sdk/commit/819d69ed1d458515e0cb6dda3aa57e050ce37364))
+* **api:** manual updates ([3dd239d](https://github.com/Bluestaq/udl-java-sdk/commit/3dd239d89a46be1354c857f76eb599e2b251f9e4))
+* re-generate sdk ([9c06a26](https://github.com/Bluestaq/udl-java-sdk/commit/9c06a2685dd01529f132e002db2f69877932bd59))
+
+
+### Chores
+
+* formatting ([71e6ab6](https://github.com/Bluestaq/udl-java-sdk/commit/71e6ab65384c9c2a223158bfe85b2ac142d484ee))
+* increase gradle JVM max memory to 16G ([42a77b2](https://github.com/Bluestaq/udl-java-sdk/commit/42a77b2979f25ce577d6e1754b01c328a7225019))
+* **internal:** update multipart form array serialization ([011e0f7](https://github.com/Bluestaq/udl-java-sdk/commit/011e0f7ad4ede86cdc6272a34cb2515218d6bbfa))
+* **tests:** bump steady to v0.20.1 ([2de360c](https://github.com/Bluestaq/udl-java-sdk/commit/2de360cfc3fc89aa1a8b8c806a0e40925b5f66ba))
+* **tests:** bump steady to v0.20.2 ([b828e36](https://github.com/Bluestaq/udl-java-sdk/commit/b828e36b1e979fbaeb92d527fbaf8d39443dc7a1))
+
 ## 0.10.0 (2026-03-24)
 
 Full Changelog: [v0.9.0...v0.10.0](https://github.com/Bluestaq/udl-java-sdk/compare/v0.9.0...v0.10.0)
