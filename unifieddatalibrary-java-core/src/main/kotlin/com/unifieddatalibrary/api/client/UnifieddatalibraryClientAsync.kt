@@ -167,7 +167,6 @@ import com.unifieddatalibrary.api.services.async.TrackServiceAsync
 import com.unifieddatalibrary.api.services.async.TransponderServiceAsync
 import com.unifieddatalibrary.api.services.async.UserServiceAsync
 import com.unifieddatalibrary.api.services.async.VesselServiceAsync
-import com.unifieddatalibrary.api.services.async.VideoServiceAsync
 import com.unifieddatalibrary.api.services.async.WeatherDataServiceAsync
 import com.unifieddatalibrary.api.services.async.WeatherReportServiceAsync
 import java.util.function.Consumer
@@ -1754,8 +1753,6 @@ interface UnifieddatalibraryClientAsync {
      * speed, etc.
      */
     fun vessel(): VesselServiceAsync
-
-    fun video(): VideoServiceAsync
 
     /**
      * These services provide for posting and querying terrestrial weather conditions over a target
@@ -3418,8 +3415,6 @@ interface UnifieddatalibraryClientAsync {
          * speed, max speed, etc.
          */
         fun vessel(): VesselServiceAsync.WithRawResponse
-
-        fun video(): VideoServiceAsync.WithRawResponse
 
         /**
          * These services provide for posting and querying terrestrial weather conditions over a
