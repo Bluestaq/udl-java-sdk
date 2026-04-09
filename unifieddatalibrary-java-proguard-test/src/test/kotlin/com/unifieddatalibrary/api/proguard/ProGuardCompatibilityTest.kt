@@ -219,7 +219,6 @@ internal class ProGuardCompatibilityTest {
         assertThat(client.transponder()).isNotNull()
         assertThat(client.user()).isNotNull()
         assertThat(client.vessel()).isNotNull()
-        assertThat(client.video()).isNotNull()
         assertThat(client.weatherData()).isNotNull()
         assertThat(client.weatherReport()).isNotNull()
     }

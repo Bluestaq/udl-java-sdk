@@ -332,8 +332,6 @@ import com.unifieddatalibrary.api.services.async.UserServiceAsync
 import com.unifieddatalibrary.api.services.async.UserServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.VesselServiceAsync
 import com.unifieddatalibrary.api.services.async.VesselServiceAsyncImpl
-import com.unifieddatalibrary.api.services.async.VideoServiceAsync
-import com.unifieddatalibrary.api.services.async.VideoServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.WeatherDataServiceAsync
 import com.unifieddatalibrary.api.services.async.WeatherDataServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.WeatherReportServiceAsync
@@ -978,10 +976,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
     private val vessel: VesselServiceAsync by lazy {
         VesselServiceAsyncImpl(clientOptionsWithUserAgent)
-    }
-
-    private val video: VideoServiceAsync by lazy {
-        VideoServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
     private val weatherData: WeatherDataServiceAsync by lazy {
@@ -2555,8 +2549,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
      */
     override fun vessel(): VesselServiceAsync = vessel
 
-    override fun video(): VideoServiceAsync = video
-
     /**
      * These services provide for posting and querying terrestrial weather conditions over a target
      * area or region and raw sensor data used to produce condition reports. Weather Reports
@@ -3252,10 +3244,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
         private val vessel: VesselServiceAsync.WithRawResponse by lazy {
             VesselServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val video: VideoServiceAsync.WithRawResponse by lazy {
-            VideoServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val weatherData: WeatherDataServiceAsync.WithRawResponse by lazy {
@@ -4931,8 +4919,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
          * speed, max speed, etc.
          */
         override fun vessel(): VesselServiceAsync.WithRawResponse = vessel
-
-        override fun video(): VideoServiceAsync.WithRawResponse = video
 
         /**
          * These services provide for posting and querying terrestrial weather conditions over a
