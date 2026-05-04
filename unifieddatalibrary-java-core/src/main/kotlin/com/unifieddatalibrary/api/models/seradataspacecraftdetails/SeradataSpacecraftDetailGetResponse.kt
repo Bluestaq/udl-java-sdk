@@ -4227,6 +4227,14 @@ private constructor(
 
     private var validated: Boolean = false
 
+    /**
+     * Validates that the types of all values in this object match their expected types recursively.
+     *
+     * This method is _not_ forwards compatible with new types from the API for existing fields.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if any value type in this object doesn't match
+     *   its expected type.
+     */
     fun validate(): SeradataSpacecraftDetailGetResponse = apply {
         if (validated) {
             return@apply
@@ -4575,6 +4583,15 @@ private constructor(
 
         private var validated: Boolean = false
 
+        /**
+         * Validates that the types of all values in this object match their expected types
+         * recursively.
+         *
+         * This method is _not_ forwards compatible with new types from the API for existing fields.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if any value type in this object doesn't
+         *   match its expected type.
+         */
         fun validate(): DataMode = apply {
             if (validated) {
                 return@apply
@@ -5891,6 +5908,15 @@ private constructor(
 
         private var validated: Boolean = false
 
+        /**
+         * Validates that the types of all values in this object match their expected types
+         * recursively.
+         *
+         * This method is _not_ forwards compatible with new types from the API for existing fields.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if any value type in this object doesn't
+         *   match its expected type.
+         */
         fun validate(): OnOrbit = apply {
             if (validated) {
                 return@apply
@@ -6090,6 +6116,16 @@ private constructor(
 
             private var validated: Boolean = false
 
+            /**
+             * Validates that the types of all values in this object match their expected types
+             * recursively.
+             *
+             * This method is _not_ forwards compatible with new types from the API for existing
+             * fields.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if any value type in this object
+             *   doesn't match its expected type.
+             */
             fun validate(): DataMode = apply {
                 if (validated) {
                     return@apply
@@ -6291,6 +6327,16 @@ private constructor(
 
             private var validated: Boolean = false
 
+            /**
+             * Validates that the types of all values in this object match their expected types
+             * recursively.
+             *
+             * This method is _not_ forwards compatible with new types from the API for existing
+             * fields.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if any value type in this object
+             *   doesn't match its expected type.
+             */
             fun validate(): Category = apply {
                 if (validated) {
                     return@apply
@@ -6448,6 +6494,16 @@ private constructor(
 
             private var validated: Boolean = false
 
+            /**
+             * Validates that the types of all values in this object match their expected types
+             * recursively.
+             *
+             * This method is _not_ forwards compatible with new types from the API for existing
+             * fields.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if any value type in this object
+             *   doesn't match its expected type.
+             */
             fun validate(): ObjectType = apply {
                 if (validated) {
                     return@apply
@@ -7414,6 +7470,15 @@ private constructor(
 
         private var validated: Boolean = false
 
+        /**
+         * Validates that the types of all values in this object match their expected types
+         * recursively.
+         *
+         * This method is _not_ forwards compatible with new types from the API for existing fields.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if any value type in this object doesn't
+         *   match its expected type.
+         */
         fun validate(): Scientific = apply {
             if (validated) {
                 return@apply
@@ -7595,6 +7660,16 @@ private constructor(
 
             private var validated: Boolean = false
 
+            /**
+             * Validates that the types of all values in this object match their expected types
+             * recursively.
+             *
+             * This method is _not_ forwards compatible with new types from the API for existing
+             * fields.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if any value type in this object
+             *   doesn't match its expected type.
+             */
             fun validate(): DataMode = apply {
                 if (validated) {
                     return@apply
@@ -9391,6 +9466,15 @@ private constructor(
 
         private var validated: Boolean = false
 
+        /**
+         * Validates that the types of all values in this object match their expected types
+         * recursively.
+         *
+         * This method is _not_ forwards compatible with new types from the API for existing fields.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if any value type in this object doesn't
+         *   match its expected type.
+         */
         fun validate(): SeradataCommDetail = apply {
             if (validated) {
                 return@apply
@@ -9612,6 +9696,16 @@ private constructor(
 
             private var validated: Boolean = false
 
+            /**
+             * Validates that the types of all values in this object match their expected types
+             * recursively.
+             *
+             * This method is _not_ forwards compatible with new types from the API for existing
+             * fields.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if any value type in this object
+             *   doesn't match its expected type.
+             */
             fun validate(): DataMode = apply {
                 if (validated) {
                     return@apply
@@ -10815,6 +10909,15 @@ private constructor(
 
         private var validated: Boolean = false
 
+        /**
+         * Validates that the types of all values in this object match their expected types
+         * recursively.
+         *
+         * This method is _not_ forwards compatible with new types from the API for existing fields.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if any value type in this object doesn't
+         *   match its expected type.
+         */
         fun validate(): SeradataEarlyWarning = apply {
             if (validated) {
                 return@apply
@@ -11006,6 +11109,16 @@ private constructor(
 
             private var validated: Boolean = false
 
+            /**
+             * Validates that the types of all values in this object match their expected types
+             * recursively.
+             *
+             * This method is _not_ forwards compatible with new types from the API for existing
+             * fields.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if any value type in this object
+             *   doesn't match its expected type.
+             */
             fun validate(): DataMode = apply {
                 if (validated) {
                     return@apply
@@ -12114,6 +12227,15 @@ private constructor(
 
         private var validated: Boolean = false
 
+        /**
+         * Validates that the types of all values in this object match their expected types
+         * recursively.
+         *
+         * This method is _not_ forwards compatible with new types from the API for existing fields.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if any value type in this object doesn't
+         *   match its expected type.
+         */
         fun validate(): SeradataNavigation = apply {
             if (validated) {
                 return@apply
@@ -12303,6 +12425,16 @@ private constructor(
 
             private var validated: Boolean = false
 
+            /**
+             * Validates that the types of all values in this object match their expected types
+             * recursively.
+             *
+             * This method is _not_ forwards compatible with new types from the API for existing
+             * fields.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if any value type in this object
+             *   doesn't match its expected type.
+             */
             fun validate(): DataMode = apply {
                 if (validated) {
                     return@apply
@@ -13625,6 +13757,15 @@ private constructor(
 
         private var validated: Boolean = false
 
+        /**
+         * Validates that the types of all values in this object match their expected types
+         * recursively.
+         *
+         * This method is _not_ forwards compatible with new types from the API for existing fields.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if any value type in this object doesn't
+         *   match its expected type.
+         */
         fun validate(): SeradataOpticalPayload = apply {
             if (validated) {
                 return@apply
@@ -13824,6 +13965,16 @@ private constructor(
 
             private var validated: Boolean = false
 
+            /**
+             * Validates that the types of all values in this object match their expected types
+             * recursively.
+             *
+             * This method is _not_ forwards compatible with new types from the API for existing
+             * fields.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if any value type in this object
+             *   doesn't match its expected type.
+             */
             fun validate(): DataMode = apply {
                 if (validated) {
                     return@apply
@@ -15390,6 +15541,15 @@ private constructor(
 
         private var validated: Boolean = false
 
+        /**
+         * Validates that the types of all values in this object match their expected types
+         * recursively.
+         *
+         * This method is _not_ forwards compatible with new types from the API for existing fields.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if any value type in this object doesn't
+         *   match its expected type.
+         */
         fun validate(): SeradataRadarPayload = apply {
             if (validated) {
                 return@apply
@@ -15601,6 +15761,16 @@ private constructor(
 
             private var validated: Boolean = false
 
+            /**
+             * Validates that the types of all values in this object match their expected types
+             * recursively.
+             *
+             * This method is _not_ forwards compatible with new types from the API for existing
+             * fields.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if any value type in this object
+             *   doesn't match its expected type.
+             */
             fun validate(): DataMode = apply {
                 if (validated) {
                     return@apply
@@ -16734,6 +16904,15 @@ private constructor(
 
         private var validated: Boolean = false
 
+        /**
+         * Validates that the types of all values in this object match their expected types
+         * recursively.
+         *
+         * This method is _not_ forwards compatible with new types from the API for existing fields.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if any value type in this object doesn't
+         *   match its expected type.
+         */
         fun validate(): SeradataSigIntPayload = apply {
             if (validated) {
                 return@apply
@@ -16923,6 +17102,16 @@ private constructor(
 
             private var validated: Boolean = false
 
+            /**
+             * Validates that the types of all values in this object match their expected types
+             * recursively.
+             *
+             * This method is _not_ forwards compatible with new types from the API for existing
+             * fields.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if any value type in this object
+             *   doesn't match its expected type.
+             */
             fun validate(): DataMode = apply {
                 if (validated) {
                     return@apply

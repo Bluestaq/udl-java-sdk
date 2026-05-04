@@ -3272,6 +3272,15 @@ private constructor(
 
         private var validated: Boolean = false
 
+        /**
+         * Validates that the types of all values in this object match their expected types
+         * recursively.
+         *
+         * This method is _not_ forwards compatible with new types from the API for existing fields.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if any value type in this object doesn't
+         *   match its expected type.
+         */
         fun validate(): Body = apply {
             if (validated) {
                 return@apply
@@ -3580,6 +3589,15 @@ private constructor(
 
         private var validated: Boolean = false
 
+        /**
+         * Validates that the types of all values in this object match their expected types
+         * recursively.
+         *
+         * This method is _not_ forwards compatible with new types from the API for existing fields.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if any value type in this object doesn't
+         *   match its expected type.
+         */
         fun validate(): DataMode = apply {
             if (validated) {
                 return@apply
@@ -3722,6 +3740,15 @@ private constructor(
 
         private var validated: Boolean = false
 
+        /**
+         * Validates that the types of all values in this object match their expected types
+         * recursively.
+         *
+         * This method is _not_ forwards compatible with new types from the API for existing fields.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if any value type in this object doesn't
+         *   match its expected type.
+         */
         fun validate(): Cat = apply {
             if (validated) {
                 return@apply
@@ -3880,6 +3907,15 @@ private constructor(
 
         private var validated: Boolean = false
 
+        /**
+         * Validates that the types of all values in this object match their expected types
+         * recursively.
+         *
+         * This method is _not_ forwards compatible with new types from the API for existing fields.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if any value type in this object doesn't
+         *   match its expected type.
+         */
         fun validate(): Cpcon = apply {
             if (validated) {
                 return@apply
@@ -4022,6 +4058,15 @@ private constructor(
 
         private var validated: Boolean = false
 
+        /**
+         * Validates that the types of all values in this object match their expected types
+         * recursively.
+         *
+         * This method is _not_ forwards compatible with new types from the API for existing fields.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if any value type in this object doesn't
+         *   match its expected type.
+         */
         fun validate(): Eoc = apply {
             if (validated) {
                 return@apply
@@ -4184,6 +4229,15 @@ private constructor(
 
         private var validated: Boolean = false
 
+        /**
+         * Validates that the types of all values in this object match their expected types
+         * recursively.
+         *
+         * This method is _not_ forwards compatible with new types from the API for existing fields.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if any value type in this object doesn't
+         *   match its expected type.
+         */
         fun validate(): Fpcon = apply {
             if (validated) {
                 return@apply
@@ -4342,6 +4396,15 @@ private constructor(
 
         private var validated: Boolean = false
 
+        /**
+         * Validates that the types of all values in this object match their expected types
+         * recursively.
+         *
+         * This method is _not_ forwards compatible with new types from the API for existing fields.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if any value type in this object doesn't
+         *   match its expected type.
+         */
         fun validate(): Hpcon = apply {
             if (validated) {
                 return@apply
@@ -4494,6 +4557,15 @@ private constructor(
 
         private var validated: Boolean = false
 
+        /**
+         * Validates that the types of all values in this object match their expected types
+         * recursively.
+         *
+         * This method is _not_ forwards compatible with new types from the API for existing fields.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if any value type in this object doesn't
+         *   match its expected type.
+         */
         fun validate(): InstStatus = apply {
             if (validated) {
                 return@apply
