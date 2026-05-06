@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.json.JsonMapper
 import com.unifieddatalibrary.api.client.UnifieddatalibraryClient
 import com.unifieddatalibrary.api.client.UnifieddatalibraryClientImpl
 import com.unifieddatalibrary.api.core.ClientOptions
+import com.unifieddatalibrary.api.core.LogLevel
 import com.unifieddatalibrary.api.core.Sleeper
 import com.unifieddatalibrary.api.core.Timeout
 import com.unifieddatalibrary.api.core.http.AsyncStreamResponse
@@ -289,6 +290,15 @@ class UnifieddatalibraryOkHttpClient private constructor() {
          * Defaults to 2.
          */
         fun maxRetries(maxRetries: Int) = apply { clientOptions.maxRetries(maxRetries) }
+
+        /**
+         * The level at which to log request and response information.
+         *
+         * [fromEnv] will set the level from environment variables. See [LogLevel.fromEnv].
+         *
+         * Defaults to [LogLevel.fromEnv].
+         */
+        fun logLevel(logLevel: LogLevel) = apply { clientOptions.logLevel(logLevel) }
 
         /** Access token for Bearer Authentication */
         fun accessToken(accessToken: String?) = apply { clientOptions.accessToken(accessToken) }
