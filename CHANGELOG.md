@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.12.0 (2026-05-12)
+
+Full Changelog: [v0.11.0...v0.12.0](https://github.com/Bluestaq/udl-java-sdk/compare/v0.11.0...v0.12.0)
+
+### Features
+
+* **client:** improve logging ([8446b61](https://github.com/Bluestaq/udl-java-sdk/commit/8446b61f4e10d02331bb4e4e92bd5ed5aca11b4b))
+* **client:** more robust error parsing ([d4c9730](https://github.com/Bluestaq/udl-java-sdk/commit/d4c97301bd8a44c726182dafb9f86e553f0b479b))
+* **client:** support proxy authentication ([90ac707](https://github.com/Bluestaq/udl-java-sdk/commit/90ac707a4cbc244da7d2e90c778130a5162f6196))
+* re-generate sdk ([9c06a26](https://github.com/Bluestaq/udl-java-sdk/commit/9c06a2685dd01529f132e002db2f69877932bd59))
+* support setting headers via env ([e84eff6](https://github.com/Bluestaq/udl-java-sdk/commit/e84eff654ef4647b0d301eb554f171b6c0fc7cda))
+
+
+### Performance Improvements
+
+* **client:** create one json mapper ([93998fc](https://github.com/Bluestaq/udl-java-sdk/commit/93998fc356f359a57488d97ef800470e8d4b3317))
+
+
+### Chores
+
+* formatting ([71e6ab6](https://github.com/Bluestaq/udl-java-sdk/commit/71e6ab65384c9c2a223158bfe85b2ac142d484ee))
+* increase gradle JVM max memory to 16G ([42a77b2](https://github.com/Bluestaq/udl-java-sdk/commit/42a77b2979f25ce577d6e1754b01c328a7225019))
+* redact api-key headers in debug logs ([fc56b59](https://github.com/Bluestaq/udl-java-sdk/commit/fc56b5943d74208ae2ac4e2f6ee41325adc601e7))
+* **tests:** bump steady to v0.22.1 ([e7b1d99](https://github.com/Bluestaq/udl-java-sdk/commit/e7b1d995c86b65c1e5d019a9924163123c03926e))
+
+
+### Documentation
+
+* clarify forwards compat behavior ([7260e68](https://github.com/Bluestaq/udl-java-sdk/commit/7260e68b7784dc5b898fa9cabf71640282c2a700))
+
 ## 0.11.0 (2026-04-09)
 
 Full Changelog: [v0.10.0...v0.11.0](https://github.com/Bluestaq/udl-java-sdk/compare/v0.10.0...v0.11.0)
