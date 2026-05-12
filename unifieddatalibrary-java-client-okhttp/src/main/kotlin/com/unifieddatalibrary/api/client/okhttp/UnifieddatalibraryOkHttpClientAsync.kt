@@ -6,11 +6,13 @@ import com.fasterxml.jackson.databind.json.JsonMapper
 import com.unifieddatalibrary.api.client.UnifieddatalibraryClientAsync
 import com.unifieddatalibrary.api.client.UnifieddatalibraryClientAsyncImpl
 import com.unifieddatalibrary.api.core.ClientOptions
+import com.unifieddatalibrary.api.core.LogLevel
 import com.unifieddatalibrary.api.core.Sleeper
 import com.unifieddatalibrary.api.core.Timeout
 import com.unifieddatalibrary.api.core.http.AsyncStreamResponse
 import com.unifieddatalibrary.api.core.http.Headers
 import com.unifieddatalibrary.api.core.http.HttpClient
+import com.unifieddatalibrary.api.core.http.ProxyAuthenticator
 import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.jsonMapper
 import java.net.Proxy
@@ -52,6 +54,7 @@ class UnifieddatalibraryOkHttpClientAsync private constructor() {
         private var clientOptions: ClientOptions.Builder = ClientOptions.builder()
         private var dispatcherExecutorService: ExecutorService? = null
         private var proxy: Proxy? = null
+        private var proxyAuthenticator: ProxyAuthenticator? = null
         private var maxIdleConnections: Int? = null
         private var keepAliveDuration: Duration? = null
         private var sslSocketFactory: SSLSocketFactory? = null
@@ -81,6 +84,20 @@ class UnifieddatalibraryOkHttpClientAsync private constructor() {
 
         /** Alias for calling [Builder.proxy] with `proxy.orElse(null)`. */
         fun proxy(proxy: Optional<Proxy>) = proxy(proxy.getOrNull())
+
+        /**
+         * Provides credentials when an HTTP proxy responds with `407 Proxy Authentication
+         * Required`.
+         */
+        fun proxyAuthenticator(proxyAuthenticator: ProxyAuthenticator?) = apply {
+            this.proxyAuthenticator = proxyAuthenticator
+        }
+
+        /**
+         * Alias for calling [Builder.proxyAuthenticator] with `proxyAuthenticator.orElse(null)`.
+         */
+        fun proxyAuthenticator(proxyAuthenticator: Optional<ProxyAuthenticator>) =
+            proxyAuthenticator(proxyAuthenticator.getOrNull())
 
         /**
          * The maximum number of idle connections kept by the underlying OkHttp connection pool.
@@ -233,6 +250,9 @@ class UnifieddatalibraryOkHttpClientAsync private constructor() {
         /**
          * Whether to call `validate` on every response before returning it.
          *
+         * Setting this to `true` is _not_ forwards compatible with new types from the API for
+         * existing fields.
+         *
          * Defaults to false, which means the shape of the response will not be validated upfront.
          * Instead, validation will only occur for the parts of the response that are accessed.
          */
@@ -273,6 +293,15 @@ class UnifieddatalibraryOkHttpClientAsync private constructor() {
          * Defaults to 2.
          */
         fun maxRetries(maxRetries: Int) = apply { clientOptions.maxRetries(maxRetries) }
+
+        /**
+         * The level at which to log request and response information.
+         *
+         * [fromEnv] will set the level from environment variables. See [LogLevel.fromEnv].
+         *
+         * Defaults to [LogLevel.fromEnv].
+         */
+        fun logLevel(logLevel: LogLevel) = apply { clientOptions.logLevel(logLevel) }
 
         /** Access token for Bearer Authentication */
         fun accessToken(accessToken: String?) = apply { clientOptions.accessToken(accessToken) }
@@ -391,6 +420,7 @@ class UnifieddatalibraryOkHttpClientAsync private constructor() {
                         OkHttpClient.builder()
                             .timeout(clientOptions.timeout())
                             .proxy(proxy)
+                            .proxyAuthenticator(proxyAuthenticator)
                             .maxIdleConnections(maxIdleConnections)
                             .keepAliveDuration(keepAliveDuration)
                             .dispatcherExecutorService(dispatcherExecutorService)

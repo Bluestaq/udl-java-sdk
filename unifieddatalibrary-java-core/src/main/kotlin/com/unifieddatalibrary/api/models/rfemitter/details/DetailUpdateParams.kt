@@ -3252,6 +3252,15 @@ private constructor(
 
         private var validated: Boolean = false
 
+        /**
+         * Validates that the types of all values in this object match their expected types
+         * recursively.
+         *
+         * This method is _not_ forwards compatible with new types from the API for existing fields.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if any value type in this object doesn't
+         *   match its expected type.
+         */
         fun validate(): Body = apply {
             if (validated) {
                 return@apply
@@ -3572,6 +3581,15 @@ private constructor(
 
         private var validated: Boolean = false
 
+        /**
+         * Validates that the types of all values in this object match their expected types
+         * recursively.
+         *
+         * This method is _not_ forwards compatible with new types from the API for existing fields.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if any value type in this object doesn't
+         *   match its expected type.
+         */
         fun validate(): DataMode = apply {
             if (validated) {
                 return@apply
@@ -3826,6 +3844,15 @@ private constructor(
 
         private var validated: Boolean = false
 
+        /**
+         * Validates that the types of all values in this object match their expected types
+         * recursively.
+         *
+         * This method is _not_ forwards compatible with new types from the API for existing fields.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if any value type in this object doesn't
+         *   match its expected type.
+         */
         fun validate(): Amplifier = apply {
             if (validated) {
                 return@apply
@@ -4537,6 +4564,15 @@ private constructor(
 
         private var validated: Boolean = false
 
+        /**
+         * Validates that the types of all values in this object match their expected types
+         * recursively.
+         *
+         * This method is _not_ forwards compatible with new types from the API for existing fields.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if any value type in this object doesn't
+         *   match its expected type.
+         */
         fun validate(): Antenna = apply {
             if (validated) {
                 return@apply
@@ -4799,6 +4835,16 @@ private constructor(
 
             private var validated: Boolean = false
 
+            /**
+             * Validates that the types of all values in this object match their expected types
+             * recursively.
+             *
+             * This method is _not_ forwards compatible with new types from the API for existing
+             * fields.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if any value type in this object
+             *   doesn't match its expected type.
+             */
             fun validate(): Feed = apply {
                 if (validated) {
                     return@apply
@@ -5253,6 +5299,16 @@ private constructor(
 
             private var validated: Boolean = false
 
+            /**
+             * Validates that the types of all values in this object match their expected types
+             * recursively.
+             *
+             * This method is _not_ forwards compatible with new types from the API for existing
+             * fields.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if any value type in this object
+             *   doesn't match its expected type.
+             */
             fun validate(): ReceiverChannel = apply {
                 if (validated) {
                     return@apply
@@ -5948,6 +6004,16 @@ private constructor(
 
             private var validated: Boolean = false
 
+            /**
+             * Validates that the types of all values in this object match their expected types
+             * recursively.
+             *
+             * This method is _not_ forwards compatible with new types from the API for existing
+             * fields.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if any value type in this object
+             *   doesn't match its expected type.
+             */
             fun validate(): TransmitChannel = apply {
                 if (validated) {
                     return@apply
@@ -6237,6 +6303,15 @@ private constructor(
 
         private var validated: Boolean = false
 
+        /**
+         * Validates that the types of all values in this object match their expected types
+         * recursively.
+         *
+         * This method is _not_ forwards compatible with new types from the API for existing fields.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if any value type in this object doesn't
+         *   match its expected type.
+         */
         fun validate(): PowerOffset = apply {
             if (validated) {
                 return@apply
@@ -6417,6 +6492,15 @@ private constructor(
 
         private var validated: Boolean = false
 
+        /**
+         * Validates that the types of all values in this object match their expected types
+         * recursively.
+         *
+         * This method is _not_ forwards compatible with new types from the API for existing fields.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if any value type in this object doesn't
+         *   match its expected type.
+         */
         fun validate(): Service = apply {
             if (validated) {
                 return@apply
@@ -6629,6 +6713,15 @@ private constructor(
 
         private var validated: Boolean = false
 
+        /**
+         * Validates that the types of all values in this object match their expected types
+         * recursively.
+         *
+         * This method is _not_ forwards compatible with new types from the API for existing fields.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if any value type in this object doesn't
+         *   match its expected type.
+         */
         fun validate(): Ttp = apply {
             if (validated) {
                 return@apply
@@ -6820,6 +6913,16 @@ private constructor(
 
             private var validated: Boolean = false
 
+            /**
+             * Validates that the types of all values in this object match their expected types
+             * recursively.
+             *
+             * This method is _not_ forwards compatible with new types from the API for existing
+             * fields.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if any value type in this object
+             *   doesn't match its expected type.
+             */
             fun validate(): TechniqueDefinition = apply {
                 if (validated) {
                     return@apply
@@ -7236,6 +7339,16 @@ private constructor(
 
                 private var validated: Boolean = false
 
+                /**
+                 * Validates that the types of all values in this object match their expected types
+                 * recursively.
+                 *
+                 * This method is _not_ forwards compatible with new types from the API for existing
+                 * fields.
+                 *
+                 * @throws UnifieddatalibraryInvalidDataException if any value type in this object
+                 *   doesn't match its expected type.
+                 */
                 fun validate(): ParamDefinition = apply {
                     if (validated) {
                         return@apply

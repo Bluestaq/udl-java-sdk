@@ -5,6 +5,7 @@ package com.unifieddatalibrary.api.errors
 import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.http.Headers
+import com.unifieddatalibrary.api.core.jsonMapper
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
@@ -14,7 +15,11 @@ private constructor(
     private val headers: Headers,
     private val body: JsonValue,
     cause: Throwable?,
-) : UnifieddatalibraryServiceException("$statusCode: $body", cause) {
+) :
+    UnifieddatalibraryServiceException(
+        "$statusCode: ${if (body.isMissing()) "Unknown" else jsonMapper().writeValueAsString(body)}",
+        cause,
+    ) {
 
     override fun statusCode(): Int = statusCode
 
